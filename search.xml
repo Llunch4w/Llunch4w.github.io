@@ -1245,7 +1245,7 @@
 <li><code>__foo</code>：解析器用_classname__foo来代替这个名字,以区别和其他类相同的命名,它无法直接像公有成员一样随便访问,通过对象名._类名__xxx这样的方式可以访问.</li>
 </ul>
 <h1 id="迭代器和生成器"><a href="#迭代器和生成器" class="headerlink" title="迭代器和生成器"></a>迭代器和生成器</h1><h1 id="args-and-kwargs"><a href="#args-and-kwargs" class="headerlink" title="*args and **kwargs"></a>*args and **kwargs</h1><h1 id="AOP和装饰器"><a href="#AOP和装饰器" class="headerlink" title="AOP和装饰器"></a>AOP和装饰器</h1><p>解释：<a href="https://www.cnblogs.com/huxi/archive/2011/03/01/1967600.html" target="_blank" rel="noopener">https://www.cnblogs.com/huxi/archive/2011/03/01/1967600.html</a></p>
-<h1 id="鸭子类型"><a href="#鸭子类型" class="headerlink" title="鸭子类型"></a>鸭子类型</h1><p>![][./Python语法/1.png]</p>
+<h1 id="鸭子类型"><a href="#鸭子类型" class="headerlink" title="鸭子类型"></a>鸭子类型</h1><p><img src="/2021/01/13/Python%E8%AF%AD%E6%B3%95/1.png" alt></p>
 <h1 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h1><p>函数重载主要是为了解决两个问题：</p>
 <ol>
 <li>可变参数类型：对于这种情况，Python中函数传参本来也不需要指明参数类型</li>
