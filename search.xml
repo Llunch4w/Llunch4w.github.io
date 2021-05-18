@@ -7809,4 +7809,55 @@
         <tag>Spring</tag>
       </tags>
   </entry>
+  <entry>
+    <title>图像处理算法演示系统的收录</title>
+    <url>/2021/05/19/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E6%BC%94%E7%A4%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%B6%E5%BD%95/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+
+<a id="more"></a>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>毕业设计题目是做一个图像处理教学辅助工具，我把它设计为B/S结构的在线工具了。这完全是我凭空想出来的一个形式，但是我觉得这个形式比当初文献调研时看到别人实现的都要好一些。直到最近可以访问Github了，看到了几个更好的项目，自己的项目瞬间就不香了，早看到这些项目然后进行魔改该多好…</p>
+<h1 id="仓库收录"><a href="#仓库收录" class="headerlink" title="仓库收录"></a>仓库收录</h1><h2 id="ImageTest"><a href="#ImageTest" class="headerlink" title="ImageTest"></a>ImageTest</h2><p><strong>github仓库地址</strong>：<a href="https://github.com/HuangBingjian/ImageProcessing" target="_blank" rel="noopener">https://github.com/HuangBingjian/ImageProcessing</a></p>
+<p>这是一个用QT搭建平台，用OpenCV实现图像处理算法的软件。虽然我的在线平台可以动态添加算法什么的更加灵活，但是成也在线，败也在线，做Web不考虑并发就是玩具项目。而我的项目现在就是承受不住并发…</p>
+<p><strong>效果</strong>：<img src="/2021/05/19/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E6%BC%94%E7%A4%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%B6%E5%BD%95/2.jpg" alt></p>
+<hr>
+
+<h2 id="Algorithm-Visualizer"><a href="#Algorithm-Visualizer" class="headerlink" title="Algorithm Visualizer"></a>Algorithm Visualizer</h2><p><strong>github仓库地址</strong>：<a href="https://github.com/algorithm-visualizer/algorithm-visualizer" target="_blank" rel="noopener">https://github.com/algorithm-visualizer/algorithm-visualizer</a></p>
+<p>这是一个算法可视化的在线网站，做到了每一步都可视化。不过它的算法内容是数据结构相关的，但我觉得这种形式非常好，研究一下实现思路后可以改成图像处理相关算法的可视化。</p>
+<p><strong>在线网址</strong>：<a href="https://algorithm-visualizer.org/" target="_blank" rel="noopener">https://algorithm-visualizer.org/</a></p>
+<p><strong>效果</strong>：<img src="/2021/05/19/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E6%BC%94%E7%A4%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%B6%E5%BD%95/1.jpg" alt></p>
+<hr>
+
+<h2 id="Image-processing-algorithm"><a href="#Image-processing-algorithm" class="headerlink" title="Image-processing-algorithm"></a>Image-processing-algorithm</h2><p><strong>github仓库地址</strong>：<a href="https://github.com/BBuf/Image-processing-algorithm" target="_blank" rel="noopener">https://github.com/BBuf/Image-processing-algorithm</a></p>
+<p>这个仓库记录了一些基于C++的图像处理算法复现，大多数是论文的复现。我一开始的计划本来也包含看一些论文，根据算法原理实现一些算法添加进系统。但是后来发现这工作量也太大了，就改成opencv实现算法了。这个仓库很有启发性，而且将收录论文整理得很整洁，也许今后我可以用python对论文实现一遍。</p>
+<p><strong>效果</strong>：<img src="/2021/05/19/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E6%BC%94%E7%A4%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%B6%E5%BD%95/3.jpg" alt></p>
+<hr>
+
+<h2 id="PaperWeekly"><a href="#PaperWeekly" class="headerlink" title="PaperWeekly"></a>PaperWeekly</h2><p><strong>github仓库地址</strong>：<a href="https://github.com/Mycenae/PaperWeekly" target="_blank" rel="noopener">https://github.com/Mycenae/PaperWeekly</a></p>
+<p>这个仓库记录了图像处理、计算机视觉方面的一些论文，包含两部分：一个是论文的链接，一个是作者自己整理论文内容写的markdown文件。</p>
+<hr>
+
+<h2 id="deep-learning-for-image-processing"><a href="#deep-learning-for-image-processing" class="headerlink" title="deep-learning-for-image-processing"></a>deep-learning-for-image-processing</h2><p><strong>github仓库地址</strong>：<a href="https://github.com/WZMIAOMIAO/deep-learning-for-image-processing" target="_blank" rel="noopener">https://github.com/WZMIAOMIAO/deep-learning-for-image-processing</a></p>
+<p>深度学习在图像处理中的应用教程。</p>
+<hr>
+
+<h2 id="Image-Processing-Algorithm"><a href="#Image-Processing-Algorithm" class="headerlink" title="Image-Processing-Algorithm"></a>Image-Processing-Algorithm</h2><p><strong>github仓库地址</strong>：<a href="https://github.com/2209520576/Image-Processing-Algorithm" target="_blank" rel="noopener">https://github.com/2209520576/Image-Processing-Algorithm</a></p>
+<p>图像处理经典常用算法及论文复现。</p>
+<p><strong>效果</strong>：<img src="/2021/05/19/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E6%BC%94%E7%A4%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%B6%E5%BD%95/4.jpg" alt></p>
+<hr>
+
+<h2 id="ImageProcessing"><a href="#ImageProcessing" class="headerlink" title="ImageProcessing"></a>ImageProcessing</h2><p><strong>github仓库地址</strong>：<a href="https://github.com/BichengLUO/ImageProcessing" target="_blank" rel="noopener">https://github.com/BichengLUO/ImageProcessing</a></p>
+<p>基于C++的MFC框架实现了一个图像处理软件。其中的画笔功能很不错。</p>
+<p><strong>效果</strong>：<img src="/2021/05/19/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E6%BC%94%E7%A4%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%B6%E5%BD%95/5.jpg" alt></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>Github仓库收录</tag>
+      </tags>
+  </entry>
 </search>
