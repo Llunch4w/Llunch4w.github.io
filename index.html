@@ -214,20 +214,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-count">49</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -260,6 +260,304 @@
 
         <div class="content index posts-expand">
           
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/line_rabbit.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">多线程学习记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-23 12:26:53" itemprop="dateCreated datePublished" datetime="2021-05-23T12:26:53+08:00">2021-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-25 07:29:39" itemprop="dateModified" datetime="2021-05-25T07:29:39+08:00">2021-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/BV1V4411p7EF?p=3" target="_blank" rel="noopener">狂神说的课程</a></p>
+<h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><p>程序是存储在磁盘上的静态代码段。我们平常所说的“运行程序”的意思实际上是指将磁盘中的程序代码加载到内存中，操作系统开启一个进程来执行程序。可以说，进程是运行的程序。进程运行时，操作系统会为它分配一定的内存空间用于保存运行时数据，内存空间属于一种资源，所以说进程是资源分配的基本单位。一个进程中可以有很多线程，但至少有一个线程。线程有自己的工作内存，也有和其他线程共享的进程主内存，在只有一个核的CPU中，CPU的使用时间只能轮流分给各个线程，即一次只能有一个线程使用CPU。所以说，线程是CPU调度的基本单位。</p>
+<h1 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h1><p>在Java中，创建线程有三种方式，分别是：</p>
+<ol>
+<li>继承<strong>Thread</strong>类，并重写它的<strong>run</strong>方法。</li>
+<li>实现<strong>Runnable</strong>接口，并重写它的<strong>run</strong>方法。</li>
+<li>实现<strong>Callable</strong>接口，并重写它的<strong>call</strong>方法。</li>
+</ol>
+<h1 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h1><ol>
+<li>start : 创建状态，已创建但未启动的线程。 –&gt; Thread.NEW</li>
+<li>ready : 就绪状态的线程，等待CPU的使用权。</li>
+<li>run : 运行状态的线程，已获得CPU的使用权。–&gt; Thread.RUNNABLE</li>
+<li>block : 阻塞状态的线程，可能正在等待某项资源的就绪。 –&gt; Thread.BLOCKED || Thread.WAITING || Thread.TIMED_WATING</li>
+<li>die : 已经结束的线程。 –&gt; Thread.TERMINATED</li>
+</ol>
+<h1 id="线程操作"><a href="#线程操作" class="headerlink" title="线程操作"></a>线程操作</h1><ol>
+<li>sleep : 线程休眠一段时间，但不释放锁。</li>
+<li>stop : 线程停止，一般使用标志位实现而不是stop或destroy函数。</li>
+<li>yield : 礼让，当前运行线程主动让出CPU使用权，从运行状态转为就绪状态。但下一个CPU的使用者是由CPU决定，也有可能仍然为礼让者。</li>
+<li>join : 插队，join的调用者将强势取得当前CPU的使用权直到该线程执行完成。这种方法会阻塞其他线程，不建议使用。</li>
+</ol>
+<h1 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h1><ul>
+<li>线程的优先级用数字表示，范围从1~10。</li>
+<li>需要先设置优先级再启动线程，否则设置的优先级将无效。</li>
+<li>优先级低只意味着获得调度的概率低，并不代表优先级高的线程一定会比优先级低的线程更先执行。</li>
+<li>默认值为<code>Thread.NORMAL_PRIORITY</code>–5。</li>
+</ul>
+<h1 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h1><p>线程可分为<strong>用户线程</strong>和<strong>守护线程</strong>，虚拟机需要确保用户线程执行完毕而不需要等待守护线程执行完毕。常见的守护线程有后台记录日志、监控内存、垃圾回收等。java中设置守护线程的方法是<code>Thread.setDaemon(true)</code>。</p>
+<h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><p>线程同步是为了解决多个线程想访问同一个资源时，保证线程安全的一种机制。它本质上是一种等待机制+锁进制，访问对象时需要获得该对象的锁，没有获得锁且需要访问该对象的线程进入这个对象的等待池形成队列，等待前面一个线程使用完毕释放锁，下一个线程再获取锁使用资源。</p>
+<h2 id="不安全案例"><a href="#不安全案例" class="headerlink" title="不安全案例"></a>不安全案例</h2><ol>
+<li>不安全的买票</li>
+<li>不安全的银行</li>
+<li>不安全的集合</li>
+</ol>
+<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><p><strong>同步方法</strong><br>同步方法即加了<code>synchronized</code>修饰的方法。同步方法控制对“对象”的访问。每个对象对应一把锁，每个同步方法都必须获得调用该方法的对象的锁才能执行，否则线程会阻塞。方法一旦执行，就独占该锁，直到方法返回才释放锁。</p>
+<p><strong>同步块</strong><br>形如<code>synchronized(obj){}</code>的代码块称为同步块。其中<strong>obj</strong>称为<strong>同步监视器</strong>。理论上obj可以是任何对象，但是推荐使用共享资源作为监视器。在同步方法中无需指定同步监视器，因为同步方法中默认使用对象本身（即<code>this</code>）或<code>class</code>作为同步监视器</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>多个线程各自占有一些资源，并且互相等待其他线程占有的资源才能运行。两个或多个线程都在等待对方释放资源，因此都处于阻塞状态时的情形被称为<strong>死锁</strong>。</p>
+<p><strong>产生死锁的四个必要条件</strong></p>
+<ol>
+<li>资源互斥：一个资源每次只能被一个线程使用。</li>
+<li>请求与保持：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不可剥夺：进程已获得的资源，在未使用完之前，不能强行剥夺。</li>
+<li>循环等待：在若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ol>
+<blockquote>
+<p>只要想办法破坏四个必要条件中的一个或多个，就可以避免死锁的发生。</p>
+</blockquote>
+<h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><p>从<strong>JDK5.08</strong>开始，Java提供了更强大的线程同步机制–通过显示定义同步锁对象来实现同步。<code>ReentrantLock</code>类实现了<code>Lock</code>接口，拥有与<strong>synchronized</strong>相同的并发性和内存语义，常用于实现线程安全的控制中。<br>使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。因此选择同步控制方式的优先级应该是：Lock &gt; 同步代码块 &gt; 同步方法。</p>
+<h1 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h1><p><strong>Java提供的解决线程通信的方法</strong></p>
+<ol>
+<li>wait : 表示线程一直等待，直到其他线程通知。其与sleep函数的不同之处在于该操作会释放锁。</li>
+<li>notify : 唤醒一个处于等待状态的线程。</li>
+<li>notifyAll : 唤醒同一个对象上处于等待状态的所有线程</li>
+</ol>
+<blockquote>
+<p>以上方法均是Object方法，都只能在同步方法或同步代码块中使用</p>
+</blockquote>
+<h2 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><ol>
+<li>管程法 : 通过缓冲区实现生产者和消费者之间的通信。</li>
+<li>信号量法 : 通过标志位实现生产者和消费者之间的通信。</li>
+</ol>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>频繁创建和销毁线程会带来性能的损耗，通过线程池的思想：提前创建好多个线程，放入线程池中，使用时直接获取，使用完放回池中，可以避免频繁的创建和销毁，实现重复利用。</p>
+<p><strong>ExecutorService</strong>是线程池接口，常见的子类有<code>ThreadPoolExecutor</code>，常用方法有：</p>
+<ul>
+<li>void executor(Runnable command) : 执行任务/命令，没有返回值。</li>
+<li><T> Future<T> submit(Callable<T> task) : 执行任务，有返回值。</T></T></T></li>
+<li>void shutdown : 关闭连接池。</li>
+</ul>
+<p><strong>Executors</strong>是线程池的工厂类，用于创建并返回不同类型的线程池。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/line_rabbit.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/" class="post-title-link" itemprop="url">Adobe下载</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-20 10:44:53 / 修改时间：12:17:53" itemprop="dateCreated datePublished" datetime="2021-05-20T10:44:53+08:00">2021-05-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8B%E8%BD%BD/" itemprop="url" rel="index"><span itemprop="name">软件下载</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote class="blockquote-center">
+<p>免费下载Adobel喽 ^_^ </p>
+
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/05/19/VimAdventures/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/line_rabbit.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/19/VimAdventures/" class="post-title-link" itemprop="url">VimAdventures</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-19 16:19:33 / 修改时间：17:18:10" itemprop="dateCreated datePublished" datetime="2021-05-19T16:19:33+08:00">2021-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote class="blockquote-center">
+<p>记录玩网页小游戏 vim adventures 的过程 ^ _ ^ </p>
+
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/19/VimAdventures/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
       
   
   
@@ -823,258 +1121,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/01/11/%E9%93%BE%E6%8E%A5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/01/04/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/line_rabbit.jpg">
-      <meta itemprop="name" content="Llunch">
-      <meta itemprop="description" content="没有理想的人不伤心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="摸鱼的Llunch">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/04/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">书籍阅读[虚拟机设计与实现]</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-04 09:54:36" itemprop="dateCreated datePublished" datetime="2021-01-04T09:54:36+08:00">2021-01-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 22:50:42" itemprop="dateModified" datetime="2021-05-16T22:50:42+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
-
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/04/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/line_rabbit.jpg">
-      <meta itemprop="name" content="Llunch">
-      <meta itemprop="description" content="没有理想的人不伤心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="摸鱼的Llunch">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">JVM快速入门</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-03 08:21:35" itemprop="dateCreated datePublished" datetime="2021-01-03T08:21:35+08:00">2021-01-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-16 22:51:08" itemprop="dateModified" datetime="2021-05-16T22:51:08+08:00">2021-05-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
-
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/line_rabbit.jpg">
-      <meta itemprop="name" content="Llunch">
-      <meta itemprop="description" content="没有理想的人不伤心">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="摸鱼的Llunch">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">基于python3的OpenCV图像处理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-12-29 14:28:16" itemprop="dateCreated datePublished" datetime="2020-12-29T14:28:16+08:00">2020-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-02 19:10:00" itemprop="dateModified" datetime="2021-01-02T19:10:00+08:00">2021-01-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
-
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

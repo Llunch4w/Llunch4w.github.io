@@ -7860,4 +7860,186 @@
         <tag>Github仓库收录</tag>
       </tags>
   </entry>
+  <entry>
+    <title>VimAdventures</title>
+    <url>/2021/05/19/VimAdventures/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+<p>记录玩网页小游戏 vim adventures 的过程 ^ _ ^ </p>
+
+</blockquote>
+
+<a id="more"></a>
+
+<h1 id="Vim-Adventrue-简介"><a href="#Vim-Adventrue-简介" class="headerlink" title="Vim Adventrue 简介"></a>Vim Adventrue 简介</h1><p>Vim Adventrue是一款学习vim操作的小游戏，网址是：<a href="https://vim-adventures.com/" target="_blank" rel="noopener">https://vim-adventures.com/</a>。本篇博客用于记录我的游戏攻略 ^ _ ^</p>
+<h1 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h1><h2 id="Point1：光标移动"><a href="#Point1：光标移动" class="headerlink" title="Point1：光标移动"></a>Point1：光标移动</h2><table>
+<thead>
+<tr>
+<th>键</th>
+<th>方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>h</td>
+<td>左</td>
+</tr>
+<tr>
+<td>j</td>
+<td>下</td>
+</tr>
+<tr>
+<td>k</td>
+<td>上</td>
+</tr>
+<tr>
+<td>l</td>
+<td>右</td>
+</tr>
+</tbody></table>
+<p>用hjkl四个键控制左下上右移动，拿到钥匙，打开宝箱。</p>
+<hr>
+
+<h2 id="Point2：光标记忆功能"><a href="#Point2：光标记忆功能" class="headerlink" title="Point2：光标记忆功能"></a>Point2：光标记忆功能</h2><p><img src="/2021/05/19/VimAdventures/1.jpg" alt></p>
+<p>看上面这个地图，是不是感觉按常理过不去呢？这时就要引入Vim的<code>光标记忆</code>特性了。</p>
+<ul>
+<li>假设图上有一个坐标系，水平方向为x轴，垂直方向为y轴。x轴以右为正方向，y轴以下为正方向。</li>
+<li>若光标 (x1,y1) 往下移动，而 (x1,y1+1) 是不可走区域（例如图中的河，真实情况的短行），那么光标最终到达的坐标 (x2,y1+1) 中的x2 是 y1+1 行中可走的不超过 x1 且最接近 x1 的点。</li>
+<li>往上移动同理。</li>
+</ul>
+<p><img src="/2021/05/19/VimAdventures/2.jpg" alt></p>
+<p>如图所示，2~8都是在记下了1的位置的情况下尽量靠近1去走的。</p>
+<h1 id="Level2"><a href="#Level2" class="headerlink" title="Level2"></a>Level2</h1><h2 id="Point1：按单词移动"><a href="#Point1：按单词移动" class="headerlink" title="Point1：按单词移动"></a>Point1：按单词移动</h2><p>单词是由字符、数字、下划线、标点符号（连续的标点符号作为单独一个单词）组成的字符串，按单词移动就是每次移动一个单词。有两种移动方式，分别是：</p>
+<ol>
+<li>w：从一个单词头跳到下一个单词头；</li>
+<li>e：从一个单词尾调到下一个单词尾；</li>
+<li>b：从一个单词头跳到上一个单词头；</li>
+<li>B：同 b</li>
+</ol>
+<h1 id="Level3"><a href="#Level3" class="headerlink" title="Level3"></a>Level3</h1><h2 id="Point1：删除字符"><a href="#Point1：删除字符" class="headerlink" title="Point1：删除字符"></a>Point1：删除字符</h2><ol>
+<li>x：删除当前光标所在的字符</li>
+<li>nx：n是数字，表示删除当前光标所在及以后共n个字符</li>
+</ol>
+<h1 id="More"><a href="#More" class="headerlink" title="More"></a>More</h1><p>没想到只能玩3关，剩下的游戏想玩就得交$25了。So,Bye~</p>
+<p><img src="/2021/05/19/VimAdventures/3.jpg" alt></p>
+<h1 id="其他玩-Vim-的网站"><a href="#其他玩-Vim-的网站" class="headerlink" title="其他玩 Vim 的网站"></a>其他玩 Vim 的网站</h1><p><strong>OpenVim</strong> : <a href="https://www.openvim.com/tutorial.html" target="_blank" rel="noopener">https://www.openvim.com/tutorial.html</a>，一个不错的交互式小网页</p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>游戏</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Adobe下载</title>
+    <url>/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/</url>
+    <content><![CDATA[<blockquote class="blockquote-center">
+<p>免费下载Adobel喽 ^_^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大一的时候，我还对计算机一无所知，却报有莫名的热情。当时热衷于下载各种例如PS之类的知名软件。然而也是在软件下载过程中，发现我的电脑的磁盘内存真的很小。事实上，我的热情仿佛只存在于下载时和初学前几天，千辛万苦下载的PS玩了几天后就弃之不用了。但它占的内存又很多，所以在它在我的磁盘中短暂的生活了一段时间后就被我删除了。当然，我也完全没有为删除它感到后悔，因为在今后的很长一段时间我也没有要用到它的场景。</p>
+<p>说回到今天为什么又要下载它。第一，前段时间我买了一个西部数据的移动硬盘，从此我不仅不再需要对256G内存的分配精打细算，为每个大型软件的下载思前想后，甚至还要大手笔地想下什么下什么 ^_^ 2T内存，2048Ghohoho，从此实现下载自由，管它用不用呢，反正我内存用不完 ︿(￣︶￣)︿ 第二呢，我的毕业论文今天定稿提交了hahaha，因此打算做些狂下载的事放松放松什么的（可怕）</p>
+<h1 id="Adobe-Creative-Cloud"><a href="#Adobe-Creative-Cloud" class="headerlink" title="Adobe Creative Cloud"></a>Adobe Creative Cloud</h1><p><code>Adobe Creative Cloud</code>有些类似于<code>Unity Hub</code>，是一个 Adobe 系列的软件下载更新的管理工具。</p>
+<p>下载链接：<a href="https://creativecloud.adobe.com/apps/download/creative-cloud" target="_blank" rel="noopener">https://creativecloud.adobe.com/apps/download/creative-cloud</a></p>
+<p>下载之后打开是这样的（虽然只能试用什么的）：</p>
+<p><img src="/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/1.jpg" alt></p>
+<h2 id="更改安装位置"><a href="#更改安装位置" class="headerlink" title="更改安装位置"></a>更改安装位置</h2><p>Adobe Creative Cloud 默认将软件安装到 C 盘，啊喂(#`O′)！所以很重要的一步操作就是将安装位置改成为移动磁盘的Adobe文件夹（我自己创建的文件夹）。</p>
+<p>文件 –&gt; 首选项 –&gt; 应用程序 –&gt; 安装位置</p>
+<p><img src="/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/2.jpg" alt></p>
+<h2 id="更窒息的事"><a href="#更窒息的事" class="headerlink" title="更窒息的事"></a>更窒息的事</h2><p>Adobe Creative Cloud 本身在安装时是默认安装到 C 盘的，我一开始以为它应该没多大，后来发现，竟然有8G？？？我一定要把它从C盘迁出去，不然就是 Adobe ByeBye(#`O′)</p>
+<h1 id="GenP"><a href="#GenP" class="headerlink" title="GenP"></a>GenP</h1><blockquote>
+<p>补丁修复程序，懂得都懂 :-)</p>
+</blockquote>
+<p>下载链接：<a href="https://official-genp.com/" target="_blank" rel="noopener">https://official-genp.com/</a></p>
+<p>但是这个官方网站上的下载链接失效了，然后就找了一个别人的网盘链接：<a href="https://pan.baidu.com/s/1nX0zKnltwVmdUSQ5uxPxEQ" target="_blank" rel="noopener">Adobe_2019-2020_GenP_v2.2</a></p>
+<h1 id="Byebye"><a href="#Byebye" class="headerlink" title="Byebye"></a>Byebye</h1><p>是我不配，把 Adobe Creaative Cloud移到 F 盘就失灵打不开了，下载计划戛然而止…</p>
+]]></content>
+      <categories>
+        <category>软件下载</category>
+      </categories>
+      <tags>
+        <tag>Adobe</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>多线程学习记录</title>
+    <url>/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="https://www.bilibili.com/video/BV1V4411p7EF?p=3" target="_blank" rel="noopener">狂神说的课程</a></p>
+<h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><p>程序是存储在磁盘上的静态代码段。我们平常所说的“运行程序”的意思实际上是指将磁盘中的程序代码加载到内存中，操作系统开启一个进程来执行程序。可以说，进程是运行的程序。进程运行时，操作系统会为它分配一定的内存空间用于保存运行时数据，内存空间属于一种资源，所以说进程是资源分配的基本单位。一个进程中可以有很多线程，但至少有一个线程。线程有自己的工作内存，也有和其他线程共享的进程主内存，在只有一个核的CPU中，CPU的使用时间只能轮流分给各个线程，即一次只能有一个线程使用CPU。所以说，线程是CPU调度的基本单位。</p>
+<h1 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h1><p>在Java中，创建线程有三种方式，分别是：</p>
+<ol>
+<li>继承<strong>Thread</strong>类，并重写它的<strong>run</strong>方法。</li>
+<li>实现<strong>Runnable</strong>接口，并重写它的<strong>run</strong>方法。</li>
+<li>实现<strong>Callable</strong>接口，并重写它的<strong>call</strong>方法。</li>
+</ol>
+<h1 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h1><ol>
+<li>start : 创建状态，已创建但未启动的线程。 –&gt; Thread.NEW</li>
+<li>ready : 就绪状态的线程，等待CPU的使用权。</li>
+<li>run : 运行状态的线程，已获得CPU的使用权。–&gt; Thread.RUNNABLE</li>
+<li>block : 阻塞状态的线程，可能正在等待某项资源的就绪。 –&gt; Thread.BLOCKED || Thread.WAITING || Thread.TIMED_WATING</li>
+<li>die : 已经结束的线程。 –&gt; Thread.TERMINATED</li>
+</ol>
+<h1 id="线程操作"><a href="#线程操作" class="headerlink" title="线程操作"></a>线程操作</h1><ol>
+<li>sleep : 线程休眠一段时间，但不释放锁。</li>
+<li>stop : 线程停止，一般使用标志位实现而不是stop或destroy函数。</li>
+<li>yield : 礼让，当前运行线程主动让出CPU使用权，从运行状态转为就绪状态。但下一个CPU的使用者是由CPU决定，也有可能仍然为礼让者。</li>
+<li>join : 插队，join的调用者将强势取得当前CPU的使用权直到该线程执行完成。这种方法会阻塞其他线程，不建议使用。</li>
+</ol>
+<h1 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h1><ul>
+<li>线程的优先级用数字表示，范围从1~10。</li>
+<li>需要先设置优先级再启动线程，否则设置的优先级将无效。</li>
+<li>优先级低只意味着获得调度的概率低，并不代表优先级高的线程一定会比优先级低的线程更先执行。</li>
+<li>默认值为<code>Thread.NORMAL_PRIORITY</code>–5。</li>
+</ul>
+<h1 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h1><p>线程可分为<strong>用户线程</strong>和<strong>守护线程</strong>，虚拟机需要确保用户线程执行完毕而不需要等待守护线程执行完毕。常见的守护线程有后台记录日志、监控内存、垃圾回收等。java中设置守护线程的方法是<code>Thread.setDaemon(true)</code>。</p>
+<h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><p>线程同步是为了解决多个线程想访问同一个资源时，保证线程安全的一种机制。它本质上是一种等待机制+锁进制，访问对象时需要获得该对象的锁，没有获得锁且需要访问该对象的线程进入这个对象的等待池形成队列，等待前面一个线程使用完毕释放锁，下一个线程再获取锁使用资源。</p>
+<h2 id="不安全案例"><a href="#不安全案例" class="headerlink" title="不安全案例"></a>不安全案例</h2><ol>
+<li>不安全的买票</li>
+<li>不安全的银行</li>
+<li>不安全的集合</li>
+</ol>
+<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><p><strong>同步方法</strong><br>同步方法即加了<code>synchronized</code>修饰的方法。同步方法控制对“对象”的访问。每个对象对应一把锁，每个同步方法都必须获得调用该方法的对象的锁才能执行，否则线程会阻塞。方法一旦执行，就独占该锁，直到方法返回才释放锁。</p>
+<p><strong>同步块</strong><br>形如<code>synchronized(obj){}</code>的代码块称为同步块。其中<strong>obj</strong>称为<strong>同步监视器</strong>。理论上obj可以是任何对象，但是推荐使用共享资源作为监视器。在同步方法中无需指定同步监视器，因为同步方法中默认使用对象本身（即<code>this</code>）或<code>class</code>作为同步监视器</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>多个线程各自占有一些资源，并且互相等待其他线程占有的资源才能运行。两个或多个线程都在等待对方释放资源，因此都处于阻塞状态时的情形被称为<strong>死锁</strong>。</p>
+<p><strong>产生死锁的四个必要条件</strong></p>
+<ol>
+<li>资源互斥：一个资源每次只能被一个线程使用。</li>
+<li>请求与保持：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不可剥夺：进程已获得的资源，在未使用完之前，不能强行剥夺。</li>
+<li>循环等待：在若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ol>
+<blockquote>
+<p>只要想办法破坏四个必要条件中的一个或多个，就可以避免死锁的发生。</p>
+</blockquote>
+<h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><p>从<strong>JDK5.08</strong>开始，Java提供了更强大的线程同步机制–通过显示定义同步锁对象来实现同步。<code>ReentrantLock</code>类实现了<code>Lock</code>接口，拥有与<strong>synchronized</strong>相同的并发性和内存语义，常用于实现线程安全的控制中。<br>使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。因此选择同步控制方式的优先级应该是：Lock &gt; 同步代码块 &gt; 同步方法。</p>
+<h1 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h1><p><strong>Java提供的解决线程通信的方法</strong></p>
+<ol>
+<li>wait : 表示线程一直等待，直到其他线程通知。其与sleep函数的不同之处在于该操作会释放锁。</li>
+<li>notify : 唤醒一个处于等待状态的线程。</li>
+<li>notifyAll : 唤醒同一个对象上处于等待状态的所有线程</li>
+</ol>
+<blockquote>
+<p>以上方法均是Object方法，都只能在同步方法或同步代码块中使用</p>
+</blockquote>
+<h2 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><ol>
+<li>管程法 : 通过缓冲区实现生产者和消费者之间的通信。</li>
+<li>信号量法 : 通过标志位实现生产者和消费者之间的通信。</li>
+</ol>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>频繁创建和销毁线程会带来性能的损耗，通过线程池的思想：提前创建好多个线程，放入线程池中，使用时直接获取，使用完放回池中，可以避免频繁的创建和销毁，实现重复利用。</p>
+<p><strong>ExecutorService</strong>是线程池接口，常见的子类有<code>ThreadPoolExecutor</code>，常用方法有：</p>
+<ul>
+<li>void executor(Runnable command) : 执行任务/命令，没有返回值。</li>
+<li><T> Future<T> submit(Callable<T> task) : 执行任务，有返回值。</T></T></T></li>
+<li>void shutdown : 关闭连接池。</li>
+</ul>
+<p><strong>Executors</strong>是线程池的工厂类，用于创建并返回不同类型的线程池。</p>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>线程</tag>
+      </tags>
+  </entry>
 </search>
