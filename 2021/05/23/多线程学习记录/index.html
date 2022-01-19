@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程学习记录">
+<meta property="og:url" content="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/2.jpg">
+<meta property="article:published_time" content="2021-05-23T04:26:53.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:59.132Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="线程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg">
+
+<link rel="canonical" href="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>多线程学习记录 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程和线程"><span class="nav-number">2.</span> <span class="nav-text">进程和线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并发和并行"><span class="nav-number">2.1.</span> <span class="nav-text">并发和并行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建线程"><span class="nav-number">3.</span> <span class="nav-text">创建线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程状态"><span class="nav-number">4.</span> <span class="nav-text">线程状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程操作"><span class="nav-number">5.</span> <span class="nav-text">线程操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程优先级"><span class="nav-number">6.</span> <span class="nav-text">线程优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#守护线程"><span class="nav-number">7.</span> <span class="nav-text">守护线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程同步"><span class="nav-number">8.</span> <span class="nav-text">线程同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不安全案例"><span class="nav-number">8.1.</span> <span class="nav-text">不安全案例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#synchronized"><span class="nav-number">8.2.</span> <span class="nav-text">synchronized</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#死锁"><span class="nav-number">8.3.</span> <span class="nav-text">死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lock"><span class="nav-number">8.4.</span> <span class="nav-text">Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Condition"><span class="nav-number">8.4.1.</span> <span class="nav-text">Condition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ReentrantLock"><span class="nav-number">8.4.2.</span> <span class="nav-text">ReentrantLock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7锁现象"><span class="nav-number">8.4.3.</span> <span class="nav-text">7锁现象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程通信"><span class="nav-number">9.</span> <span class="nav-text">线程通信</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生产者消费者问题"><span class="nav-number">9.1.</span> <span class="nav-text">生产者消费者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚假唤醒"><span class="nav-number">9.1.1.</span> <span class="nav-text">虚假唤醒</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程池"><span class="nav-number">10.</span> <span class="nav-text">线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Executors"><span class="nav-number">10.1.</span> <span class="nav-text">Executors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义线程池-–-ThreadPoolExecutor"><span class="nav-number">10.2.</span> <span class="nav-text">自定义线程池 – ThreadPoolExecutor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程拒绝策略"><span class="nav-number">10.2.1.</span> <span class="nav-text">线程拒绝策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大线程如何定义"><span class="nav-number">10.2.2.</span> <span class="nav-text">最大线程如何定义</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合类不安全"><span class="nav-number">11.</span> <span class="nav-text">集合类不安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#List"><span class="nav-number">11.1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">11.2.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">11.3.</span> <span class="nav-text">Map</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Callable"><span class="nav-number">12.</span> <span class="nav-text">Callable</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#FutureTask"><span class="nav-number">12.1.</span> <span class="nav-text">FutureTask</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用辅助类"><span class="nav-number">13.</span> <span class="nav-text">常用辅助类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CountDownLatch"><span class="nav-number">13.1.</span> <span class="nav-text">CountDownLatch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CyclicBarrier"><span class="nav-number">13.2.</span> <span class="nav-text">CyclicBarrier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Semaphore"><span class="nav-number">13.3.</span> <span class="nav-text">Semaphore</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读写锁"><span class="nav-number">14.</span> <span class="nav-text">读写锁</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#阻塞队列"><span class="nav-number">15.</span> <span class="nav-text">阻塞队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BlockingQueue"><span class="nav-number">15.1.</span> <span class="nav-text">BlockingQueue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SynchronousQueue"><span class="nav-number">15.2.</span> <span class="nav-text">SynchronousQueue</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四大函数式接口"><span class="nav-number">16.</span> <span class="nav-text">四大函数式接口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数型接口-–-Function"><span class="nav-number">16.1.</span> <span class="nav-text">函数型接口 – Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#断定型接口-–-Predicate"><span class="nav-number">16.2.</span> <span class="nav-text">断定型接口 – Predicate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消费型接口-–-Consumer"><span class="nav-number">16.3.</span> <span class="nav-text">消费型接口 – Consumer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#供给型接口-–-Supplier"><span class="nav-number">16.4.</span> <span class="nav-text">供给型接口 – Supplier</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Stream流式计算"><span class="nav-number">17.</span> <span class="nav-text">Stream流式计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ForkJoin"><span class="nav-number">18.</span> <span class="nav-text">ForkJoin</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#工作窃取"><span class="nav-number">18.1.</span> <span class="nav-text">工作窃取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异步回调"><span class="nav-number">19.</span> <span class="nav-text">异步回调</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JMM"><span class="nav-number">20.</span> <span class="nav-text">JMM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile"><span class="nav-number">20.1.</span> <span class="nav-text">volatile</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式"><span class="nav-number">21.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#饿汉式单例"><span class="nav-number">21.1.</span> <span class="nav-text">饿汉式单例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#懒汉式"><span class="nav-number">21.2.</span> <span class="nav-text">懒汉式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DCL懒汉式"><span class="nav-number">21.3.</span> <span class="nav-text">DCL懒汉式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#静态内部类"><span class="nav-number">21.4.</span> <span class="nav-text">静态内部类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类"><span class="nav-number">21.5.</span> <span class="nav-text">枚举类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CAS"><span class="nav-number">22.</span> <span class="nav-text">CAS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ABA问题"><span class="nav-number">22.1.</span> <span class="nav-text">ABA问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原子引用"><span class="nav-number">22.1.1.</span> <span class="nav-text">原子引用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#锁"><span class="nav-number">23.</span> <span class="nav-text">锁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公平锁和非公平锁"><span class="nav-number">23.1.</span> <span class="nav-text">公平锁和非公平锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可重入锁"><span class="nav-number">23.2.</span> <span class="nav-text">可重入锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自旋锁"><span class="nav-number">23.3.</span> <span class="nav-text">自旋锁</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#死锁排查"><span class="nav-number">24.</span> <span class="nav-text">死锁排查</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多线程学习记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-23 12:26:53" itemprop="dateCreated datePublished" datetime="2021-05-23T12:26:53+08:00">2021-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:59" itemprop="dateModified" datetime="2022-01-10T14:24:59+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li>狂神说的课程 : <a href="https://www.bilibili.com/video/BV1V4411p7EF?p=3" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1V4411p7EF?p=3</a></li>
+<li>还是狂神说的课程 : <a href="https://www.bilibili.com/video/BV1B7411L7tE?p=2" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1B7411L7tE?p=2</a></li>
+</ol>
+<h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><p>程序是存储在磁盘上的静态代码段。我们平常所说的“运行程序”的意思实际上是指将磁盘中的程序代码加载到内存中，操作系统开启一个进程来执行程序。可以说，进程是运行的程序。进程运行时，操作系统会为它分配一定的内存空间用于保存运行时数据，内存空间属于一种资源，所以说进程是资源分配的基本单位。一个进程中可以有很多线程，但至少有一个线程。线程有自己的工作内存，也有和其他线程共享的进程主内存，在只有一个核的CPU中，CPU的使用时间只能轮流分给各个线程，即一次只能有一个线程使用CPU。所以说，线程是CPU调度的基本单位。</p>
+<h2 id="并发和并行"><a href="#并发和并行" class="headerlink" title="并发和并行"></a>并发和并行</h2><p><strong>并发</strong> : 多个线程操作同一资源。CPU一核的情况下，通过为不同线程分配时间片实现快速交替，模拟出多线程同时执行的效果。并发编程的本质是充分利用CPU的资源。<br><strong>并行</strong> : CPU多核情况下，不同线程可运行在不同的核中，实现真正的同时执行。</p>
+<h1 id="创建线程"><a href="#创建线程" class="headerlink" title="创建线程"></a>创建线程</h1><p>在Java中，创建线程有三种方式，分别是：</p>
+<ol>
+<li>继承<strong>Thread</strong>类，并重写它的<strong>run</strong>方法。</li>
+<li>实现<strong>Runnable</strong>接口，并重写它的<strong>run</strong>方法。</li>
+<li>实现<strong>Callable</strong>接口，并重写它的<strong>call</strong>方法。</li>
+</ol>
+<h1 id="线程状态"><a href="#线程状态" class="headerlink" title="线程状态"></a>线程状态</h1><ol>
+<li>start : 创建状态，已创建但未启动的线程。 –&gt; Thread.NEW</li>
+<li>ready : 就绪状态的线程，等待CPU的使用权。</li>
+<li>run : 运行状态的线程，已获得CPU的使用权。–&gt; Thread.RUNNABLE</li>
+<li>block : 阻塞状态的线程，可能正在等待某项资源的就绪。 –&gt; Thread.BLOCKED || Thread.WAITING || Thread.TIMED_WATING</li>
+<li>die : 已经结束的线程。 –&gt; Thread.TERMINATED</li>
+</ol>
+<h1 id="线程操作"><a href="#线程操作" class="headerlink" title="线程操作"></a>线程操作</h1><ol>
+<li>sleep : 线程休眠一段时间，但不释放锁。</li>
+<li>stop : 线程停止，一般使用标志位实现而不是stop或destroy函数。</li>
+<li>yield : 礼让，当前运行线程主动让出CPU使用权，从运行状态转为就绪状态。但下一个CPU的使用者是由CPU决定，也有可能仍然为礼让者。</li>
+<li>join : 插队，join的调用者将强势取得当前CPU的使用权直到该线程执行完成。这种方法会阻塞其他线程，不建议使用。</li>
+</ol>
+<h1 id="线程优先级"><a href="#线程优先级" class="headerlink" title="线程优先级"></a>线程优先级</h1><ul>
+<li>线程的优先级用数字表示，范围从1~10。</li>
+<li>需要先设置优先级再启动线程，否则设置的优先级将无效。</li>
+<li>优先级低只意味着获得调度的概率低，并不代表优先级高的线程一定会比优先级低的线程更先执行。</li>
+<li>默认值为<code>Thread.NORMAL_PRIORITY</code>–5。</li>
+</ul>
+<h1 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h1><p>线程可分为<strong>用户线程</strong>和<strong>守护线程</strong>，虚拟机需要确保用户线程执行完毕而不需要等待守护线程执行完毕。常见的守护线程有后台记录日志、监控内存、垃圾回收等。java中设置守护线程的方法是<code>Thread.setDaemon(true)</code>。</p>
+<h1 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h1><p>线程同步是为了解决多个线程想访问同一个资源时，保证线程安全的一种机制。它本质上是一种等待机制+锁进制，访问对象时需要获得该对象的锁，没有获得锁且需要访问该对象的线程进入这个对象的等待池形成队列，等待前面一个线程使用完毕释放锁，下一个线程再获取锁使用资源。</p>
+<h2 id="不安全案例"><a href="#不安全案例" class="headerlink" title="不安全案例"></a>不安全案例</h2><ol>
+<li>不安全的买票</li>
+<li>不安全的银行</li>
+<li>不安全的集合</li>
+</ol>
+<h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><p><strong>同步方法</strong><br>同步方法即加了<code>synchronized</code>修饰的方法。同步方法控制对“对象”的访问。每个对象对应一把锁，每个同步方法都必须获得调用该方法的对象的锁才能执行，否则线程会阻塞。方法一旦执行，就独占该锁，直到方法返回才释放锁。</p>
+<p><strong>同步块</strong><br>形如<code>synchronized(obj){}</code>的代码块称为同步块。其中<strong>obj</strong>称为<strong>同步监视器</strong>。理论上obj可以是任何对象，但是推荐使用共享资源作为监视器。在同步方法中无需指定同步监视器，因为同步方法中默认使用对象本身（即<code>this</code>）或<code>class</code>作为同步监视器</p>
+<h2 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h2><p>多个线程各自占有一些资源，并且互相等待其他线程占有的资源才能运行。两个或多个线程都在等待对方释放资源，因此都处于阻塞状态时的情形被称为<strong>死锁</strong>。</p>
+<p><strong>产生死锁的四个必要条件</strong></p>
+<ol>
+<li>资源互斥：一个资源每次只能被一个线程使用。</li>
+<li>请求与保持：一个线程因请求资源而阻塞时，对已获得的资源保持不放。</li>
+<li>不可剥夺：进程已获得的资源，在未使用完之前，不能强行剥夺。</li>
+<li>循环等待：在若干进程之间形成一种头尾相接的循环等待资源关系。</li>
+</ol>
+<blockquote>
+<p>只要想办法破坏四个必要条件中的一个或多个，就可以避免死锁的发生。</p>
+</blockquote>
+<h2 id="Lock"><a href="#Lock" class="headerlink" title="Lock"></a>Lock</h2><p>从<strong>JDK5.0</strong>开始，Java提供了更强大的线程同步机制–通过显示定义同步锁对象来实现同步。<code>ReentrantLock</code>类实现了<code>Lock</code>接口，拥有与<strong>synchronized</strong>相同的并发性和内存语义，常用于实现线程安全的控制中。<br>使用Lock锁，JVM将花费较少的时间来调度线程，性能更好。因此选择同步控制方式的优先级应该是：Lock &gt; 同步代码块 &gt; 同步方法。</p>
+<p><strong>Synchronized和Lock的区别</strong></p>
+<ul>
+<li>Synchronized 是关键字，而 Lock 是 Java 接口。</li>
+<li>Synchronized 无法判断获取锁的状态，Lock 可以判断是否获得了锁。</li>
+<li>Synchronized 会自动释放锁，Lock 必须手动释放。</li>
+<li>如果有两个线程A,B获取同一个资源，Synchronized 下A获得锁后如果阻塞了，B就会一直等待；而 Lock 锁下B不一定会一直等待。</li>
+<li>虽然 Synchronized 和 Lock 都是可重入锁，但 Synchronized 是不可中断的非公平锁；而 Lock 是可中断的，且是否为公平锁可以通过构造函数的传参指定，类似<code>Reentrant(true)</code>将创建一个公平锁，默认参数为false，即非公平锁。</li>
+<li>Synchronized 适合锁少量的同步代码，Lock 适合锁大量的同步代码。</li>
+</ul>
+<h3 id="Condition"><a href="#Condition" class="headerlink" title="Condition"></a>Condition</h3><blockquote>
+<p>用于精准的通知和唤醒线程</p>
+</blockquote>
+<p>可通过<code>Lock.newConditon()</code>得到一个Condition对象。</p>
+<h3 id="ReentrantLock"><a href="#ReentrantLock" class="headerlink" title="ReentrantLock"></a>ReentrantLock</h3><p>ReentrantLock可以设置为公平锁或非公平锁：</p>
+<ul>
+<li>公平锁：采用<strong>先来后到</strong>规则获取锁。</li>
+<li>非公平锁：不必遵守先来后到的规则，可以<strong>插队</strong>获取锁。默认是非公平锁。</li>
+</ul>
+<h3 id="7锁现象"><a href="#7锁现象" class="headerlink" title="7锁现象"></a>7锁现象</h3><ol>
+<li>2个同步方法，1个对象。</li>
+<li>1个同步方法，1个普通方法，1个对象。</li>
+<li>1个同步方法，2个对象。</li>
+<li>2个静态同步方法，1个对象。</li>
+<li>2个静态同步方法，2个对象。</li>
+<li>1个静态同步方法，1个普通同步方法，1个对象。</li>
+<li>1个静态同步方法，1个普通同步方法，2个对象</li>
+</ol>
+<h1 id="线程通信"><a href="#线程通信" class="headerlink" title="线程通信"></a>线程通信</h1><p><strong>Java提供的解决线程通信的方法</strong></p>
+<ol>
+<li>wait : 表示线程一直等待，直到其他线程通知。其与sleep函数的不同之处在于该操作会释放锁。</li>
+<li>notify : 唤醒一个处于等待状态的线程。</li>
+<li>notifyAll : 唤醒同一个对象上处于等待状态的所有线程</li>
+</ol>
+<blockquote>
+<p>以上方法均是Object方法，都只能在同步方法或同步代码块中使用</p>
+</blockquote>
+<h2 id="生产者消费者问题"><a href="#生产者消费者问题" class="headerlink" title="生产者消费者问题"></a>生产者消费者问题</h2><ol>
+<li>管程法 : 通过缓冲区实现生产者和消费者之间的通信。</li>
+<li>信号量法 : 通过标志位实现生产者和消费者之间的通信。</li>
+</ol>
+<h3 id="虚假唤醒"><a href="#虚假唤醒" class="headerlink" title="虚假唤醒"></a>虚假唤醒</h3><p>当场景中出现多个消费者和多个生产者时，用if判断而不是while判断而带来的紊乱。<br>举个栗子，假设Data类有increase和decrease两个方法，两个方法都由synchronized修饰；有一个成员变量num。写一个程序希望能够实现当num等于0时加1，当num等于1时减1的效果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        num++;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"执行加1操作，num = "</span> + num);</span><br><span class="line">        <span class="keyword">this</span>.notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">decrease</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        num--;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"执行减1操作，num = "</span> + num);</span><br><span class="line">        <span class="keyword">this</span>.notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分别设置两个生产者、两个消费者线程来进行实验。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FakeNotifyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Data data = <span class="keyword">new</span> Data();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">2</span>; k++)&#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)&#123;</span><br><span class="line">                    data.increase();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,<span class="string">"IncreaseThread"</span> + k).start();</span><br><span class="line">    </span><br><span class="line">            <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)&#123;</span><br><span class="line">                    data.decrease();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,<span class="string">"DecreaseThread"</span> + k).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后出现了迷惑结果：<br><img src="/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg" alt><br>分析造成这种结果的原因是：<br><img src="/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/2.jpg" alt></p>
+<ol>
+<li>DecreaseThread1 执行，此时因为 num=1，因此 DecreaseThread1 不会被阻塞，走到了 num– 这一步，完成后 num=0。</li>
+<li>此时，CPU使用权交给了 DecreaseThread2，因为 num=0，所以经过 if 判断时 DecreaseThread2 调用 <code>wait</code> 进行阻塞。</li>
+<li>DecreaseThread2 处于阻塞状态当然不能继续执行，时间片耗尽后CPU使用权又交给了 DecreaseThread1。此时 DecreaseThread1 调用<code>notifyAll</code> 来唤醒所有的 wait 线程，包括 DecreaseThread2。</li>
+<li>然后 DecreaseThread2 被唤醒，出了 if 判断，执行 num– 操作，使 num=-1</li>
+</ol>
+<p>综上，要想解决这个虚假唤醒的问题，只要将原来的 if 判断 换成 while 循环判断即可。</p>
+<h1 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h1><p>频繁创建和销毁线程会带来性能的损耗，通过线程池的思想：提前创建好多个线程，放入线程池中，使用时直接获取，使用完放回池中，可以避免频繁的创建和销毁，实现重复利用。</p>
+<p><strong>ExecutorService</strong>是线程池接口，常见的子类有<code>ThreadPoolExecutor</code>，常用方法有：</p>
+<ul>
+<li>void executor(Runnable command) : 执行任务/命令，没有返回值。</li>
+<li><T> Future<T> submit(Callable<T> task) : 执行任务，有返回值。</T></T></T></li>
+<li>void shutdown : 关闭连接池。</li>
+</ul>
+<p><strong>Executors</strong>是线程池的工厂类，用于创建并返回不同类型的线程池。</p>
+<h2 id="Executors"><a href="#Executors" class="headerlink" title="Executors"></a>Executors</h2><ul>
+<li>newSingleThreadExecutor – 单个线程</li>
+<li>newFixedThreadPool – 固定大小</li>
+<li>newCachedThreadPool – 可伸缩大小，遇强则强</li>
+</ul>
+<h2 id="自定义线程池-–-ThreadPoolExecutor"><a href="#自定义线程池-–-ThreadPoolExecutor" class="headerlink" title="自定义线程池 – ThreadPoolExecutor"></a>自定义线程池 – ThreadPoolExecutor</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> corePoolSize,       // 核心线程池大小</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">int</span> maximumPoolSize,    // 最大核心线程池大小</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="keyword">long</span> keepAliveTime,     // 超时时间，空闲时间超时的线程会被释放</span></span></span><br><span class="line"><span class="function"><span class="params">    TimeUnit unit,          // 超时单位</span></span></span><br><span class="line"><span class="function"><span class="params">    BlockingQueue&lt;Runnable&gt; workQueue, // 阻塞队列</span></span></span><br><span class="line"><span class="function"><span class="params">    ThreadFactory threadFactory,       // 线程工厂</span></span></span><br><span class="line"><span class="function"><span class="params">    RejectedExecutionHandler handler;  // 拒绝策略</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>最大承载 = 阻塞队列容量 + 最大核心线程池大小</p>
+<h3 id="线程拒绝策略"><a href="#线程拒绝策略" class="headerlink" title="线程拒绝策略"></a>线程拒绝策略</h3><ul>
+<li>AbortPolicy : 阻塞队列满了，仍有请求时，不处理这个请求，并抛出异常。</li>
+<li>CallerRunsPolicy : 阻塞队列满了，仍有请求时，这个请求交给提交请求的线程处理（哪来的回哪去）。</li>
+<li>DiscardPolicy : 阻塞队列满了，仍有请求时，不处理这个请求，直接丢掉该请求，不抛出异常。</li>
+<li>DiscardOldestPolicy : 阻塞队列满了，仍有请求时，该请求和最早的请求进行竞争，也不会抛出异常。</li>
+</ul>
+<h3 id="最大线程如何定义"><a href="#最大线程如何定义" class="headerlink" title="最大线程如何定义"></a>最大线程如何定义</h3><ul>
+<li>CPU密集型：获取CPU的核数，n核的CPU就定义最大线程数为n。CPU核数可以通过 <code>Runtime.getRuntime().availableProcessors()</code>进行获取。</li>
+<li>IO密集型：判断程序中十分耗IO的线程，最大线程应该大于这个值。</li>
+</ul>
+<h1 id="集合类不安全"><a href="#集合类不安全" class="headerlink" title="集合类不安全"></a>集合类不安全</h1><h2 id="List"><a href="#List" class="headerlink" title="List"></a>List</h2><p>以<strong>ArrayList</strong>为例，它是并发不安全的，如果并发修改的话会出现<code>java.util.ConcurrentModificationException</code>异常。</p>
+<p>常见解决方案有：</p>
+<ol>
+<li>以Vector代替ArrayList，Vector中的add方法是加了synchronized的同步方法，而ArrayList中的add方法只是普通方法。</li>
+<li>利用<code>Collections.synchronizedList</code>方法对普通ArrayList进行转换。</li>
+<li>使用<strong>CopyOnWriteArrayList</strong>。</li>
+</ol>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>以<strong>HashSet</strong>为例，它是并发不安全的，如果并发修改的话会出现<code>java.util.ConcurrentModificationException</code>异常。（PS：HashSet的底层是使用HashMap实现）。</p>
+<p>常见解决方案有：</p>
+<ol>
+<li>利用<code>Collections.synchronizedSet</code>方法对普通HashSet进行转换。</li>
+<li>使用<strong>CopyOnWriteArraySet</strong>。</li>
+</ol>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>以<strong>HashSet</strong>为例，它是并发不安全的，如果并发修改的话会出现<code>java.util.ConcurrentModificationException</code>异常。</p>
+<p>常见解决方案有：</p>
+<ol>
+<li>利用<code>Collections.synchronizedMap</code>方法对普通HashMap进行转换。</li>
+<li>使用<strong>ConcurrentHashMap</strong>。</li>
+</ol>
+<h1 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h1><p>Callable是一个泛型接口，需要重写call方法，方法的返回值是泛型。</p>
+<p><strong>细节</strong>：</p>
+<ol>
+<li>有缓存。</li>
+<li>结果可能需要等待，会阻塞。</li>
+</ol>
+<h2 id="FutureTask"><a href="#FutureTask" class="headerlink" title="FutureTask"></a>FutureTask</h2><ul>
+<li><code>new Thread(new FutureTask&lt;V&gt;(Callable)).start()</code></li>
+<li><code>futureTask.get()</code> – 可能会产生阻塞</li>
+</ul>
+<h1 id="常用辅助类"><a href="#常用辅助类" class="headerlink" title="常用辅助类"></a>常用辅助类</h1><h2 id="CountDownLatch"><a href="#CountDownLatch" class="headerlink" title="CountDownLatch"></a>CountDownLatch</h2><ul>
+<li><code>new CountDownLatch(num)</code> – 初始化计数值</li>
+<li><code>countDown()</code> – 计数值-1</li>
+<li><code>await()</code> – 等待计数器归0，然后再向下执行</li>
+</ul>
+<h2 id="CyclicBarrier"><a href="#CyclicBarrier" class="headerlink" title="CyclicBarrier"></a>CyclicBarrier</h2><ul>
+<li><code>new CyclicBarrier(num, Runnable)</code> – 初始化计数目标值,Runnable为达到目标值后的回调函数</li>
+<li><code>await()</code> – 等待</li>
+</ul>
+<h2 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h2><blockquote>
+<p>类似停车位，可用于限流场景</p>
+</blockquote>
+<ul>
+<li><code>new Semaphore(num)</code> – 许可进入的线程数量</li>
+<li><code>acquire()</code> – 得到一个许可证</li>
+<li><code>release()</code> – 释放一个许可证</li>
+</ul>
+<h1 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h1><p><strong>ReadWriteLock</strong>是一个接口，拥有一个唯一的实现类<strong>ReentrantReadWriteLock</strong>。</p>
+<ul>
+<li>独占锁：写锁，一次只能被一个线程占有。</li>
+<li>共享锁：读锁，多个线程可以同时占有。</li>
+</ul>
+<h1 id="阻塞队列"><a href="#阻塞队列" class="headerlink" title="阻塞队列"></a>阻塞队列</h1><p><strong>BlockingQueue</strong>是一个接口，它的实现类有<strong>LinkedBlockingQueue</strong>和<strong>ArrayBlockingQueue</strong>等。</p>
+<h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><p><strong>API</strong></p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>抛出异常</th>
+<th>有返回值，不抛出异常</th>
+<th>阻塞等待</th>
+<th>超时等待</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>添加</td>
+<td>add</td>
+<td>offer</td>
+<td>put</td>
+<td>offer(,,)</td>
+</tr>
+<tr>
+<td>移除</td>
+<td>remove</td>
+<td>poll</td>
+<td>take</td>
+<td>poll(,)</td>
+</tr>
+<tr>
+<td>队首</td>
+<td>element</td>
+<td>peek</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="SynchronousQueue"><a href="#SynchronousQueue" class="headerlink" title="SynchronousQueue"></a>SynchronousQueue</h2><blockquote>
+<p>同步队列，是BlockingQueue接口的一个实现类。不存储元素，往队列里put一个元素后必须从里面先take出来，否则不能再put进去值</p>
+</blockquote>
+<h1 id="四大函数式接口"><a href="#四大函数式接口" class="headerlink" title="四大函数式接口"></a>四大函数式接口</h1><p>函数式接口：只有一个方法的接口。</p>
+<blockquote>
+<p>@FunctionInterface</p>
+</blockquote>
+<h2 id="函数型接口-–-Function"><a href="#函数型接口-–-Function" class="headerlink" title="函数型接口 – Function"></a>函数型接口 – Function</h2><blockquote>
+<p>有一个输入参数，一个输出参数</p>
+</blockquote>
+<h2 id="断定型接口-–-Predicate"><a href="#断定型接口-–-Predicate" class="headerlink" title="断定型接口 – Predicate"></a>断定型接口 – Predicate</h2><blockquote>
+<p>有一个输入参数，输出参数只能是布尔值</p>
+</blockquote>
+<h2 id="消费型接口-–-Consumer"><a href="#消费型接口-–-Consumer" class="headerlink" title="消费型接口 – Consumer"></a>消费型接口 – Consumer</h2><blockquote>
+<p>有一个输入参数，没有返回值</p>
+</blockquote>
+<h2 id="供给型接口-–-Supplier"><a href="#供给型接口-–-Supplier" class="headerlink" title="供给型接口 – Supplier"></a>供给型接口 – Supplier</h2><blockquote>
+<p>没有输入参数，只有返回值</p>
+</blockquote>
+<h1 id="Stream流式计算"><a href="#Stream流式计算" class="headerlink" title="Stream流式计算"></a>Stream流式计算</h1><p><strong>题目</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">题目要求：用一行代码实现以下要求</span><br><span class="line">现有5个用户，按如下条件进行筛选：</span><br><span class="line">1. ID 必须为偶数；</span><br><span class="line">2. 年龄必须大于23岁；</span><br><span class="line">3. 用户名转为大写字母；</span><br><span class="line">4. 按用户名字母倒序；</span><br><span class="line">5. 只输出一个用户</span><br></pre></td></tr></table></figure>
+
+<h1 id="ForkJoin"><a href="#ForkJoin" class="headerlink" title="ForkJoin"></a>ForkJoin</h1><blockquote>
+<p>把大任务拆分为小任务</p>
+</blockquote>
+<h2 id="工作窃取"><a href="#工作窃取" class="headerlink" title="工作窃取"></a>工作窃取</h2><p>维护的都是双端队列</p>
+<h1 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调"></a>异步回调</h1><p><strong>CompletableFuture<V></V></strong></p>
+<ul>
+<li>runAsync()  – 无返回值</li>
+<li>supplyAsync() – 有返回值</li>
+<li>get()</li>
+<li>whenComplete</li>
+<li>exceptionally</li>
+</ul>
+<h1 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h1><p>JMM 是 Java 内存模型，它拥有的一些同步约定如下：</p>
+<ol>
+<li>线程解锁前，必须把共享变量立刻刷回主内存。</li>
+<li>线程加锁前，必须读取主内存中的最新值到工作内存中。</li>
+<li>加锁和解锁是同一把锁。</li>
+</ol>
+<p><strong>8种内存交互操作</strong>：read、load、use、assign、write、store、lock、unlock</p>
+<h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><blockquote>
+<p>是Java虚拟机提供的轻量级的同步机制。</p>
+</blockquote>
+<ul>
+<li>保证可见性；</li>
+<li>不保证原子性；</li>
+<li>禁止指令重排。</li>
+</ul>
+<p><strong>指令重排</strong>：计算机并不是按编码顺序去执行代码。</p>
+<p>源代码 –&gt; 编译器优化的重排 –&gt; 指令并行也可能重排 –&gt; 内存系统也会重排 –&gt; 执行</p>
+<p>处理器在进行指令重排的时候，会考虑数据之间的依赖性。</p>
+<p><strong>指令重排导致乱序例子</strong></p>
+<p>假设a,b,c,d这四个值默认都为0；</p>
+<table>
+<thead>
+<tr>
+<th>线程A</th>
+<th>线程B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x=a</td>
+<td>y=b</td>
+</tr>
+<tr>
+<td>b=1</td>
+<td>a=2</td>
+</tr>
+</tbody></table>
+<p>正常结果为x=0,y=0；但是由于可能指令重排为下列情况</p>
+<table>
+<thead>
+<tr>
+<th>线程A</th>
+<th>线程B</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>b=1</td>
+<td>a=2</td>
+</tr>
+<tr>
+<td>x=a</td>
+<td>y=b</td>
+</tr>
+</tbody></table>
+<p>得到x=2；y=1的错误结果。</p>
+<p><strong>volatile避免指令重排的原理</strong></p>
+<blockquote>
+<p>内存屏障，CPU指令。</p>
+</blockquote>
+<p>对一个用volatile声明过的变量，在执行它的写指令时，CPU会在指令的上下各加一条内存屏障指令，禁止上面指令和下面指令顺序交换。</p>
+<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="饿汉式单例"><a href="#饿汉式单例" class="headerlink" title="饿汉式单例"></a>饿汉式单例</h2><p>类创建时就创建单例，缺点是可能会浪费空间。</p>
+<h2 id="懒汉式"><a href="#懒汉式" class="headerlink" title="懒汉式"></a>懒汉式</h2><p>用一个对象获取单例时，才去创建这个单例。缺点是多线程时会可能会出现重复创建的问题。</p>
+<h2 id="DCL懒汉式"><a href="#DCL懒汉式" class="headerlink" title="DCL懒汉式"></a>DCL懒汉式</h2><p>双重检测锁模式的懒汉式。</p>
+<p>缺点是new操作时可能会发生指令重排。解决方法是volatile。</p>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><h1 id="CAS"><a href="#CAS" class="headerlink" title="CAS"></a>CAS</h1><blockquote>
+<p>CompareAndSet : 比较并交换</p>
+</blockquote>
+<p>比较当前工作内存中的值和主内存中的值，如果这个值是期望的，那么执行操作。如果不是，则一直循环。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AtomicInteger atomicInteger = <span class="keyword">new</span> AtomicInteger(initialValue);</span><br><span class="line">atomicInteger.compareAndSet();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// expect : 期望，update : 更新</span></span><br><span class="line"><span class="comment">// 如果期望的值达到了，就更新；否则，就不更新</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">compareAndSet</span><span class="params">(<span class="keyword">int</span> expect, <span class="keyword">int</span> update)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>CAS 是 CPU的操作原语</p>
+</blockquote>
+<p>Java无法操作内存，C++可以操作内存，所以Java操作内存的方法是通过native方法调用C++。其中Unsafe类相当于C++的一个后门，供Java使用。</p>
+<p>CAS的缺点：</p>
+<ul>
+<li>循环会耗时。</li>
+<li>一次性只能保证一个共享变量的原子性。</li>
+<li>会产生ABA问题</li>
+</ul>
+<h2 id="ABA问题"><a href="#ABA问题" class="headerlink" title="ABA问题"></a>ABA问题</h2><h3 id="原子引用"><a href="#原子引用" class="headerlink" title="原子引用"></a>原子引用</h3><p>AtomicReference</p>
+<p>思想：乐观锁</p>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><h2 id="公平锁和非公平锁"><a href="#公平锁和非公平锁" class="headerlink" title="公平锁和非公平锁"></a>公平锁和非公平锁</h2><p>取决于是否可被抢占</p>
+<h2 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h2><h2 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h2><h1 id="死锁排查"><a href="#死锁排查" class="headerlink" title="死锁排查"></a>死锁排查</h1><ol>
+<li>使用 <code>jps -l</code> 定位进程号</li>
+<li>使用 <code>jstack 进程号</code> 找到死锁问题</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BA%BF%E7%A8%8B/" rel="tag"># 线程</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/" rel="prev" title="Adobe下载">
+      <i class="fa fa-chevron-left"></i> Adobe下载
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/26/%E5%88%86%E4%BA%AB%E9%9F%B3%E4%B9%90/" rel="next" title="分享音乐">
+      分享音乐 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

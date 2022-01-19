@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="记录玩网页小游戏 vim adventures 的过程 ^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VimAdventures">
+<meta property="og:url" content="https://llunch4w.github.io/2021/05/19/VimAdventures/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="记录玩网页小游戏 vim adventures 的过程 ^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/19/VimAdventures/1.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/19/VimAdventures/2.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/19/VimAdventures/3.jpg">
+<meta property="article:published_time" content="2021-05-19T08:19:33.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:58.986Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="游戏">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2021/05/19/VimAdventures/1.jpg">
+
+<link rel="canonical" href="https://llunch4w.github.io/2021/05/19/VimAdventures/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>VimAdventures | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vim-Adventrue-简介"><span class="nav-number">1.</span> <span class="nav-text">Vim Adventrue 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level-1"><span class="nav-number">2.</span> <span class="nav-text">Level 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Point1：光标移动"><span class="nav-number">2.1.</span> <span class="nav-text">Point1：光标移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Point2：光标记忆功能"><span class="nav-number">2.2.</span> <span class="nav-text">Point2：光标记忆功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level2"><span class="nav-number">3.</span> <span class="nav-text">Level2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Point1：按单词移动"><span class="nav-number">3.1.</span> <span class="nav-text">Point1：按单词移动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Level3"><span class="nav-number">4.</span> <span class="nav-text">Level3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Point1：删除字符"><span class="nav-number">4.1.</span> <span class="nav-text">Point1：删除字符</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#More"><span class="nav-number">5.</span> <span class="nav-text">More</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他玩-Vim-的网站"><span class="nav-number">6.</span> <span class="nav-text">其他玩 Vim 的网站</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/05/19/VimAdventures/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VimAdventures
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-19 16:19:33" itemprop="dateCreated datePublished" datetime="2021-05-19T16:19:33+08:00">2021-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:58" itemprop="dateModified" datetime="2022-01-10T14:24:58+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>记录玩网页小游戏 vim adventures 的过程 ^ _ ^ </p>
+
+</blockquote>
+
+<a id="more"></a>
+
+<h1 id="Vim-Adventrue-简介"><a href="#Vim-Adventrue-简介" class="headerlink" title="Vim Adventrue 简介"></a>Vim Adventrue 简介</h1><p>Vim Adventrue是一款学习vim操作的小游戏，网址是：<a href="https://vim-adventures.com/" target="_blank" rel="noopener">https://vim-adventures.com/</a>。本篇博客用于记录我的游戏攻略 ^ _ ^</p>
+<h1 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h1><h2 id="Point1：光标移动"><a href="#Point1：光标移动" class="headerlink" title="Point1：光标移动"></a>Point1：光标移动</h2><table>
+<thead>
+<tr>
+<th>键</th>
+<th>方向</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>h</td>
+<td>左</td>
+</tr>
+<tr>
+<td>j</td>
+<td>下</td>
+</tr>
+<tr>
+<td>k</td>
+<td>上</td>
+</tr>
+<tr>
+<td>l</td>
+<td>右</td>
+</tr>
+</tbody></table>
+<p>用hjkl四个键控制左下上右移动，拿到钥匙，打开宝箱。</p>
+<hr>
+
+<h2 id="Point2：光标记忆功能"><a href="#Point2：光标记忆功能" class="headerlink" title="Point2：光标记忆功能"></a>Point2：光标记忆功能</h2><p><img src="/2021/05/19/VimAdventures/1.jpg" alt></p>
+<p>看上面这个地图，是不是感觉按常理过不去呢？这时就要引入Vim的<code>光标记忆</code>特性了。</p>
+<ul>
+<li>假设图上有一个坐标系，水平方向为x轴，垂直方向为y轴。x轴以右为正方向，y轴以下为正方向。</li>
+<li>若光标 (x1,y1) 往下移动，而 (x1,y1+1) 是不可走区域（例如图中的河，真实情况的短行），那么光标最终到达的坐标 (x2,y1+1) 中的x2 是 y1+1 行中可走的不超过 x1 且最接近 x1 的点。</li>
+<li>往上移动同理。</li>
+</ul>
+<p><img src="/2021/05/19/VimAdventures/2.jpg" alt></p>
+<p>如图所示，2~8都是在记下了1的位置的情况下尽量靠近1去走的。</p>
+<h1 id="Level2"><a href="#Level2" class="headerlink" title="Level2"></a>Level2</h1><h2 id="Point1：按单词移动"><a href="#Point1：按单词移动" class="headerlink" title="Point1：按单词移动"></a>Point1：按单词移动</h2><p>单词是由字符、数字、下划线、标点符号（连续的标点符号作为单独一个单词）组成的字符串，按单词移动就是每次移动一个单词。有两种移动方式，分别是：</p>
+<ol>
+<li>w：从一个单词头跳到下一个单词头；</li>
+<li>e：从一个单词尾调到下一个单词尾；</li>
+<li>b：从一个单词头跳到上一个单词头；</li>
+<li>B：同 b</li>
+</ol>
+<h1 id="Level3"><a href="#Level3" class="headerlink" title="Level3"></a>Level3</h1><h2 id="Point1：删除字符"><a href="#Point1：删除字符" class="headerlink" title="Point1：删除字符"></a>Point1：删除字符</h2><ol>
+<li>x：删除当前光标所在的字符</li>
+<li>nx：n是数字，表示删除当前光标所在及以后共n个字符</li>
+</ol>
+<h1 id="More"><a href="#More" class="headerlink" title="More"></a>More</h1><p>没想到只能玩3关，剩下的游戏想玩就得交$25了。So,Bye~</p>
+<p><img src="/2021/05/19/VimAdventures/3.jpg" alt></p>
+<h1 id="其他玩-Vim-的网站"><a href="#其他玩-Vim-的网站" class="headerlink" title="其他玩 Vim 的网站"></a>其他玩 Vim 的网站</h1><p><strong>OpenVim</strong> : <a href="https://www.openvim.com/tutorial.html" target="_blank" rel="noopener">https://www.openvim.com/tutorial.html</a>，一个不错的交互式小网页</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%B8%E6%88%8F/" rel="tag"># 游戏</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/19/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AE%97%E6%B3%95%E6%BC%94%E7%A4%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E6%94%B6%E5%BD%95/" rel="prev" title="图像处理算法演示系统的收录">
+      <i class="fa fa-chevron-left"></i> 图像处理算法演示系统的收录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/" rel="next" title="Adobe下载">
+      Adobe下载 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

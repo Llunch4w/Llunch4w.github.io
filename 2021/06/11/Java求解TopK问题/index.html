@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java求解TopK问题">
+<meta property="og:url" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/1.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/2.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/3.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/4.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/5.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/6.jpg">
+<meta property="article:published_time" content="2021-06-10T23:27:04.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:58.939Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="算法 Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/1.jpg">
+
+<link rel="canonical" href="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java求解TopK问题 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TopK-问题"><span class="nav-number">1.</span> <span class="nav-text">TopK 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考链接"><span class="nav-number">2.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法一：全部排序"><span class="nav-number">3.</span> <span class="nav-text">方法一：全部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验"><span class="nav-number">3.1.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法二：快排的改进算法"><span class="nav-number">4.</span> <span class="nav-text">方法二：快排的改进算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验-1"><span class="nav-number">4.1.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法三：局部淘汰法"><span class="nav-number">5.</span> <span class="nav-text">方法三：局部淘汰法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验-2"><span class="nav-number">5.1.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法四：分治法"><span class="nav-number">6.</span> <span class="nav-text">方法四：分治法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验-3"><span class="nav-number">6.1.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法五：Hash法"><span class="nav-number">7.</span> <span class="nav-text">方法五：Hash法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#方法六：小顶堆"><span class="nav-number">8.</span> <span class="nav-text">方法六：小顶堆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实验1"><span class="nav-number">8.1.</span> <span class="nav-text">实验1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验2"><span class="nav-number">8.2.</span> <span class="nav-text">实验2</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java求解TopK问题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-11 07:27:04" itemprop="dateCreated datePublished" datetime="2021-06-11T07:27:04+08:00">2021-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:58" itemprop="dateModified" datetime="2022-01-10T14:24:58+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="TopK-问题"><a href="#TopK-问题" class="headerlink" title="TopK 问题"></a>TopK 问题</h1><p>10亿个数中如何高效地找到最大的一个数以及最大的K个数</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ol>
+<li>参考1：<a href="https://github.com/weitingyuk/LeetCode-Notes-Waiting/blob/main/2021-02-17/TopK.md" target="_blank" rel="noopener">https://github.com/weitingyuk/LeetCode-Notes-Waiting/blob/main/2021-02-17/TopK.md</a></li>
+<li>参考2：<a href="https://zhuanlan.zhihu.com/p/72164039" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/72164039</a></li>
+</ol>
+<h1 id="方法一：全部排序"><a href="#方法一：全部排序" class="headerlink" title="方法一：全部排序"></a>方法一：全部排序</h1><ul>
+<li><strong>思路</strong>：将n个数进行排序后取前k个</li>
+<li><strong>时间复杂度</strong>：快排时间复杂度为<code>O(nlogn)</code>。</li>
+<li><strong>空间</strong>：在32位机器上，float类型占用4Byte，$10^9$个数需要占用越4GB的存储空间。</li>
+<li><strong>缺点</strong>：全部排序需要将数据全部载入内存，如果电脑内存小于4GB，则无法使用该方法。另一方面，该方法对于内存大于4GB的电脑也不高效，因为问题要求只是找到TopK，而排序将所有元素都排序了，做了很多无用功。</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p><strong>实验目的</strong>：生成一个$10^6$个数，用快速排序对其运行时间进行测试。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @ Author LuckyQ</span></span><br><span class="line"><span class="comment"> * @ Date   2021-05-22 13:59</span></span><br><span class="line"><span class="comment"> * @ Description 快速排序</span></span><br><span class="line"><span class="comment"> * @ 时间复杂度 O(nlogn)</span></span><br><span class="line"><span class="comment"> * @ 空间复杂度 O(n)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">import</span> java.util.Random;</span><br><span class="line"> <span class="keyword">import</span> java.lang.Math;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuickSort</span></span>&#123;</span><br><span class="line">    <span class="comment">// Return the index of nums[0] should be</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partion</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = nums[left];</span><br><span class="line">        <span class="keyword">int</span> i = left + <span class="number">1</span>, j = right;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Divide nums by num to this situation --&gt; | &lt;= num | num | &gt; num |</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j)&#123;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[i] &gt;= num)&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[j] &lt; num)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">                nums[j] = nums[i];</span><br><span class="line">                nums[i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">        nums[j] = num;</span><br><span class="line">        nums[left] = temp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(right &lt;= left)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = QuickSort.partion(nums, left, right);</span><br><span class="line">        sort(nums, left, mid - <span class="number">1</span>);</span><br><span class="line">        sort(nums, mid + <span class="number">1</span>, right);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] generateNums(<span class="keyword">int</span> N, <span class="keyword">int</span> highBound)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">            nums[i] = random.nextInt(highBound);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------------------------------\n"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            System.out.print(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>((i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n-----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// N is the number of experience</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">experience</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> time = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span>[] container = <span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line"></span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            QuickSort.sort(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; k; j++)&#123;</span><br><span class="line">                container[j] = nums[j];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// if(i == 0)&#123;</span></span><br><span class="line">            <span class="comment">//     AdvancedQuickSort.printArray(container);</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">            time += (endTime - startTime) / <span class="number">1000.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> time / N;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = QuickSort.generateNums(<span class="number">1000000</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="comment">// QuickSort.printArray(nums);</span></span><br><span class="line">        <span class="keyword">double</span> averageTime = QuickSort.experience(nums, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"程序运行平均时间："</span> + Math.round(averageTime * <span class="number">1000</span>) + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验结果</strong>：<br><img src="/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/1.jpg" alt></p>
+<h1 id="方法二：快排的改进算法"><a href="#方法二：快排的改进算法" class="headerlink" title="方法二：快排的改进算法"></a>方法二：快排的改进算法</h1><ul>
+<li><strong>思路</strong>：本质上是运用了快排中分治思想。首先对数组第一个元素对数组进行一个划分，划分后使其左边的元素都不小于该元素，右边的元素都大于该元素。不妨将划分元素归为左部分。如果左边部分元素的数目等于K，则代表找到前K个数；如果左边部分元素的数目大于K，则继续对左部分数组进行划分；如果左边部分元素的数目小于K，则继续对右部元素做(K-左部元素个数)划分。</li>
+<li><strong>时间复杂度</strong>：<code>O(nlogn)</code>（不确定）</li>
+<li><strong>空间复杂度</strong>：4n Byte</li>
+<li><strong>缺点</strong>：数据也要全部载入内存，但是速度会比普通的快排快。</li>
+</ul>
+<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p><strong>实验目的</strong>：生成一个$10^6$个数，用快速排序对其运行时间进行测试。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @ Author LuckyQ</span></span><br><span class="line"><span class="comment"> * @ Date   2021-05-22 22:16</span></span><br><span class="line"><span class="comment"> * @ Description 改进版快速排序</span></span><br><span class="line"><span class="comment"> * @ 时间复杂度 O(nlogn)</span></span><br><span class="line"><span class="comment"> * @ 空间复杂度 O(n)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">import</span> java.util.Random;</span><br><span class="line"> <span class="keyword">import</span> java.lang.Math;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdvancedQuickSort</span></span>&#123;</span><br><span class="line">    <span class="comment">// Return the index of nums[0] should be</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partion</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = nums[left];</span><br><span class="line">        <span class="keyword">int</span> i = left + <span class="number">1</span>, j = right;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Divide nums by num to this situation --&gt; | &lt;= num | num | &gt; num |</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j)&#123;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[i] &gt;= num)&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[j] &lt; num)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">                nums[j] = nums[i];</span><br><span class="line">                nums[i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">        nums[j] = num;</span><br><span class="line">        nums[left] = temp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(right &lt;= left)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = AdvancedQuickSort.partion(nums, left, right);</span><br><span class="line">        <span class="keyword">int</span> num = mid - left + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(num == k)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(num &gt; k)&#123;</span><br><span class="line">            AdvancedQuickSort.sort(nums, left, mid - <span class="number">1</span>, k);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            AdvancedQuickSort.sort(nums, mid + <span class="number">1</span>, right, k - num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] generateNums(<span class="keyword">int</span> N, <span class="keyword">int</span> highBound)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">            nums[i] = random.nextInt(highBound);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------------------------------\n"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            System.out.print(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>((i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n-----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// N is the number of experience</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">experience</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> time = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N; i++)&#123;</span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            <span class="keyword">int</span>[] container = <span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line">            AdvancedQuickSort.sort(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>, k);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; k; j++)&#123;</span><br><span class="line">                container[j] = nums[j];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// if(i == 0)&#123;</span></span><br><span class="line">            <span class="comment">//     AdvancedQuickSort.printArray(container);</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">            time += (endTime - startTime) / <span class="number">1000.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> time / N;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = AdvancedQuickSort.generateNums(<span class="number">1000000</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="comment">// AdvancedQuickSort.printArray(nums);</span></span><br><span class="line">        <span class="keyword">double</span> averageTime = AdvancedQuickSort.experience(nums, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"程序运行平均时间："</span> + Math.round(averageTime * <span class="number">1000</span>) + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验结果</strong>：<br><img src="/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/2.jpg" alt></p>
+<h1 id="方法三：局部淘汰法"><a href="#方法三：局部淘汰法" class="headerlink" title="方法三：局部淘汰法"></a>方法三：局部淘汰法</h1><ul>
+<li><strong>思路</strong>：用一个容器保存前K个数，然后将剩余的所有数字一一与容器内的最小数字相比，如果某一后续元素比容器内最小数字大，则删掉容器内最小元素，并将该元素插入容器。</li>
+<li><strong>时间复杂度</strong>：<code>O(Kn)</code></li>
+<li><strong>空间</strong>：只用容器是一定要保存在内存中的，所以需要的空间为$4m$Byte，m为容器大小。</li>
+<li><strong>缺点</strong>：时间复杂度较高</li>
+</ul>
+<h2 id="实验-2"><a href="#实验-2" class="headerlink" title="实验"></a>实验</h2><p><strong>实验目的</strong>：生成一个$10^6$个数，用局部淘汰法对其运行时间进行测试，其中K值为100。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @ Author LuckyQ</span></span><br><span class="line"><span class="comment"> * @ Date   2021-05-22 21:11</span></span><br><span class="line"><span class="comment"> * @ Description 局部淘汰法</span></span><br><span class="line"><span class="comment"> * @ 时间复杂度 O(nk)</span></span><br><span class="line"><span class="comment"> * @ 空间复杂度 O(k)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">import</span> java.util.Random;</span><br><span class="line"> <span class="keyword">import</span> java.lang.Math;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PartialElimination</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] partialElimination(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] container = <span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++)&#123;</span><br><span class="line">            container[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = k; i &lt; nums.length; i++)&#123;</span><br><span class="line">            <span class="comment">// is there any item lower than nums[i] in container,if the answer is yes then index != -1</span></span><br><span class="line">            <span class="keyword">int</span> index = -<span class="number">1</span>, minNum = nums[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(container[j] &lt; minNum)&#123;</span><br><span class="line">                    index = j;</span><br><span class="line">                    minNum = container[j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(index != -<span class="number">1</span>)&#123;</span><br><span class="line">                container[index] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> container;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] generateNums(<span class="keyword">int</span> N, <span class="keyword">int</span> highBound)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">            nums[i] = random.nextInt(highBound);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------------------------------\n"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            System.out.print(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>((i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n-----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// k is the number of target, N is the number of experience</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">experience</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> time = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N; i++)&#123;</span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            <span class="keyword">int</span>[] container = PartialElimination.partialElimination(nums, k);</span><br><span class="line">            <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// PartialElimination.printArray(container);</span></span><br><span class="line">            time += (endTime - startTime) / <span class="number">1000.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> time / N;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = PartialElimination.generateNums(<span class="number">1000000</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="comment">// PartialElimination.printArray(nums);</span></span><br><span class="line">        <span class="keyword">double</span> averageTime = PartialElimination.experience(nums, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"程序运行平均时间："</span> + Math.round(averageTime * <span class="number">1000</span>) + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验结果</strong>：<img src="/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/3.jpg" alt></p>
+<h1 id="方法四：分治法"><a href="#方法四：分治法" class="headerlink" title="方法四：分治法"></a>方法四：分治法</h1><ul>
+<li><strong>思路</strong>：将n个数据分为m份，每份$\frac{n}{m}$个数据，找到每份数据中最大的K个，最后在得到的mk个数据中找出最大的k个。m份数据可以分别在m台计算机中同时进行计算。</li>
+<li><strong>时间复杂度</strong>：<code>O(nlog(n/m))</code></li>
+<li><strong>空间</strong>：4 * max(n/m, mk) Byte</li>
+<li><strong>缺点</strong>：分布式的部署和通信比较复杂</li>
+</ul>
+<h2 id="实验-3"><a href="#实验-3" class="headerlink" title="实验"></a>实验</h2><p><strong>实验目的</strong>：生成一个$10^6$个数，用一个线程模拟一台计算机，共设置了10台计算机。用分治法对其运行时间进行测试，其中K值为100。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @ Author LuckyQ</span></span><br><span class="line"><span class="comment"> * @ Date   2021-05-22 23:00</span></span><br><span class="line"><span class="comment"> * @ Description 分治思想求TopK</span></span><br><span class="line"><span class="comment"> * @ 时间复杂度 O(nlog(n/m))</span></span><br><span class="line"><span class="comment"> * @ 空间复杂度 O(max(n/m, mk))</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Callable;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Future;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.lang.Math;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DivideConquer</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partion</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = nums[left];</span><br><span class="line">        <span class="keyword">int</span> i = left + <span class="number">1</span>, j = right;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Divide nums by num to this situation --&gt; | &lt;= num | num | &gt; num |</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j)&#123;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[i] &gt;= num)&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[j] &lt; num)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">                nums[j] = nums[i];</span><br><span class="line">                nums[i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">        nums[j] = num;</span><br><span class="line">        nums[left] = temp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> left, <span class="keyword">int</span> right, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(right &lt;= left)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = DivideConquer.partion(nums, left, right);</span><br><span class="line">        <span class="keyword">int</span> num = mid - left + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(num == k)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(num &gt; k)&#123;</span><br><span class="line">            DivideConquer.sort(nums, left, mid - <span class="number">1</span>, k);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            DivideConquer.sort(nums, mid + <span class="number">1</span>, right, k - num);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] divideConquer(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> m, <span class="keyword">int</span> k)&#123;</span><br><span class="line">        <span class="keyword">int</span> n = nums.length / m;</span><br><span class="line"></span><br><span class="line">        ExecutorService executor = Executors.newFixedThreadPool(m);</span><br><span class="line">        List&lt;Future&lt;<span class="keyword">int</span>[]&gt;&gt; futureList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">int</span>[] partNums = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)&#123;</span><br><span class="line">                partNums[j] = nums[i * n + j];</span><br><span class="line">            &#125;</span><br><span class="line">            futureList.add(executor.submit(<span class="keyword">new</span> ProcessThread(partNums, k)));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        executor.shutdown();</span><br><span class="line">        <span class="keyword">int</span>[] topkMerge = <span class="keyword">new</span> <span class="keyword">int</span>[m * k];</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(Future&lt;<span class="keyword">int</span>[]&gt; future: futureList)&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="keyword">int</span>[] container = future.get();</span><br><span class="line">                <span class="comment">// DivideConquer.printArray(container, "computer[" + (index + 1) + "]");</span></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; container.length; i++)&#123;</span><br><span class="line">                    topkMerge[index * k + i] = container[i];</span><br><span class="line">                &#125;</span><br><span class="line">                index += <span class="number">1</span>;</span><br><span class="line">            &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// DivideConquer.printArray(topkMerge, "merge");</span></span><br><span class="line">        DivideConquer.sort(topkMerge, <span class="number">0</span>, topkMerge.length - <span class="number">1</span>, k);</span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; k; j++)&#123;</span><br><span class="line">            res[j] = topkMerge[j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] generateNums(<span class="keyword">int</span> N, <span class="keyword">int</span> highBound)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">            nums[i] = random.nextInt(highBound);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] nums, String title)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"------------"</span> + title + <span class="string">"-----------------------\n"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            System.out.print(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>((i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n-----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// N is the number of experience</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">experience</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> m, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> time = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> epoch = <span class="number">0</span>; epoch &lt; N; epoch++)&#123;</span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            <span class="keyword">int</span>[] result = DivideConquer.divideConquer(nums, m, k);</span><br><span class="line">            <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// if(epoch == 0)&#123;</span></span><br><span class="line">            <span class="comment">//     DivideConquer.printArray(result,"result");</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">            time += (endTime - startTime) / <span class="number">1000.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> time / N;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = DivideConquer.generateNums(<span class="number">1000000</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="comment">// DivideConquer.printArray(nums,"origin");</span></span><br><span class="line">        <span class="keyword">double</span> averageTime = DivideConquer.experience(nums, <span class="number">10</span>, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"程序运行平均时间："</span> + Math.round(averageTime * <span class="number">1000</span>) + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class ProcessThread implements Callable&lt;int[]&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] nums;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> k;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ProcessThread</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nums = nums;</span><br><span class="line">        <span class="keyword">this</span>.k = k;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// AdvancedQuickSort</span></span><br><span class="line">    <span class="comment">// Return the index of nums[0] should be</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">partion</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> num = nums[left];</span><br><span class="line">        <span class="keyword">int</span> i = left + <span class="number">1</span>, j = right;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Divide nums by num to this situation --&gt; | &lt;= num | num | &gt; num |</span></span><br><span class="line">        <span class="keyword">while</span>(i &lt;= j)&#123;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[i] &gt;= num)&#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(i &lt;= j &amp;&amp; nums[j] &lt; num)&#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i &lt; j)&#123;</span><br><span class="line">                <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">                nums[j] = nums[i];</span><br><span class="line">                nums[i] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> temp = nums[j];</span><br><span class="line">        nums[j] = num;</span><br><span class="line">        nums[left] = temp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> j;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// AdvancedQuickSort</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(right &lt;= left)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> mid = partion(left, right);</span><br><span class="line">        <span class="keyword">int</span> num = mid - left + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(num == k)&#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(num &gt; k)&#123;</span><br><span class="line">            sort(left, mid - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            sort(mid + <span class="number">1</span>, right);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] call()&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            sort(<span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span>[] container = <span class="keyword">new</span> <span class="keyword">int</span>[k];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++)&#123;</span><br><span class="line">                container[i] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> container;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验结果</strong>：<img src="/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/4.jpg" alt></p>
+<h1 id="方法五：Hash法"><a href="#方法五：Hash法" class="headerlink" title="方法五：Hash法"></a>方法五：Hash法</h1><p><strong>思路</strong>：先通过Hash法，对数据集进行去重复。这样如果重复率很高的话，会减少很大的内存用量，从而缩小运算空间，然后通过分治法或最小堆法查找最大的K个数。</p>
+<blockquote>
+<p>关于这个方法我有一个疑惑，前K个数不是包含相等的数吗，去重之后不就少数了吗？比如，生成了100万个取值范围在[0,100]的数，希望找到最大的1000个数。这样去重后最大K个数最多也才100个啊…</p>
+</blockquote>
+<h1 id="方法六：小顶堆"><a href="#方法六：小顶堆" class="headerlink" title="方法六：小顶堆"></a>方法六：小顶堆</h1><ul>
+<li><strong>思路</strong>：首先读入前K个数来创建大小为K的小顶堆，建堆的时间复杂度为O(K)，然后遍历后续的数字，并于堆顶（最小）数字进行比较。如果比最小的数小，则继续读取后续数字；如果比堆顶数字大，则替换堆顶元素并重新调整堆为最小堆。</li>
+<li><strong>时间复杂度</strong>：<code>O(NlogK)</code></li>
+<li><strong>空间</strong>：$2^K - 1$</li>
+</ul>
+<h2 id="实验1"><a href="#实验1" class="headerlink" title="实验1"></a>实验1</h2><p><strong>实验目的</strong>：生成一个$10^6$个数，用小顶堆法对其运行时间进行测试，其中K值为100。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @ Author LuckyQ</span></span><br><span class="line"><span class="comment"> * @ Date   2021-06-08 9:27</span></span><br><span class="line"><span class="comment"> * @ Description 小顶堆实现topK</span></span><br><span class="line"><span class="comment"> * @ 时间复杂度 O(nlogk)</span></span><br><span class="line"><span class="comment"> * @ 空间复杂度 O(2^k-1)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.lang.Math;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmallHeap</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getTopK(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> N, <span class="keyword">int</span> K)&#123;</span><br><span class="line">        <span class="comment">// res是结果数组</span></span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[K];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; K; i++)&#123;</span><br><span class="line">            res[i] = nums[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 建立一个大小为 K 的小顶堆，设堆顶为0</span></span><br><span class="line">        buildHeap(res, K);</span><br><span class="line">        <span class="comment">// 对于剩余 N-K 个数字，逐个判断是否能加入小顶堆</span></span><br><span class="line">        <span class="comment">// 若大于小顶堆的堆顶（最小值），则将其替换最小堆堆顶并调准堆。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = K; i &lt; N; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt; res[<span class="number">0</span>])&#123;</span><br><span class="line">                res[<span class="number">0</span>] = nums[i];</span><br><span class="line">                shiftDown(res, K, <span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 建堆</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buildHeap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 最小的树即最后一个叶子的根，它的坐标为（size - 1） 其父亲结点坐标为(size - 1 - 1) / 2 </span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = (size - <span class="number">2</span>) / <span class="number">2</span>; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">            shiftDown(nums, size, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 向下调准</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">shiftDown</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> size, <span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = <span class="number">2</span> * index + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; size)&#123;</span><br><span class="line">            <span class="keyword">int</span> min = left;</span><br><span class="line">            <span class="keyword">int</span> right = left + <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(right &lt; size &amp;&amp; nums[right] &lt; nums[left])&#123;</span><br><span class="line">                min = right;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(nums[index] &lt; nums[min])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> tmp = nums[min];</span><br><span class="line">            nums[min] = nums[index];</span><br><span class="line">            nums[index] = tmp;</span><br><span class="line">            <span class="comment">// 更新 left, index</span></span><br><span class="line">            index = min;</span><br><span class="line">            left = <span class="number">2</span> * index + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] generateNums(<span class="keyword">int</span> N, <span class="keyword">int</span> highBound)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">            nums[i] = random.nextInt(highBound);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------------------------------\n"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            System.out.print(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>((i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n-----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// N is the number of experience</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">experience</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> time = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N; i++)&#123;</span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            <span class="keyword">int</span>[] container = SmallHeap.getTopK(nums, nums.length, k);</span><br><span class="line">            <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// if(i == 0)&#123;</span></span><br><span class="line">            <span class="comment">//     SmallHeap.printArray(container);</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">            time += (endTime - startTime) / <span class="number">1000.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> time / N;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = SmallHeap.generateNums(<span class="number">1000000</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="comment">// SmallHeap.printArray(nums);</span></span><br><span class="line">        <span class="keyword">double</span> averageTime = SmallHeap.experience(nums, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"程序运行平均时间："</span> + Math.round(averageTime * <span class="number">1000</span>) + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验结果</strong>：<img src="/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/5.jpg" alt></p>
+<h2 id="实验2"><a href="#实验2" class="headerlink" title="实验2"></a>实验2</h2><p>实验1代码中手动实现了小顶堆，其实还可以使用 Java 中的优先队列 <code>PriorityQueue</code> 进行实现。</p>
+<p><strong>实验目的</strong>：重复上述实验，只是将小顶堆使用优先队列进行实现。</p>
+<p><strong>代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @ Author LuckyQ</span></span><br><span class="line"><span class="comment"> * @ Date   2021-06-10 13:42</span></span><br><span class="line"><span class="comment"> * @ Description 队列实现小顶堆的topK</span></span><br><span class="line"><span class="comment"> * @ 时间复杂度 O(nlogk)</span></span><br><span class="line"><span class="comment"> * @ 空间复杂度 O(2^k-1)</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.PriorityQueue;</span><br><span class="line"><span class="keyword">import</span> java.util.Queue;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"><span class="keyword">import</span> java.lang.Math;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PriorityHeap</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] getTopK(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> N, <span class="keyword">int</span> K)&#123;</span><br><span class="line">        <span class="comment">// 初始化优先队列，默认情况下是小顶堆</span></span><br><span class="line">        Queue&lt;Integer&gt; queue = <span class="keyword">new</span> PriorityQueue&lt;&gt;();</span><br><span class="line">        <span class="comment">// 将前 K 个元素放入优先队列</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; K; i++)&#123;</span><br><span class="line">            queue.add(nums[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 对于剩余 N-K 个数字，逐个判断是否能加入小顶堆</span></span><br><span class="line">        <span class="comment">// 若大于小顶堆的堆顶（最小值），则将其替换最小堆堆顶并调准堆。</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = K; i &lt; N; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i] &gt; queue.peek())&#123;</span><br><span class="line">                queue.poll();</span><br><span class="line">                queue.add(nums[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// res是结果数组</span></span><br><span class="line">        <span class="keyword">int</span>[] res = <span class="keyword">new</span> <span class="keyword">int</span>[K];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; K; i++)&#123;</span><br><span class="line">            res[i] = queue.poll();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] generateNums(<span class="keyword">int</span> N, <span class="keyword">int</span> highBound)&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line">        Random random = <span class="keyword">new</span> Random();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++)&#123;</span><br><span class="line">            nums[i] = random.nextInt(highBound);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nums;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(<span class="keyword">int</span>[] nums)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"-----------------------------------\n"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            System.out.print(nums[i]);</span><br><span class="line">            <span class="keyword">if</span>((i + <span class="number">1</span>) % <span class="number">10</span> == <span class="number">0</span>)&#123;</span><br><span class="line">                System.out.println();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                System.out.print(<span class="string">"\t"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"\n-----------------------------------"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// N is the number of experience</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">experience</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> k, <span class="keyword">int</span> N)</span></span>&#123;</span><br><span class="line">        <span class="keyword">double</span> time = <span class="number">0.0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N; i++)&#123;</span><br><span class="line">            <span class="keyword">long</span> startTime = System.currentTimeMillis();</span><br><span class="line">            <span class="keyword">int</span>[] container = PriorityHeap.getTopK(nums, nums.length, k);</span><br><span class="line">            <span class="keyword">long</span> endTime = System.currentTimeMillis();</span><br><span class="line">            <span class="comment">// if(i == 0)&#123;</span></span><br><span class="line">            <span class="comment">//     PriorityHeap.printArray(container);</span></span><br><span class="line">            <span class="comment">// &#125;</span></span><br><span class="line">            time += (endTime - startTime) / <span class="number">1000.0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> time / N;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = SmallHeap.generateNums(<span class="number">1000000</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="comment">// PriorityHeap.printArray(nums);</span></span><br><span class="line">        <span class="keyword">double</span> averageTime = PriorityHeap.experience(nums, <span class="number">100</span>, <span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">"程序运行平均时间："</span> + Math.round(averageTime * <span class="number">1000</span>) + <span class="string">"ms"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>实验结果：<img src="/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/6.jpg" alt></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95-Java/" rel="tag"># 算法 Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/09/Android%E5%85%A5%E9%97%A8/" rel="prev" title="Android入门">
+      <i class="fa fa-chevron-left"></i> Android入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="next" title="VSCode使用指南">
+      VSCode使用指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

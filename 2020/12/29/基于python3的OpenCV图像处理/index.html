@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于python3的OpenCV图像处理">
+<meta property="og:url" content="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/1.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/2.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/3.png">
+<meta property="article:published_time" content="2020-12-29T06:28:16.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:59.131Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="opencv">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/1.png">
+
+<link rel="canonical" href="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>基于python3的OpenCV图像处理 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#资料"><span class="nav-number">1.</span> <span class="nav-text">资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#opencv简介"><span class="nav-number">2.</span> <span class="nav-text">opencv简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块"><span class="nav-number">2.1.</span> <span class="nav-text">模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.2.</span> <span class="nav-text">安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像的加载和保存"><span class="nav-number">3.</span> <span class="nav-text">图像的加载和保存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#numpy"><span class="nav-number">4.</span> <span class="nav-text">numpy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#色彩空间"><span class="nav-number">5.</span> <span class="nav-text">色彩空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#像素运算"><span class="nav-number">6.</span> <span class="nav-text">像素运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算术运算"><span class="nav-number">6.1.</span> <span class="nav-text">算术运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑运算"><span class="nav-number">6.2.</span> <span class="nav-text">逻辑运算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ROI和泛洪填充"><span class="nav-number">7.</span> <span class="nav-text">ROI和泛洪填充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ROI"><span class="nav-number">7.1.</span> <span class="nav-text">ROI</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模糊操作"><span class="nav-number">8.</span> <span class="nav-text">模糊操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积原理"><span class="nav-number">8.1.</span> <span class="nav-text">卷积原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中值模糊"><span class="nav-number">8.2.</span> <span class="nav-text">中值模糊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均值模糊"><span class="nav-number">8.3.</span> <span class="nav-text">均值模糊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于平均值"><span class="nav-number">8.3.1.</span> <span class="nav-text">基于平均值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高斯模糊（基于权重）"><span class="nav-number">8.3.2.</span> <span class="nav-text">高斯模糊（基于权重）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义模糊"><span class="nav-number">8.4.</span> <span class="nav-text">自定义模糊</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#边缘保留滤波（EPF）"><span class="nav-number">9.</span> <span class="nav-text">边缘保留滤波（EPF）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯双边"><span class="nav-number">9.1.</span> <span class="nav-text">高斯双边</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#均值迁移"><span class="nav-number">9.2.</span> <span class="nav-text">均值迁移</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#直方图"><span class="nav-number">10.</span> <span class="nav-text">直方图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#直方图均衡化"><span class="nav-number">10.1.</span> <span class="nav-text">直方图均衡化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直方图比较"><span class="nav-number">10.2.</span> <span class="nav-text">直方图比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向投影"><span class="nav-number">10.3.</span> <span class="nav-text">反向投影</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模板匹配"><span class="nav-number">11.</span> <span class="nav-text">模板匹配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二值化"><span class="nav-number">12.</span> <span class="nav-text">二值化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局二值化"><span class="nav-number">12.1.</span> <span class="nav-text">全局二值化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#局部二值化"><span class="nav-number">12.2.</span> <span class="nav-text">局部二值化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#超大图像二值化"><span class="nav-number">12.3.</span> <span class="nav-text">超大图像二值化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空白图像过滤"><span class="nav-number">12.4.</span> <span class="nav-text">空白图像过滤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像金字塔"><span class="nav-number">13.</span> <span class="nav-text">图像金字塔</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯金字塔"><span class="nav-number">13.1.</span> <span class="nav-text">高斯金字塔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拉普拉斯金字塔"><span class="nav-number">13.2.</span> <span class="nav-text">拉普拉斯金字塔</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像梯度"><span class="nav-number">14.</span> <span class="nav-text">图像梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Canny边缘提取"><span class="nav-number">15.</span> <span class="nav-text">Canny边缘提取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#直线检测"><span class="nav-number">16.</span> <span class="nav-text">直线检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#霍夫直线变换"><span class="nav-number">16.1.</span> <span class="nav-text">霍夫直线变换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#圆检测"><span class="nav-number">17.</span> <span class="nav-text">圆检测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#霍夫圆检测"><span class="nav-number">17.1.</span> <span class="nav-text">霍夫圆检测</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#轮廓发现"><span class="nav-number">18.</span> <span class="nav-text">轮廓发现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对象测量"><span class="nav-number">19.</span> <span class="nav-text">对象测量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#形态学操作"><span class="nav-number">20.</span> <span class="nav-text">形态学操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#膨胀与腐蚀"><span class="nav-number">20.1.</span> <span class="nav-text">膨胀与腐蚀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开闭操作"><span class="nav-number">20.2.</span> <span class="nav-text">开闭操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他形态学操作"><span class="nav-number">20.3.</span> <span class="nav-text">其他形态学操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#形态学梯度"><span class="nav-number">20.4.</span> <span class="nav-text">形态学梯度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分水岭算法"><span class="nav-number">21.</span> <span class="nav-text">分水岭算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#人脸检测"><span class="nav-number">22.</span> <span class="nav-text">人脸检测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证码识别"><span class="nav-number">23.</span> <span class="nav-text">验证码识别</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于python3的OpenCV图像处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-29 14:28:16" itemprop="dateCreated datePublished" datetime="2020-12-29T14:28:16+08:00">2020-12-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:59" itemprop="dateModified" datetime="2022-01-10T14:24:59+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">图像处理</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
+<li><p>B站视频【基于python3的Opencv图像处理教程(从零到实践)】：<a href="https://www.bilibili.com/video/BV1CJ411D7Yj?from=search&seid=14244991535486395451" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1CJ411D7Yj?from=search&amp;seid=14244991535486395451</a></p>
+</li>
+<li><p>opencv3.4文档：<a href="https://docs.opencv.org/master/" target="_blank" rel="noopener">https://docs.opencv.org/master/</a></p>
+</li>
+<li><p>opencv官网：<a href="[https://opencv.org/">https://opencv.org/</a></p>
+</li>
+<li><p>opencv中文网论坛：<a href="http://www.opencv.org.cn/" target="_blank" rel="noopener">http://www.opencv.org.cn/</a></p>
+</li>
+<li><p>opencv库各版本下载地址：<a href="https://sourceforge.net/projects/opencvlibrary/files/" target="_blank" rel="noopener">https://sourceforge.net/projects/opencvlibrary/files/</a></p>
+</li>
+</ol>
+<h1 id="opencv简介"><a href="#opencv简介" class="headerlink" title="opencv简介"></a>opencv简介</h1><p>OpenCV（Open Source Computer Vision Library）开放源代码计算机视觉库，主要算法涉及图像处理、计算机视觉和机器学习相关方法。OpenCV 其实就是一堆 C 和 C++语言的源代码文件，这些源代码文件中实现了许多常用的计算机视觉算法。</p>
+<p><strong>图像处理、数字图像处理、计算机视觉</strong></p>
+<ul>
+<li>图像处理（Image Processing）：一般包括图像压缩，增强和复原，匹配、描述和识别3个部分</li>
+<li>数字图像处理（Digital Image Processing）：通过计算机对图像进行去除噪声、增强、复原、分割、提取特征等处理的方法和技术</li>
+<li>计算机视觉（Computer Vision）：是指用摄像机和电脑代替人眼对目标进行识别、跟踪和测量等机器视觉，并进一步做图形处理，使之成为更适合人眼观察或仪器检测图像的一门学科</li>
+</ul>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p><img src="/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/1.png" alt></p>
+<p>opencv的框架与各模块功能介绍：<a href="https://blog.csdn.net/u012679707/article/details/79505279" target="_blank" rel="noopener">https://blog.csdn.net/u012679707/article/details/79505279</a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>目前python版本</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PS E:\Github\Blog&gt; python --version</span><br><span class="line">Python <span class="number">3</span>.<span class="number">6</span>.<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>opencv依赖库</strong></p>
+<blockquote>
+<p>将python需要安装的依赖库写入requirements.txt中</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opencv-python</span><br><span class="line">opencv-contrib-python</span><br><span class="line">pytesseract</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装依赖库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 升级python版本（如果出现pip version版本过低的Warning则执行此步骤）</span></span><br><span class="line">python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip </span><br><span class="line"><span class="comment"># 安装requirements.txt中说明的各依赖库</span></span><br><span class="line">python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ \</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h1 id="图像的加载和保存"><a href="#图像的加载和保存" class="headerlink" title="图像的加载和保存"></a>图像的加载和保存</h1><h1 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h1><h1 id="色彩空间"><a href="#色彩空间" class="headerlink" title="色彩空间"></a>色彩空间</h1><ul>
+<li>RGB</li>
+<li>HSV<br><img src="/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/2.png" alt></li>
+<li>HLS</li>
+<li>YCrCb</li>
+<li>YUV</li>
+</ul>
+<h1 id="像素运算"><a href="#像素运算" class="headerlink" title="像素运算"></a>像素运算</h1><h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><h1 id="ROI和泛洪填充"><a href="#ROI和泛洪填充" class="headerlink" title="ROI和泛洪填充"></a>ROI和泛洪填充</h1><h2 id="ROI"><a href="#ROI" class="headerlink" title="ROI"></a>ROI</h2><blockquote>
+<p>Region of Interest</p>
+</blockquote>
+<ul>
+<li>FLOODFILL_FIXED_RANGE : 改变图像，泛洪填充</li>
+<li>FLOODFILL_MASK_ONLY ：不改变图像，只填充遮罩层本身</li>
+</ul>
+<h1 id="模糊操作"><a href="#模糊操作" class="headerlink" title="模糊操作"></a>模糊操作</h1><h2 id="卷积原理"><a href="#卷积原理" class="headerlink" title="卷积原理"></a>卷积原理</h2><h2 id="中值模糊"><a href="#中值模糊" class="headerlink" title="中值模糊"></a>中值模糊</h2><h2 id="均值模糊"><a href="#均值模糊" class="headerlink" title="均值模糊"></a>均值模糊</h2><h3 id="基于平均值"><a href="#基于平均值" class="headerlink" title="基于平均值"></a>基于平均值</h3><h3 id="高斯模糊（基于权重）"><a href="#高斯模糊（基于权重）" class="headerlink" title="高斯模糊（基于权重）"></a>高斯模糊（基于权重）</h3><h2 id="自定义模糊"><a href="#自定义模糊" class="headerlink" title="自定义模糊"></a>自定义模糊</h2><h1 id="边缘保留滤波（EPF）"><a href="#边缘保留滤波（EPF）" class="headerlink" title="边缘保留滤波（EPF）"></a>边缘保留滤波（EPF）</h1><h2 id="高斯双边"><a href="#高斯双边" class="headerlink" title="高斯双边"></a>高斯双边</h2><h2 id="均值迁移"><a href="#均值迁移" class="headerlink" title="均值迁移"></a>均值迁移</h2><h1 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h1><h2 id="直方图均衡化"><a href="#直方图均衡化" class="headerlink" title="直方图均衡化"></a>直方图均衡化</h2><ul>
+<li>equalizeHist</li>
+<li>createCLAHE</li>
+</ul>
+<h2 id="直方图比较"><a href="#直方图比较" class="headerlink" title="直方图比较"></a>直方图比较</h2><ul>
+<li>巴氏距离</li>
+<li>相关性</li>
+<li>卡方</li>
+</ul>
+<h2 id="反向投影"><a href="#反向投影" class="headerlink" title="反向投影"></a>反向投影</h2><h1 id="模板匹配"><a href="#模板匹配" class="headerlink" title="模板匹配"></a>模板匹配</h1><h1 id="二值化"><a href="#二值化" class="headerlink" title="二值化"></a>二值化</h1><h2 id="全局二值化"><a href="#全局二值化" class="headerlink" title="全局二值化"></a>全局二值化</h2><h2 id="局部二值化"><a href="#局部二值化" class="headerlink" title="局部二值化"></a>局部二值化</h2><h2 id="超大图像二值化"><a href="#超大图像二值化" class="headerlink" title="超大图像二值化"></a>超大图像二值化</h2><h2 id="空白图像过滤"><a href="#空白图像过滤" class="headerlink" title="空白图像过滤"></a>空白图像过滤</h2><h1 id="图像金字塔"><a href="#图像金字塔" class="headerlink" title="图像金字塔"></a>图像金字塔</h1><ul>
+<li>pyrdown : 降采样</li>
+<li>pyrup : 还原</li>
+</ul>
+<h2 id="高斯金字塔"><a href="#高斯金字塔" class="headerlink" title="高斯金字塔"></a>高斯金字塔</h2><h2 id="拉普拉斯金字塔"><a href="#拉普拉斯金字塔" class="headerlink" title="拉普拉斯金字塔"></a>拉普拉斯金字塔</h2><h1 id="图像梯度"><a href="#图像梯度" class="headerlink" title="图像梯度"></a>图像梯度</h1><ul>
+<li>Sobel算子</li>
+<li>拉普拉斯算子</li>
+</ul>
+<h1 id="Canny边缘提取"><a href="#Canny边缘提取" class="headerlink" title="Canny边缘提取"></a>Canny边缘提取</h1><p><strong>Canny算法步骤</strong></p>
+<ol>
+<li>高斯模糊：GaussianBlur</li>
+<li>灰度转换：cvtColor</li>
+<li>计算梯度：Sobel/Scharr</li>
+<li>非最大信号抑制</li>
+<li>高低阈值输出二值图像</li>
+</ol>
+<h1 id="直线检测"><a href="#直线检测" class="headerlink" title="直线检测"></a>直线检测</h1><h2 id="霍夫直线变换"><a href="#霍夫直线变换" class="headerlink" title="霍夫直线变换"></a>霍夫直线变换</h2><h1 id="圆检测"><a href="#圆检测" class="headerlink" title="圆检测"></a>圆检测</h1><h2 id="霍夫圆检测"><a href="#霍夫圆检测" class="headerlink" title="霍夫圆检测"></a>霍夫圆检测</h2><h1 id="轮廓发现"><a href="#轮廓发现" class="headerlink" title="轮廓发现"></a>轮廓发现</h1><h1 id="对象测量"><a href="#对象测量" class="headerlink" title="对象测量"></a>对象测量</h1><h1 id="形态学操作"><a href="#形态学操作" class="headerlink" title="形态学操作"></a>形态学操作</h1><h2 id="膨胀与腐蚀"><a href="#膨胀与腐蚀" class="headerlink" title="膨胀与腐蚀"></a>膨胀与腐蚀</h2><h2 id="开闭操作"><a href="#开闭操作" class="headerlink" title="开闭操作"></a>开闭操作</h2><ul>
+<li>开操作：腐蚀 + 膨胀</li>
+<li>闭操作：膨胀 + 腐蚀</li>
+</ul>
+<h2 id="其他形态学操作"><a href="#其他形态学操作" class="headerlink" title="其他形态学操作"></a>其他形态学操作</h2><ul>
+<li>顶帽（tophat）: 原图像与开操作之间的差值图像</li>
+<li>黑帽（blackhat） : 闭操作与原图像之间的差值图像</li>
+</ul>
+<h2 id="形态学梯度"><a href="#形态学梯度" class="headerlink" title="形态学梯度"></a>形态学梯度</h2><ul>
+<li>基本梯度 : 膨胀之后的图像减去腐蚀之后的图像得到的差值图像</li>
+<li>内部梯度 : 原图减去腐蚀之后的图像得到的差值图像</li>
+<li>外部梯度 : 膨胀之后的图像减去原图得到的差值图像</li>
+</ul>
+<h1 id="分水岭算法"><a href="#分水岭算法" class="headerlink" title="分水岭算法"></a>分水岭算法</h1><p>基于距离的分水岭分割流程<br><img src="/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/3.png" alt></p>
+<h1 id="人脸检测"><a href="#人脸检测" class="headerlink" title="人脸检测"></a>人脸检测</h1><h1 id="验证码识别"><a href="#验证码识别" class="headerlink" title="验证码识别"></a>验证码识别</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/opencv/" rel="tag"># opencv</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/12/29/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98%E4%B9%8B%E3%80%90Line-Sweep%E3%80%91/" rel="prev" title="力扣刷题之【Line Sweep】">
+      <i class="fa fa-chevron-left"></i> 力扣刷题之【Line Sweep】
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" rel="next" title="JVM快速入门">
+      JVM快速入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

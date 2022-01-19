@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="书籍阅读[虚拟机设计与实现]">
+<meta property="og:url" content="https://llunch4w.github.io/2021/01/04/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-01-04T01:54:36.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:59.014Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="JVM">
+<meta property="article:tag" content="虚拟机">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://llunch4w.github.io/2021/01/04/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>书籍阅读[虚拟机设计与实现] | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机简介"><span class="nav-number">2.</span> <span class="nav-text">虚拟机简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是虚拟机"><span class="nav-number">2.1.</span> <span class="nav-text">什么是虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么需要虚拟机"><span class="nav-number">2.2.</span> <span class="nav-text">为什么需要虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机示例"><span class="nav-number">2.3.</span> <span class="nav-text">虚拟机示例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#虚拟机的内部组成"><span class="nav-number">3.</span> <span class="nav-text">虚拟机的内部组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机核心组件"><span class="nav-number">3.1.</span> <span class="nav-text">虚拟机核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载器与动态链接器"><span class="nav-number">3.1.1.</span> <span class="nav-text">加载器与动态链接器</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/01/04/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB-%E8%99%9A%E6%8B%9F%E6%9C%BA%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          书籍阅读[虚拟机设计与实现]
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-04 09:54:36" itemprop="dateCreated datePublished" datetime="2021-01-04T09:54:36+08:00">2021-01-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:59" itemprop="dateModified" datetime="2022-01-10T14:24:59+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>书名全称为：虚拟机设计与实现（以JVM为例），为李晓峰所著。</p>
+<h1 id="虚拟机简介"><a href="#虚拟机简介" class="headerlink" title="虚拟机简介"></a>虚拟机简介</h1><h2 id="什么是虚拟机"><a href="#什么是虚拟机" class="headerlink" title="什么是虚拟机"></a>什么是虚拟机</h2><p>百度百科上对于虚拟机的定义是：虚拟机（Virtual Machine）指通过软件模拟的具有完整硬件系统功能的、运行在一个完全隔离环境中的完整计算机系统。<br>但在本书中，将虚拟机分为了两类，一是<code>模拟器</code>，二是<code>语言运行时引擎</code>。</p>
+<ul>
+<li>模拟器又细分为两类<ul>
+<li>一是提供完整计算机系统模拟的<code>完整指令架构(ISA)虚拟机</code>，符合百度百科的虚拟机定义</li>
+<li>二是提供用户进程ABI模拟的<code>应用程序二进制接口(ABI)虚拟机</code></li>
+</ul>
+</li>
+<li>语言运行时引擎也细分为两类<ul>
+<li>一是<code>虚拟ISA虚拟机</code>。虚拟ISA通常定义了一套高层的、规模有限的ISA语言；提供的运行时引擎使虚拟ISA编码的应用程序在其上执行</li>
+<li>二是<code>语言虚拟机</code>，提供一个运行时引擎来执行以客户语言编写的程序。程序通常以客户语言的源码形式提供给虚拟机，运行时引擎去解释或翻译程序，也就对应着<code>解释器</code>和<code>编译器</code></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>作者提到，本书的主题是 <strong>语言运行时引擎</strong></p>
+</blockquote>
+<h2 id="为什么需要虚拟机"><a href="#为什么需要虚拟机" class="headerlink" title="为什么需要虚拟机"></a>为什么需要虚拟机</h2><ul>
+<li>（计算机）安全性</li>
+<li>（编程）效率</li>
+<li>（应用程序）可移植性</li>
+</ul>
+<p><strong>安全语言的条件</strong></p>
+<ul>
+<li>内存安全：确保内存中某种类型的数据总是遵循对这种类型的限制。例如：指针变量永远不会持有非法指针，数组元素永远不会越界</li>
+<li>运算安全：确保内存中某种数据的运行总是遵循对这种类型的限制。例如：指针变量不允许进行任意算术运算。</li>
+<li>控制安全：确保代码的执行流既不会卡住也不会跑飞。例如：跳转到恶意代码。</li>
+</ul>
+<h2 id="虚拟机示例"><a href="#虚拟机示例" class="headerlink" title="虚拟机示例"></a>虚拟机示例</h2><ul>
+<li>JavaScript引擎：存在于Web浏览器中，最早的JavaScript引擎是Mozilla Firefox的SpiderMonkey。2015年版本的JavaScript引擎工作步骤为：将JavaScript代码翻译为字节码形式的IR(Intermediate representation，中间表示)，然后调用IonMonkey把字节码编译为机器码。</li>
+<li>Perl引擎：Perl虚拟机本质上是一个解释器，其工作步骤为：第一阶段将Perl源码翻译为一系列操作码（称为op code或者字节码），第二阶段一步步遍历op code序列来执行它们。<ul>
+<li>一般传统脚本语言虚拟机就是类似Perl引擎的解释器</li>
+<li>常见的脚本语言有：UNIX Shell、Windows PowerShell、Perl、Python、Ruby</li>
+<li>脚本语言通常以“编写 -&gt; 执行”这样的交互方式使用。交互执行意味着程序执行一行代码，然后等待程序员输入下一行代码来执行。</li>
+<li>脚本语言也常用于批量执行或自动执行一系列任务</li>
+</ul>
+</li>
+<li>Android Java VM：Google Android是一种用于智能设备的操作系统。Android应用程序的主要编程语言是Java的一种变体。<ul>
+<li>第一阶段Java程序被编译为JVM字节码；第二阶段JVM字节码被翻译为另一种形式的字节码，称为dex（Android应用程序以打包dex字节码的形式发布）。</li>
+<li>智能设备执行Android程序时，需要虚拟机来执行dex代码<ul>
+<li>Kitkat版本前的Android版本中，虚拟机名为Dalvik，它包含一个解释器以及一个即时编译器。其工作流程为：Dalvik首先用解释器执行dex代码，并维护一个计数器来记录同一dex代码片段的执行次数。当某一dex片段执行次数超过某一阈值时（说明该段代码频繁使用）。Dalvik就会调用编译器将这段代码编译为机器码，然后下次就可以直接执行机器码来提高性能</li>
+<li>Kitkat版本后的Android版本中，虚拟机名为ART(Android Runtime)。ART在应用程序安装到设备上时就把dex代码编译为机器码，编译后的代码缓存在持久存储中，这种方法称为预编译AOT(Ahead Of Time)。ART用更长的安装时间换得了更快的应用程序启动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Apache Harmony：一个由Apache软件基金会和社区贡献者开发的一个开源Java实现。它包括一个名为动态运行层虚拟机的JVM实现。<ul>
+<li>Apache Harmony项目本身已在2011终止</li>
+<li>实现完整的Java平台，特别是那些大量的类库，需要巨大的工作量。但实现一个JVM则相对容易一些。据作者所知，已经有十几个声明对外发布的JVM实现，但独立的Java类库实现只有3个：OpenJDK、GNU Classpath、Apache Harmony。目前，OpenJDK库实现可能是唯一一个仍在活跃维护中的Java类库</li>
+</ul>
+</li>
+</ul>
+<h1 id="虚拟机的内部组成"><a href="#虚拟机的内部组成" class="headerlink" title="虚拟机的内部组成"></a>虚拟机的内部组成</h1><p>一个完整的语言实现通常至少包括3部分：</p>
+<ul>
+<li><strong>虚拟机</strong> ：对于JVM来说，就是字节码的运行时引擎</li>
+<li><strong>语言库</strong> ：语言的核心库。除非是非常底层且非常原始的语言（比如针对某个特定处理器的汇编语言），否则一个常用语言的实现通常会把这个语言的核心库作为虚拟机的一部分包含进去。<ul>
+<li>有时候，虚拟机不得不硬编码一些只能用于关联库的逻辑。例如，JVM不能没有库程序包java.lang</li>
+<li>这是因为有些核心数据结构，如Java对象和Java类，依赖于程序包java.lang.Object以及java.lang.Class的定义</li>
+</ul>
+</li>
+<li><strong>工具集</strong> ：为了应用某个语言开发程序，通常需要针对这个语言的工具集与虚拟机合作，以支持调试、性能分析、打包等等功能。</li>
+</ul>
+<h2 id="虚拟机核心组件"><a href="#虚拟机核心组件" class="headerlink" title="虚拟机核心组件"></a>虚拟机核心组件</h2><blockquote>
+<p>同一语言的不同虚拟机实现可能在各个方面大有不同，但必须遵循并支持同一语言标准。因此，每个实现必须包含一系列功能类似的核心组件</p>
+</blockquote>
+<p>一个虚拟机的实现需要完成如下功能：</p>
+<ul>
+<li>把应用程序的代码加载到内存中（<code>加载器</code>），并把符号解析到内部地址（<code>动态链接器</code>）</li>
+<li>执行程序操作（<code>执行引擎</code>）</li>
+<li>管理各种计算资源，包括内存（<code>内存管理器</code>）和处理器（<code>线程调度器</code>）</li>
+<li>为该语言不能直接访问的外部资源提某种访问方式（<code>语言扩展/本地接口</code>）</li>
+</ul>
+<h3 id="加载器与动态链接器"><a href="#加载器与动态链接器" class="headerlink" title="加载器与动态链接器"></a>加载器与动态链接器</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JVM/" rel="tag"># JVM</a>
+              <a href="/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" rel="tag"># 虚拟机</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" rel="prev" title="JVM快速入门">
+      <i class="fa fa-chevron-left"></i> JVM快速入门
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/11/%E9%93%BE%E6%8E%A5/" rel="next" title="链接">
+      链接 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

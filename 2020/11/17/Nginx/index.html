@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx">
+<meta property="og:url" content="https://llunch4w.github.io/2020/11/17/Nginx/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/17/Nginx/1.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/17/Nginx/2.png">
+<meta property="article:published_time" content="2020-11-17T01:44:45.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:58.971Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="JavaEE 分布式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2020/11/17/Nginx/1.png">
+
+<link rel="canonical" href="https://llunch4w.github.io/2020/11/17/Nginx/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Nginx | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx简介"><span class="nav-number">1.</span> <span class="nav-text">Nginx简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理"><span class="nav-number">1.1.</span> <span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡"><span class="nav-number">1.2.</span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动静分离"><span class="nav-number">1.3.</span> <span class="nav-text">动静分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高可用"><span class="nav-number">1.4.</span> <span class="nav-text">高可用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx安装"><span class="nav-number">2.</span> <span class="nav-text">Nginx安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx配置"><span class="nav-number">3.</span> <span class="nav-text">Nginx配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx配置文件"><span class="nav-number">3.1.</span> <span class="nav-text">Nginx配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件地址"><span class="nav-number">3.1.1.</span> <span class="nav-text">配置文件地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件组成"><span class="nav-number">3.1.2.</span> <span class="nav-text">配置文件组成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx配置实例"><span class="nav-number">3.2.</span> <span class="nav-text">Nginx配置实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反向代理配置实例"><span class="nav-number">3.2.1.</span> <span class="nav-text">反向代理配置实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实例1"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">实例1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实例2"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">实例2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#负载均衡配置实例"><span class="nav-number">3.2.2.</span> <span class="nav-text">负载均衡配置实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动静分离配置实例"><span class="nav-number">3.2.3.</span> <span class="nav-text">动静分离配置实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高可用配置实例"><span class="nav-number">3.2.4.</span> <span class="nav-text">高可用配置实例</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2020/11/17/Nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Nginx
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-17 09:44:45" itemprop="dateCreated datePublished" datetime="2020-11-17T09:44:45+08:00">2020-11-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:58" itemprop="dateModified" datetime="2022-01-10T14:24:58+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">分布式</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Nginx简介"><a href="#Nginx简介" class="headerlink" title="Nginx简介"></a>Nginx简介</h1><p>Nginx是一个高性能反向代理服务器，其特点包括 <em>占用内存少</em> ，<em>并发能力强</em> 。Nginx专门为性能优化而开发，能经受住高负载的考验。</p>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><strong>正向代理</strong>：客户端通过代理服务器访问因特网，正向代理中客户端需要配置代理服务器。客户端对服务端来说是透明的，即服务端并不知道客户端的地址，知道的是代理服务器的地址。</p>
+<p><strong>反向代理</strong>：客户端仍是通过代理服务器访问因特网，但反向代理中客户端对代理无感知，不需要任何配置就可以访问。而反向代理服务器会从服务器集群中选择一个服务器获取数据返回。服务端和反向代理服务器对于客户端来说是一个整体。暴露的是代理服务器的地址，隐藏了真实服务器的IP地址。</p>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><p>代理服务器将接收到的客户端请求分发到服务器集群中的某个服务器上，使得单个服务器上的负载压力减小。</p>
+<h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><p>将动态资源（jsp、servlet等)与静态资源（html、css、js、image等）分开部署</p>
+<h2 id="高可用"><a href="#高可用" class="headerlink" title="高可用"></a>高可用</h2><p>可以保持 7*24 不间断运行</p>
+<h1 id="Nginx安装"><a href="#Nginx安装" class="headerlink" title="Nginx安装"></a>Nginx安装</h1><p>Hexo博客部署到服务器文章中已写过，这篇文章中略</p>
+<p><a href="http://localhost:4000/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" target="_blank" rel="noopener">跳转到Hexo博客部署博文</a></p>
+<h1 id="Nginx配置"><a href="#Nginx配置" class="headerlink" title="Nginx配置"></a>Nginx配置</h1><h2 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h2><h3 id="配置文件地址"><a href="#配置文件地址" class="headerlink" title="配置文件地址"></a>配置文件地址</h3><p>/usr/local/nginx/conf/nginx.conf</p>
+<h3 id="配置文件组成"><a href="#配置文件组成" class="headerlink" title="配置文件组成"></a>配置文件组成</h3><p><strong>1.全局块</strong></p>
+<ul>
+<li>不在大括号里的内容</li>
+<li>设置nginx服务器整体运行的配置指令<ul>
+<li>运行Nginx服务器的用户（组）</li>
+<li>允许生成的 worker process 数</li>
+<li>进程 PID 存放路径</li>
+<li>日志存放路径和类型</li>
+<li>其他配置文件的引入</li>
+</ul>
+</li>
+</ul>
+<p><strong>2.events块</strong></p>
+<ul>
+<li>影响Nginx服务器和用户网络之间的连接<ul>
+<li>是否开启对多 work process 下的网络连接序列化</li>
+<li>是否允许同时接受多个网络连接</li>
+<li>选取哪种事件驱动模型来处理连接请求</li>
+<li>每个 work process 可以同时支持的最大连接数</li>
+</ul>
+</li>
+</ul>
+<p><strong>3.http块</strong></p>
+<ul>
+<li>包含http全局块和server块</li>
+<li>http全局块配置的指令包括<ul>
+<li>文件引入</li>
+<li>MIME-TYPE定义</li>
+<li>日志自定义</li>
+<li>连接超时间</li>
+<li>单链接请求数上限</li>
+</ul>
+</li>
+<li>server块包含全局server块和location块<ul>
+<li>一个server可配置多个location</li>
+<li>全局server最常见的配置：<ul>
+<li>监听配置</li>
+<li>主机名称</li>
+<li>主机IP配置</li>
+</ul>
+</li>
+<li>location块的作用是：<ul>
+<li>基于Nginx服务器接收到的请求字符串，对主机名称（或IP别名）之外的字符串进行匹配，对特定请求进行处理</li>
+<li>地址定向</li>
+<li>数据缓存</li>
+<li>第三方模块</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Nginx配置实例"><a href="#Nginx配置实例" class="headerlink" title="Nginx配置实例"></a>Nginx配置实例</h2><h3 id="反向代理配置实例"><a href="#反向代理配置实例" class="headerlink" title="反向代理配置实例"></a>反向代理配置实例</h3><p><strong>前提条件</strong><br>已安装好tomcat服务器<br><a href="http://localhost:4000/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" target="_blank" rel="noopener">跳转到安装教程</a></p>
+<h4 id="实例1"><a href="#实例1" class="headerlink" title="实例1"></a>实例1</h4><p><strong>实现目标</strong><br>在本机Windows浏览器上访问网址 <a href="http://www.123.com:8080" target="_blank" rel="noopener">www.123.com</a>，跳转到tomcat主页</p>
+<p><strong>前提条件</strong><br>拥有并启动一个Tomcat服务器</p>
+<p><strong>1. 修改Windows下的HOST文件，添加地址映射</strong></p>
+<p><img src="/2020/11/17/Nginx/1.png" alt="修改HOST文件"></p>
+<p><strong>检测</strong><br>浏览器端访问 <a href="https://www.123.com:8080" target="_blank" rel="noopener">https://www.123.com:8080</a> ，将跳转到tomcat页面</p>
+<p><strong>2. 对nginx进行请求转发配置（反向代理配置）</strong></p>
+<p><img src="/2020/11/17/Nginx/2.png" alt="修改Nginx配置文件"></p>
+<h4 id="实例2"><a href="#实例2" class="headerlink" title="实例2"></a>实例2</h4><p><strong>实现目标</strong></p>
+<ol>
+<li>访问 <a href="http://101.200.3.108:9001/edu" target="_blank" rel="noopener">http://101.200.3.108:9001/edu</a> 直接跳转到 127.0.0.1:8080</li>
+<li>访问 <a href="http://101.200.3.108:9001/vod" target="_blank" rel="noopener">http://101.200.3.108:9001/vod</a> 直接跳转到127.0.0.1:8080</li>
+</ol>
+<p><strong>前提条件</strong><br>拥有并启动两个Tomcat服务器</p>
+<h3 id="负载均衡配置实例"><a href="#负载均衡配置实例" class="headerlink" title="负载均衡配置实例"></a>负载均衡配置实例</h3><h3 id="动静分离配置实例"><a href="#动静分离配置实例" class="headerlink" title="动静分离配置实例"></a>动静分离配置实例</h3><h3 id="高可用配置实例"><a href="#高可用配置实例" class="headerlink" title="高可用配置实例"></a>高可用配置实例</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaEE-%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"># JavaEE 分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="prev" title="Hexo博客部署到服务器">
+      <i class="fa fa-chevron-left"></i> Hexo博客部署到服务器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/18/Docker/" rel="next" title="Docker">
+      Docker <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

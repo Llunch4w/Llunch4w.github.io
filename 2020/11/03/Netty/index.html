@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty">
+<meta property="og:url" content="https://llunch4w.github.io/2020/11/03/Netty/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/1.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/2.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/3.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/4.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/5.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/6.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/7.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/9.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/8.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/10.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/11.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/12.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/15.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/13.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/14.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/16.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/17.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/18.png">
+<meta property="og:image" content="https://llunch4w.github.io/2020/11/03/Netty/19.png">
+<meta property="article:published_time" content="2020-11-03T00:15:28.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:58.964Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="Java框架">
+<meta property="article:tag" content="NIO">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2020/11/03/Netty/1.png">
+
+<link rel="canonical" href="https://llunch4w.github.io/2020/11/03/Netty/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Netty | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-IO模型"><span class="nav-number">2.</span> <span class="nav-text">Java IO模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BIO模型"><span class="nav-number">2.1.</span> <span class="nav-text">BIO模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NIO模型"><span class="nav-number">2.2.</span> <span class="nav-text">NIO模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer"><span class="nav-number">2.2.1.</span> <span class="nav-text">Buffer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel"><span class="nav-number">2.2.2.</span> <span class="nav-text">Channel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Selector"><span class="nav-number">2.2.3.</span> <span class="nav-text">Selector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NIO与零拷贝"><span class="nav-number">2.2.4.</span> <span class="nav-text">NIO与零拷贝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AIO模型"><span class="nav-number">2.3.</span> <span class="nav-text">AIO模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reactor模式"><span class="nav-number">3.</span> <span class="nav-text">Reactor模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单Reactor单线程"><span class="nav-number">3.1.</span> <span class="nav-text">单Reactor单线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单Reactor多线程"><span class="nav-number">3.2.</span> <span class="nav-text">单Reactor多线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主从Reactor多线程"><span class="nav-number">3.3.</span> <span class="nav-text">主从Reactor多线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty模型"><span class="nav-number">4.</span> <span class="nav-text">Netty模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty核心组件"><span class="nav-number">5.</span> <span class="nav-text">Netty核心组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EventLoopGroup"><span class="nav-number">5.1.</span> <span class="nav-text">EventLoopGroup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bootstrap"><span class="nav-number">5.2.</span> <span class="nav-text">Bootstrap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChannelOption"><span class="nav-number">5.3.</span> <span class="nav-text">ChannelOption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChannelFuture"><span class="nav-number">5.4.</span> <span class="nav-text">ChannelFuture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChannelHandler"><span class="nav-number">5.5.</span> <span class="nav-text">ChannelHandler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChannelPipeline"><span class="nav-number">5.6.</span> <span class="nav-text">ChannelPipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TaskQueue"><span class="nav-number">5.7.</span> <span class="nav-text">TaskQueue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Unpooled"><span class="nav-number">5.8.</span> <span class="nav-text">Unpooled</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Netty编码解码"><span class="nav-number">6.</span> <span class="nav-text">Netty编码解码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Protobuf"><span class="nav-number">6.1.</span> <span class="nav-text">Protobuf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ByteToMessageDecoder"><span class="nav-number">6.2.</span> <span class="nav-text">ByteToMessageDecoder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#handler链中的解码编码handler"><span class="nav-number">6.3.</span> <span class="nav-text">handler链中的解码编码handler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Netty其他常用编码、解码器"><span class="nav-number">6.4.</span> <span class="nav-text">Netty其他常用编码、解码器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TCP粘包和拆包"><span class="nav-number">7.</span> <span class="nav-text">TCP粘包和拆包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#来源"><span class="nav-number">8.</span> <span class="nav-text">来源</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2020/11/03/Netty/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Netty
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-11-03 08:15:28" itemprop="dateCreated datePublished" datetime="2020-11-03T08:15:28+08:00">2020-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:58" itemprop="dateModified" datetime="2022-01-10T14:24:58+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+
+<a id="more"></a>
+
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Netty是JBoss提供的一个Java开源框架，主要针对在TCP协议下，面向Client端的高并发应用，或者点对点场景下的大量数据持续的传输。Netty本质上是一个NIO框架，封装了进行NIO的一系列操作。</p>
+<p><img src="/2020/11/03/Netty/1.png" alt="IO封装层次"></p>
+<p><strong>Netty的实际应用</strong></p>
+<ul>
+<li>大数据领域：Apache-Flink、Apache-Spark</li>
+<li>游戏领域：联机游戏</li>
+<li>互联网领域：分布式系统中结点之间的远程调用，如Dubbo</li>
+</ul>
+<p>一般来说，需要用到高并发网络通信的地方都需要用到Netty</p>
+<p><strong>推荐书籍</strong><br>Netty实战、Netty权威指南</p>
+<h1 id="Java-IO模型"><a href="#Java-IO模型" class="headerlink" title="Java IO模型"></a>Java IO模型</h1><p>Java支持三种网络IO模型，分别是BIO（阻塞IO）,NIO（非阻塞IO）,AIO（异步非阻塞IO，但只在windows系统上适用）</p>
+<h2 id="BIO模型"><a href="#BIO模型" class="headerlink" title="BIO模型"></a>BIO模型</h2><p><img src="/2020/11/03/Netty/2.png" alt="BIO工作机制"></p>
+<p>工作机制：</p>
+<ol>
+<li>Server启动一个监听线程监听Client请求</li>
+<li>对于每一个可接收的Client请求，Server将创建一个线程与客户端进行通信</li>
+</ol>
+<p>弊端：</p>
+<ol>
+<li>每个通信线程都是阻塞式的，如果和客户端交流并不频繁，则CPU浪费率很大</li>
+<li>对于每一个客户端都需要新建一个线程，当客户端很多是，系统负荷太大</li>
+</ol>
+<p>应用场景：连接数目较小且固定的场景</p>
+<h2 id="NIO模型"><a href="#NIO模型" class="headerlink" title="NIO模型"></a>NIO模型</h2><p><img src="/2020/11/03/Netty/3.png" alt="NIO工作机制"></p>
+<p>工作机制：</p>
+<ol>
+<li>Server启动一个Channel Manager作为所有通信通道的管理者</li>
+<li>每个Client若希望与Server进行网络IO通信，则它会将希望进行的操作（如读、写、建立连接等）在Channel Manager处注册一个Channel</li>
+<li>Channel Manager会不断轮询所有注册在册的Channel，若这个Channel中有事件发生，则对这个事件进行处理</li>
+<li>处理事件的线程既可以是Channel Manager所处线程，也可以是从线程池中取一个线程来进行处理（通常这种方式更高效）</li>
+</ol>
+<p>Channel Manager通常被称作<code>Selector</code>，除此之外，NIO的核心组件还包括<code>Buffer</code>,<code>Channel</code>。<br>Buffer在上图中未表现，它实际上是Channel和Socket之间的缓冲区。</p>
+<p>应用场景：连接数目较多且连接比较短的场景，如聊天服务器、弹幕系统、服务器之间的通讯等</p>
+<h3 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h3><p>Buffer是缓冲区，正是因为NIO模型具有Buffer，因此它是基于块的读写，相比于BIO基于流的读写更有效率。Buffer类派生了IntBuffer,ByteBuffer等子类，所有Buffer类保存数据的底层结构都是数组。</p>
+<p><strong>Buffer类的核心属性</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>capacity</td>
+<td>容量</td>
+<td>可容纳的最大数据量，在缓冲区创建时设定，设定后不可改变</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>缓冲区当前终点</td>
+<td>不能对缓冲区中超过limit的位置进行读写，limit是可以修改的</td>
+</tr>
+<tr>
+<td>position</td>
+<td>位置</td>
+<td>下一个读/写元素的索引</td>
+</tr>
+<tr>
+<td>mark</td>
+<td>标记</td>
+<td>可以在某些位置设置一些标记以方便用户操作</td>
+</tr>
+</tbody></table>
+<h3 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h3><p>相比于流只能单向操作（读或者写），而通道支持同时读写。在NIO中，Channel从Buffer中读数据（write(ByteBuffer src)），写数据到Buffer中(read(ByteBuffer dst))。<br>Channel是NIO中的一个接口，常用的Channel类如下：</p>
+<ul>
+<li>ServerSocketChannel：对应服务器监听客户请求Socket</li>
+<li>SocketChannel：对应Server-Client通信Socket</li>
+<li>DatagramChannel：对应UDP数据报通信</li>
+<li>FileChannel：对应文件读写</li>
+</ul>
+<h3 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h3><p>在NIO模型中充当一个管理者的角色，将不断轮询所有在它这注册过的channel，当channel处有事件发生时，通知相应程序来处理事件。这种机制使得服务器一个线程可以负责与多个客户端之间的通信，其中每个线程对应一个Selector。</p>
+<p><strong>Selector常见操作</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 创建一个Selector</span><br><span class="line">Selector selector &#x3D; Selector.open();</span><br><span class="line">&#x2F;&#x2F; 将一个channel注册到selector上</span><br><span class="line">channel.register(selector,SelectorKey.OP_XXXX,[Buffer]);</span><br><span class="line">&#x2F;&#x2F; selector进行轮询</span><br><span class="line">selector.select([time(ms)]);</span><br><span class="line">&#x2F;&#x2F; 获取Selector上所有有事件发生的SelectionKey（每个SelectionKey与一个注册事件相关联）</span><br><span class="line">Set&lt;SelectionKey&gt; selectionKeys &#x3D; selector.selectedKeys();</span><br><span class="line">&#x2F;&#x2F; 获取Selector上所有注册的SelectionKey</span><br><span class="line">Set&lt;SelectionKey&gt; selectionKeys &#x3D; selector.keys();</span><br><span class="line">&#x2F;&#x2F; 根据SelectionKey获取关联的Channel</span><br><span class="line">channel &#x3D; key.channel();</span><br><span class="line">&#x2F;&#x2F; 根据key获取关联channel的buffer</span><br><span class="line">buffer &#x3D; key.attachment();</span><br></pre></td></tr></table></figure>
+
+<h3 id="NIO与零拷贝"><a href="#NIO与零拷贝" class="headerlink" title="NIO与零拷贝"></a>NIO与零拷贝</h3><blockquote>
+<p>零拷贝并不意味着拷贝数目为0，而意味着CPU拷贝次数为0</p>
+</blockquote>
+<p><strong>传统网络通信IO过程</strong></p>
+<p><img src="/2020/11/03/Netty/4.png" alt="传统IO"></p>
+<ol>
+<li>数据一开始是存在于硬件驱动（<code>Hard Driver</code>）中的</li>
+<li>通过DMA将硬件中的数据传输到操作系统的内核空间里的缓冲区（<code>Kernel Buffer</code>）</li>
+<li>通过CPU总线将内核空间中的数据复制到用户空间里的缓冲区（<code>User Buffer</code>）</li>
+<li>通过CPU总线将用户空间的数据复制到内核空间中的套接字缓冲区（<code>Socket Buffer</code>）中</li>
+<li>套接字缓冲区再将数据复制到协议栈引擎（<code>Protocol Engine</code>）中</li>
+</ol>
+<p>传统IO过程经历了4次复制，3次（用户态和内核态的）上下文切换</p>
+<p><strong>mmap优化</strong></p>
+<p><img src="/2020/11/03/Netty/5.png" alt="mmap优化"></p>
+<p>mmap通过内存映射，将文件映射到内核缓冲区。同时，用户空间可以共享内核空间的数据。这样，在网络传输过程中，就可以减少一次内核空间到用户空间的拷贝。<br>mmap优化后网络通信过程经历了3次复制，3次上下文切换</p>
+<p><strong>sendFile优化</strong></p>
+<p><img src="/2020/11/03/Netty/6.png" alt="sendFile优化"></p>
+<p>Linux2.1提供了sendFile函数，使得内核缓冲区中的数据可以不经过用户态直接拷贝到socket缓冲区内。<br>sendFile优化后网络通信过程经历了3次复制，2次上下文切换</p>
+<p><strong>零拷贝</strong></p>
+<p><img src="/2020/11/03/Netty/7.png" alt="零拷贝"></p>
+<p>Linux2.4对sendFile函数做了优化，避免了从内核缓冲区将数据拷贝到socket缓冲区的操作，直接将内核缓冲区中的数据拷贝到了协议栈。这里其实有一次cpu拷贝（kernel buffer–&gt;socket buffer），但拷贝的信息很少（如length,offset），消耗低，可以忽略。<br>这种方式可以近似经历了2次复制，2次上下文切换</p>
+<h2 id="AIO模型"><a href="#AIO模型" class="headerlink" title="AIO模型"></a>AIO模型</h2><p>AIO引入了异步通道的概念，采用Proactor模式，简化了程序编写：有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端启动线程去处理。</p>
+<p>应用场景：连接数目比较多且连接比较长的场景，如相册服务器</p>
+<h1 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h1><p>Reactor模式是一种设计模式，它是基于事件驱动的，可以并发的处理多个服务请求，当请求抵达后，依据多路复用策略，同步的派发这些请求至相关的请求处理程序。</p>
+<p><img src="/2020/11/03/Netty/9.png" alt="Reactor模式"></p>
+<ul>
+<li><strong>Handle</strong>：操作系统的一种资源，用于表示一个事件（在网络编程中可以是连接事件、写事件、读事件）</li>
+<li><strong>Synchronous Event Demultiplexer</strong>：本质上是一个系统调用，用于等待事件的发生。调用方在调用它是会阻塞，直到同步事件分离器上有事件发生</li>
+<li><strong>Initiation Dispatcher</strong>：定义了一些控制事件的调度规范，提供事件管理。</li>
+<li><strong>Event Handler</strong>：事件处理器的接口</li>
+<li><strong>Concrete Event Handler</strong>：事件处理器的实现</li>
+</ul>
+<p><strong>Reactor模式的工作流程</strong></p>
+<ol>
+<li>初始化Initiation Dispatcher，若干个Concret Event Handler注册到Dispatcher中（希望Dispatcher会在注册的事件发生时通知自己）</li>
+<li>Initiation Dispatcher会要求每个Handler向其传递内部Handle，操作系统可以通过Handle标识对应的Handler</li>
+<li>当所有Concret Event Handler注册完毕，Initiation Dispatcher将启动循环，使用Synchronous Event Demultiplexer等待事件的发生</li>
+<li>当某个Handle发生时，Synchronous Event Demultiplexer会通知Initiation Dispatcher</li>
+<li>Initiation Dispatcher再调用相应的Handler回调方法处理这个事件</li>
+</ol>
+<h2 id="单Reactor单线程"><a href="#单Reactor单线程" class="headerlink" title="单Reactor单线程"></a>单Reactor单线程</h2><p><img src="/2020/11/03/Netty/8.png" alt="单Reactor单线程"></p>
+<p><strong>工作机制</strong></p>
+<ol>
+<li>Reactor通过select监听客户端请求事件，当有事件发生时，调用dispatcher进行分发</li>
+<li>如果是建立连接请求事件，则Acceptor通过accept处理连接请求事件，然后创建一个Handler对象处理完成连接后的各种事件</li>
+<li>如果不是连接请求，则由Reactor分发调用对应的Handler进行处理</li>
+</ol>
+<p>Reactor和Handler都在同一线程中，说明当Handler在处理时，Reactor是不能工作的，那么此时到来的客户端请求就会被阻塞。</p>
+<h2 id="单Reactor多线程"><a href="#单Reactor多线程" class="headerlink" title="单Reactor多线程"></a>单Reactor多线程</h2><p><img src="/2020/11/03/Netty/10.png" alt="单Reactor多线程"></p>
+<p><strong>工作机制</strong></p>
+<ol>
+<li>Reactor通过select监听客户端请求事件，当有事件发生时，调用dispatcher进行分发</li>
+<li>如果是建立连接请求事件，则Acceptor通过accept处理连接请求事件，然后创建一个Handler对象处理完成连接后的各种事件</li>
+<li>如果不是连接请求，则由Reactor分发调用对应的Handler进行处理</li>
+<li>Handler只负责响应事件，不做具体的业务处理。响应事件的Handler，会在读完数据后，分发给工作线程池中的某个线程处理具体的业务逻辑</li>
+<li>工作线程池会分配独立线程完成真正的业务，并将结果返回给Handler</li>
+<li>Handler收到响应后，通过send方法将结果返回给客户端</li>
+</ol>
+<h2 id="主从Reactor多线程"><a href="#主从Reactor多线程" class="headerlink" title="主从Reactor多线程"></a>主从Reactor多线程</h2><p><img src="/2020/11/03/Netty/11.png" alt="主从Reactor多线程"></p>
+<p><strong>工作机制</strong></p>
+<ol>
+<li>Reactor主线程MainReactor对象通过select监听事件，收到连接事件后，通过Acceptor处理</li>
+<li>当Acceptor处理完连接事件后，MainReactor将连接分配给SubReactor</li>
+<li>SubReactor将连接放入连接队列中进行监听，并创建Handler进行各种事件处理</li>
+<li>当有事件发生时，SubReactor就会调用对应的Handler进行处理</li>
+<li>Handler通过read读取事件，然后分发给工作线程处理</li>
+<li>工作线程池分配独立的工作线程进行业务处理，返回结果给Handler</li>
+<li>Handler收到响应的结果后，再通过send方法将结果返回给Client</li>
+</ol>
+<p>MainReactor可以关联多个SubReactor</p>
+<h1 id="Netty模型"><a href="#Netty模型" class="headerlink" title="Netty模型"></a>Netty模型</h1><p><img src="/2020/11/03/Netty/12.png" alt="Netty模型"></p>
+<ul>
+<li>Netty抽象出两组线程池<ul>
+<li>BossGroup专门负责处理与客户端之间的连接；</li>
+<li>WorkGroup专门负责网络读写</li>
+<li>BossGroup和WorkGroup类型都是NioEventLoopGroup</li>
+</ul>
+</li>
+<li>NioEventLoopGroup相当于一个事件循环组，这个组中包含多个事件循环，每个循环都是一个NioEventLoop</li>
+<li>NioEventLoop表示一个不断循环的执行处理任务的线程，每个NioEventLoop上都有一个Selector，用于绑定在其上的socket网络通信</li>
+<li>NioEventLoopGroup可以有多个线程，即可以含有多个NioEventLoop</li>
+<li>每个Work NioEventLoop处理业务时，会使用PipeLine（管道），PipeLine中包含了Channel（即可以通过PipeLine获取对应的Channel），同时管道中维护了很多Handler（处理器）</li>
+</ul>
+<p><strong>数量关系</strong></p>
+<ul>
+<li>NioEventLoopGroup下包含多个NioEventLoop</li>
+<li>每个NioEventLoop包含一个Selector，一个TaskQueue</li>
+<li>每个Selector上可以注册多个NioChannel</li>
+<li>每个NioChannel只会绑定在唯一的Selector上</li>
+<li>每个NioChannel都绑定一个自己的ChannelPipeLine</li>
+</ul>
+<p><strong>Boss NioEventLoop执行步骤</strong></p>
+<ol>
+<li>轮询accept事件</li>
+<li>处理accept事件，与Client建立连接，生成NioSocketChannel，并将其注册到某个Work NioEventLoop上的Selector</li>
+<li>处理任务队列的任务，即runAllTasks</li>
+</ol>
+<p><strong>Work NioEventLoop执行步骤</strong></p>
+<ol>
+<li>轮询read/write事件</li>
+<li>处理IO事件（即read/write事件），在对应的NioSocketChannel上进行处理</li>
+<li>处理任务队列的其他任务，即runAllTasks</li>
+</ol>
+<h1 id="Netty核心组件"><a href="#Netty核心组件" class="headerlink" title="Netty核心组件"></a>Netty核心组件</h1><h2 id="EventLoopGroup"><a href="#EventLoopGroup" class="headerlink" title="EventLoopGroup"></a>EventLoopGroup</h2><p>EventLoopGroup是一个接口，常用实现类为NioEventLoopGroup。</p>
+<ul>
+<li>BossGroup和WorkerGroup都属于NioEventLoopGroup类，一个EventLoopGroup中可以包含多个EventLoop，具体数目默认为8，也可在创建时由程序员配置</li>
+<li>一般将BossGroup配置1个EventLoop，对应着一个Selector，一个ServerSocketChannel，处理来自客户端的连接事件</li>
+<li>如果连接结果是OP_ACCEPT，则交由Acceptor进行处理，否则则交给WorkerGroup处理后续I/O操作</li>
+<li>WorkerGroup对应多个EventLoop，每个EventLoop对应着一个Selector，每个Selector轮询注册到此EventLoop上的所有Channel</li>
+<li>EventLoopGroup具有next方法，返回下一个EventLoop</li>
+</ul>
+<p><img src="/2020/11/03/Netty/15.png" alt="EventLoopGroup"></p>
+<p><strong>创建方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; nThread默认个数为8</span><br><span class="line">NioEventLoopGroup bossGroup &#x3D; new NioEventLoopGroup(1);</span><br><span class="line">NioEventLoopGroup workerGroup &#x3D; new NioEventLoopGroup();</span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group.shutdownGracefully();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><p>Bootstrap的意思是引导，Netty程序通常是从一个Bootstrap开始，用作配置整个Netty程序。其中，服务端程序使用的是ServerBootstrap，客户端使用的是Bootstrap。</p>
+<p><strong>常见方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Server端使用ServerBootstrap配置两个EventLoopGroup</span><br><span class="line">serverBootstrap.group(bossGroup,workerGroup);</span><br><span class="line">&#x2F;&#x2F; 客户端使用Bootstrap配置一个EventLoopGroup</span><br><span class="line">boostrap.group(workerGroup);</span><br><span class="line">&#x2F;&#x2F; 配置一个通道实现</span><br><span class="line">channel(Class channelClass)</span><br><span class="line">&#x2F;&#x2F; 用来给ServerChannel添加配置</span><br><span class="line">option(ChannelOption&lt;T&gt; option,T value)</span><br><span class="line">&#x2F;&#x2F; 用来给接收到的通道添加配置</span><br><span class="line">childOption(ChannelOption&lt;T&gt; option,T value)</span><br><span class="line">&#x2F;&#x2F; 为bossGroup中的事件添加业务处理类</span><br><span class="line">handler(ChannelHandler handler)</span><br><span class="line">&#x2F;&#x2F; 为workerGroup中的事件添加业务处理类</span><br><span class="line">childHandler(ChannelHandler handler)</span><br><span class="line">&#x2F;&#x2F; 用于服务器端，占用端口号</span><br><span class="line">ChannelFuture bind(int inetPort)</span><br><span class="line">&#x2F;&#x2F; 用于客户端，连接服务器</span><br><span class="line">ChannelFuture connect(String inetHost,int inetPort)</span><br></pre></td></tr></table></figure>
+
+<h2 id="ChannelOption"><a href="#ChannelOption" class="headerlink" title="ChannelOption"></a>ChannelOption</h2><p><strong>SO_BACKLOG</strong><br>对应TCP/IP协议中的listen函数的backlog参数，用来初始化服务器可连接队列大小。服务端对客户端的请求是顺序处理的，且在同一时间只能处理一个客户端的连接请求。当服务端正在处理连接请求时，有新的连接请求到来则会被放入可连接队列中等待。</p>
+<p><strong>SO_KEEPALIVE</strong><br>设置为true的话则代表一直保持连接状态</p>
+<h2 id="ChannelFuture"><a href="#ChannelFuture" class="headerlink" title="ChannelFuture"></a>ChannelFuture</h2><p>Netty中所有的IO操作的异步的，若想知道消息是否被正确处理，就需要通过ChannelFuture注册一个监听，当操作完成时监听会自动触发注册的监听事件。</p>
+<p><strong>异步机制</strong><br>当异步执行某个操作时，当前线程不需要等待操作完成。当前线程调用此操作会立即得到一个返回的Future接口，然后此操作（任务）会在其他线程中执行。通过调用Future接口中的一系列方法此可以知道任务异步执行的情况，同时也可以通过添加监听器的方式来指示任务异步完成后自动执行的回调函数。</p>
+<p><strong>Future-Listener机制</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 绑定一个端口并且同步</span><br><span class="line">ChannelFuture channelFuture &#x3D; bootstrap.bind(6668).sync();</span><br><span class="line">&#x2F;&#x2F; 注册监听函数执行完成后的操作</span><br><span class="line">channelFuture.addListener(new ChannelFutureListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void operationComplete(ChannelFuture channelFuture) throws Exception &#123;</span><br><span class="line">        if(channelFuture.isSuccess())&#123;</span><br><span class="line">            System.out.println(&quot;服务器绑定端口成功&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            System.out.println(&quot;服务器绑定端口失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="ChannelHandler"><a href="#ChannelHandler" class="headerlink" title="ChannelHandler"></a>ChannelHandler</h2><p>ChannelHandler是一个接口，处理或拦截I/O事件，并将其转发到ChannelPipeLine（业务处理链）中的下一个处理程序</p>
+<p><img src="/2020/11/03/Netty/13.png" alt="接口和类一览图"></p>
+<p>以客户端为例：</p>
+<ul>
+<li>出站：如果事件的运动方向是从客户端到服务端，则称这些事件为出站</li>
+<li>入站：如果事件的运动方向是从服务端到客户端，则称这些事件为入站</li>
+</ul>
+<h2 id="ChannelPipeline"><a href="#ChannelPipeline" class="headerlink" title="ChannelPipeline"></a>ChannelPipeline</h2><p><img src="/2020/11/03/Netty/14.png" alt="ChannelPipeline结构"></p>
+<p>入站和出站事件在一个双向链表中：</p>
+<ul>
+<li>入站事件会从链表head往后传递到最后一个入站的handler；</li>
+<li>出站事件会从链表tail往前传递到最前一个出站的handler。</li>
+<li>两种类型的handler互不影响，因为入站handler和出站handler分别保存在两条不同的双向链表中<ul>
+<li>入站handler实现ChannelInboundHandler&lt;C&gt;接口，如解码器</li>
+<li>出站handler实现ChannelOutboundHandler&lt;C&gt;接口，如编码器</li>
+<li>C代表通道类型，在网络通信中一般是SocketChannel</li>
+</ul>
+</li>
+</ul>
+<h2 id="TaskQueue"><a href="#TaskQueue" class="headerlink" title="TaskQueue"></a>TaskQueue</h2><p>任务队列保存某些了耗时长的业务操作，TaskQueue中的任务会异步执行。在Netty模型中，TaskQueue有一个线程，它会不断从队头取一个任务进行执行。</p>
+<p><strong>将任务加入TaskQueue的方法</strong></p>
+<p>方案1：用户程序自定义普通任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctx.channel().eventLoop().excute(new Runnable()&#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void run()&#123;</span><br><span class="line">    &#x2F;&#x2F; 耗时长的业务操作</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>方案2：用户自定义定时任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 该任务是提交到scheduleTaskQueue</span><br><span class="line">ctx.channel().eventLoop().schedule(new Runnable()&#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void run()&#123;</span><br><span class="line">    &#x2F;&#x2F; 耗时长的业务操作</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,5,TimeUnit,SECONDS);</span><br></pre></td></tr></table></figure>
+
+<p>方案3：非当前Reactor线程调用Channel中的各种方法<br>一般是用在推送系统中。做法是用一个集合类保存需要推送消息的Channel，在需要推送时，遍历这个集合，获取每个Channel，然后调用eventLoop()函数获得他们所在的NioEventLoop，在对应的TaskQueue或ScheduleTaskQueue中加入任务。</p>
+<h2 id="Unpooled"><a href="#Unpooled" class="headerlink" title="Unpooled"></a>Unpooled</h2><p>Unpooled类是Netty提供的一个专门用来操纵缓冲区的工具类</p>
+<p>ByteBuf底层是一个数组，因此创建时可以指定其大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf buf &#x3D; Unpooled.buffer(10);</span><br></pre></td></tr></table></figure>
+
+<p>在Netty中，ByteBuf不需要flip进行反转。Netty底层通过维护readIndex,writeIndex,capacity三个变量来控制读写区域。其中[0,readIndex)表示已读取区域； [readIndex,writeIndex)表示可读区域； [writeIndex,capacity)表示可写区域。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buf.writeByte(i); &#x2F;&#x2F; 写入数据</span><br><span class="line">buf.readByte();   &#x2F;&#x2F; 读取数据</span><br></pre></td></tr></table></figure>
+
+<h1 id="Netty编码解码"><a href="#Netty编码解码" class="headerlink" title="Netty编码解码"></a>Netty编码解码</h1><p>在编写网络应用程序时，由于数据在网络中都是以二进制形式进行传输，因此在发送数据时就需要将业务数据编码成字节码，在接收数据后就需要将字节码解码成业务数据。<br>codec（编解码器）由两部分组成，分别是：decoder(解码器);encoder(编码器)</p>
+<p><img src="/2020/11/03/Netty/16.png" alt="数据传输过程"></p>
+<p><strong>Netty自身编码解码机制和问题</strong></p>
+<ol>
+<li>Netty自身提供了一些codec<ul>
+<li>StringEncoder、StringDecoder：字符串编码、解码器</li>
+<li>ObjectEncoder、ObjectDecoder：Java对象编码、解码器</li>
+</ul>
+</li>
+<li>Netty本身自带的Java对象编码、解码器底层使用的是序列化技术，此技术存在一些问题<ul>
+<li>Java序列化技术效率不高</li>
+<li>无法跨语言</li>
+<li>序列化后体积太大，是二进制编码的5倍多</li>
+</ul>
+</li>
+<li>新的解决方案是Google的Protobuf</li>
+</ol>
+<h2 id="Protobuf"><a href="#Protobuf" class="headerlink" title="Protobuf"></a>Protobuf</h2><p>Protobuf是谷歌发布的开源项目，全称Google Protocol Buffers，是一种轻便高效的结构化数据存储格式，可以用于结构化数据串行化（序列化）。<br>它很适合做数据存储或者RPC(Remote Procedure Call)数据交换格式。目前很多公司都从http+json的方式转换到tcp+protobuf的方式。</p>
+<p><strong>ProtoBuf在java中的使用原理</strong></p>
+<ul>
+<li>将类的定义通过.proto文件进行描述</li>
+<li>然后通过protoc.exe编译器根据.proto自动生成.java文件</li>
+</ul>
+<p><strong>ProtoBuf在IDEA中使用步骤</strong></p>
+<ol>
+<li><p>在pom.xml中添加protobuf-java依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.google.protobuf&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;protobuf-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.13.0&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写.proto文件</p>
+</li>
+<li><p>在pom.xml文件中添加编译插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">    &lt;plugins&gt;</span><br><span class="line">        &lt;plugin&gt;</span><br><span class="line">            &lt;groupId&gt;org.xolstice.maven.plugins&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;protobuf-maven-plugin&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;0.6.1&lt;&#x2F;version&gt;</span><br><span class="line"></span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;protocExecutable&gt;</span><br><span class="line">                    D:\protoc-3.13.0\bin\protoc.exe  &lt;!-- 刚刚环境变量配置的位置 --&gt;</span><br><span class="line">                &lt;&#x2F;protocExecutable&gt;</span><br><span class="line">                &lt;pluginId&gt;protoc-java&lt;&#x2F;pluginId&gt;</span><br><span class="line">                &lt;!-- proto文件放置的目录 --&gt;</span><br><span class="line">                &lt;protoSourceRoot&gt;$&#123;project.basedir&#125;&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;dynner&#x2F;netty&#x2F;codec2&lt;&#x2F;protoSourceRoot&gt;</span><br><span class="line">                &lt;!-- 生成文件的目录 --&gt;</span><br><span class="line">                &lt;outputDirectory&gt;$&#123;project.basedir&#125;&#x2F;src&#x2F;main&#x2F;java&#x2F;com&#x2F;dynner&#x2F;netty&#x2F;codec2&lt;&#x2F;outputDirectory&gt;</span><br><span class="line">                &lt;!-- 生成文件前是否把目标目录清空，这个最好设置为false，以免误删项目文件 --&gt;</span><br><span class="line">                &lt;clearOutputDirectory&gt;false&lt;&#x2F;clearOutputDirectory&gt;</span><br><span class="line">            &lt;&#x2F;configuration&gt;</span><br><span class="line">            &lt;executions&gt;</span><br><span class="line">                &lt;execution&gt;</span><br><span class="line">                    &lt;goals&gt;</span><br><span class="line">                        &lt;goal&gt;compile&lt;&#x2F;goal&gt;</span><br><span class="line">                    &lt;&#x2F;goals&gt;</span><br><span class="line">                &lt;&#x2F;execution&gt;</span><br><span class="line">            &lt;&#x2F;executions&gt;</span><br><span class="line">        &lt;&#x2F;plugin&gt;</span><br><span class="line">    &lt;&#x2F;plugins&gt;</span><br><span class="line">&lt;&#x2F;build&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用Maven项目编译</p>
+</li>
+</ol>
+<p><img src="/2020/11/03/Netty/17.png" alt="利用proto文件生成java文件"></p>
+<h2 id="ByteToMessageDecoder"><a href="#ByteToMessageDecoder" class="headerlink" title="ByteToMessageDecoder"></a>ByteToMessageDecoder</h2><p><img src="/2020/11/03/Netty/18.png" alt="ByteToMessageDecoder继承关系"></p>
+<p>由于不知道远程节点是否会一次性发送一个完整消息，TCP可能会出现粘包拆包问题。这个类会对入站数据进行缓冲，知道它准备好被处理。</p>
+<h2 id="handler链中的解码编码handler"><a href="#handler链中的解码编码handler" class="headerlink" title="handler链中的解码编码handler"></a>handler链中的解码编码handler</h2><ul>
+<li>不论解码handler还是编码handler，接收的消息必须与待处理的消息类型一致，否则handler不会被执行</li>
+<li>在解码器进行解码时，需要判断缓存（ByteBuf）的数据是否足够，否则接收到的结果可能会与期望的结果不一致</li>
+</ul>
+<h2 id="Netty其他常用编码、解码器"><a href="#Netty其他常用编码、解码器" class="headerlink" title="Netty其他常用编码、解码器"></a>Netty其他常用编码、解码器</h2><p><strong>ReplayingDecoder</strong><br>ReplayingDecoder&lt;S&gt; 扩展了ByteToMessageDecoder类</p>
+<ul>
+<li>优点<ul>
+<li>不必调用readableBytes方法人工判定缓存中数据量是否足够做转换</li>
+<li>参数S指定了用户状态管理类型（void表示不需要状态管理）</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>并不是所有ByteBuf操作都支持</li>
+<li>某些情况下速度比ByteToMessageDecoder慢</li>
+</ul>
+</li>
+</ul>
+<p><strong>LineBasedFrameDecoder</strong><br>使用行尾控制符（\n或\r\n）作为分隔符来解析数据</p>
+<p><strong>DelimiterBasedFrameDecoder</strong><br>使用自定义的特殊字符作为消息的分隔符</p>
+<p><strong>HttpObjectDecoder</strong><br>一个Http数据的解码器</p>
+<p><strong>LengthFieldBasedFrameDecoder</strong><br>通过指定长度来标识整包消息，这样就可以自动的处理粘包和半包消息</p>
+<h1 id="TCP粘包和拆包"><a href="#TCP粘包和拆包" class="headerlink" title="TCP粘包和拆包"></a>TCP粘包和拆包</h1><p>TCP是面向连接、面向流的，提供高可靠性服务。消息收发两端都要有一个成对的socket。发送端为了更高效的将包发送给接收方，使用了优化方法（Nagle算法），将多次间隔较小且数据量小的数据，合成一个大的数据块，然后进行封包。这样做虽然提高的效率，但接收端就难以分辨出完整的数据包了。因为面向流的通信是无消息保护边界的。由于TCP无消息保护边界，需要在接收端处理消息边界问题。</p>
+<p><strong>案例说明</strong></p>
+<p><img src="/2020/11/03/Netty/19.png" alt="粘包拆包问题案例说明"></p>
+<ol>
+<li>前提：客户端发送了两个数据包 D1 和 D2 给服务端</li>
+<li>情况1：服务端分两次读取到两个独立数据包 D1 和 D2。没有粘包和拆包</li>
+<li>情况2：服务端一次接收到了两个数据包，D1 和 D2 粘合在一起。称之为TCP粘包</li>
+<li>情况3：服务端分两次读取到了数据包：第一次读取到完整的 D1 包和 D2 包部分内容；第二次读取到 D2 包剩余内容。称之为 TCP拆包</li>
+<li>情况4：服务端分两次读取到了数据包：第一次读取到了 D1 包的部分内容；第二次读取到了 D1 包的剩余内容和 D2 包。</li>
+</ol>
+<h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p><a href="https://www.bilibili.com/video/BV1DJ411m7NR?from=search&seid=2689171580875062493" target="_blank" rel="noopener">尚硅谷韩顺平Netty教学</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java%E6%A1%86%E6%9E%B6/" rel="tag"># Java框架</a>
+              <a href="/tags/NIO/" rel="tag"># NIO</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/25/Swing%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E7%BB%84%E4%BB%B6/" rel="prev" title="Swing中的那些组件">
+      <i class="fa fa-chevron-left"></i> Swing中的那些组件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/14/%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E5%8F%82%E8%80%83%E6%8C%87%E5%8D%97/" rel="next" title="大厂面试参考指南">
+      大厂面试参考指南 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

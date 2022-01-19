@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统">
+<meta property="og:url" content="https://llunch4w.github.io/2021/06/20/%E3%80%90%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87%E3%80%91%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2021/06/20/%E3%80%90%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87%E3%80%91%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/1.jpg">
+<meta property="article:published_time" content="2021-06-20T10:12:14.000Z">
+<meta property="article:modified_time" content="2022-01-10T07:25:00.409Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="面试 操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2021/06/20/%E3%80%90%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87%E3%80%91%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/1.jpg">
+
+<link rel="canonical" href="https://llunch4w.github.io/2021/06/20/%E3%80%90%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87%E3%80%91%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>操作系统 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程间有哪些通信方式？"><span class="nav-number">1.</span> <span class="nav-text">进程间有哪些通信方式？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#管道"><span class="nav-number">1.1.</span> <span class="nav-text">管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FIFO"><span class="nav-number">1.2.</span> <span class="nav-text">FIFO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列"><span class="nav-number">1.3.</span> <span class="nav-text">消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量"><span class="nav-number">1.4.</span> <span class="nav-text">信号量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#共享内存"><span class="nav-number">1.5.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#套接字"><span class="nav-number">1.6.</span> <span class="nav-text">套接字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程过程调用"><span class="nav-number">1.7.</span> <span class="nav-text">远程过程调用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#进程和线程之间有什么区别？"><span class="nav-number">2.</span> <span class="nav-text">进程和线程之间有什么区别？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#简述-select-poll-epoll-的使用场景以及区别"><span class="nav-number">3.</span> <span class="nav-text">简述 select, poll, epoll 的使用场景以及区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件描述符"><span class="nav-number">3.1.</span> <span class="nav-text">文件描述符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select"><span class="nav-number">3.2.</span> <span class="nav-text">select</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poll"><span class="nav-number">3.3.</span> <span class="nav-text">poll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll"><span class="nav-number">3.4.</span> <span class="nav-text">epoll</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll-create"><span class="nav-number">3.4.1.</span> <span class="nav-text">epoll_create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll-ctl"><span class="nav-number">3.4.2.</span> <span class="nav-text">epoll_ctl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#epoll-wait"><span class="nav-number">3.4.3.</span> <span class="nav-text">epoll_wait</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll-的优点"><span class="nav-number">3.5.</span> <span class="nav-text">epoll 的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三者对比"><span class="nav-number">3.6.</span> <span class="nav-text">三者对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#水平触发、边缘触发"><span class="nav-number">3.7.</span> <span class="nav-text">水平触发、边缘触发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简述操作系统如何进行内存管理"><span class="nav-number">3.8.</span> <span class="nav-text">简述操作系统如何进行内存管理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/06/20/%E3%80%90%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87%E3%80%91%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          操作系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-20 18:12:14" itemprop="dateCreated datePublished" datetime="2021-06-20T18:12:14+08:00">2021-06-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 15:25:00" itemprop="dateModified" datetime="2022-01-10T15:25:00+08:00">2022-01-10</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="进程间有哪些通信方式？"><a href="#进程间有哪些通信方式？" class="headerlink" title="进程间有哪些通信方式？"></a>进程间有哪些通信方式？</h1><p><strong>资料</strong>：</p>
+<ol>
+<li><a href="https://www.guru99.com/inter-process-communication-ipc.html" target="_blank" rel="noopener">https://www.guru99.com/inter-process-communication-ipc.html</a></li>
+<li><a href="https://www.cnblogs.com/zgq0/p/8780893.html#:~:text=%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%EF%BC%88IPC%EF%BC%8CInterProcess,Communication%EF%BC%89%E6%98%AF%E6%8C%87%E5%9C%A8%E4%B8%8D%E5%90%8C%E8%BF%9B%E7%A8%8B%E4%B9%8B%E9%97%B4%E4%BC%A0%E6%92%AD%E6%88%96%E4%BA%A4%E6%8D%A2%E4%BF%A1%E6%81%AF%E3%80%82%20IPC%E7%9A%84%E6%96%B9%E5%BC%8F%E9%80%9A%E5%B8%B8%E6%9C%89%E7%AE%A1%E9%81%93%EF%BC%88%E5%8C%85%E6%8B%AC%E6%97%A0%E5%90%8D%E7%AE%A1%E9%81%93%E5%92%8C%E5%91%BD%E5%90%8D%E7%AE%A1%E9%81%93%EF%BC%89%E3%80%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E3%80%81%E4%BF%A1%E5%8F%B7%E9%87%8F%E3%80%81%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E3%80%81Socket%E3%80%81Streams%E7%AD%89%E3%80%82" target="_blank" rel="noopener">进程间的五种通信方式</a></li>
+<li><a href="https://cloud.tencent.com/developer/news/478432#:~:text=%E5%A5%97%E6%8E%A5%E5%AD%97%E6%98%AF%E4%B8%80%E5%A5%97%E7%94%A8%20C%E8%AF%AD%E8%A8%80%20%E5%86%99%E6%88%90%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%20%E5%BC%80%E5%8F%91%E5%BA%93%20%EF%BC%8C%E5%AE%83%E9%A6%96%E5%85%88%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BA%93%E3%80%82,%E4%B8%BB%E8%A6%81%E4%BD%9C%E7%94%A8%E5%B0%B1%E6%98%AF%E5%AE%9E%E7%8E%B0%20%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%20%E5%92%8C%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%20%EF%BC%8C%E5%9B%A0%E6%AD%A4%E5%9C%A8%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E4%B8%AD%E8%A2%AB%E5%B9%BF%E6%B3%9B%E4%BD%BF%E7%94%A8%E3%80%82" target="_blank" rel="noopener">套接字</a></li>
+<li><a href="https://blog.csdn.net/qq_42021840/article/details/108778105" target="_blank" rel="noopener">Windows RPC–远程过程调用</a></li>
+</ol>
+<p><img src="/2021/06/20/%E3%80%90%E9%9D%A2%E8%AF%95%E5%85%AB%E8%82%A1%E6%96%87%E3%80%91%E4%B9%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/1.jpg" alt></p>
+<h2 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h2><ol>
+<li>通常管道指的是无名管道，它是半双工的（即数据只能在一个方向上流动），具有固定的读端和写端。</li>
+<li>它只能用于具有亲缘关系的进程之间的通信（也是父子进程或者兄弟进程之间）。</li>
+<li>它可以看成是一种特殊的文件，对于它的读写也可以使用普通的 <code>read</code> 、 <code>write</code> 等函数。但是它不是普通的文件，并不属于其他任何文件系统，并且只存在于内存中。</li>
+</ol>
+<p><strong>原型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pipe</span><span class="params">(<span class="keyword">int</span> fd[<span class="number">2</span>])</span></span>;    <span class="comment">// 返回值：若成功返回0，失败返回-1</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当一个管道建立时，它会创建两个文件描述符：fd[0]为读而打开，fd[1]为写而打开。<br>要关闭管道只需将这两个文件描述符关闭即可。</p>
+</blockquote>
+<h2 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h2><ol>
+<li>FIFO，也称为命名管道，它是一种文件类型。</li>
+<li>FIFO可以在无关的进程之间交换数据，与无名管道不同。</li>
+<li>FIFO有路径名与之相关联，它以一种特殊设备文件形式存在于文件系统中。</li>
+</ol>
+<p><strong>原型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="comment">// 返回值：成功返回0，出错返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mkfifo</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *pathname, <span class="keyword">mode_t</span> mode)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>其中的 <code>mode</code> 参数与 <code>open</code> 函数中的 <code>mode</code> 相同。一旦创建了一个 <strong>FIFO</strong> ，就可以用一般的文件I/O函数操作它。<br>当 open 一个 FIFO 时，是否设置非阻塞标志（ <strong>O_NONBLOCK</strong> ）的区别：</p>
+<ul>
+<li>若没有指定 <code>O_NONBLOCK</code> （默认），只读 open 要阻塞到某个其他进程为写而打开此 FIFO。类似的，只写 open 要阻塞到某个其他进程为读而打开它。</li>
+<li>若指定了 <code>O_NONBLOCK</code> ，则只读 open 立即返回。而只写 open 将出错返回 -1 如果没有进程已经为读而打开该 FIFO ，其 <code>errno</code> 置 <code>ENXIO</code> 。</li>
+</ul>
+<h2 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h2><ol>
+<li>消息队列，是消息的链接表，存放在内核中。一个消息队列由一个标识符（即队列ID）来标识。</li>
+<li>消息队列是面向记录的，其中的消息具有特定的格式以及特定的优先级。</li>
+<li>消息队列独立于发送与接收进程。进程终止时，消息队列及其内容并不会被删除。</li>
+<li>消息队列可以实现消息的随机查询,消息不一定要以先进先出的次序读取,也可以按消息的类型读取。</li>
+</ol>
+<p><strong>原型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/msg.h&gt;</span></span></span><br><span class="line"><span class="comment">// 创建或打开消息队列：成功返回队列ID，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgget</span><span class="params">(<span class="keyword">key_t</span> key, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 添加消息：成功返回0，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgsnd</span><span class="params">(<span class="keyword">int</span> msqid, <span class="keyword">const</span> <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 读取消息：成功返回消息数据的长度，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgrcv</span><span class="params">(<span class="keyword">int</span> msqid, <span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">long</span> type,<span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 控制消息队列：成功返回0，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">msgctl</span><span class="params">(<span class="keyword">int</span> msqid, <span class="keyword">int</span> cmd, struct msqid_ds *buf)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>在以下两种情况下，msgget将创建一个新的消息队列：</p>
+<ul>
+<li>如果没有与键值 key 相对应的消息队列，并且 flag 中包含了 <code>IPC_CREAT</code> 标志位。</li>
+<li>key参数为 <code>IPC_PRIVATE</code> 。</li>
+</ul>
+<p>函数 <code>msgrcv</code> 在读取消息队列时，type参数有下面几种情况：</p>
+<ul>
+<li><code>type == 0</code> , 返回队列中的第一个消息；</li>
+<li><code>type &gt; 0</code> , 返回队列中消息类型为 type 的第一个消息；</li>
+<li><code>type &lt; 0</code> , 返回队列中消息类型值小于或等于 type 绝对值的消息，如果有多个，则取类型值最小的消息。</li>
+</ul>
+<h2 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h2><ol>
+<li>信号量（semaphore）与已经介绍过的 IPC 结构不同，它是一个计数器。信号量用于实现进程间的互斥与同步，而不是用于存储进程间通信数据。</li>
+<li>信号量用于进程间同步，若要在进程间传递数据需要结合共享内存。</li>
+<li>信号量基于操作系统的 PV 操作，程序对信号量的操作都是原子操作。</li>
+<li>每次对信号量的 PV 操作不仅限于对信号量值加 1 或减 1，而且可以加减任意正整数。</li>
+<li>支持信号量组。</li>
+</ol>
+<p><strong>原型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/sem.h&gt;</span></span></span><br><span class="line"><span class="comment">// 创建或获取一个信号量组：若成功返回信号量集ID，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semget</span><span class="params">(<span class="keyword">key_t</span> key, <span class="keyword">int</span> num_sems, <span class="keyword">int</span> sem_flags)</span></span>;</span><br><span class="line"><span class="comment">// 对信号量组进行操作，改变信号量的值：成功返回0，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semop</span><span class="params">(<span class="keyword">int</span> semid, struct sembuf semoparray[], <span class="keyword">size_t</span> numops)</span></span>;</span><br><span class="line"><span class="comment">// 控制信号量的相关信息</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">semctl</span><span class="params">(<span class="keyword">int</span> semid, <span class="keyword">int</span> sem_num, <span class="keyword">int</span> cmd, ...)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h2><ol>
+<li>共享内存（Shared Memory），指两个或多个进程共享一个给定的存储区。</li>
+<li>共享内存是最快的一种 IPC，因为进程是直接对内存进行存取。</li>
+<li>因为多个进程可以同时操作，所以需要进行同步。</li>
+<li>信号量+共享内存通常结合在一起使用，信号量用来同步对共享内存的访问。</li>
+</ol>
+<p><strong>原型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/shm.h&gt;</span></span></span><br><span class="line"><span class="comment">// 创建或获取一个共享内存：成功返回共享内存ID，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmget</span><span class="params">(<span class="keyword">key_t</span> key, <span class="keyword">size_t</span> <span class="built_in">size</span>, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 连接共享内存到当前进程的地址空间：成功返回指向共享内存的指针，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">shmat</span><span class="params">(<span class="keyword">int</span> shm_id, <span class="keyword">const</span> <span class="keyword">void</span> *addr, <span class="keyword">int</span> flag)</span></span>;</span><br><span class="line"><span class="comment">// 断开与共享内存的连接：成功返回0，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmdt</span><span class="params">(<span class="keyword">void</span> *addr)</span></span>;</span><br><span class="line"><span class="comment">// 控制共享内存的相关信息：成功返回0，失败返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shmctl</span><span class="params">(<span class="keyword">int</span> shm_id, <span class="keyword">int</span> cmd, struct shmid_ds *buf)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>当用shmget函数创建一段共享内存时，必须指定其 size；而如果引用一个已存在的共享内存，则将 size 指定为0 。</p>
+<p>当一段共享内存被创建以后，它并不能被任何进程访问。必须使用shmat函数连接该共享内存到当前进程的地址空间，连接成功后把共享内存区对象映射到调用进程的地址空间，随后可像本地空间一样访问。</p>
+<p>shmdt函数是用来断开shmat建立的连接的。注意，这并不是从系统中删除该共享内存，只是当前进程不能再访问该共享内存而已。</p>
+<h2 id="套接字"><a href="#套接字" class="headerlink" title="套接字"></a>套接字</h2><ol>
+<li>套接字（socket）是一个抽象层，应用程序可以通过它发送或接收数据，可对其进行像对文件一样的打开、读写和关闭等操作。套接字允许应用程序与网络中的其他应用程序进行通信。网络套接字是IP地址与端口的组合。</li>
+<li>实际开发中使用的套接字可以分为三类：<strong>流套接字（TCP套接字）</strong>、<strong>数据报套接字</strong>和<strong>原始套接字</strong>。<ul>
+<li><strong>流式套接字（SOCK-STREAM）</strong>。它提供了一种可靠的、可以进行双向连接的数据传输服务。其实现了数据无差错、无重复的发送。流式套接字自身便内设了流量控制功能。在TCP/IP协议簇中，使用TCP协议来实现字节流的传输，当用户想要发送大批量的数据或者对数据传输有较高的要求时，可以使用流式套接字。</li>
+<li><strong>数据报套接字（SOCK-DGRAM）</strong>。它提供了一种不可靠的双向数据传输服务。数据包以独立的形式被发送，不提供可靠性保证。数据在传输过程中可能会丢失或重复，并且不能保证在接收端按发送顺序接收数据。在TCP/IP协议簇中，使用UDP协议来实现数据报套接字。在出现差错的可能性较小或允许部分传输出错的应用场合，可以使用数据报套接字进行数据传输，这样通信的效率较高。</li>
+<li><strong>原始套接字（SOCK-RAW）</strong>。该套接字允许对较低层协议（如IP或ICMP）进行直接访问，常用于网络协议分析，检验新的网络协议实现，也可用于测试新配置或安装的网络设备。</li>
+</ul>
+</li>
+</ol>
+<h2 id="远程过程调用"><a href="#远程过程调用" class="headerlink" title="远程过程调用"></a>远程过程调用</h2><p>RPC（ Remote Procedure Call），远程过程调用，相比于IPC来说RPC就是基于远程的工作机制，说白了RPC也是一种进程间通信方式，它只不过可以允许本地程序调用另一个地址空间的过程或者函数，而不用程序员去管理调用的细节。对于IPC来说，程序只能调用本地空间的函数，而RPC机制提供了一种程序员不必显示的区分本地调用和远程调用。</p>
+<p><strong>RPC框架</strong></p>
+<ul>
+<li>客户端（client）：服务的调用方。</li>
+<li>客户端存根（client stub）:存放服务端的地址信息，再将客户端的请求参数打包成网络数据，然后通过网络远程发送给服务方。</li>
+<li>服务端存根（server stub）:接受客户端发送过来的消息，将消息解包，并调用本地的方法。</li>
+<li>服务端（server）:正真的服务提供者。</li>
+</ul>
+<h1 id="进程和线程之间有什么区别？"><a href="#进程和线程之间有什么区别？" class="headerlink" title="进程和线程之间有什么区别？"></a>进程和线程之间有什么区别？</h1><p>进程是资源分配的最⼩单位，⽽线程则是系统调度的最⼩单位。</p>
+<ol>
+<li><strong>创建时消耗资源不同</strong>：进程下多个线程间共享<strong>虚拟内存</strong>、<strong>⽂件描述符</strong>、<strong>信号处理⽅式</strong>等资源，但进程间拥有独⽴的虚拟内存、⽂件描述符与信号处理等资源。在创建线程时，由于虚拟内存、⽂件描述符等资源共享，故不需要进⾏额外的内存复制。</li>
+<li><strong>通信⽅式不同</strong>：线程间可通过全局变量、互斥锁或者是条件变量来进⾏通信，但进程间只能使⽤管道、OS 提供的共享内存等进⾏通信，需要投⼊更多的资源。</li>
+<li><strong>对信号的⽀持不同</strong>：由于线程是“依附”在进程之上的，因此，同⼀个进程下的多个线程在使⽤信号时会有问题，⽆法准确的将信号传递⾄某⼀个具体的线程。</li>
+<li><strong>上下⽂切换速度不同</strong>：因为线程间共享了虚拟内存、⽂件描述符等诸多信息，因此 OS 只需要在上下⽂保存线程的堆栈、寄存器等少量信息，所以其切换速度要⾼于进程间的上下⽂切换。</li>
+</ol>
+<h1 id="简述-select-poll-epoll-的使用场景以及区别"><a href="#简述-select-poll-epoll-的使用场景以及区别" class="headerlink" title="简述 select, poll, epoll 的使用场景以及区别"></a>简述 select, poll, epoll 的使用场景以及区别</h1><p>进程可以通过 select、poll、epoll 发起 I/O 多路复用的系统调用，这些系统调用都是同步阻塞的：如果传入的多个文件描述符中，有描述符就绪，则返回就绪的描述符；否则如果所有文件描述符都未就绪，就阻塞调用进程，直到某个描述符就绪，或者阻塞时长超过设置的 timeout 后，再返回。使用非阻塞 I/O 检查每个描述符的就绪状态。</p>
+<p>如果 <code>timeout</code> 参数设为 NULL，会无限阻塞直到某个描述符就绪；如果 <code>timeout</code> 参数设为 0，会立即返回，不阻塞。</p>
+<h2 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h2><p>文件描述符（file descriptor）是一个非负整数，从 0 开始。进程使用文件描述符来标识一个打开的文件。</p>
+<p>系统为每一个进程维护了一个文件描述符表，表示该进程打开文件的记录表，而文件描述符实际上就是这张表的索引。当进程打开（open）或者新建（create）文件时，内核会在该进程的文件列表中新增一个表项，同时返回一个文件描述符 —— 也就是新增表项的下标。</p>
+<p>每个进程默认都有 3 个文件描述符：0 (stdin)、1 (stdout)、2 (stderr)。</p>
+<h2 id="select"><a href="#select" class="headerlink" title="select"></a>select</h2><p><strong>函数原型</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select</span><span class="params">(<span class="keyword">int</span> nfds,    <span class="comment">// 需要遍历的文件描述符个数</span></span></span></span><br><span class="line"><span class="function"><span class="params">            fd_set *<span class="keyword">restrict</span> readfds,  <span class="comment">// 可以读取的描述符</span></span></span></span><br><span class="line"><span class="function"><span class="params">            fd_set *<span class="keyword">restrict</span> writefds, <span class="comment">// 可以写入的描述符</span></span></span></span><br><span class="line"><span class="function"><span class="params">            fd_set *<span class="keyword">restrict</span> errorfds, <span class="comment">// 发生错误的描述符</span></span></span></span><br><span class="line"><span class="function"><span class="params">            struct timeval *<span class="keyword">restrict</span> timeout <span class="comment">// select 阻塞时长</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>fd_set</strong><br>参数中的 <code>fd_set</code> 类型表示文件描述符的集合。由于文件描述符 fd 是一个从 0 开始的无符号整数，所以可以使用 fd_set 的二进制每一位来表示一个文件描述符。某一位为 1，表示对应的文件描述符已就绪。</p>
+<p>fd_set 的使用涉及以下几个 API：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/select.h&gt;   </span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FD_ZERO</span><span class="params">(<span class="keyword">int</span> fd, fd_set *fdset)</span></span>;  <span class="comment">// 将 fd_set 所有位置 0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FD_CLR</span><span class="params">(<span class="keyword">int</span> fd, fd_set *fdset)</span></span>;   <span class="comment">// 将 fd_set 某一位置 0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FD_SET</span><span class="params">(<span class="keyword">int</span> fd, fd_set *fd_set)</span></span>;  <span class="comment">// 将 fd_set 某一位置 1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FD_ISSET</span><span class="params">(<span class="keyword">int</span> fd, fd_set *fdset)</span></span>; <span class="comment">// 检测 fd_set 某一位是否为 1</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>select 的缺点</strong></p>
+<ol>
+<li>性能开销大：调用 select 时会陷入内核，这时需要将参数中的 fd_set 从用户空间拷贝到内核空间；内核需要遍历传递进来的所有 fd_set 的每一位，不管它们是否就绪。<br>2、 同时能够监听的文件描述符数量太少。受限于 sizeof(fd_set) 的大小，在编译内核时就确定了且无法更改。一般是 1024，不同的操作系统不相同。</li>
+</ol>
+<h2 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h2><p>poll 和 select 几乎没有区别。poll 采用链表的方式存储文件描述符，没有最大存储数量的限制。<br>从性能开销上看，poll 和 select 的差别不大。</p>
+<h2 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h2><p>epoll 是对 select 和 poll 的改进，避免了“性能开销大”和“文件描述符数量少”两个缺点。<br>简而言之，epoll 有以下几个特点：</p>
+<ol>
+<li>使用<strong>红黑树</strong>存储文件描述符集合。</li>
+<li>使用<strong>队列</strong>存储就绪的文件描述符。</li>
+<li>每个文件描述符只需在添加时传入一次；通过事件更改文件描述符状态。</li>
+</ol>
+<p>select、poll 模型都只使用一个函数，而 epoll 模型使用三个函数：<code>epoll_create</code>、<code>epoll_ctl</code> 和 <code>epoll_wait</code>。</p>
+<h3 id="epoll-create"><a href="#epoll-create" class="headerlink" title="epoll_create"></a>epoll_create</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 epoll 实例，同时返回一个引用该实例的文件描述符。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_create</span><span class="params">(<span class="keyword">int</span> <span class="built_in">size</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>返回的文件描述符仅仅指向对应的 epoll 实例，并不表示真实的磁盘文件节点。其他 API 如 epoll_ctl、epoll_wait 会使用这个文件描述符来操作相应的 epoll 实例。</p>
+<p>epoll 实例内部存储：</p>
+<ul>
+<li>监听列表：所有要监听的文件描述符，使用红黑树</li>
+<li>就绪列表：所有就绪的文件描述符，使用链表</li>
+</ul>
+<h3 id="epoll-ctl"><a href="#epoll-ctl" class="headerlink" title="epoll_ctl"></a>epoll_ctl</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// epoll_ctl 会监听文件描述符 fd 上发生的 event 事件。返回值 0 或 -1，表示上述操作成功与否。</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_ctl</span><span class="params">(<span class="keyword">int</span> epfd, <span class="keyword">int</span> op, <span class="keyword">int</span> fd, struct epoll_event *event)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<ul>
+<li>epfd 即 epoll_create 返回的文件描述符，指向一个 epoll 实例</li>
+<li>fd 表示要监听的目标文件描述符</li>
+<li>event 表示要监听的事件（可读、可写、发送错误…）</li>
+<li>op 表示要对 fd 执行的操作，有以下几种：<ul>
+<li>EPOLL_CTL_ADD：为 fd 添加一个监听事件 event</li>
+<li>EPOLL_CTL_MOD：event 是一个结构体变量，这相当于变量 event 本身没变，但是更改了其内部字段的值</li>
+<li>EPOLL_CTL_DEL：删除 fd 的所有监听事件，这种情况下 event 参数没用</li>
+</ul>
+</li>
+</ul>
+<p>epoll_ctl 会将文件描述符 fd 添加到 epoll 实例的监听列表里，同时为 fd 设置一个回调函数，并监听事件 event。当 fd 上发生相应事件时，会调用回调函数，将 fd 添加到 epoll 实例的就绪队列上。</p>
+<h3 id="epoll-wait"><a href="#epoll-wait" class="headerlink" title="epoll_wait"></a>epoll_wait</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">epoll_wait</span><span class="params">(<span class="keyword">int</span> epfd, struct epoll_event *events,</span></span></span><br><span class="line"><span class="function"><span class="params">               <span class="keyword">int</span> maxevents, <span class="keyword">int</span> timeout)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>这是 epoll 模型的主要函数，功能相当于 select。</p>
+<p>参数说明：</p>
+<ul>
+<li>epfd 即 epoll_create 返回的文件描述符，指向一个 epoll 实例</li>
+<li>events 是一个数组，保存就绪状态的文件描述符，其空间由调用者负责申请</li>
+<li>maxevents 指定 events 的大小</li>
+<li>timeout 类似于 select 中的 timeout。如果没有文件描述符就绪，即就绪队列为空，则 epoll_wait 会阻塞 timeout 毫秒。如果 timeout 设为 -1，则 epoll_wait 会一直阻塞，直到有文件描述符就绪；如果 timeout 设为 0，则 epoll_wait 会立即返回</li>
+<li>返回值表示 events 中存储的就绪描述符个数，最大不超过 maxevents。</li>
+</ul>
+<h2 id="epoll-的优点"><a href="#epoll-的优点" class="headerlink" title="epoll 的优点"></a>epoll 的优点</h2><p>对于“文件描述符数量少”，select 使用整型数组存储文件描述符集合，而 epoll 使用红黑树存储，数量较大。</p>
+<p>对于“性能开销大”，epoll_ctl 中为每个文件描述符指定了回调函数，并在就绪时将其加入到就绪列表，因此 epoll 不需要像 select 那样遍历检测每个文件描述符，只需要判断就绪列表是否为空即可。这样，在没有描述符就绪时，epoll 能更早地让出系统资源。</p>
+<p>此外，每次调用 select 时都需要向内核拷贝所有要监听的描述符集合，而 epoll 对于每个描述符，只需要在 epoll_ctl 传递一次，之后 epoll_wait 不需要再次传递。这也大大提高了效率。</p>
+<h2 id="三者对比"><a href="#三者对比" class="headerlink" title="三者对比"></a>三者对比</h2><ul>
+<li>select：调用开销大（需要复制集合）；集合大小有限制；需要遍历整个集合找到就绪的描述符</li>
+<li>poll：poll 采用链表的方式存储文件描述符，没有最大存储数量的限制，其他方面和 select 没有区别</li>
+<li>epoll：调用开销小（不需要复制）；集合大小无限制；采用回调机制，不需要遍历整个集合</li>
+</ul>
+<p>select、poll 都是在用户态维护文件描述符集合，因此每次需要将完整集合传给内核；epoll 由操作系统在内核中维护文件描述符集合，因此只需要在创建的时候传入文件描述符。</p>
+<p>此外 select 只支持水平触发，epoll 支持边缘触发。</p>
+<p>当连接数较多并且有很多的不活跃连接时，epoll 的效率比其它两者高很多。当连接数较少并且都十分活跃的情况下，由于 epoll 需要很多回调，因此性能可能低于其它两者。</p>
+<h2 id="水平触发、边缘触发"><a href="#水平触发、边缘触发" class="headerlink" title="水平触发、边缘触发"></a>水平触发、边缘触发</h2><p>水平触发（LT，Level Trigger）：当文件描述符就绪时，会触发通知，如果用户程序没有一次性把数据读/写完，下次还会发出可读/可写信号进行通知。<br>边缘触发（ET，Edge Trigger）：仅当描述符从未就绪变为就绪时，通知一次，之后不会再通知。</p>
+<h2 id="简述操作系统如何进行内存管理"><a href="#简述操作系统如何进行内存管理" class="headerlink" title="简述操作系统如何进行内存管理"></a>简述操作系统如何进行内存管理</h2><p><strong>1. 虚拟内存</strong><br>内存管理就在程序和物理内存之间引入了虚拟内存的概念；对进程地址和物理地址进行隔离。</p>
+<p><strong>2. 内存分区</strong><br>Linux 对内存节点进行分区；将节点分为DMA、Normal、High Memory 内存区。DMA内存区：直接内存访问区，通常为物理内存的起始16M；主要供I/O外设使用，无需CPU参与的外设和内存DMA。Normal内存区：从16M到896M内存区；内核可以直接使用。Hight Memory内存区：896M以后的内存区；高端内存，内核不能直接使用。</p>
+<p><strong>3. 内核空间和用户空间</strong><br>Linux 操作系统，将虚拟内存划分为内核空间和用户空间；用户进程只能访问用户空间的虚拟地址，只有通过系统调用、外设中断或异常才能访问内核空间。</p>
+<p>Linux内核空间 1G容量，包括：内核镜像、物理页面表、驱动程序等，其分区包括：</p>
+<ul>
+<li>直接映射区</li>
+<li>高端内存线性地址空间</li>
+<li>动态内存映射区（vmalloc region）：由内核函数vmalloc 分配；</li>
+<li>永久内存映射区：alloc_page、 kmap</li>
+<li>固定映射区：特定用途，如 ACPI_BASE 等</li>
+</ul>
+<p>用户空间：分为5个不同内存区域：</p>
+<ul>
+<li>代码段：只读，存放可执行文件的操作指令；镜像；</li>
+<li>数据段：存放可执行文件中已初始化全局变量；存放静态变量和全局变量；</li>
+<li>BSS段：未初始化全局变量</li>
+<li>堆：存放被动态分配的内存段；</li>
+<li>栈：存放临时创建的局部变量；</li>
+</ul>
+<p><strong>4. 内存地址映射</strong><br>CPU生成的地址是逻辑地址，而内存单元中的地址为物理地址；执行时地址绑定方案会生成不同的逻辑地址和物理地址，这时，逻辑地址通常被称为虚拟地址。</p>
+<p>物理地址空间是有限的，虚拟地址空间可以是任意大小；程序可以通过操作虚拟地址，把虚拟地址空间映射到物理地址空间； Linux通过缺页中断和swap机制，实现虚拟地址映射。</p>
+<p>虚拟地址和物理地址，主要通过分段和分页技术，进行映射；程序地址：段号+页号+页内偏移。</p>
+<p>段是信息的逻辑单位，根据用户的需要划分，段对用户是可见的； 页时信息的物理单位，为管理内存方便和划分的，对用户透明的。分段：将程序分为代码段、数据段、堆栈段等；分页：将段分成均匀的小块，通过页表映射物理内存。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9D%A2%E8%AF%95-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"># 面试 操作系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/17/Java%E5%9F%BA%E7%A1%80/" rel="prev" title="Java基础">
+      <i class="fa fa-chevron-left"></i> Java基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/20/%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85ubuntu%E6%A1%8C%E9%9D%A2%E7%89%88/" rel="next" title="虚拟机安装ubuntu桌面版">
+      虚拟机安装ubuntu桌面版 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

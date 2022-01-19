@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="为hexo博客添加音乐链接 ^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo添加音乐链接">
+<meta property="og:url" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="为hexo博客添加音乐链接 ^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/1.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/2.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/3.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/4.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/5.jpg">
+<meta property="og:image" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/6.jpg">
+<meta property="article:published_time" content="2021-05-26T00:19:41.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:59.007Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/1.jpg">
+
+<link rel="canonical" href="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>hexo添加音乐链接 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+<link rel="stylesheet" href="/assets/css/APlayer.min.css" class="aplayer-style-marker">
+<script src="/assets/js/APlayer.min.js" class="aplayer-script-marker"></script>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载hexo音乐播放插件"><span class="nav-number">1.</span> <span class="nav-text">下载hexo音乐播放插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用方法"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step1-获取音乐的链接"><span class="nav-number">2.1.</span> <span class="nav-text">Step1 : 获取音乐的链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step2-获取封面图片的链接"><span class="nav-number">2.2.</span> <span class="nav-text">Step2 : 获取封面图片的链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step3-获取歌词"><span class="nav-number">2.3.</span> <span class="nav-text">Step3 : 获取歌词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step4-在博文中插入链接"><span class="nav-number">2.4.</span> <span class="nav-text">Step4 : 在博文中插入链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#遗留问题"><span class="nav-number">3.</span> <span class="nav-text">遗留问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo添加音乐链接
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-26 08:19:41" itemprop="dateCreated datePublished" datetime="2021-05-26T08:19:41+08:00">2021-05-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:59" itemprop="dateModified" datetime="2022-01-10T14:24:59+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>为hexo博客添加音乐链接 ^ _ ^<br><img src="/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/1.jpg" alt></p>
+
+</blockquote>
+
+<a id="more"></a>
+
+<h1 id="下载hexo音乐播放插件"><a href="#下载hexo音乐播放插件" class="headerlink" title="下载hexo音乐播放插件"></a>下载hexo音乐播放插件</h1><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-tag-aplayer --save</span><br></pre></td></tr></table></figure>
+
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><h2 id="Step1-获取音乐的链接"><a href="#Step1-获取音乐的链接" class="headerlink" title="Step1 : 获取音乐的链接"></a>Step1 : 获取音乐的链接</h2><p><img src="/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/2.jpg" alt></p>
+<p>打开<strong>网易云网站</strong>，找到希望添加的歌曲id，比如这首没有理想的人不伤心是<strong>1305364671</strong>。<br>这首歌对应的外链地址就是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;1305364671.mp3</span><br></pre></td></tr></table></figure>
+
+<h2 id="Step2-获取封面图片的链接"><a href="#Step2-获取封面图片的链接" class="headerlink" title="Step2 : 获取封面图片的链接"></a>Step2 : 获取封面图片的链接</h2><p><img src="/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/3.jpg" alt></p>
+<ul>
+<li>在图片处右键，然后检查图片</li>
+<li>找到 img 结点，获取它的 src 值，即为图片链接</li>
+</ul>
+<h2 id="Step3-获取歌词"><a href="#Step3-获取歌词" class="headerlink" title="Step3 : 获取歌词"></a>Step3 : 获取歌词</h2><p>在浏览器中输入以下网址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 其中 id 是 Step1 中获取到的歌曲链接</span><br><span class="line">http:&#x2F;&#x2F;music.163.com&#x2F;api&#x2F;song&#x2F;media?id&#x3D;1305364671</span><br></pre></td></tr></table></figure>
+
+<p>得到如下页面：<br><img src="/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/4.jpg" alt></p>
+<p>但我们最后希望得到的是这样格式的歌词：<br><img src="/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/5.jpg" alt></p>
+<p>所以我写了一个python脚本来对它进行处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_html</span><span class="params">(url)</span>:</span></span><br><span class="line">    <span class="comment"># 模仿浏览器的headers</span></span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">"user-agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.114 Safari/537.36"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    response = requests.get(url,headers=headers)</span><br><span class="line">    lyric = response.json()[<span class="string">'lyric'</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"lyric.txt"</span>, <span class="string">"w"</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(lyric)</span><br><span class="line">    print(<span class="string">"done"</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    get_html(<span class="string">"http://music.163.com/api/song/media?id=1305364671"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后就得到了歌词文件：<br><img src="/2021/05/26/hexo%E6%B7%BB%E5%8A%A0%E9%9F%B3%E4%B9%90%E9%93%BE%E6%8E%A5/6.jpg" alt></p>
+<h2 id="Step4-在博文中插入链接"><a href="#Step4-在博文中插入链接" class="headerlink" title="Step4 : 在博文中插入链接"></a>Step4 : 在博文中插入链接</h2><p>插入格式如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% aplayerlrc "<span class="built_in">title</span>" "author" "url" ["picture_url", "narrow", "autoplay", "width:xxx"] %&#125;</span><br><span class="line">[xx:xx.xx]lrc here</span><br><span class="line">&#123;% endaplayerlrc %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>标签参数</strong>：</p>
+<ul>
+<li>title : 歌曲名称</li>
+<li>author : 歌曲作者</li>
+<li>url : Step1 获取到的歌曲外链url地址</li>
+<li>picture_url（封面|可选） : Step2 获取到的图片url地址</li>
+<li>narrow: （可选）播放器袖珍风格</li>
+<li>autoplay: (可选) 自动播放，移动端浏览器暂时不支持此功能</li>
+<li>width:xxx:(可选) 播放器宽度(默认: 100%)</li>
+</ul>
+<p><strong>实例</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">&#123;% aplayerlrc "没有理想的人不伤心" "新裤子" "http://music.<span class="number">163</span>.com/song/media/outer/url?id=<span class="number">1305364671</span>.mp3" "http://p2.music.<span class="number">126</span>.<span class="built_in">net</span>/GW7sRVT4sfm8P0kwkMlQlg==/<span class="number">109951163522768092</span>.jpg?param=<span class="number">130</span>y130" %&#125;</span><br><span class="line">[<span class="number">00</span>:<span class="number">00</span>.<span class="number">00</span>]没有理想的人不伤心 声活版</span><br><span class="line">[<span class="number">00</span>:<span class="number">00</span>.<span class="number">00</span>]Remix by：卓越</span><br><span class="line"></span><br><span class="line">[<span class="number">00</span>:<span class="number">00</span>.<span class="number">00</span>]我最爱去的唱片店</span><br><span class="line">[<span class="number">00</span>:<span class="number">03</span>.<span class="number">15</span>]昨天是她的最后一天</span><br><span class="line">[<span class="number">00</span>:<span class="number">06</span>.<span class="number">96</span>]曾经让我陶醉的碎片</span><br><span class="line">[<span class="number">00</span>:<span class="number">10</span>.<span class="number">16</span>]全都散落在街边</span><br><span class="line"></span><br><span class="line">[<span class="number">00</span>:<span class="number">14</span>.<span class="number">31</span>]我最爱去的书店</span><br><span class="line">[<span class="number">00</span>:<span class="number">17</span>.<span class="number">76</span>]她也没撑过这个夏天</span><br><span class="line">[<span class="number">00</span>:<span class="number">21</span>.<span class="number">30</span>]回忆文字流淌着怀念</span><br><span class="line">[<span class="number">00</span>:<span class="number">24</span>.<span class="number">94</span>]可是已没什么好怀念</span><br><span class="line">[<span class="number">00</span>:<span class="number">28</span>.<span class="number">85</span>]可是你曾经的那些梦</span><br><span class="line">[<span class="number">00</span>:<span class="number">32</span>.<span class="number">38</span>]都已变得模糊看不见</span><br><span class="line">[<span class="number">00</span>:<span class="number">35</span>.<span class="number">92</span>]那些为了理想的战斗</span><br><span class="line">[<span class="number">00</span>:<span class="number">39</span>.<span class="number">66</span>]也不过为了钱</span><br><span class="line">[<span class="number">00</span>:<span class="number">43</span>.<span class="number">28</span>]可是我最恨的那个人</span><br><span class="line">[<span class="number">00</span>:<span class="number">47</span>.<span class="number">40</span>]他始终没死在我面前</span><br><span class="line">[<span class="number">00</span>:<span class="number">50</span>.<span class="number">85</span>]还没年轻就变得苍老</span><br><span class="line">[<span class="number">00</span>:<span class="number">54</span>.<span class="number">52</span>]这一生无解</span><br><span class="line"></span><br><span class="line">[<span class="number">00</span>:<span class="number">56</span>.<span class="number">87</span>]没有我的空间</span><br><span class="line">[<span class="number">01</span>:<span class="number">01</span>.<span class="number">82</span>]没有我的空间</span><br><span class="line">[<span class="number">01</span>:<span class="number">05</span>.<span class="number">52</span>]没有我的空间</span><br><span class="line">[<span class="number">01</span>:<span class="number">09</span>.<span class="number">39</span>]没有我的空间</span><br><span class="line"></span><br><span class="line">[<span class="number">01</span>:<span class="number">12</span>.<span class="number">90</span>]你曾热爱的那个人</span><br><span class="line">[<span class="number">01</span>:<span class="number">16</span>.<span class="number">75</span>]这一生也不会再见面</span><br><span class="line">[<span class="number">01</span>:<span class="number">20</span>.<span class="number">41</span>]你等在这文化的废墟上</span><br><span class="line">[<span class="number">01</span>:<span class="number">24</span>.<span class="number">08</span>]已没人觉得你狂野</span><br><span class="line">[<span class="number">01</span>:<span class="number">27</span>.<span class="number">83</span>]那些让人敬仰的神殿</span><br><span class="line">[<span class="number">01</span>:<span class="number">31</span>.<span class="number">51</span>]只在无知的人心中灵验</span><br><span class="line">[<span class="number">01</span>:<span class="number">33</span>.<span class="number">07</span>](旁白：大家晚上好，这里是正在直播的午夜新闻 欢迎收看)</span><br><span class="line">[<span class="number">01</span>:<span class="number">36</span>.<span class="number">11</span>]我住在属于我的猪圈</span><br><span class="line">[<span class="number">01</span>:<span class="number">39</span>.<span class="number">02</span>]这一夜无眠</span><br><span class="line"></span><br><span class="line">[<span class="number">01</span>:<span class="number">41</span>.<span class="number">59</span>]我不要在失败孤独中死去</span><br><span class="line">[<span class="number">01</span>:<span class="number">46</span>.<span class="number">05</span>]我不要一直活在地下里</span><br><span class="line">[<span class="number">01</span>:<span class="number">49</span>.<span class="number">49</span>]物质的骗局</span><br><span class="line">[<span class="number">01</span>:<span class="number">51</span>.<span class="number">90</span>]匆匆的蚂蚁</span><br><span class="line">[<span class="number">01</span>:<span class="number">53</span>.<span class="number">63</span>]没有文化的人不伤心</span><br><span class="line">[<span class="number">01</span>:<span class="number">57</span>.<span class="number">05</span>]我不要在失败孤独中死去</span><br><span class="line">[<span class="number">02</span>:<span class="number">00</span>.<span class="number">53</span>]我不要一直活在地下里</span><br><span class="line">[<span class="number">02</span>:<span class="number">04</span>.<span class="number">28</span>]物质的骗局</span><br><span class="line">[<span class="number">02</span>:<span class="number">06</span>.<span class="number">75</span>]匆匆的蚂蚁</span><br><span class="line">[<span class="number">02</span>:<span class="number">08</span>.<span class="number">68</span>]没有文化的人不伤心</span><br><span class="line">[<span class="number">02</span>:<span class="number">11</span>.<span class="number">80</span>]他不伤心</span><br><span class="line"></span><br><span class="line">[<span class="number">02</span>:<span class="number">24</span>.<span class="number">60</span>]（背景音：欢迎乘坐武汉轨道交通<span class="number">4</span>号线 本次列车终点站黄金口）</span><br><span class="line"></span><br><span class="line">[<span class="number">02</span>:<span class="number">28</span>.<span class="number">24</span>]我最爱去的唱片店</span><br><span class="line">[<span class="number">02</span>:<span class="number">30</span>.<span class="number">87</span>]昨天是她的最后一天</span><br><span class="line">[<span class="number">02</span>:<span class="number">34</span>.<span class="number">51</span>]曾经让我陶醉的碎片</span><br><span class="line">[<span class="number">02</span>:<span class="number">38</span>.<span class="number">00</span>]全都散落在街边</span><br><span class="line"></span><br><span class="line">[<span class="number">02</span>:<span class="number">42</span>.<span class="number">30</span>]我最爱去的书店</span><br><span class="line">[<span class="number">02</span>:<span class="number">45</span>.<span class="number">42</span>]她也没撑过这个夏天</span><br><span class="line">[<span class="number">02</span>:<span class="number">49</span>.<span class="number">07</span>]回忆文字流淌着怀念</span><br><span class="line">[<span class="number">02</span>:<span class="number">53</span>.<span class="number">01</span>]已不能怀念</span><br><span class="line"></span><br><span class="line">[<span class="number">02</span>:<span class="number">55</span>.<span class="number">85</span>]我不要在失败孤独中死去</span><br><span class="line">[<span class="number">02</span>:<span class="number">59</span>.<span class="number">61</span>]我不要一直活在地下里</span><br><span class="line">[<span class="number">03</span>:<span class="number">03</span>.<span class="number">46</span>]物质的骗局</span><br><span class="line">[<span class="number">03</span>:<span class="number">05</span>.<span class="number">76</span>]匆匆的蚂蚁</span><br><span class="line">[<span class="number">03</span>:<span class="number">07</span>.<span class="number">64</span>]没有文化的人不伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">11</span>.<span class="number">02</span>]我不要在失败孤独中死去</span><br><span class="line">[<span class="number">03</span>:<span class="number">14</span>.<span class="number">39</span>]我不要一直活在地下里</span><br><span class="line">[<span class="number">03</span>:<span class="number">17</span>.<span class="number">91</span>]物质的骗局</span><br><span class="line">[<span class="number">03</span>:<span class="number">20</span>.<span class="number">46</span>]匆匆的蚂蚁</span><br><span class="line">[<span class="number">03</span>:<span class="number">22</span>.<span class="number">58</span>]没有文化的人不伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">25</span>.<span class="number">58</span>]他不会伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">29</span>.<span class="number">54</span>]他不会伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">33</span>.<span class="number">02</span>]他不会伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">36</span>.<span class="number">70</span>]他不会伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">40</span>.<span class="number">79</span>]他也会伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">43</span>.<span class="number">47</span>]他也会伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">47</span>.<span class="number">62</span>]他也会伤心</span><br><span class="line">[<span class="number">03</span>:<span class="number">51</span>.<span class="number">72</span>]伤心</span><br><span class="line"></span><br><span class="line">[<span class="number">04</span>:<span class="number">12</span>.<span class="number">15</span>]我最爱去的唱片店</span><br><span class="line">[<span class="number">04</span>:<span class="number">14</span>.<span class="number">23</span>]昨天是她的最后一天</span><br><span class="line">[<span class="number">04</span>:<span class="number">17</span>.<span class="number">95</span>]曾经让我陶醉的碎片</span><br><span class="line">[<span class="number">04</span>:<span class="number">21</span>.<span class="number">55</span>]全都散落在街边</span><br><span class="line">[<span class="number">04</span>:<span class="number">26</span>.<span class="number">17</span>]</span><br><span class="line">[<span class="number">04</span>:<span class="number">28</span>.<span class="number">81</span>]Presented By Levi’s®</span><br><span class="line">&#123;% endaplayerlrc %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>效果</strong></p>
+<div id="aplayer-IpMNkphW" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+				<pre class="aplayer-lrc-content">[00:00.00]没有理想的人不伤心 声活版
+[00:00.00]Remix by：卓越
+
+[00:00.00]我最爱去的唱片店
+[00:03.15]昨天是她的最后一天
+[00:06.96]曾经让我陶醉的碎片
+[00:10.16]全都散落在街边
+
+[00:14.31]我最爱去的书店
+[00:17.76]她也没撑过这个夏天
+[00:21.30]回忆文字流淌着怀念
+[00:24.94]可是已没什么好怀念
+[00:28.85]可是你曾经的那些梦
+[00:32.38]都已变得模糊看不见
+[00:35.92]那些为了理想的战斗
+[00:39.66]也不过为了钱
+[00:43.28]可是我最恨的那个人
+[00:47.40]他始终没死在我面前
+[00:50.85]还没年轻就变得苍老
+[00:54.52]这一生无解
+
+[00:56.87]没有我的空间
+[01:01.82]没有我的空间
+[01:05.52]没有我的空间
+[01:09.39]没有我的空间
+
+[01:12.90]你曾热爱的那个人
+[01:16.75]这一生也不会再见面
+[01:20.41]你等在这文化的废墟上
+[01:24.08]已没人觉得你狂野
+[01:27.83]那些让人敬仰的神殿
+[01:31.51]只在无知的人心中灵验
+[01:33.07](旁白：大家晚上好，这里是正在直播的午夜新闻 欢迎收看)
+[01:36.11]我住在属于我的猪圈
+[01:39.02]这一夜无眠
+
+[01:41.59]我不要在失败孤独中死去
+[01:46.05]我不要一直活在地下里
+[01:49.49]物质的骗局
+[01:51.90]匆匆的蚂蚁
+[01:53.63]没有文化的人不伤心
+[01:57.05]我不要在失败孤独中死去
+[02:00.53]我不要一直活在地下里
+[02:04.28]物质的骗局
+[02:06.75]匆匆的蚂蚁
+[02:08.68]没有文化的人不伤心
+[02:11.80]他不伤心
+
+[02:24.60]（背景音：欢迎乘坐武汉轨道交通4号线 本次列车终点站黄金口）
+
+[02:28.24]我最爱去的唱片店
+[02:30.87]昨天是她的最后一天
+[02:34.51]曾经让我陶醉的碎片
+[02:38.00]全都散落在街边
+
+[02:42.30]我最爱去的书店
+[02:45.42]她也没撑过这个夏天
+[02:49.07]回忆文字流淌着怀念
+[02:53.01]已不能怀念
+
+[02:55.85]我不要在失败孤独中死去
+[02:59.61]我不要一直活在地下里
+[03:03.46]物质的骗局
+[03:05.76]匆匆的蚂蚁
+[03:07.64]没有文化的人不伤心
+[03:11.02]我不要在失败孤独中死去
+[03:14.39]我不要一直活在地下里
+[03:17.91]物质的骗局
+[03:20.46]匆匆的蚂蚁
+[03:22.58]没有文化的人不伤心
+[03:25.58]他不会伤心
+[03:29.54]他不会伤心
+[03:33.02]他不会伤心
+[03:36.70]他不会伤心
+[03:40.79]他也会伤心
+[03:43.47]他也会伤心
+[03:47.62]他也会伤心
+[03:51.72]伤心
+
+[04:12.15]我最爱去的唱片店
+[04:14.23]昨天是她的最后一天
+[04:17.95]曾经让我陶醉的碎片
+[04:21.55]全都散落在街边
+[04:26.17]
+[04:28.81]Presented By Levi’s®</pre>
+			</div>
+			<script>
+				var ap = new APlayer({
+					element: document.getElementById("aplayer-IpMNkphW"),
+					narrow: false,
+					autoplay: false,
+					showlrc: 2,
+					music: {
+						title: "没有理想的人不伤心",
+						author: "新裤子",
+						url: "http://music.163.com/song/media/outer/url?id=1305364671.mp3",
+						pic: "http://p2.music.126.net/GW7sRVT4sfm8P0kwkMlQlg==/109951163522768092.jpg?param=130y130",
+					}
+				});
+				window.aplayers || (window.aplayers = []);
+				window.aplayers.push(ap);
+			</script>
+
+<h1 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h1><ol>
+<li>此方法只能使用网易云的外链，对于其他平台的音乐则不行。</li>
+<li>无法播放本地音乐文件，似乎只能用url。</li>
+</ol>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>某博主的文章：<a href="https://donlex.cn/archives/bda67445.html" target="_blank" rel="noopener">https://donlex.cn/archives/bda67445.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/26/%E5%88%86%E4%BA%AB%E9%9F%B3%E4%B9%90/" rel="prev" title="分享音乐">
+      <i class="fa fa-chevron-left"></i> 分享音乐
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/30/Java-Lambda/" rel="next" title="Java Lambda">
+      Java Lambda <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

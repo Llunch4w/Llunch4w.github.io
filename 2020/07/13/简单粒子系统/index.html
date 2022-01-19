@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="模拟洒水系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单粒子系统">
+<meta property="og:url" content="https://llunch4w.github.io/2020/07/13/%E7%AE%80%E5%8D%95%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="模拟洒水系统">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-07-13T11:02:25.000Z">
+<meta property="article:modified_time" content="2022-01-10T06:24:59.154Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="DirectX">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://llunch4w.github.io/2020/07/13/%E7%AE%80%E5%8D%95%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>简单粒子系统 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#思路简述"><span class="nav-number">1.</span> <span class="nav-text">思路简述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#全局变量"><span class="nav-number">1.1.</span> <span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顶点格式"><span class="nav-number">1.2.</span> <span class="nav-text">顶点格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InitGeometry"><span class="nav-number">1.3.</span> <span class="nav-text">InitGeometry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Render"><span class="nav-number">1.4.</span> <span class="nav-text">Render</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ClearUp"><span class="nav-number">1.5.</span> <span class="nav-text">ClearUp</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ParticalSystem类"><span class="nav-number">2.</span> <span class="nav-text">ParticalSystem类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码"><span class="nav-number">3.</span> <span class="nav-text">源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ParticalSystem-h"><span class="nav-number">3.1.</span> <span class="nav-text">ParticalSystem.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ParticleSystem-cpp"><span class="nav-number">3.2.</span> <span class="nav-text">ParticleSystem.cpp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UtilMacro-h"><span class="nav-number">3.3.</span> <span class="nav-text">UtilMacro.h</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-cpp"><span class="nav-number">3.4.</span> <span class="nav-text">Main.cpp</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">没有理想的人不伤心</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2020/07/13/%E7%AE%80%E5%8D%95%E7%B2%92%E5%AD%90%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="没有理想的人不伤心">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          简单粒子系统
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-13 19:02:25" itemprop="dateCreated datePublished" datetime="2020-07-13T19:02:25+08:00">2020-07-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 14:24:59" itemprop="dateModified" datetime="2022-01-10T14:24:59+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DirectX/" itemprop="url" rel="index"><span itemprop="name">DirectX</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>模拟洒水系统 </p>
+
+</blockquote>
+
+<a id="more"></a>
+
+<h1 id="思路简述"><a href="#思路简述" class="headerlink" title="思路简述"></a>思路简述</h1><p>Main文件部分与创建茶壶网格模型基本相同，不同点在于 全局变量、顶点格式、 InitGeometry 函数、 Render 函数、 ClearUp 函数部分有所不同。</p>
+<h2 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h2><p>增加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CParticleSystem*        g_pSprayParticles;     &#x2F;&#x2F;喷洒粒子系统对象</span><br></pre></td></tr></table></figure>
+
+<h2 id="顶点格式"><a href="#顶点格式" class="headerlink" title="顶点格式"></a>顶点格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct CUSTOMVERTEX</span><br><span class="line">&#123;</span><br><span class="line">    D3DXVECTOR3 position;</span><br><span class="line">    D3DXVECTOR3 normal;</span><br><span class="line">&#125;;</span><br><span class="line">#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ | D3DFVF_NORMAL)</span><br></pre></td></tr></table></figure>
+
+<h2 id="InitGeometry"><a href="#InitGeometry" class="headerlink" title="InitGeometry"></a>InitGeometry</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;创建喷洒粒子系统对象</span><br><span class="line">g_pSprayParticles &#x3D; new CParticleSystem(500,2000);</span><br><span class="line">g_pSprayParticles-&gt;Create( g_pd3dDevice );</span><br></pre></td></tr></table></figure>
+
+<h2 id="Render"><a href="#Render" class="headerlink" title="Render"></a>Render</h2><p>增加粒子系统的渲染</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;渲染粒子系统</span><br><span class="line">g_pSprayParticles-&gt;Render(g_pd3dDevice);</span><br></pre></td></tr></table></figure>
+
+<h2 id="ClearUp"><a href="#ClearUp" class="headerlink" title="ClearUp"></a>ClearUp</h2><p>增加粒子系统的删除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;销毁粒子系统对象</span><br><span class="line">if( g_pSprayParticles !&#x3D; NULL )</span><br><span class="line">    g_pSprayParticles-&gt;Destroy();</span><br><span class="line">SAFE_DELETE(g_pSprayParticles);</span><br></pre></td></tr></table></figure>
+
+<h1 id="ParticalSystem类"><a href="#ParticalSystem类" class="headerlink" title="ParticalSystem类"></a>ParticalSystem类</h1><blockquote>
+<p>处理粒子系统部分，包括粒子系统的定义、创建、渲染和销毁</p>
+</blockquote>
+<h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><h2 id="ParticalSystem-h"><a href="#ParticalSystem-h" class="headerlink" title="ParticalSystem.h"></a>ParticalSystem.h</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; </span><br><span class="line">&#x2F;&#x2F; Desc: 喷洒粒子系统类头文件</span><br><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">#pragma once</span><br><span class="line">#include &quot;UtilMacro.h&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;点精灵顶点结构和顶点格式</span><br><span class="line">struct POINTVERTEX</span><br><span class="line">&#123;</span><br><span class="line">    D3DXVECTOR3 pos;</span><br><span class="line">    D3DCOLOR    color;</span><br><span class="line">&#125;;</span><br><span class="line">#define D3DFVF_POINTVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 粒子结构</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">struct PARTICLE</span><br><span class="line">&#123;</span><br><span class="line">	D3DXVECTOR3 m_vPos0;      &#x2F;&#x2F;初始位置</span><br><span class="line">    D3DXVECTOR3 m_vVel0;      &#x2F;&#x2F;初始速度</span><br><span class="line">    float       m_fTime0;     &#x2F;&#x2F;创建时间</span><br><span class="line">    D3DXVECTOR3 m_vPos;       &#x2F;&#x2F;当前位置</span><br><span class="line">    D3DXVECTOR3 m_vVel;       &#x2F;&#x2F;当前速度</span><br><span class="line">    D3DXCOLOR   m_vColor;     &#x2F;&#x2F;粒子颜色</span><br><span class="line">    PARTICLE*   m_pNext;      &#x2F;&#x2F;指向下一粒子的指针</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 粒子系统类的定义</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">class CParticleSystem</span><br><span class="line">&#123;</span><br><span class="line">private:</span><br><span class="line">    DWORD     m_dwParticlesLim;   &#x2F;&#x2F;链表中粒子的最大数量</span><br><span class="line">    PARTICLE* m_pParticles;       &#x2F;&#x2F;当前粒子链表</span><br><span class="line">    PARTICLE* m_pParticlesFree;   &#x2F;&#x2F;保存已经死亡粒子的链表, 从该链表为新粒子分配内存</span><br><span class="line"></span><br><span class="line">    LPDIRECT3DVERTEXBUFFER9   m_pVB;        &#x2F;&#x2F;保存粒子数据的顶点缓存</span><br><span class="line">	LPDIRECT3DTEXTURE9        m_pTexture;   &#x2F;&#x2F;粒子纹理</span><br><span class="line"></span><br><span class="line">	DWORD  m_dwBase;       &#x2F;&#x2F;每次填充顶点缓存时的起始位置</span><br><span class="line">    DWORD  m_dwFlush;      &#x2F;&#x2F;一次填充顶点缓存的粒子数量</span><br><span class="line">    DWORD  m_dwDiscard;    &#x2F;&#x2F;顶点缓存能够容纳的最大粒子数量</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	DWORD  m_dwParticles;  &#x2F;&#x2F;当前链表中粒子的数量</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">	CParticleSystem( DWORD dwFlush, DWORD dwDiscard);</span><br><span class="line">	~CParticleSystem();</span><br><span class="line">	HRESULT Create(LPDIRECT3DDEVICE9 pd3dDevice);</span><br><span class="line">	HRESULT Update( float fSecsPerFrame);</span><br><span class="line">	HRESULT Render( LPDIRECT3DDEVICE9 pd3dDevice );</span><br><span class="line">	HRESULT Destroy();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ParticleSystem-cpp"><a href="#ParticleSystem-cpp" class="headerlink" title="ParticleSystem.cpp"></a>ParticleSystem.cpp</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#x2F;&#x2F; Desc:     喷洒粒子系统类源文件</span><br><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">#include &quot;d3dx9.h&quot;</span><br><span class="line">#include &quot;ParticleSystem.h&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 构造函数</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">CParticleSystem::CParticleSystem( DWORD dwFlush, DWORD dwDiscard)</span><br><span class="line">&#123;</span><br><span class="line">    m_dwBase         &#x3D; 0;</span><br><span class="line">    m_dwFlush        &#x3D; dwFlush;</span><br><span class="line">	m_dwDiscard      &#x3D; dwDiscard;</span><br><span class="line"></span><br><span class="line">    m_dwParticles    &#x3D; 0;</span><br><span class="line">    m_dwParticlesLim &#x3D; 2000;</span><br><span class="line"></span><br><span class="line">    m_pParticles     &#x3D; NULL;</span><br><span class="line">    m_pParticlesFree &#x3D; NULL;</span><br><span class="line">	m_pVB            &#x3D; NULL;</span><br><span class="line">	m_pTexture &#x3D; NULL;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 析构函数</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">CParticleSystem::~CParticleSystem()</span><br><span class="line">&#123;</span><br><span class="line">    while( m_pParticles )</span><br><span class="line">    &#123;</span><br><span class="line">        PARTICLE* pParticle &#x3D; m_pParticles;</span><br><span class="line">        m_pParticles &#x3D; pParticle-&gt;m_pNext;</span><br><span class="line">        delete pParticle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    while( m_pParticlesFree )</span><br><span class="line">    &#123;</span><br><span class="line">        PARTICLE *pParticle &#x3D; m_pParticlesFree;</span><br><span class="line">        m_pParticlesFree &#x3D; pParticle-&gt;m_pNext;</span><br><span class="line">        delete pParticle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 创建粒子纹理</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">HRESULT CParticleSystem::Create( LPDIRECT3DDEVICE9 pd3dDevice )</span><br><span class="line">&#123;</span><br><span class="line">	HRESULT hr;</span><br><span class="line"></span><br><span class="line">	V_RETURN( D3DXCreateTextureFromFile(pd3dDevice, L&quot;particle.bmp&quot;, &amp;m_pTexture ));</span><br><span class="line"></span><br><span class="line">	V_RETURN( pd3dDevice-&gt;CreateVertexBuffer( m_dwDiscard * </span><br><span class="line">		sizeof(POINTVERTEX), D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS, </span><br><span class="line">		D3DFVF_POINTVERTEX, D3DPOOL_SYSTEMMEM, &amp;m_pVB, NULL ));</span><br><span class="line"></span><br><span class="line">	return S_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 更新当前粒子的属性</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">HRESULT CParticleSystem::Update( float fSecsPerFrame)</span><br><span class="line">&#123;</span><br><span class="line">    PARTICLE *pParticle, **ppParticle;</span><br><span class="line">    static float fTime &#x3D; 0.0f;</span><br><span class="line">    fTime +&#x3D; fSecsPerFrame;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;更新已存在粒子的属性值</span><br><span class="line">    ppParticle &#x3D; &amp;m_pParticles;   &#x2F;&#x2F;粒子链表</span><br><span class="line">    while( *ppParticle )</span><br><span class="line">    &#123;</span><br><span class="line">        pParticle &#x3D; *ppParticle;  &#x2F;&#x2F;取出当前粒子</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;计算粒子的新位置</span><br><span class="line">        float fT &#x3D; fTime - pParticle-&gt;m_fTime0;  &#x2F;&#x2F;当前粒子已存活的时间</span><br><span class="line">        float fGravity &#x3D; -9.8f;</span><br><span class="line">        pParticle-&gt;m_vPos    &#x3D; pParticle-&gt;m_vVel0 * fT + pParticle-&gt;m_vPos0;</span><br><span class="line">        pParticle-&gt;m_vPos.y +&#x3D; (0.5f * fGravity) * (fT * fT);</span><br><span class="line">        pParticle-&gt;m_vVel.y  &#x3D; pParticle-&gt;m_vVel0.y + fGravity * fT; </span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;如果粒子死亡则删除</span><br><span class="line">        if( pParticle-&gt;m_vPos.y &lt; 0 )  &#x2F;&#x2F;在本中判断粒子死亡的条件是粒子已经落到地面</span><br><span class="line">        &#123;</span><br><span class="line">            *ppParticle &#x3D; pParticle-&gt;m_pNext;</span><br><span class="line">            pParticle-&gt;m_pNext &#x3D; m_pParticlesFree;</span><br><span class="line">            m_pParticlesFree &#x3D; pParticle;</span><br><span class="line">            m_dwParticles--;</span><br><span class="line">        &#125;</span><br><span class="line">        else  &#x2F;&#x2F;准备处理下一个粒子</span><br><span class="line">        &#123;</span><br><span class="line">            ppParticle &#x3D; &amp;pParticle-&gt;m_pNext;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;添加新粒子</span><br><span class="line">	DWORD  dwEmited &#x3D; 0;</span><br><span class="line">	UINT numEmitedPerFrame &#x3D; (UINT)(1000*fSecsPerFrame);    &#x2F;&#x2F;每次发射的粒子数</span><br><span class="line">    while( m_dwParticles &lt; m_dwParticlesLim &amp;&amp; dwEmited&lt;&#x3D;numEmitedPerFrame)</span><br><span class="line">    &#123;</span><br><span class="line">		&#x2F;&#x2F;创建一个新粒子</span><br><span class="line">        if( m_pParticlesFree )</span><br><span class="line">        &#123;</span><br><span class="line">            pParticle &#x3D; m_pParticlesFree;</span><br><span class="line">            m_pParticlesFree &#x3D; pParticle-&gt;m_pNext;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            if( NULL &#x3D;&#x3D; ( pParticle &#x3D; new PARTICLE ) )</span><br><span class="line">                return E_OUTOFMEMORY;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;将新粒子链接到粒子链表</span><br><span class="line">        pParticle-&gt;m_pNext &#x3D; m_pParticles;</span><br><span class="line">        m_pParticles &#x3D; pParticle;</span><br><span class="line">        m_dwParticles++;</span><br><span class="line">		dwEmited++;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;为新粒子设置初始位置、初始速度、当前位置、当前速度、颜色和创建时间等属性</span><br><span class="line">        float fRand &#x3D; ((float)rand()&#x2F;(float)RAND_MAX)*2.0f - 1.0f;  &#x2F;&#x2F;[-1,1]</span><br><span class="line">        pParticle-&gt;m_vPos0 &#x3D; D3DXVECTOR3(0,1,0);    &#x2F;&#x2F;粒子初始位置</span><br><span class="line">        pParticle-&gt;m_vVel0.x  &#x3D; 8.0f*fRand;         &#x2F;&#x2F;粒子初始速度</span><br><span class="line">        pParticle-&gt;m_vVel0.z  &#x3D; 10.0f;</span><br><span class="line">		pParticle-&gt;m_vVel0.y  &#x3D; 0.0f;</span><br><span class="line"></span><br><span class="line">        pParticle-&gt;m_vPos &#x3D; pParticle-&gt;m_vPos0;     </span><br><span class="line">        pParticle-&gt;m_vVel &#x3D; pParticle-&gt;m_vVel0;</span><br><span class="line"></span><br><span class="line">        pParticle-&gt;m_vColor &#x3D; D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);  &#x2F;&#x2F;粒子颜色</span><br><span class="line">        pParticle-&gt;m_fTime0     &#x3D; fTime;            &#x2F;&#x2F;粒子创建时间</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return S_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;将FLOAT型参数转换为DWORD型</span><br><span class="line">inline DWORD FtoDW( FLOAT f ) &#123; return *((DWORD*)&amp;f); &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 渲染粒子系统</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">HRESULT CParticleSystem::Render( LPDIRECT3DDEVICE9 pd3dDevice )</span><br><span class="line">&#123;</span><br><span class="line">    HRESULT hr;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;为使用点精灵设置相关渲染状态</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSPRITEENABLE, true );     &#x2F;&#x2F;使用点精灵</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSCALEENABLE,  true );</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSIZE,     FtoDW(0.1f) );  &#x2F;&#x2F;粒子大小</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSIZE_MIN, FtoDW(0.00f) ); &#x2F;&#x2F;点的最小尺寸</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSCALE_A,  FtoDW(0.00f) );</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSCALE_B,  FtoDW(0.00f) );</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSCALE_C,  FtoDW(1.00f) );</span><br><span class="line"></span><br><span class="line">	pd3dDevice-&gt;SetRenderState( D3DRS_LIGHTING, false );        &#x2F;&#x2F;禁用光照处理</span><br><span class="line">	pd3dDevice-&gt;SetRenderState( D3DRS_ZWRITEENABLE, false );     &#x2F;&#x2F;禁用深度缓存操作</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_ALPHABLENDENABLE, true );  &#x2F;&#x2F;启用Alpha 混合</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_SRCBLEND, D3DBLEND_ONE );  &#x2F;&#x2F;注意Alpha混合方式</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_DESTBLEND, D3DBLEND_ONE );</span><br><span class="line"></span><br><span class="line">	pd3dDevice-&gt;SetTexture(0, m_pTexture );   &#x2F;&#x2F;设置粒子纹理</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;为渲染粒子准备顶点缓存数据</span><br><span class="line">    pd3dDevice-&gt;SetStreamSource( 0, m_pVB, 0, sizeof(POINTVERTEX) );</span><br><span class="line">    pd3dDevice-&gt;SetFVF( D3DFVF_POINTVERTEX );</span><br><span class="line"></span><br><span class="line">    PARTICLE*    pParticle &#x3D; m_pParticles;</span><br><span class="line">    POINTVERTEX* pVertices;</span><br><span class="line">    DWORD        dwNumParticlesToRender &#x3D; 0;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;确定锁定顶点缓存的起始位置</span><br><span class="line">	m_dwBase +&#x3D; m_dwFlush;</span><br><span class="line">	if(m_dwBase &gt;&#x3D; m_dwDiscard)  &#x2F;&#x2F;顶点缓存已满, 重新从头开始锁定</span><br><span class="line">		m_dwBase &#x3D; 0;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;锁定一个顶点缓存片段</span><br><span class="line">	V_RETURN( hr &#x3D; m_pVB-&gt;Lock( m_dwBase * sizeof(POINTVERTEX), m_dwFlush * sizeof(POINTVERTEX),</span><br><span class="line">		(void**) &amp;pVertices, m_dwBase ? D3DLOCK_NOOVERWRITE : D3DLOCK_DISCARD ));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;使用粒子位置和颜色数据填充顶点缓存, 并渲染</span><br><span class="line">    while( pParticle )</span><br><span class="line">    &#123;</span><br><span class="line">		&#x2F;&#x2F;根据粒子的运动速度确定其模糊程度,</span><br><span class="line">        D3DXVECTOR3 vPos(pParticle-&gt;m_vPos);</span><br><span class="line">        D3DXVECTOR3 vVel(pParticle-&gt;m_vVel);</span><br><span class="line">        FLOAT       fLengthSq &#x3D; D3DXVec3LengthSq(&amp;vVel);</span><br><span class="line">        UINT        dwSteps;</span><br><span class="line"></span><br><span class="line">        if( fLengthSq &lt; 1.0f )        dwSteps &#x3D; 2;</span><br><span class="line">        else if( fLengthSq &lt;  4.00f ) dwSteps &#x3D; 3;</span><br><span class="line">        else if( fLengthSq &lt;  9.00f ) dwSteps &#x3D; 4;</span><br><span class="line">        else if( fLengthSq &lt; 12.25f ) dwSteps &#x3D; 5;</span><br><span class="line">        else if( fLengthSq &lt; 16.00f ) dwSteps &#x3D; 6;</span><br><span class="line">        else if( fLengthSq &lt; 20.25f ) dwSteps &#x3D; 7;</span><br><span class="line">        else                          dwSteps &#x3D; 8;</span><br><span class="line"></span><br><span class="line">        vVel *&#x3D; -0.04f &#x2F; (float)dwSteps;</span><br><span class="line">        DWORD dwDiffuse &#x3D; (DWORD) pParticle-&gt;m_vColor;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;通过对其在不同位置渲染多次来实现模糊效果</span><br><span class="line">        for( DWORD i &#x3D; 0; i &lt; dwSteps; i++ )</span><br><span class="line">        &#123;</span><br><span class="line">            pVertices-&gt;pos     &#x3D; vPos;         &#x2F;&#x2F;点图元的位置</span><br><span class="line">            pVertices-&gt;color &#x3D; dwDiffuse;    &#x2F;&#x2F;点图元的颜色</span><br><span class="line">            pVertices++;</span><br><span class="line">			vPos +&#x3D; vVel;     &#x2F;&#x2F;为实现模糊效果确定该点图元的下一位置</span><br><span class="line"></span><br><span class="line">            if( ++dwNumParticlesToRender &#x3D;&#x3D; m_dwFlush )  &#x2F;&#x2F;填充完毕指定的数据块</span><br><span class="line">            &#123;</span><br><span class="line">               m_pVB-&gt;Unlock();</span><br><span class="line">               pd3dDevice-&gt;DrawPrimitive( D3DPT_POINTLIST, m_dwBase, dwNumParticlesToRender);</span><br><span class="line"></span><br><span class="line">				m_dwBase +&#x3D; m_dwFlush;</span><br><span class="line">				if(m_dwBase &gt;&#x3D; m_dwDiscard)</span><br><span class="line">					m_dwBase &#x3D; 0;</span><br><span class="line"></span><br><span class="line">				m_pVB-&gt;Lock( m_dwBase * sizeof(POINTVERTEX), m_dwFlush * sizeof(POINTVERTEX),</span><br><span class="line">		            (void**) &amp;pVertices, m_dwBase ? D3DLOCK_NOOVERWRITE : D3DLOCK_DISCARD );</span><br><span class="line">                dwNumParticlesToRender &#x3D; 0;  &#x2F;&#x2F;将需要渲染的顶点数重新置零</span><br><span class="line">            &#125; &#x2F;&#x2F;end if</span><br><span class="line">        &#125;  &#x2F;&#x2F;end for </span><br><span class="line">        pParticle &#x3D; pParticle-&gt;m_pNext;</span><br><span class="line">    &#125; &#x2F;&#x2F;end while</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Unlock the vertex buffer</span><br><span class="line">    m_pVB-&gt;Unlock();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;渲染剩余不足一块的粒子</span><br><span class="line">    if( dwNumParticlesToRender )</span><br><span class="line">    &#123;</span><br><span class="line">        pd3dDevice-&gt;DrawPrimitive( D3DPT_POINTLIST, m_dwBase, dwNumParticlesToRender );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;恢复相关渲染状态</span><br><span class="line">	pd3dDevice-&gt;SetRenderState( D3DRS_LIGHTING, true );</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSPRITEENABLE, false );</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_POINTSCALEENABLE,  false );</span><br><span class="line">	pd3dDevice-&gt;SetRenderState( D3DRS_ZWRITEENABLE, true );</span><br><span class="line">    pd3dDevice-&gt;SetRenderState( D3DRS_ALPHABLENDENABLE, false );</span><br><span class="line"></span><br><span class="line">    return S_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 释放粒子顶点缓存和粒子纹理</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">HRESULT CParticleSystem::Destroy()</span><br><span class="line">&#123;</span><br><span class="line">	SAFE_RELEASE(m_pVB);</span><br><span class="line">	SAFE_RELEASE(m_pTexture);</span><br><span class="line">    return S_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="UtilMacro-h"><a href="#UtilMacro-h" class="headerlink" title="UtilMacro.h"></a>UtilMacro.h</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#x2F;&#x2F; Desc: 辅助宏定义</span><br><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"></span><br><span class="line">#pragma once</span><br><span class="line"></span><br><span class="line">#ifndef V</span><br><span class="line">#define V(x)           &#123; hr &#x3D; x; &#125;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">#ifndef V_RETURN</span><br><span class="line">#define V_RETURN(x)    &#123; hr &#x3D; x; if( FAILED(hr) ) &#123; return hr; &#125; &#125;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">#ifndef SAFE_DELETE</span><br><span class="line">#define SAFE_DELETE(p)       &#123; if(p) &#123; delete (p);     (p)&#x3D;NULL; &#125; &#125;</span><br><span class="line">#endif    </span><br><span class="line">#ifndef SAFE_DELETE_ARRAY</span><br><span class="line">#define SAFE_DELETE_ARRAY(p) &#123; if(p) &#123; delete[] (p);   (p)&#x3D;NULL; &#125; &#125;</span><br><span class="line">#endif    </span><br><span class="line">#ifndef SAFE_RELEASE</span><br><span class="line">#define SAFE_RELEASE(p)      &#123; if(p) &#123; (p)-&gt;Release(); (p)&#x3D;NULL; &#125; &#125;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+
+<h2 id="Main-cpp"><a href="#Main-cpp" class="headerlink" title="Main.cpp"></a>Main.cpp</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">&#x2F;&#x2F; Desc: 绘制茶壶模型</span><br><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">#include &lt;d3dx9.h&gt;  &#x2F;&#x2F;该头文件中又包含了d3d9.h头文件</span><br><span class="line">#include &lt;tchar.h&gt;</span><br><span class="line">#include &lt;d3dx9core.h&gt;</span><br><span class="line">#include &quot;UtilMacro.h&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 全局变量</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">LPDIRECT3D9             g_pD3D &#x3D; NULL;    &#x2F;&#x2F;Direct3D对象</span><br><span class="line">LPDIRECT3DDEVICE9       g_pd3dDevice &#x3D; NULL;    &#x2F;&#x2F;Direct3D设备对象</span><br><span class="line">LPD3DXFONT              g_pFont &#x3D; 0;       &#x2F;&#x2F;字体对象</span><br><span class="line">LPD3DXMESH              g_pTeapotMesh &#x3D; NULL;   &#x2F;&#x2F;茶壶网格模型</span><br><span class="line"></span><br><span class="line">RECT   g_ClientRect;    &#x2F;&#x2F;窗口客户区</span><br><span class="line">float  g_FPS &#x3D; 0;       &#x2F;&#x2F;帧速率</span><br><span class="line">WCHAR  g_strFPS[20];    &#x2F;&#x2F;包含帧速率的字符数组</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 顶点结构和顶点格式</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">struct CUSTOMVERTEX</span><br><span class="line">&#123;</span><br><span class="line">	D3DXVECTOR3 position;</span><br><span class="line">	DWORD color;</span><br><span class="line">&#125;;</span><br><span class="line">#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ | D3DFVF_DIFFUSE)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 设置世界矩阵</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">void SetWorldMatrix()</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;创建并设置世界矩阵</span><br><span class="line">	D3DXMATRIXA16 matWorld;</span><br><span class="line">	float  time &#x3D; timeGetTime() * 0.001f;</span><br><span class="line">	float fAngle &#x3D; time * D3DX_PI &#x2F; 2;</span><br><span class="line">	&#x2F;&#x2F;fAngle &#x3D; 0;</span><br><span class="line">	D3DXMatrixRotationY(&amp;matWorld, fAngle);     &#x2F;&#x2F;旋转	</span><br><span class="line">	g_pd3dDevice-&gt;SetTransform(D3DTS_WORLD, &amp;matWorld);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 设置观察矩阵和投影矩阵</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">void SetViewandProjMatrices()</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;建立并设置观察矩阵</span><br><span class="line">	D3DXVECTOR3 vEyePt(0.0f, 0.0f, -5.0f);</span><br><span class="line">	D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);</span><br><span class="line">	D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);</span><br><span class="line">	D3DXMATRIXA16 matView;</span><br><span class="line">	D3DXMatrixLookAtLH(&amp;matView, &amp;vEyePt, &amp;vLookatPt, &amp;vUpVec);</span><br><span class="line">	g_pd3dDevice-&gt;SetTransform(D3DTS_VIEW, &amp;matView);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;建立并设置投影矩阵</span><br><span class="line">	D3DXMATRIXA16 matProj;</span><br><span class="line">	float aspect &#x3D; (float)(g_ClientRect.right - g_ClientRect.left) &#x2F; (g_ClientRect.bottom - g_ClientRect.top);</span><br><span class="line">	D3DXMatrixPerspectiveFovLH(&amp;matProj, D3DX_PI &#x2F; 4, aspect, 1.0f, 100.0f);</span><br><span class="line">	g_pd3dDevice-&gt;SetTransform(D3DTS_PROJECTION, &amp;matProj);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 设置灯光</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">void SetLights()</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;方向光</span><br><span class="line">	D3DXVECTOR3 vecDir;</span><br><span class="line">	D3DLIGHT9 light;</span><br><span class="line">	ZeroMemory(&amp;light, sizeof(D3DLIGHT9));</span><br><span class="line">	light.Type &#x3D; D3DLIGHT_DIRECTIONAL;</span><br><span class="line">	light.Diffuse.r &#x3D; 1.0f;</span><br><span class="line">	light.Diffuse.g &#x3D; 1.0f;</span><br><span class="line">	light.Diffuse.b &#x3D; 1.0f;</span><br><span class="line">	vecDir &#x3D; D3DXVECTOR3(1, -1, 1);</span><br><span class="line">	D3DXVec3Normalize((D3DXVECTOR3*)&amp;light.Direction, &amp;vecDir);</span><br><span class="line">	light.Range &#x3D; 1000.0f;</span><br><span class="line">	g_pd3dDevice-&gt;SetLight(0, &amp;light);</span><br><span class="line">	g_pd3dDevice-&gt;LightEnable(0, TRUE);</span><br><span class="line">	g_pd3dDevice-&gt;SetRenderState(D3DRS_LIGHTING, true);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;全局环境光</span><br><span class="line">	g_pd3dDevice-&gt;SetRenderState(D3DRS_AMBIENT, 0xff505050);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 设置材质</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">void SetMaterial()</span><br><span class="line">&#123;</span><br><span class="line">	D3DMATERIAL9 mtrl;</span><br><span class="line">	ZeroMemory(&amp;mtrl, sizeof(D3DMATERIAL9));</span><br><span class="line">	mtrl.Diffuse.r &#x3D; mtrl.Ambient.r &#x3D; 1.0f;</span><br><span class="line">	mtrl.Diffuse.g &#x3D; mtrl.Ambient.g &#x3D; 0.0f;</span><br><span class="line">	mtrl.Diffuse.b &#x3D; mtrl.Ambient.b &#x3D; 0.0f;</span><br><span class="line">	mtrl.Diffuse.a &#x3D; mtrl.Ambient.a &#x3D; 1.0f;</span><br><span class="line">	g_pd3dDevice-&gt;SetMaterial(&amp;mtrl);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 初始化Direct3D</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">HRESULT InitD3D(HWND hWnd)</span><br><span class="line">&#123;</span><br><span class="line">	HRESULT hr;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;创建Direct3D对象, 该对象用来创建Direct3D设备对象</span><br><span class="line">	g_pD3D &#x3D; Direct3DCreate9(D3D_SDK_VERSION);</span><br><span class="line">	if (g_pD3D &#x3D;&#x3D; NULL)</span><br><span class="line">		return E_FAIL;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;检查设备性能</span><br><span class="line">	D3DCAPS9  caps;</span><br><span class="line">	g_pD3D-&gt;GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &amp;caps);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;检查设备是否支持硬件顶点处理</span><br><span class="line">	int vp &#x3D; 0;</span><br><span class="line">	if (caps.DevCaps &amp; D3DDEVCAPS_HWTRANSFORMANDLIGHT)</span><br><span class="line">	&#123;</span><br><span class="line">		vp &#x3D; D3DCREATE_HARDWARE_VERTEXPROCESSING;</span><br><span class="line">	&#125;</span><br><span class="line">	else</span><br><span class="line">	&#123;</span><br><span class="line">		vp &#x3D; D3DCREATE_SOFTWARE_VERTEXPROCESSING;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;设置D3DPRESENT_PARAMETERS结构</span><br><span class="line">	D3DPRESENT_PARAMETERS d3dpp;</span><br><span class="line">	ZeroMemory(&amp;d3dpp, sizeof(d3dpp));</span><br><span class="line">	d3dpp.Windowed &#x3D; TRUE;</span><br><span class="line">	d3dpp.SwapEffect &#x3D; D3DSWAPEFFECT_DISCARD;</span><br><span class="line">	d3dpp.BackBufferFormat &#x3D; D3DFMT_UNKNOWN;</span><br><span class="line">	d3dpp.EnableAutoDepthStencil &#x3D; TRUE;</span><br><span class="line">	d3dpp.AutoDepthStencilFormat &#x3D; D3DFMT_D16;</span><br><span class="line">	d3dpp.PresentationInterval &#x3D; D3DPRESENT_INTERVAL_IMMEDIATE;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;创建Direct3D设备对象</span><br><span class="line">	V_RETURN(g_pD3D-&gt;CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, vp, &amp;d3dpp, &amp;g_pd3dDevice));</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;创建字体对象</span><br><span class="line">	V_RETURN(D3DXCreateFont(g_pd3dDevice, 0, 0, 0, 0, 0, 0, 0, 0, 0, L&quot;Arial&quot;, &amp;g_pFont));</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;获取窗口客户区</span><br><span class="line">	GetClientRect(hWnd, &amp;g_ClientRect);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;设置观察和投影矩阵</span><br><span class="line">	SetViewandProjMatrices();</span><br><span class="line"></span><br><span class="line">	return S_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 创建场景图形</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">HRESULT InitGeometry()</span><br><span class="line">&#123;</span><br><span class="line">	HRESULT hr;</span><br><span class="line">	V_RETURN(D3DXCreateTeapot(g_pd3dDevice, &amp;g_pTeapotMesh, NULL));</span><br><span class="line">	return S_OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 计算帧速率</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">float GetFPS()</span><br><span class="line">&#123;</span><br><span class="line">	static float  fps &#x3D; 0;</span><br><span class="line">	static int    frameCount &#x3D; 0;</span><br><span class="line">	static float  currentTime &#x3D; 0.0f;</span><br><span class="line">	static float  lastTime &#x3D; 0.0f;</span><br><span class="line"></span><br><span class="line">	frameCount++;</span><br><span class="line">	currentTime &#x3D; timeGetTime()*0.001f;</span><br><span class="line"></span><br><span class="line">	if (currentTime - lastTime &gt; 1.0f)</span><br><span class="line">	&#123;</span><br><span class="line">		fps &#x3D; (float)frameCount &#x2F; (currentTime - lastTime);</span><br><span class="line">		lastTime &#x3D; currentTime;</span><br><span class="line">		frameCount &#x3D; 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return fps;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 渲染图形 </span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">void Render()</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;清空后台缓存</span><br><span class="line">	g_pd3dDevice-&gt;Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(45, 50, 170), 1.0f, 0);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;开始在后台缓存绘制图形</span><br><span class="line">	if (SUCCEEDED(g_pd3dDevice-&gt;BeginScene()))</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;设置灯光和材质</span><br><span class="line">		SetLights();</span><br><span class="line">		SetMaterial();</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;设置世界矩阵</span><br><span class="line">		SetWorldMatrix();</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;绘制茶壶</span><br><span class="line">		g_pTeapotMesh-&gt;DrawSubset(0);</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;在窗口左上角绘制文本</span><br><span class="line">		int charCount &#x3D; swprintf_s(g_strFPS, 20, L&quot;FPS: %0.2f&quot;, GetFPS());</span><br><span class="line">		g_pFont-&gt;DrawText(NULL, g_strFPS, charCount, &amp;g_ClientRect, DT_TOP | DT_LEFT, 0xffffffff);</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;结束在后台缓存渲染图形</span><br><span class="line">		g_pd3dDevice-&gt;EndScene();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;将在后台缓存绘制的图形提交到前台缓存显示</span><br><span class="line">	g_pd3dDevice-&gt;Present(NULL, NULL, NULL, NULL);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 释放创建的对象</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">void Cleanup()</span><br><span class="line">&#123;</span><br><span class="line">	SAFE_RELEASE(g_pTeapotMesh);</span><br><span class="line">	SAFE_RELEASE(g_pFont);</span><br><span class="line">	SAFE_RELEASE(g_pd3dDevice);</span><br><span class="line">	SAFE_RELEASE(g_pD3D);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 消息处理</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)</span><br><span class="line">&#123;</span><br><span class="line">	switch (msg)</span><br><span class="line">	&#123;</span><br><span class="line">	case WM_KEYDOWN:</span><br><span class="line">		if (wParam &#x3D;&#x3D; VK_ESCAPE)</span><br><span class="line">			PostQuitMessage(0);</span><br><span class="line">		break;</span><br><span class="line"></span><br><span class="line">	case WM_DESTROY:</span><br><span class="line">		PostQuitMessage(0);</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return DefWindowProc(hWnd, msg, wParam, lParam);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 程序入口</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">int _stdcall _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,</span><br><span class="line">	PTSTR szCmdLine, int iCmdShow)</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;定义窗口类</span><br><span class="line">	WNDCLASSEX wndClassEx;</span><br><span class="line">	wndClassEx.cbSize &#x3D; sizeof(WNDCLASSEX);</span><br><span class="line">	wndClassEx.style &#x3D; CS_CLASSDC;</span><br><span class="line">	wndClassEx.lpfnWndProc &#x3D; WndProc;</span><br><span class="line">	wndClassEx.cbClsExtra &#x3D; 0;</span><br><span class="line">	wndClassEx.cbWndExtra &#x3D; 0;</span><br><span class="line">	wndClassEx.hInstance &#x3D; hInstance;</span><br><span class="line">	wndClassEx.hIcon &#x3D; LoadIcon(NULL, IDI_APPLICATION);</span><br><span class="line">	wndClassEx.hCursor &#x3D; LoadCursor(NULL, IDC_ARROW);</span><br><span class="line">	wndClassEx.hbrBackground &#x3D; (HBRUSH)GetStockObject(WHITE_BRUSH);</span><br><span class="line">	wndClassEx.lpszMenuName &#x3D; NULL;</span><br><span class="line">	wndClassEx.lpszClassName &#x3D; L&quot;ClassName&quot;;</span><br><span class="line">	wndClassEx.hIconSm &#x3D; NULL;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;注册窗口类</span><br><span class="line">	if (!RegisterClassEx(&amp;wndClassEx))</span><br><span class="line">	&#123;</span><br><span class="line">		MessageBox(NULL, L&quot;注册窗口类失败!&quot;, L&quot;Teapot&quot;, 0);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;创建窗口</span><br><span class="line">	HWND hWnd &#x3D; NULL;</span><br><span class="line">	hWnd &#x3D; CreateWindowEx(NULL, &#x2F;&#x2F;窗口扩展风格</span><br><span class="line">		L&quot;ClassName&quot;,            &#x2F;&#x2F;窗口类名称</span><br><span class="line">		L&quot;Teapot&quot;,               &#x2F;&#x2F;窗口标题</span><br><span class="line">		WS_OVERLAPPEDWINDOW,     &#x2F;&#x2F;窗口风格</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始X位置</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始Y位置</span><br><span class="line">		600,                     &#x2F;&#x2F;窗口初始宽度</span><br><span class="line">		480,                     &#x2F;&#x2F;窗口初始高度</span><br><span class="line">		NULL,                    &#x2F;&#x2F;父窗口句柄</span><br><span class="line">		NULL,                    &#x2F;&#x2F;窗口菜单句柄</span><br><span class="line">		hInstance,               &#x2F;&#x2F;程序实例句柄</span><br><span class="line">		NULL);                  &#x2F;&#x2F; 创建参数</span><br><span class="line"></span><br><span class="line">	if (hWnd &#x3D;&#x3D; NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		MessageBox(NULL, L&quot;创建窗口失败!&quot;, L&quot;Teapot&quot;, 0);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;初始化Direct3D</span><br><span class="line">	if (SUCCEEDED(InitD3D(hWnd)))</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;创建并填充顶点缓存</span><br><span class="line">		if (SUCCEEDED(InitGeometry()))</span><br><span class="line">		&#123;</span><br><span class="line">			&#x2F;&#x2F;显示窗口</span><br><span class="line">			ShowWindow(hWnd, SW_SHOWDEFAULT);</span><br><span class="line">			UpdateWindow(hWnd);</span><br><span class="line"></span><br><span class="line">			&#x2F;&#x2F;进入消息循环</span><br><span class="line">			MSG msg;</span><br><span class="line">			ZeroMemory(&amp;msg, sizeof(msg));</span><br><span class="line">			while (msg.message !&#x3D; WM_QUIT)</span><br><span class="line">			&#123;</span><br><span class="line">				if (PeekMessage(&amp;msg, NULL, 0U, 0U, PM_REMOVE))</span><br><span class="line">				&#123;</span><br><span class="line">					TranslateMessage(&amp;msg);</span><br><span class="line">					DispatchMessage(&amp;msg);</span><br><span class="line">				&#125;</span><br><span class="line">				else</span><br><span class="line">				&#123;</span><br><span class="line">					Render();  &#x2F;&#x2F;渲染图形</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;释放创建的相关对象</span><br><span class="line">	Cleanup();</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/DirectX/" rel="tag"># DirectX</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/07/13/%E5%88%9B%E5%BB%BAx%E6%96%87%E4%BB%B6%E7%BD%91%E6%A0%BC%E6%A8%A1%E5%9E%8B/" rel="prev" title="创建x文件网格模型">
+      <i class="fa fa-chevron-left"></i> 创建x文件网格模型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/19/Java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="next" title="Java基本数据类型">
+      Java基本数据类型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
