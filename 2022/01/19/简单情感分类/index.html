@@ -5,37 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单情感分类">
-<meta property="og:url" content="https://llunch4w.gitee.io/blog/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/mlp_sc.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/mlp_sc.png">
 <meta property="article:published_time" content="2022-01-19T08:56:20.000Z">
 <meta property="article:modified_time" content="2022-01-20T02:27:57.979Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="Deep Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/mlp_sc.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/mlp_sc.png">
 
-<link rel="canonical" href="https://llunch4w.gitee.io/blog/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/">
+<link rel="canonical" href="https://llunch4w.gitee.io/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/">
 
 
 <script id="page-configurations">
@@ -105,7 +105,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -125,27 +125,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -211,27 +211,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/blog/images/me.jpg">
+      src="/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -271,10 +271,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/me.jpg">
+      <meta itemprop="image" content="/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -327,18 +327,12 @@
 
 </blockquote>
 <a id="more"></a>
-
-<h1 id="Step1-Vacabulary-Mapping"><a href="#Step1-Vacabulary-Mapping" class="headerlink" title="Step1: Vacabulary Mapping"></a>Step1: Vacabulary Mapping</h1><p>Firstly, we need to trans natural signal(token) to integer. So we code a <strong>Vacab</strong> to record the mapping of token and index.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vocab</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.idx_to_token = []</span><br><span class="line">        self.token_to_idx = &#123;&#125;</span><br><span class="line">        self.unk = <span class="string">"&lt;unk&gt;"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(self, text, min_freq=<span class="number">1</span>, reserved_tokens=None)</span>:</span></span><br><span class="line">        token_freqs = defaultdict(int)</span><br><span class="line">        <span class="keyword">for</span> sentence <span class="keyword">in</span> text:</span><br><span class="line">            <span class="keyword">for</span> token <span class="keyword">in</span> sentence:</span><br><span class="line">                token_freqs[token] += <span class="number">1</span></span><br><span class="line">        uniq_tokens = [<span class="string">"&lt;unk&gt;"</span>] + (reserved_tokens <span class="keyword">if</span> reserved_tokens <span class="keyword">else</span> [])</span><br><span class="line">        uniq_tokens += [token <span class="keyword">for</span> token, freq <span class="keyword">in</span> token_freqs.items() <span class="keyword">if</span> freq &gt;= min_freq <span class="keyword">and</span> token != <span class="string">"&lt;unk&gt;"</span>]</span><br><span class="line">        <span class="comment"># TODO figure out why return cls rather object</span></span><br><span class="line">        <span class="keyword">return</span> cls(uniq_tokens)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.idx_to_token)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, token)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.token_to_idx.get(token, self.unk)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convert_tokens_to_ids</span><span class="params">(self, tokens)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> [self[token] <span class="keyword">for</span> token <span class="keyword">in</span> tokens]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convert_ids_to_tokens</span><span class="params">(self, indices)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> [self.idx_to_token[index] <span class="keyword">for</span> index <span class="keyword">in</span> indices]</span><br></pre></td></tr></table></figure>
-
-<h1 id="Step2-Word-Embedding-Layer"><a href="#Step2-Word-Embedding-Layer" class="headerlink" title="Step2: Word Embedding Layer"></a>Step2: Word Embedding Layer</h1><p>Trans a word to a vector which is low dimension, dense, continues is called <strong>Embedding</strong>.  </p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vacabulary size: 8; embedding vector dimesion: 3</span></span><br><span class="line">embedding = nn.Embedding(<span class="number">8</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># input size: [2, 4]</span></span><br><span class="line">input = torch.tensor([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">4</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>]], dtype=torch.long)</span><br><span class="line"><span class="comment"># output size: [2, 4, 3]</span></span><br><span class="line">output = embedding(input)</span><br></pre></td></tr></table></figure>
-
+<h1 id="Step1-Vacabulary-Mapping"><a href="#Step1-Vacabulary-Mapping" class="headerlink" title="Step1: Vacabulary Mapping"></a>Step1: Vacabulary Mapping</h1><p>Firstly, we need to trans natural signal(token) to integer. So we code a <strong>Vacab</strong> to record the mapping of token and index.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vocab</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.idx_to_token = []</span><br><span class="line">        self.token_to_idx = &#123;&#125;</span><br><span class="line">        self.unk = <span class="string">"&lt;unk&gt;"</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(self, text, min_freq=<span class="number">1</span>, reserved_tokens=None)</span>:</span></span><br><span class="line">        token_freqs = defaultdict(int)</span><br><span class="line">        <span class="keyword">for</span> sentence <span class="keyword">in</span> text:</span><br><span class="line">            <span class="keyword">for</span> token <span class="keyword">in</span> sentence:</span><br><span class="line">                token_freqs[token] += <span class="number">1</span></span><br><span class="line">        uniq_tokens = [<span class="string">"&lt;unk&gt;"</span>] + (reserved_tokens <span class="keyword">if</span> reserved_tokens <span class="keyword">else</span> [])</span><br><span class="line">        uniq_tokens += [token <span class="keyword">for</span> token, freq <span class="keyword">in</span> token_freqs.items() <span class="keyword">if</span> freq &gt;= min_freq <span class="keyword">and</span> token != <span class="string">"&lt;unk&gt;"</span>]</span><br><span class="line">        <span class="comment"># TODO figure out why return cls rather object</span></span><br><span class="line">        <span class="keyword">return</span> cls(uniq_tokens)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.idx_to_token)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, token)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.token_to_idx.get(token, self.unk)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convert_tokens_to_ids</span><span class="params">(self, tokens)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> [self[token] <span class="keyword">for</span> token <span class="keyword">in</span> tokens]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">convert_ids_to_tokens</span><span class="params">(self, indices)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> [self.idx_to_token[index] <span class="keyword">for</span> index <span class="keyword">in</span> indices]</span><br></pre></td></tr></table></figure></p>
+<h1 id="Step2-Word-Embedding-Layer"><a href="#Step2-Word-Embedding-Layer" class="headerlink" title="Step2: Word Embedding Layer"></a>Step2: Word Embedding Layer</h1><p>Trans a word to a vector which is low dimension, dense, continues is called <strong>Embedding</strong>.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vacabulary size: 8; embedding vector dimesion: 3</span></span><br><span class="line">embedding = nn.Embedding(<span class="number">8</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># input size: [2, 4]</span></span><br><span class="line">input = torch.tensor([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">4</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>]], dtype=torch.long)</span><br><span class="line"><span class="comment"># output size: [2, 4, 3]</span></span><br><span class="line">output = embedding(input)</span><br></pre></td></tr></table></figure></p>
 <h1 id="Step3-Model-Realize"><a href="#Step3-Model-Realize" class="headerlink" title="Step3: Model Realize"></a>Step3: Model Realize</h1><h2 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a>MLP</h2><p>Usually, we need to trans word to word embedding vector first, then take the embedding vector as the input of MLP network. But a sequence usually contains many word vectors. The problem is <strong>How can we take them as the input vector of MLP?</strong><br>One way is <strong>Concating</strong> the n vectos as a new vector whose dimension is $n \times d$. By the way, $d$ is the dimension of word vector.<br>But this way will cause a problem: <strong>The final prediction results are too related with the position of tokens in sequence</strong>. If add a new token in the head of sequence, then all parameters of network will change and the results will be much different. </p>
 <p>To solve this problem, we can use <strong>Bag Of Words</strong>. In BOW method, we don’t consider the order of words in the sequence, and simply view the sequence as a set of words. So, we can use <strong>aggregation</strong> to process many word vectors in one sequence, such as <strong>average, sum, max</strong>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MLP</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, vocab_size, embedding_dim, hidden_dim, num_class)</span>:</span></span><br><span class="line">        super(MLP, self).__init__()</span><br><span class="line">        <span class="comment"># word vector layer</span></span><br><span class="line">        self.embedding = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        <span class="comment"># word vector layer --&gt; linear layer</span></span><br><span class="line">        self.linear1 = nn.Linear(embedding_dim, hidden_dim)</span><br><span class="line">        <span class="comment"># activation layer</span></span><br><span class="line">        self.activate = F.relu</span><br><span class="line">        <span class="comment"># activate layer --&gt; output layer</span></span><br><span class="line">        self.linear2 = nn.Linear(hidden_dim, num_class)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        embeddings = self.embeddings(inputs)</span><br><span class="line">        <span class="comment"># aggregation</span></span><br><span class="line">        embedding = embeddings.mean(dim=<span class="number">1</span>)</span><br><span class="line">        hidden = self.activate(self.linear1(embedding))</span><br><span class="line">        outputs = self.linear2(hidden)</span><br><span class="line">        probs = F.log_softmax(outputs, dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> probs</span><br><span class="line"></span><br><span class="line">mlp = MLP(vocab_size=<span class="number">8</span>, embedding_dim=<span class="number">3</span>, hidden_dim=<span class="number">5</span>, num_class=<span class="number">5</span>)</span><br><span class="line"><span class="comment"># input size: [2, 4]</span></span><br><span class="line">input = torch.tensor([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>], [<span class="number">4</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">7</span>]], dtype=torch.long)</span><br><span class="line"><span class="comment"># output size: [2, 2]</span></span><br><span class="line">output = mlp(input)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/mlp_sc.png" alt></p>
+<p><img src="/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/mlp_sc.png" alt></p>
 <p>However, in real situation, input sequences in one batch often have different length. In other word, sometimes the input can not be represented by a matrix because of <strong>different sequence length</strong>.<br>A solution for this problem is <strong>EmbeddingBag</strong>:</p>
 <ol>
 <li>Firstly, <strong>Concating</strong> all the sequences.</li>
@@ -353,7 +347,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
           </div>
 
         
@@ -362,7 +356,7 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2022/01/18/Python-API/" rel="prev" title="Python API">
+    <a href="/2022/01/18/Python-API/" rel="prev" title="Python API">
       <i class="fa fa-chevron-left"></i> Python API
     </a></div>
       <div class="post-nav-item"></div>
@@ -461,25 +455,25 @@
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/motion.js"></script>
 
 
-  
-
-
+<script src="/js/next-boot.js"></script>
 
 
   
-<script src="/blog/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -568,5 +562,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

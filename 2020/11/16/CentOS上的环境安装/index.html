@@ -5,50 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS上的环境安装">
-<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/2.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/3.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/4.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/5.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/6.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/7.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/8.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/9.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/10.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/11.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/12.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/13.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/14.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/2.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/3.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/4.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/5.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/6.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/7.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/8.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/9.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/10.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/11.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/12.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/13.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/14.png">
 <meta property="article:published_time" content="2020-11-16T01:54:45.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:58.900Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png">
 
-<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+<link rel="canonical" href="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
 
 
 <script id="page-configurations">
@@ -118,7 +118,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -138,27 +138,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -224,27 +224,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/blog/images/me.jpg">
+      src="/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -284,10 +284,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/me.jpg">
+      <meta itemprop="image" content="/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -322,7 +322,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+                  <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
                 </span>
             </span>
 
@@ -349,7 +349,6 @@
 
 </blockquote>
 <a id="more"></a>
-
 <h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><p><strong>CentOS上环境安装的4中方式</strong></p>
 <ol>
 <li>rpm安装</li>
@@ -367,41 +366,28 @@
 <h1 id="rpm安装jdk"><a href="#rpm安装jdk" class="headerlink" title="rpm安装jdk"></a>rpm安装jdk</h1><p><strong>1. 去Oracle官网下载jdk8的rpm</strong></p>
 <p>jdk8下载页：<a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" target="_blank" rel="noopener">https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html</a></p>
 <p>我下载的是这个Linux64位的rpm</p>
-<p><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png" alt="jdk的rpm安装包"></p>
+<p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/1.png" alt="jdk的rpm安装包"></p>
 <p><strong>2. 通过XFtp工具将rpm文件放入当前用户的目录下</strong></p>
-<p><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/2.png" alt="转移rpm包"></p>
-<p>传输成功后如下图所示：<br><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/3.png" alt="转移rpm包成功"></p>
+<p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/2.png" alt="转移rpm包"></p>
+<p>传输成功后如下图所示：<br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/3.png" alt="转移rpm包成功"></p>
 <p><strong>3. 安装Java环境</strong></p>
-<p>3.1. 查看当前系统是否存在Java环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
-
-<p>若已有的话则进行卸载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 检测JDK版本信息</span><br><span class="line">rpm -qa | grep jdk</span><br><span class="line"># -q query</span><br><span class="line"># -a all: query all installed packages</span><br><span class="line">&gt; 得到的结果为一个jdk号</span><br><span class="line"></span><br><span class="line"># 卸载jdk</span><br><span class="line">rpm -e --nodeps 上一步查出的jdk号</span><br><span class="line"># -e</span><br><span class="line"># --nodeps：Dont&#39;t verify dependencies of packages</span><br></pre></td></tr></table></figure>
-
-<p>3.2. 通过rpm命令安装Java环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh rpm文件名</span><br><span class="line"></span><br><span class="line"># -i install</span><br><span class="line"># -v print</span><br><span class="line"># -h hash</span><br></pre></td></tr></table></figure>
-
-<p>ps：注意要使用root用户才有安装权限<br><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/4.png" alt="安装"></p>
+<p>3.1. 查看当前系统是否存在Java环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
+<p>若已有的话则进行卸载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 检测JDK版本信息</span><br><span class="line">rpm -qa | grep jdk</span><br><span class="line"># -q query</span><br><span class="line"># -a all: query all installed packages</span><br><span class="line">&gt; 得到的结果为一个jdk号</span><br><span class="line"></span><br><span class="line"># 卸载jdk</span><br><span class="line">rpm -e --nodeps 上一步查出的jdk号</span><br><span class="line"># -e</span><br><span class="line"># --nodeps：Dont&#39;t verify dependencies of packages</span><br></pre></td></tr></table></figure></p>
+<p>3.2. 通过rpm命令安装Java环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh rpm文件名</span><br><span class="line"></span><br><span class="line"># -i install</span><br><span class="line"># -v print</span><br><span class="line"># -h hash</span><br></pre></td></tr></table></figure></p>
+<p>ps：注意要使用root用户才有安装权限<br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/4.png" alt="安装"></p>
 <p>3.3. 配置环境变量</p>
-<p><strong>安装成功的Java文件保存在\usr目录下</strong><br><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/5.png" alt="java安装目录"></p>
-<p><strong>1. 进入 /etc/profile</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
-
-<p><strong>2. 在文件末尾添加配置</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_271-amd64</span><br><span class="line">CLASSPATH&#x3D;%JAVA_HOME%&#x2F;lib&#x2F;tools.jar:%JAVA_HOME%&#x2F;jre&#x2F;lib&#x2F;dt.jar:.</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JAVA_HOME&#x2F;jre&#x2F;bin</span><br><span class="line">export PATH CLASSPATH JAVA_HOME</span><br></pre></td></tr></table></figure>
-
-<p><strong>3. 让配置文件生效</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
-
+<p><strong>安装成功的Java文件保存在\usr目录下</strong><br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/5.png" alt="java安装目录"></p>
+<p><strong>1. 进入 /etc/profile</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 在文件末尾添加配置</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_271-amd64</span><br><span class="line">CLASSPATH&#x3D;%JAVA_HOME%&#x2F;lib&#x2F;tools.jar:%JAVA_HOME%&#x2F;jre&#x2F;lib&#x2F;dt.jar:.</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JAVA_HOME&#x2F;jre&#x2F;bin</span><br><span class="line">export PATH CLASSPATH JAVA_HOME</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 让配置文件生效</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure></p>
 <h1 id="解压缩安装Tomcat"><a href="#解压缩安装Tomcat" class="headerlink" title="解压缩安装Tomcat"></a>解压缩安装Tomcat</h1><p><strong>1. 去官网下载tomcat安装包</strong></p>
 <p>tomcat9.0.39下载页面：<a href="https://tomcat.apache.org/download-90.cgi#9.0.39" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi#9.0.39</a></p>
-<p><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/6.png" alt="tomcat9下载"></p>
+<p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/6.png" alt="tomcat9下载"></p>
 <p><strong>2. 通过XFtp将安装包传送到服务器</strong></p>
-<p><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/7.png" alt="tomcat9传输到服务器"></p>
+<p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/7.png" alt="tomcat9传输到服务器"></p>
 <p><strong>3. 解压安装包</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf 安装包名称</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/8.png" alt="tomcat9解压"></p>
+<p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/8.png" alt="tomcat9解压"></p>
 <blockquote>
 <p>我将解压得到的文件夹移到 /etc/opt目录下了</p>
 </blockquote>
@@ -410,61 +396,33 @@
 <li>Linux中的可执行文件为.sh文件</li>
 <li>tomcat解压后启动文件存放在bin目录中</li>
 </ul>
-<p><strong>启动和关闭脚本</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;startup.sh # 启动服务器</span><br><span class="line">.&#x2F;shutdown.sh # 关闭服务器</span><br></pre></td></tr></table></figure>
-
-<p><strong>查看启动日志（可选）</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd logs&#x2F;</span><br><span class="line">tail -f catalina.out</span><br></pre></td></tr></table></figure>
-
-<p><strong>访问Tomcat需要通过8080端口</strong><br>服务器端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启8080端口</span><br><span class="line">firewall-cmd --zone&#x3D;public --add-port&#x3D;8080&#x2F;tcp --permanent</span><br><span class="line"></span><br><span class="line"># 重启防火墙</span><br><span class="line">systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line"># 检查是否已开放8080</span><br><span class="line">firewall-cmd --list-ports</span><br></pre></td></tr></table></figure>
-
+<p><strong>启动和关闭脚本</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;startup.sh # 启动服务器</span><br><span class="line">.&#x2F;shutdown.sh # 关闭服务器</span><br></pre></td></tr></table></figure></p>
+<p><strong>查看启动日志（可选）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd logs&#x2F;</span><br><span class="line">tail -f catalina.out</span><br></pre></td></tr></table></figure></p>
+<p><strong>访问Tomcat需要通过8080端口</strong><br>服务器端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启8080端口</span><br><span class="line">firewall-cmd --zone&#x3D;public --add-port&#x3D;8080&#x2F;tcp --permanent</span><br><span class="line"></span><br><span class="line"># 重启防火墙</span><br><span class="line">systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line"># 检查是否已开放8080</span><br><span class="line">firewall-cmd --list-ports</span><br></pre></td></tr></table></figure></p>
 <p>阿里云端：配置安全组规则，添加8080端口</p>
-<p><strong>5. 成功页面</strong><br><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/9.png" alt="能正确访问tomcat主页"></p>
-<h1 id="yum安装docker"><a href="#yum安装docker" class="headerlink" title="yum安装docker"></a>yum安装docker</h1><p><strong>1. 检测当前CentOS版本信息</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;redhat-release</span><br></pre></td></tr></table></figure>
-
-<p><strong>2. 安装环境</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install 包名</span><br></pre></td></tr></table></figure>
-
-<p>安装gcc相关环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure>
-
+<p><strong>5. 成功页面</strong><br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/9.png" alt="能正确访问tomcat主页"></p>
+<h1 id="yum安装docker"><a href="#yum安装docker" class="headerlink" title="yum安装docker"></a>yum安装docker</h1><p><strong>1. 检测当前CentOS版本信息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;redhat-release</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 安装环境</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install 包名</span><br></pre></td></tr></table></figure></p>
+<p>安装gcc相关环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure></p>
 <p><strong>3. 根据docker官网文档进行操作</strong></p>
 <p>docket官方文档地址：<a href="https://docs.docker.com/engine/install/centos/" target="_blank" rel="noopener">https://docs.docker.com/engine/install/centos/</a></p>
-<p>3.1. 卸载旧版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">    docker-client \</span><br><span class="line">    docker-client-latest \</span><br><span class="line">    docker-common \</span><br><span class="line">    docker-latest \</span><br><span class="line">    docker-latest-logrotate \</span><br><span class="line">    docker-logrotate \</span><br><span class="line">    docker-engine</span><br></pre></td></tr></table></figure>
-
-<p>3.2. 安装需要的软件包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
-
-<p>3.3. 设置stable镜像仓库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p>3.4. 更新yum软件包索引</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
-
-<p>3.5. 安装docker ce</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
-
-<p>3.6. 启动docker</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
-
-<p>3.7. 测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker run hello-word</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
-
-<p>关闭docker</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker service docker stop</span><br></pre></td></tr></table></figure>
-
+<p>3.1. 卸载旧版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">    docker-client \</span><br><span class="line">    docker-client-latest \</span><br><span class="line">    docker-common \</span><br><span class="line">    docker-latest \</span><br><span class="line">    docker-latest-logrotate \</span><br><span class="line">    docker-logrotate \</span><br><span class="line">    docker-engine</span><br></pre></td></tr></table></figure></p>
+<p>3.2. 安装需要的软件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure></p>
+<p>3.3. 设置stable镜像仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br></pre></td></tr></table></figure></p>
+<p>3.4. 更新yum软件包索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure></p>
+<p>3.5. 安装docker ce<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure></p>
+<p>3.6. 启动docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure></p>
+<p>3.7. 测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker run hello-word</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure></p>
+<p>关闭docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker service docker stop</span><br></pre></td></tr></table></figure></p>
 <h1 id="宝塔安装mysql"><a href="#宝塔安装mysql" class="headerlink" title="宝塔安装mysql"></a>宝塔安装mysql</h1><p><strong>1. 进入宝塔面板的软件商店安装mysql</strong></p>
-<p><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/10.png" alt="通过宝塔面板安装mysql"></p>
+<p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/10.png" alt="通过宝塔面板安装mysql"></p>
 <p>我选择的是mysql5.6</p>
 <p><strong>2. 在数据库面板添加一个数据库</strong></p>
-<p><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/11.png" alt="通过宝塔面板添加数据库"></p>
-<p>访问权限应该设置为所有人<br><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/12.png" alt="访问权限"></p>
+<p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/11.png" alt="通过宝塔面板添加数据库"></p>
+<p>访问权限应该设置为所有人<br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/12.png" alt="访问权限"></p>
 <p><strong>3. 在本地通过navicat连接服务器数据库</strong></p>
-<p>3.1. 点击新建连接<br><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/13.png" alt="新建连接"></p>
-<p>3.2. 连接配置<br><img src="/blog/blog/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/14.png" alt="连接配置"></p>
+<p>3.1. 点击新建连接<br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/13.png" alt="新建连接"></p>
+<p>3.2. 连接配置<br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/14.png" alt="连接配置"></p>
 
     </div>
 
@@ -474,7 +432,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
           </div>
 
         
@@ -483,11 +441,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2020/11/15/Hexo%E4%B8%AD%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3/" rel="prev" title="Hexo中新建文章标题乱码解决">
+    <a href="/2020/11/15/Hexo%E4%B8%AD%E6%96%B0%E5%BB%BA%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98%E4%B9%B1%E7%A0%81%E8%A7%A3%E5%86%B3/" rel="prev" title="Hexo中新建文章标题乱码解决">
       <i class="fa fa-chevron-left"></i> Hexo中新建文章标题乱码解决
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2020/11/16/Git/" rel="next" title="Git">
+    <a href="/2020/11/16/Git/" rel="next" title="Git">
       Git <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -585,25 +543,25 @@
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/motion.js"></script>
 
 
-  
-
-
+<script src="/js/next-boot.js"></script>
 
 
   
-<script src="/blog/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -639,5 +597,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

@@ -5,40 +5,40 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="VSCode使用指南">
-<meta property="og:url" content="https://llunch4w.gitee.io/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.jpg">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/2.jpg">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/3.jpg">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/4.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/2.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/3.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/4.jpg">
 <meta property="article:published_time" content="2021-06-12T22:41:01.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:58.984Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="VSCode">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.jpg">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.jpg">
 
-<link rel="canonical" href="https://llunch4w.gitee.io/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+<link rel="canonical" href="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
 
 
 <script id="page-configurations">
@@ -108,7 +108,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -128,27 +128,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -214,27 +214,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/blog/images/me.jpg">
+      src="/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -274,10 +274,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/me.jpg">
+      <meta itemprop="image" content="/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -312,7 +312,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
+                  <a href="/categories/%E8%BD%AF%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">软件</span></a>
                 </span>
             </span>
 
@@ -339,11 +339,10 @@
 
 </blockquote>
 <a id="more"></a>
-
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>故事要从一个月前说起，当时我还在用 VSCode 写图像处理算法小程序，是一位矜矜业业的搬砖工。搬砖时，辅助有 VSCode 中 Python 插件提供的代码提示；鼠标轻轻移动就能显示出函数定义，给我的搬砖工作带来了极大便利。</p>
 <p>直到某一天，我一顿玄学操作后，函数提示消失了，好用的“仿IDE编程”沦为“记事本编程”。我尝试了很多网上的办法也没有成功。刚巧我的搬砖工作也完成了，就以“不写python代码”为解决方案搁置了这个问题。</p>
-<p>直到昨天，我突然想写一个“图片转动漫”的小脚本，搜了搜youtube，发现有一个基于图像处理的简单实现，打算copy下来。copy过程中，“记事本编程”的碍眼之处又显现出来。我沿着历史的轨迹，继续“搜博客–&gt;无脑试错”，但是幸运女神仿佛始终没能眷顾我。最后，我采用了终极解决方案–卸载重装。结果发现重装后的 VSCode 竟然保留了之前的所有配置(ΩДΩ) 阿巴阿巴，痴呆落泪…</p>
-<p>正所谓“瞎看博客三百篇，不会原创也会抄”。大量的博客试错虽然没有解决我的问题，但至少让我有一个解决问题的思路，就是–配置 <code>setting.json</code> 文件。一定是其中有某个地方配置错误，导致问题出现。但是由于之前各种不求甚解的“拆东墙，补西墙”操作， setting.json 中的配置项已经变得杂乱无章。搜索了一下也没发现有比较好的 setting.json 解析文章，于是打算去官方文档上看看。</p>
+<p>直到昨天，我突然想写一个“图片转动漫”的小脚本，搜了搜youtube，发现有一个基于图像处理的简单实现，打算copy下来。copy过程中，“记事本编程”的碍眼之处又显现出来。我沿着历史的轨迹，继续“搜博客—&gt;无脑试错”，但是幸运女神仿佛始终没能眷顾我。最后，我采用了终极解决方案—卸载重装。结果发现重装后的 VSCode 竟然保留了之前的所有配置(ΩДΩ) 阿巴阿巴，痴呆落泪…</p>
+<p>正所谓“瞎看博客三百篇，不会原创也会抄”。大量的博客试错虽然没有解决我的问题，但至少让我有一个解决问题的思路，就是—配置 <code>setting.json</code> 文件。一定是其中有某个地方配置错误，导致问题出现。但是由于之前各种不求甚解的“拆东墙，补西墙”操作， setting.json 中的配置项已经变得杂乱无章。搜索了一下也没发现有比较好的 setting.json 解析文章，于是打算去官方文档上看看。</p>
 <p>随便看了看就发现了一个可行的尝试思路，试了试竟然真的解决了问题。问题解决后，我又逛了逛官方文档，发现 VSCode 原来有那么多玩法，于是打算将官方文档好好看一看，有一个“汉化搬砖+缝合”的工作计划（就是<strong>VSCode使用指南</strong>系列文章），希望我不要鸽掉o(*￣︶￣*)o</p>
 <h1 id="官方文档地址"><a href="#官方文档地址" class="headerlink" title="官方文档地址"></a>官方文档地址</h1><p>Documention Of Visual Studio Code : <a href="https://code.visualstudio.com/docs" target="_blank" rel="noopener">https://code.visualstudio.com/docs</a></p>
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>Visual Studio Code是一个轻量级但功能强大的源代码编辑器，可以在桌面上运行，适用于Windows、macOS和Linux。它内置了对JavaScript、TypeScript和Nodejs的支持，并为其他语言(如c++、c#、Java、Python、PHP、Go)和运行时(如. net和Unity)提供了丰富的扩展生态系统。</p>
@@ -357,7 +356,7 @@
 <h1 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h1><h2 id="下载-amp-更新-amp-卸载"><a href="#下载-amp-更新-amp-卸载" class="headerlink" title="下载 &amp; 更新 &amp; 卸载"></a>下载 &amp; 更新 &amp; 卸载</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>VSCode 下载地址：<a href="https://code.visualstudio.com/Download" target="_blank" rel="noopener">https://code.visualstudio.com/Download</a>。</p>
 <p>VSCode 有内测版本，如果你愿意提前使用即将发布的新版本（虽然可能不是很稳定），就可以下载内测版本，下载地址：<a href="https://code.visualstudio.com/insiders" target="_blank" rel="noopener">https://code.visualstudio.com/insiders</a>。</p>
 <p>VSCode 支持<strong>Portable</strong>模式，这种模式旨在将其配置设置读写到计算机中可访问的文件夹中，这种模式使所有由 VS Code 创建和维护的数据能够靠近它自己，这使得根据用户的偏好和数据在不同的计算机之间更容易地传输程序。这种模式还提供了一种方法来设置 VS Code 扩展的安装文件夹位置，这对于防止扩展安装在 Windows AppData 文件夹中的公司环境很有用。</p>
-<p><strong>Portable</strong>模式的 VSCode 只能通过<strong>压缩包</strong>的形式进行下载，你可以通过<a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">下载页</a>找到符合你系统的压缩包进行下载：Windows用户下载<strong>zip</strong>安装包，Linux用户下载<strong>.tar.gz</strong>安装包。<br><img src="/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.jpg" alt></p>
+<p><strong>Portable</strong>模式的 VSCode 只能通过<strong>压缩包</strong>的形式进行下载，你可以通过<a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">下载页</a>找到符合你系统的压缩包进行下载：Windows用户下载<strong>zip</strong>安装包，Linux用户下载<strong>.tar.gz</strong>安装包。<br><img src="/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/1.jpg" alt></p>
 <blockquote>
 <p>不要试图在<strong>Windows User or System installers</strong>完成的安装下配置<strong>Portable</strong>模式，该模式只在<strong>压缩包</strong>形式的下载中被支持。</p>
 </blockquote>
@@ -371,9 +370,8 @@
 </blockquote>
 <p>即使在<strong>Portable</strong>模式下，默认存放临时文件的 <strong>TMP</strong> 文件夹仍然在系统文件中。如果你希望将你的 TMP 目录放入你的 <strong>%VSCODE_DIR%</strong> 下的话，可以在 <strong>data</strong> 文件夹中创建一个空的 <strong>tmp</strong> 文件。当 tmp 文件创建成功后，它就会被自动用来保存 VSCode 产生的临时数据。</p>
 <p>VSCode 是一个占用存储空间很小的应用，它只包含大多数开发工作流中最常用的组件，如：编辑器、文件管理、窗口管理和首选项设置等。另外， Javascript/TypeScript 语言服务和 Node.js 调试器也是基本安装的一部分。</p>
-<p>经常使用大型 IDE 的朋友可能会习惯 <strong>File–&gt;New Project</strong> 的形式来创建一个项目，但 VSCode 中没有这项操作。原因是大型 IDE 中的 <strong>New Project</strong> 之所以成功，是因为其中内置了很多项目模板，而 VSCode 中没有内置这些东西。这种设定造就了 VSCode 小巧轻便的特点，但并没有降低它的能力。因为这些 IDE 有的功能，VSCode 也可以通过安装组件（扩展）来完成。</p>
-<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>VSCode 几乎每个月会发布一个新版本，新版本会增加一些新特性、修复一些 bug。VS Code 平台支持平台和插件的自动更新，用户也可以通过<strong>Help–&gt;Check for Updates</strong>来检测当前可用更新。如果用户希望取消自动更新，则可以通过 <code>Ctrl + Shift + P</code> 输入 <code>Open Settings</code> 打开<strong>设置</strong>的配置文件，并增加以下两项配置：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 平台的自动更新，默认是 default</span></span><br><span class="line">"update.mode": "none"</span><br><span class="line"><span class="comment">// 插件的自动更新，默认是 true</span></span><br><span class="line">"extensions.autoUpdate": false</span><br></pre></td></tr></table></figure>
+<p>经常使用大型 IDE 的朋友可能会习惯 <strong>File—&gt;New Project</strong> 的形式来创建一个项目，但 VSCode 中没有这项操作。原因是大型 IDE 中的 <strong>New Project</strong> 之所以成功，是因为其中内置了很多项目模板，而 VSCode 中没有内置这些东西。这种设定造就了 VSCode 小巧轻便的特点，但并没有降低它的能力。因为这些 IDE 有的功能，VSCode 也可以通过安装组件（扩展）来完成。</p>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><p>VSCode 几乎每个月会发布一个新版本，新版本会增加一些新特性、修复一些 bug。VS Code 平台支持平台和插件的自动更新，用户也可以通过<strong>Help—&gt;Check for Updates</strong>来检测当前可用更新。如果用户希望取消自动更新，则可以通过 <code>Ctrl + Shift + P</code> 输入 <code>Open Settings</code> 打开<strong>设置</strong>的配置文件，并增加以下两项配置：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 平台的自动更新，默认是 default</span></span><br><span class="line">"update.mode": "none"</span><br><span class="line"><span class="comment">// 插件的自动更新，默认是 true</span></span><br><span class="line">"extensions.autoUpdate": false</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>自动更新在<strong>Windows Zip</strong>下载下不支持。</p>
 </blockquote>
@@ -382,7 +380,7 @@
 <li><strong>%APPDATA%\Code</strong> ：比如我的电脑是 <strong>C:\Users\a\AppData\Roaming\Code</strong> 。</li>
 <li><strong>%USERPROFILE%.vscode</strong> ：比如我的电脑是 <strong>C:\Users\a.vscode</strong> 。</li>
 </ul>
-<h2 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h2><h3 id="Welcome-页"><a href="#Welcome-页" class="headerlink" title="Welcome 页"></a>Welcome 页</h3><p>Welcome 页会提供一些快捷标签，通过这些标签可以快速跳转到某操作。打开 Welcome 页的方式为：<strong>Help–&gt;Welcome</strong>。页面左下角的 <strong>Interactive playground</strong> 将带你进入一个交互式学习场景，介绍 VSCode 的一些编辑特性及使用技巧。<br>如下图所示：<img src="/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/2.jpg" alt>介绍区域会介绍某个特性及这个特性的用法，而交互式区域则是一段可编辑代码，用户可以在这段代码上按照教程尝试使用这个特性。</p>
+<h2 id="Tips-and-Tricks"><a href="#Tips-and-Tricks" class="headerlink" title="Tips and Tricks"></a>Tips and Tricks</h2><h3 id="Welcome-页"><a href="#Welcome-页" class="headerlink" title="Welcome 页"></a>Welcome 页</h3><p>Welcome 页会提供一些快捷标签，通过这些标签可以快速跳转到某操作。打开 Welcome 页的方式为：<strong>Help—&gt;Welcome</strong>。页面左下角的 <strong>Interactive playground</strong> 将带你进入一个交互式学习场景，介绍 VSCode 的一些编辑特性及使用技巧。<br>如下图所示：<img src="/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/2.jpg" alt>介绍区域会介绍某个特性及这个特性的用法，而交互式区域则是一段可编辑代码，用户可以在这段代码上按照教程尝试使用这个特性。</p>
 <p>接下来是 <strong>Interactive playground</strong> 介绍的几种特性。</p>
 <h4 id="多焦点编辑（Mul-Cursor-Editing）"><a href="#多焦点编辑（Mul-Cursor-Editing）" class="headerlink" title="多焦点编辑（Mul-Cursor Editing）"></a>多焦点编辑（Mul-Cursor Editing）</h4><ul>
 <li><code>Alt + Click</code> : 在任意鼠标点击处增加一个焦点；</li>
@@ -391,9 +389,9 @@
 </ul>
 <h4 id="智能感知（IntelliSense）"><a href="#智能感知（IntelliSense）" class="headerlink" title="智能感知（IntelliSense）"></a>智能感知（IntelliSense）</h4><p>通过 <code>Ctrl + Space</code> 可触发智能提示。值得注意的一点是，<code>Ctrl + Space</code> 快捷键在 Windows 系统中已经被<strong>输入法/非输入法切换</strong>功能占用，只有先更改这项快捷键的设定才能在 VSCode 中使用智能感知功能。更改步骤如下：</p>
 <ol>
-<li>在桌面底部 <strong>任务栏</strong> 处右键 –&gt; 选中 <strong>任务栏设置</strong> ；</li>
-<li>在 <strong>设置</strong> 窗口的左上角有一个 <strong>查找设置</strong> 输入框 –&gt; 键入 <strong>input</strong> ；</li>
-<li>查询后在显示结果列表中选择 <strong>显示所有结果</strong> –&gt; 在结果列表中选择 <strong>高级键盘设置</strong> –&gt; 在该面板中选择 <strong>输入语言热键</strong> ；</li>
+<li>在桌面底部 <strong>任务栏</strong> 处右键 —&gt; 选中 <strong>任务栏设置</strong> ；</li>
+<li>在 <strong>设置</strong> 窗口的左上角有一个 <strong>查找设置</strong> 输入框 —&gt; 键入 <strong>input</strong> ；</li>
+<li>查询后在显示结果列表中选择 <strong>显示所有结果</strong> —&gt; 在结果列表中选择 <strong>高级键盘设置</strong> —&gt; 在该面板中选择 <strong>输入语言热键</strong> ；</li>
 <li>更改 <strong>输入法/非输入法切换</strong> 的 <strong>按键顺序</strong> ，由 <code>Ctrl + Space</code> 变为 <code>左 Alt + Shift</code>。</li>
 </ol>
 <p>重启 VSCode 后即可使用 <code>Ctrl + Space</code> 快捷键来触发智能提示了。</p>
@@ -409,18 +407,20 @@
 <li><code>Ctrl + Shift + ]</code> : 展开 。</li>
 </ul>
 <h4 id="模板代码段（Snipptes）"><a href="#模板代码段（Snipptes）" class="headerlink" title="模板代码段（Snipptes）"></a>模板代码段（Snipptes）</h4><p>可通过安装插件的方式为平台添加多种语言的模板代码段。例如输入 <strong>try</strong> 之后会出现 <strong>trycatch</strong> 的选择项，按 <code>Tab</code> 键即可在代码中添加一段 try catch 的模板代码。</p>
-<h3 id="默认快捷键"><a href="#默认快捷键" class="headerlink" title="默认快捷键"></a>默认快捷键</h3><p><img src="/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/3.jpg" alt></p>
+<h3 id="默认快捷键"><a href="#默认快捷键" class="headerlink" title="默认快捷键"></a>默认快捷键</h3><p><img src="/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/3.jpg" alt></p>
 <blockquote>
 <p>你可以通过在<strong>命令面板</strong>中搜索<strong>shortcut</strong>关键词来查找快捷键默认配置文件和配置文件，前者帮助你查找各默认快捷键；后者帮助你自定义快捷键设置来覆盖默认设置。</p>
 </blockquote>
-<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><table>
+<h3 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h3><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>按键</th>
 <th>功能</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>Ctrl + P</code></td>
 <td>快速打开文件（通过输入文件名进行模糊匹配）</td>
 </tr>
@@ -516,7 +516,9 @@
 <td><code>Ctrl + B</code></td>
 <td>文件栏显示/隐藏切换</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="更改主题"><a href="#更改主题" class="headerlink" title="更改主题"></a>更改主题</h3><ol>
 <li><code>Ctrl + Shift + P</code> 打开14命令面板；</li>
 <li>输入 <strong>theme</strong> , 选择 <strong>Preferences:Color Theme</strong></li>
@@ -529,11 +531,8 @@
 <li>搜索关键字 <strong>Open Settings</strong> ， 在搜索结果中选择 <strong>Open Settings(JSON)</strong></li>
 <li>建议同时打开搜索结果中的 <strong>Open Default Settings(JSON)</strong> ，打开的 <strong>defaultSetting.json</strong> 文件中包含所有的默认设置，以及设置相关的注释，通过查阅可以让你更清楚各项配置的含义。</li>
 </ol>
-<p>我的配置（部分参考官方文档上定义的配置）：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Specifies the color theme used in the workbench.</span></span><br><span class="line">    <span class="attr">"workbench.colorTheme"</span>: <span class="string">"Visual Studio Dark"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Main editor</span></span><br><span class="line">    <span class="attr">"editor.fontSize"</span>: <span class="number">18</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Controls the font family.</span></span><br><span class="line">    <span class="attr">"editor.fontFamily"</span>: <span class="string">"Fira Code"</span>,</span><br><span class="line">    <span class="comment">// Enables/Disables font ligatures ('calt' and 'liga' font features).</span></span><br><span class="line">    <span class="attr">"editor.fontLigatures"</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Controls auto save of dirty editors. </span></span><br><span class="line">    <span class="attr">"files.autoSave"</span>: <span class="string">"afterDelay"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Format a file on save. </span></span><br><span class="line">    <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// Controls whether the editor should automatically format the pasted content.</span></span><br><span class="line">    <span class="attr">"editor.formatOnPaste"</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Controls how the editor should render whitespace characters.</span></span><br><span class="line">    <span class="attr">"editor.renderWhitespace"</span>: <span class="string">"all"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>特定语言的设定</strong>：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"[languageid]": &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我的配置（部分参考官方文档上定义的配置）：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Specifies the color theme used in the workbench.</span></span><br><span class="line">    <span class="attr">"workbench.colorTheme"</span>: <span class="string">"Visual Studio Dark"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Main editor</span></span><br><span class="line">    <span class="attr">"editor.fontSize"</span>: <span class="number">18</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Controls the font family.</span></span><br><span class="line">    <span class="attr">"editor.fontFamily"</span>: <span class="string">"Fira Code"</span>,</span><br><span class="line">    <span class="comment">// Enables/Disables font ligatures ('calt' and 'liga' font features).</span></span><br><span class="line">    <span class="attr">"editor.fontLigatures"</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Controls auto save of dirty editors. </span></span><br><span class="line">    <span class="attr">"files.autoSave"</span>: <span class="string">"afterDelay"</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Format a file on save. </span></span><br><span class="line">    <span class="attr">"editor.formatOnSave"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// Controls whether the editor should automatically format the pasted content.</span></span><br><span class="line">    <span class="attr">"editor.formatOnPaste"</span>: <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Controls how the editor should render whitespace characters.</span></span><br><span class="line">    <span class="attr">"editor.renderWhitespace"</span>: <span class="string">"all"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>特定语言的设定</strong>：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">"[languageid]": &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>可通过 <strong>命令面板</strong> 输入 <strong>Configure Language Specific Settings</strong> 指令来选择一门语言添加配置（前提是该语言需要的插件已经安装成功）</p>
 </blockquote>
@@ -544,7 +543,7 @@
 <li>点击 <code>.*</code> 可用于切换为 <strong>正则表达式</strong> 匹配。</li>
 <li>左侧的箭头符号点击后会出现<strong>替换框</strong>。</li>
 </ol>
-<p><img src="/blog/blog/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/4.jpg" alt></p>
+<p><img src="/2021/06/13/VSCode%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/4.jpg" alt></p>
 
     </div>
 
@@ -554,7 +553,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/VSCode/" rel="tag"># VSCode</a>
+              <a href="/tags/VSCode/" rel="tag"># VSCode</a>
           </div>
 
         
@@ -563,11 +562,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/" rel="prev" title="Java求解TopK问题">
+    <a href="/2021/06/11/Java%E6%B1%82%E8%A7%A3TopK%E9%97%AE%E9%A2%98/" rel="prev" title="Java求解TopK问题">
       <i class="fa fa-chevron-left"></i> Java求解TopK问题
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2021/06/13/VSCode-Python%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="next" title="VSCode-Python环境配置">
+    <a href="/2021/06/13/VSCode-Python%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" rel="next" title="VSCode-Python环境配置">
       VSCode-Python环境配置 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -665,25 +664,25 @@
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/motion.js"></script>
 
 
-  
-
-
+<script src="/js/next-boot.js"></script>
 
 
   
-<script src="/blog/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -719,5 +718,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

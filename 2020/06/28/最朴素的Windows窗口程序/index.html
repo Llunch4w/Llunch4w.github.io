@@ -5,31 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="一个基于Visual Studio 2017的Windows窗口程序     无装饰，超朴素，除了流程一无所有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="最朴素的Windows窗口程序">
-<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="一个基于Visual Studio 2017的Windows窗口程序     无装饰，超朴素，除了流程一无所有">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/1.jpg">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/2.jpg">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/3.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/1.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/2.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/3.jpg">
 <meta property="article:published_time" content="2020-06-28T12:48:23.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:59.144Z">
 <meta property="article:author" content="Llunch">
@@ -37,9 +37,9 @@
 <meta property="article:tag" content="Visual Studio">
 <meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/1.jpg">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/1.jpg">
 
-<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/">
+<link rel="canonical" href="https://llunch4w.gitee.io/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/">
 
 
 <script id="page-configurations">
@@ -109,7 +109,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -129,27 +129,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -215,27 +215,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/blog/images/me.jpg">
+      src="/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -275,10 +275,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/me.jpg">
+      <meta itemprop="image" content="/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -313,7 +313,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/DirectX/" itemprop="url" rel="index"><span itemprop="name">DirectX</span></a>
+                  <a href="/categories/DirectX/" itemprop="url" rel="index"><span itemprop="name">DirectX</span></a>
                 </span>
             </span>
 
@@ -343,25 +343,23 @@
 <p>无装饰，超朴素，除了流程一无所有</p>
 </blockquote>
 <a id="more"></a>
-
 <h1 id="1-新建项目"><a href="#1-新建项目" class="headerlink" title="1 新建项目"></a>1 新建项目</h1><blockquote>
 <p>在Visual Studio 2017中新建一个Windows窗口程序</p>
 </blockquote>
-<ol start="0">
+<ol>
 <li><p>新建一个解决方案</p>
 </li>
-<li><p>解决方案处右键–》添加–》项目，打开新建项目向导</p>
+<li><p>解决方案处右键—》添加—》项目，打开新建项目向导</p>
 </li>
-<li><p>选择<code>Visual C++</code>/<code>Windows桌面</code>下的Windows桌面向导<br><img src="/blog/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/1.jpg" alt></p>
+<li><p>选择<code>Visual C++</code>/<code>Windows桌面</code>下的Windows桌面向导<br><img src="/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/1.jpg" alt></p>
 </li>
-<li><p>在弹出窗口中选择<code>桌面应用程序</code>，并勾选<code>空项目</code><br><img src="/blog/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/2.jpg" alt></p>
+<li><p>在弹出窗口中选择<code>桌面应用程序</code>，并勾选<code>空项目</code><br><img src="/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/2.jpg" alt></p>
 </li>
 <li><p>在源文件夹下新建C++源文件simpleWinApp.cpp</p>
 </li>
 </ol>
 <h1 id="2-编写Windows窗口程序"><a href="#2-编写Windows窗口程序" class="headerlink" title="2 编写Windows窗口程序"></a>2 编写Windows窗口程序</h1><h2 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h2><p><code>#include &lt;Windows.h&gt;</code></p>
-<h2 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h2><h3 id="函数组成"><a href="#函数组成" class="headerlink" title="函数组成"></a>函数组成</h3><p><strong>1. 入口函数</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int _stdcall _tWinMain ( HINSTANCE hInstance,</span><br><span class="line">                         HINSTANCE hPrevInstance,</span><br><span class="line">						 PTSTR szCmdLine, </span><br><span class="line">                         int iCmdShow )</span><br></pre></td></tr></table></figure>
+<h2 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h2><h3 id="函数组成"><a href="#函数组成" class="headerlink" title="函数组成"></a>函数组成</h3><p><strong>1. 入口函数</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int _stdcall _tWinMain ( HINSTANCE hInstance,</span><br><span class="line">                         HINSTANCE hPrevInstance,</span><br><span class="line">						 PTSTR szCmdLine, </span><br><span class="line">                         int iCmdShow )</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>hInstance：实例句柄。当可执行文件加载到内存中时，操作系统使用该值来标识该可执行文件</li>
 <li>hPrevInstance：没有任何意义。它曾在16位Windows中使用，但现在始终为零。</li>
@@ -369,9 +367,7 @@
 <li>nCmdShow：是一个标志，指示是否将主应用程序窗口最小化，最大化或正常显示。</li>
 <li>返回值：操作系统不使用该返回值，但是可以使用该返回值将状态代码传送给您编写的其他程序。</li>
 </ul>
-<p><strong>2. 窗口过程</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 处理窗口消息</span><br><span class="line">LRESULT CALLBACK WndProc (HWND hwnd,        &#x2F;&#x2F; 窗口句柄</span><br><span class="line">                          UINT message,     &#x2F;&#x2F; 消息类型</span><br><span class="line">                          WPARAM wParam,    &#x2F;&#x2F; 第一个消息参数</span><br><span class="line">                          LPARAM lParam)    &#x2F;&#x2F; 第二个消息参数</span><br></pre></td></tr></table></figure>
-
+<p><strong>2. 窗口过程</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 处理窗口消息</span><br><span class="line">LRESULT CALLBACK WndProc (HWND hwnd,        &#x2F;&#x2F; 窗口句柄</span><br><span class="line">                          UINT message,     &#x2F;&#x2F; 消息类型</span><br><span class="line">                          WPARAM wParam,    &#x2F;&#x2F; 第一个消息参数</span><br><span class="line">                          LPARAM lParam)    &#x2F;&#x2F; 第二个消息参数</span><br></pre></td></tr></table></figure></p>
 <p><strong>宏定义和函数调用方式扫盲</strong></p>
 <ol>
 <li><code>__stdcall</code> 是 Standard Call 的缩写，是 C++ 的标准调用方式：所有参数从右到左依次入栈，如果是调用类成员的话，最后一个入栈的是 this 指针。</li>
@@ -379,19 +375,15 @@
 <li><code>LRESULT</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef LONG_PTR    LRESULT;</span><br><span class="line">typedef _W64 long LONG_PTR, *PLONG_PTR; &#x2F;&#x2F; _W64在VS2013后就取消了</span><br></pre></td></tr></table></figure></li>
 <li><code>WPARAM</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef UINT_PTR    WPARAM;</span><br><span class="line">typedef _W64 unsigned int UINT_PTR, *PUINT_PTR;</span><br></pre></td></tr></table></figure></li>
 <li><code>LPARAM</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef LONG_PTR    LPARAM;</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
 <h3 id="入口函数"><a href="#入口函数" class="headerlink" title="入口函数"></a>入口函数</h3><blockquote>
 <p>_tWinMain</p>
 </blockquote>
 <h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">int _stdcall _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,</span><br><span class="line">	PTSTR szCmdLine, int iCmdShow)</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;定义窗口类</span><br><span class="line">	WNDCLASSEX wndClassEx;</span><br><span class="line">	wndClassEx.cbSize &#x3D; sizeof(WNDCLASSEX);</span><br><span class="line">	wndClassEx.style &#x3D; CS_HREDRAW | CS_VREDRAW;</span><br><span class="line">	wndClassEx.lpfnWndProc &#x3D; WndProc;</span><br><span class="line">	wndClassEx.cbClsExtra &#x3D; 0;</span><br><span class="line">	wndClassEx.cbWndExtra &#x3D; 0;</span><br><span class="line">	wndClassEx.hInstance &#x3D; hInstance;</span><br><span class="line">	wndClassEx.hIcon &#x3D; LoadIcon(NULL, IDI_APPLICATION);</span><br><span class="line">	wndClassEx.hCursor &#x3D; LoadCursor(NULL, IDC_ARROW);</span><br><span class="line">	wndClassEx.hbrBackground &#x3D; (HBRUSH)GetStockObject(WHITE_BRUSH);</span><br><span class="line">	wndClassEx.lpszMenuName &#x3D; NULL;</span><br><span class="line">	wndClassEx.lpszClassName &#x3D; L&quot;SimWinClass&quot;;</span><br><span class="line">	wndClassEx.hIconSm &#x3D; NULL;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;注册窗口类</span><br><span class="line">	if (!RegisterClassEx(&amp;wndClassEx))</span><br><span class="line">	&#123;</span><br><span class="line">		MessageBox(NULL, L&quot;注册窗口类失败!&quot;, L&quot;SimpleWinApp&quot;, 0);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;创建窗口</span><br><span class="line">	HWND hwnd &#x3D; NULL;</span><br><span class="line">	hwnd &#x3D; CreateWindowEx(NULL, &#x2F;&#x2F;窗口扩展风格</span><br><span class="line">		L&quot;SimWinClass&quot;,          &#x2F;&#x2F;窗口类名称</span><br><span class="line">		L&quot;SimpleWinApp&quot;,         &#x2F;&#x2F;窗口标题</span><br><span class="line">		WS_OVERLAPPEDWINDOW,     &#x2F;&#x2F;窗口风格</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始X位置</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始Y位置</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始宽度</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始高度</span><br><span class="line">		NULL,                    &#x2F;&#x2F;父窗口句柄</span><br><span class="line">		NULL,                    &#x2F;&#x2F;窗口菜单句柄</span><br><span class="line">		hInstance,               &#x2F;&#x2F;程序实例句柄</span><br><span class="line">		NULL);                  &#x2F;&#x2F; 创建参数</span><br><span class="line"></span><br><span class="line">	if (hwnd &#x3D;&#x3D; NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		MessageBox(NULL, L&quot;创建窗口失败!&quot;, L&quot;SimpleWinApp&quot;, 0);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;显示窗口</span><br><span class="line">	ShowWindow(hwnd, iCmdShow);</span><br><span class="line">	UpdateWindow(hwnd);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;消息循环</span><br><span class="line">	MSG  msg;</span><br><span class="line">	while (GetMessage(&amp;msg, NULL, 0, 0))</span><br><span class="line">	&#123;</span><br><span class="line">		TranslateMessage(&amp;msg);</span><br><span class="line">		DispatchMessage(&amp;msg);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;另外一种消息循环</span><br><span class="line">	&#x2F;**</span><br><span class="line">	MSG  msg;</span><br><span class="line">	while(TRUE)</span><br><span class="line">	&#123;</span><br><span class="line">		if(PeekMessage(&amp;msg, NULL, 0, 0, PM_REMOVE))</span><br><span class="line">		&#123;</span><br><span class="line">			if(msg.message &#x3D;&#x3D; WM_QUIT)</span><br><span class="line">				break;</span><br><span class="line"></span><br><span class="line">			TranslateMessage( &amp;msg );</span><br><span class="line">			DispatchMessage( &amp;msg );</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			&#x2F;&#x2F;进行其它处理</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	**&#x2F;</span><br><span class="line"></span><br><span class="line">	return msg.wParam;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="相关类定义"><a href="#相关类定义" class="headerlink" title="相关类定义"></a>相关类定义</h4><h5 id="WNDCLASS"><a href="#WNDCLASS" class="headerlink" title="WNDCLASS"></a>WNDCLASS</h5><blockquote>
-<p>窗口类</p>
+<p>窗口类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">typedef struct tagWNDCLASSW &#123;</span><br><span class="line">    UINT        cbSize;         &#x2F;&#x2F; 窗口类所占字节数</span><br><span class="line">    UINT        style;          &#x2F;&#x2F; 指定窗口类型</span><br><span class="line">    WNDPROC     lpfnWndProc;    &#x2F;&#x2F; 指定窗口过程（必须是回调函数）</span><br><span class="line">    int         cbClsExtra;     &#x2F;&#x2F; 预留的额外空间，一般为 0</span><br><span class="line">    int         cbWndExtra;     &#x2F;&#x2F; 预留的额外空间，一般为 0</span><br><span class="line">    HINSTANCE   hInstance;      &#x2F;&#x2F; 应用程序的实例句柄</span><br><span class="line">    HICON       hIcon;          &#x2F;&#x2F; 为所有基于该窗口类的窗口设定一个图标</span><br><span class="line">    HCURSOR     hCursor;        &#x2F;&#x2F; 为所有基于该窗口类的窗口设定一个鼠标指针</span><br><span class="line">    HBRUSH      hbrBackground;  &#x2F;&#x2F; 指定窗口背景色</span><br><span class="line">    LPCWSTR     lpszMenuName;   &#x2F;&#x2F; 指定窗口菜单</span><br><span class="line">    LPCWSTR     lpszClassName;  &#x2F;&#x2F; 指定窗口类名</span><br><span class="line">&#125; WNDCLASSW, *PWNDCLASSW, NEAR *NPWNDCLASSW, FAR *LPWNDCLASSW;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">typedef struct tagWNDCLASSW &#123;</span><br><span class="line">    UINT        cbSize;         &#x2F;&#x2F; 窗口类所占字节数</span><br><span class="line">    UINT        style;          &#x2F;&#x2F; 指定窗口类型</span><br><span class="line">    WNDPROC     lpfnWndProc;    &#x2F;&#x2F; 指定窗口过程（必须是回调函数）</span><br><span class="line">    int         cbClsExtra;     &#x2F;&#x2F; 预留的额外空间，一般为 0</span><br><span class="line">    int         cbWndExtra;     &#x2F;&#x2F; 预留的额外空间，一般为 0</span><br><span class="line">    HINSTANCE   hInstance;      &#x2F;&#x2F; 应用程序的实例句柄</span><br><span class="line">    HICON       hIcon;          &#x2F;&#x2F; 为所有基于该窗口类的窗口设定一个图标</span><br><span class="line">    HCURSOR     hCursor;        &#x2F;&#x2F; 为所有基于该窗口类的窗口设定一个鼠标指针</span><br><span class="line">    HBRUSH      hbrBackground;  &#x2F;&#x2F; 指定窗口背景色</span><br><span class="line">    LPCWSTR     lpszMenuName;   &#x2F;&#x2F; 指定窗口菜单</span><br><span class="line">    LPCWSTR     lpszClassName;  &#x2F;&#x2F; 指定窗口类名</span><br><span class="line">&#125; WNDCLASSW, *PWNDCLASSW, NEAR *NPWNDCLASSW, FAR *LPWNDCLASSW;</span><br></pre></td></tr></table></figure>
-
 <p><strong>常见style</strong>   </p>
 <ul>
 <li><code>CS_VREDRAW</code>：移动或者调整窗口的高度（垂直方向）时，重绘整个窗口</li>
@@ -402,7 +394,6 @@
 <li><code>typedef unsigned int   UINT;</code></li>
 <li><code>typedef LRESULT (CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);</code></li>
 <li><code>LPCWSTR</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">typedef _Null_terminated_ CONST WCHAR *LPCWSTR, *PCWSTR;</span><br><span class="line">typedef wchar_t WCHAR;    &#x2F;&#x2F; wc,   16-bit UNICODE character</span><br></pre></td></tr></table></figure>
-
 </li>
 </ul>
 <h4 id="相关函数定义"><a href="#相关函数定义" class="headerlink" title="相关函数定义"></a>相关函数定义</h4><h5 id="CreateWindow"><a href="#CreateWindow" class="headerlink" title="CreateWindow"></a>CreateWindow</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">HWND WINAPI CreateWindow(</span><br><span class="line">  _In_opt_  LPCTSTR lpClassName,    &#x2F;&#x2F; 窗口类名称</span><br><span class="line">  _In_opt_  LPCTSTR lpWindowName,   &#x2F;&#x2F; 窗口标题</span><br><span class="line">  _In_      DWORD dwStyle,          &#x2F;&#x2F; 窗口风格，或称窗口格式</span><br><span class="line">  _In_      int x,                  &#x2F;&#x2F; 初始 x 坐标</span><br><span class="line">  _In_      int y,                  &#x2F;&#x2F; 初始 y 坐标</span><br><span class="line">  _In_      int nWidth,             &#x2F;&#x2F; 初始 x 方向尺寸</span><br><span class="line">  _In_      int nHeight,            &#x2F;&#x2F; 初始 y 方向尺寸</span><br><span class="line">  _In_opt_  HWND hWndParent,        &#x2F;&#x2F; 父窗口句柄</span><br><span class="line">  _In_opt_  HMENU hMenu,            &#x2F;&#x2F; 窗口菜单句柄</span><br><span class="line">  _In_opt_  HINSTANCE hInstance,    &#x2F;&#x2F; 程序实例句柄</span><br><span class="line">  _In_opt_  LPVOID lpParam          &#x2F;&#x2F; 创建参数</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
@@ -430,12 +421,12 @@
 <li><code>WS_OVERLAPPEDWINDOW</code>：相当于（WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX），与 WS_TILEDWINDOW 风格相同</li>
 </ul>
 <h5 id="MessageBox"><a href="#MessageBox" class="headerlink" title="MessageBox"></a>MessageBox</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int WINAPI MessageBox(</span><br><span class="line">        _In_opt_  HWND hWnd,            &#x2F;&#x2F; 该消息框的父窗口句柄(如果为NULL，则没有拥有父窗口)</span><br><span class="line">        _In_opt_  LPCTSTR lpText,       &#x2F;&#x2F; 消息框的内容</span><br><span class="line">        _In_opt_  LPCTSTR lpCaption,    &#x2F;&#x2F; 消息框的标题</span><br><span class="line">        _In_      UINT uType            &#x2F;&#x2F; 指定一个决定对话框的内容和行为的位标志集</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>返回值</strong>  </p>
 <ul>
 <li>消息框中返回一个整数值</li>
 <li>该值指示用户单击了哪个按钮</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -443,36 +434,17 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>IDOK</td>
 <td>用户按下了“确认”按钮</td>
 </tr>
-<tr>
-<td>IDCANCEL</td>
-<td>用户按下了“取消”按钮</td>
-</tr>
-<tr>
-<td>IDABORT</td>
-<td>用户按下了“中止”按钮</td>
-</tr>
-<tr>
-<td>IDRETRY</td>
-<td>用户按下了“重试”按钮</td>
-</tr>
-<tr>
-<td>IDIGNORE</td>
-<td>用户按下了“忽略”按钮</td>
-</tr>
-<tr>
-<td>IDYE</td>
-<td>用户按下了“是”按钮</td>
-</tr>
-<tr>
-<td>IDNO</td>
-<td>用户按下了“否”按钮</td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<p>IDCANCEL|用户按下了“取消”按钮<br>IDABORT|用户按下了“中止”按钮<br>IDRETRY|用户按下了“重试”按钮<br>IDIGNORE|用户按下了“忽略”按钮<br>IDYE|用户按下了“是”按钮<br>IDNO|用户按下了“否”按钮</p>
 <p><strong>uType参数取值</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -480,31 +452,16 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>MB_OK</td>
 <td>默认值，有一个“确认”按钮在里面</td>
 </tr>
-<tr>
-<td>MB_YESNO</td>
-<td>有“是”和“否”两个按钮在里面</td>
-</tr>
-<tr>
-<td>MB_ABORTRETRYIGNORE</td>
-<td>有“中止”，“重试”和“跳过”三个按钮在里面</td>
-</tr>
-<tr>
-<td>MB_YESNOCANCEL</td>
-<td>有“是”，“否”和“取消”三个按钮在里面</td>
-</tr>
-<tr>
-<td>MB_RETRYCANCEL</td>
-<td>有“重试”和“取消”两个按钮在里面</td>
-</tr>
-<tr>
-<td>MB_OKCANCEL</td>
-<td>有“确定”和“取消”两个按钮在里面</td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<p>MB_YESNO|有“是”和“否”两个按钮在里面<br>MB_ABORTRETRYIGNORE|有“中止”，“重试”和“跳过”三个按钮在里面<br>MB_YESNOCANCEL|有“是”，“否”和“取消”三个按钮在里面<br>MB_RETRYCANCEL|有“重试”和“取消”两个按钮在里面<br>MB_OKCANCEL|有“确定”和“取消”两个按钮在里面</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -512,23 +469,14 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
-<td>MB_ICONWARNING</td>
-<td>惊叹号</td>
-</tr>
+<tbody>
 <tr>
-<td>MB_ICONINFORMATION</td>
-<td>字母i</td>
+<td></td>
 </tr>
-<tr>
-<td>MB_ICONQUESTION</td>
-<td>问号</td>
-</tr>
-<tr>
-<td>MB_ICONERROR</td>
-<td>叉号</td>
-</tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+<p>MB_ICONWARNING|惊叹号<br>MB_ICONINFORMATION|字母i<br>MB_ICONQUESTION|问号<br>MB_ICONERROR|叉号</p>
 <h5 id="ShowWindow"><a href="#ShowWindow" class="headerlink" title="ShowWindow"></a>ShowWindow</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">BOOL WINAPI ShowWindow(</span><br><span class="line">        _In_  HWND hWnd,        &#x2F;&#x2F; 窗口句柄</span><br><span class="line">        _In_  int nCmdShow      &#x2F;&#x2F; 控制窗口如何显示</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p><strong>返回值</strong></p>
 <ul>
@@ -542,7 +490,6 @@
 <li><code>SW_HIDE</code>：隐藏窗口并激活其他窗口</li>
 </ul>
 <h5 id="UpdateWindow"><a href="#UpdateWindow" class="headerlink" title="UpdateWindow"></a>UpdateWindow</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BOOL UpdateWindow(</span><br><span class="line">  _In_  HWND hWnd   &#x2F;&#x2F; 指定要更新的窗口的句柄</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>返回值</strong></p>
 <ul>
 <li>如果函数调用成功，返回值为非 0</li>
@@ -554,7 +501,6 @@
 <li>如果更新区域为空，则不发送消息</li>
 </ul>
 <h5 id="GetMessage"><a href="#GetMessage" class="headerlink" title="GetMessage"></a>GetMessage</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BOOL WINAPI GetMessage(</span><br><span class="line">  _Out_     LPMSG lpMsg,            &#x2F;&#x2F; 指向 MSG 结构的指针，用于存放获取到的消息</span><br><span class="line">  _In_opt_  HWND hWnd,              &#x2F;&#x2F; 需要获取消息的窗口的句柄</span><br><span class="line">  _In_      UINT wMsgFilterMin,     &#x2F;&#x2F; 指定被可以被获取的消息值的最小整数</span><br><span class="line">  _In_      UINT wMsgFilterMax      &#x2F;&#x2F; 指定被可以被获取的消息值的最大整数</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>返回值</strong></p>
 <ul>
 <li>如果函数取得 WM_QUIT 之外的其他消息，返回值是 true</li>
@@ -577,7 +523,6 @@
 <li><code>wMsgFilterMin</code> 和 <code>wMsgFilterMax</code> 参数限定消息获取的范围，如果二者都为 0，则消息获取的范围为所有消息</li>
 </ol>
 <h5 id="PeekMessage"><a href="#PeekMessage" class="headerlink" title="PeekMessage"></a>PeekMessage</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">BOOL WINAPI PeekMessage(</span><br><span class="line">  _Out_     LPMSG lpMsg,            &#x2F;&#x2F; 指向 MSG 结构的指针，用于存放获取到的消息</span><br><span class="line">  _In_opt_  HWND hWnd,              &#x2F;&#x2F; 需要获取消息的窗口的句柄</span><br><span class="line">  _In_      UINT wMsgFilterMin,     &#x2F;&#x2F; 指定被可以被获取的消息值的最小整数</span><br><span class="line">  _In_      UINT wMsgFilterMax      &#x2F;&#x2F; 指定被可以被获取的消息值的最大整数</span><br><span class="line">  _In_     UINT  wRemoveMsg         &#x2F;&#x2F; 指定消息如何被处理</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>返回值</strong></p>
 <ul>
 <li>如果获取到有效的消息，返回值是 true；</li>
@@ -599,7 +544,6 @@
 <li><code>PM_QS_SENDMESSAGE</code>：处理所有 send 的消息</li>
 </ul>
 <h5 id="TranslateMessage"><a href="#TranslateMessage" class="headerlink" title="TranslateMessage"></a>TranslateMessage</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BOOL WINAPI TranslateMessage(</span><br><span class="line">  _In_  const MSG *lpMsg        &#x2F;&#x2F; 指向含有消息的 MSG 结构的指针</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>函数功能</strong></p>
 <ul>
 <li>将虚拟键消息转换为字符消息</li>
@@ -613,20 +557,16 @@
 <li>如果消息没被转换（字符消息没被寄送到调用线程的消息队列里）则返回值是零。</li>
 </ol>
 <h5 id="DispatchMessage"><a href="#DispatchMessage" class="headerlink" title="DispatchMessage"></a>DispatchMessage</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">LRESULT WINAPI DispatchMessage(</span><br><span class="line">  _In_  const MSG *lpmsg        &#x2F;&#x2F; 指向含有消息的 MSG结构 的指针</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>函数功能</strong><br>分派一个消息给窗口过程（回调函数）</p>
 <p><strong>返回值</strong><br>返回值是窗口过程返回的值</p>
 <h3 id="窗口过程"><a href="#窗口过程" class="headerlink" title="窗口过程"></a>窗口过程</h3><h4 id="源码-1"><a href="#源码-1" class="headerlink" title="源码"></a>源码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)</span><br><span class="line">&#123;</span><br><span class="line">	switch (message)</span><br><span class="line">	&#123;</span><br><span class="line">	case WM_CREATE:</span><br><span class="line">		break;</span><br><span class="line"></span><br><span class="line">	case WM_KEYDOWN:</span><br><span class="line">		if (wParam &#x3D;&#x3D; VK_ESCAPE)</span><br><span class="line">			PostQuitMessage(0);</span><br><span class="line">		break;</span><br><span class="line"></span><br><span class="line">	case WM_DESTROY:</span><br><span class="line">		PostQuitMessage(0);</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return DefWindowProc(hwnd, message, wParam, lParam);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h4><h5 id="PostQuitMessage"><a href="#PostQuitMessage" class="headerlink" title="PostQuitMessage"></a>PostQuitMessage</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VOID WINAPI PostQuitMessage(</span><br><span class="line">  _In_  int nExitCode       \\ 指定应用程序的退出代码，此值被用作 WM_QUIT 消息的 wParam 参数</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>函数功能</strong></p>
 <ul>
 <li>向系统表明有个线程提出终止（退出）请求</li>
 <li>实际上是发送一个 WM_QUIT 消息给线程的消息队列并立即返回</li>
 </ul>
 <h5 id="DefWindowProc"><a href="#DefWindowProc" class="headerlink" title="DefWindowProc"></a>DefWindowProc</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LRESULT WINAPI DefWindowProc(</span><br><span class="line">  _In_  HWND hWnd,      \\ 接收消息的窗口句柄</span><br><span class="line">  _In_  UINT Msg,       \\ 消息的标识符</span><br><span class="line">  _In_  WPARAM wParam,  \\ 指定消息的附加消息</span><br><span class="line">  _In_  LPARAM lParam   \\ 指定消息的附加消息</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
 <p><strong>返回值</strong><br>消息处理结果</p>
 <p><strong>函数功能</strong></p>
 <ul>
@@ -635,8 +575,7 @@
 </ul>
 <h4 id="Windows常用消息和含义"><a href="#Windows常用消息和含义" class="headerlink" title="Windows常用消息和含义"></a>Windows常用消息和含义</h4><p><a href="https://fishc.com.cn/thread-47244-1-1.html" target="_blank" rel="noopener">Windows常用消息和含义</a></p>
 <h1 id="3-完整代码"><a href="#3-完整代码" class="headerlink" title="3 完整代码"></a>3 完整代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;Windows.h&gt;</span><br><span class="line">#include &lt;tchar.h&gt;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;窗口过程声明</span><br><span class="line">LRESULT _stdcall WndProc(HWND, UINT, WPARAM, LPARAM);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 入口函数</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">int _stdcall _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,</span><br><span class="line">	PTSTR szCmdLine, int iCmdShow)</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F;定义窗口类</span><br><span class="line">	WNDCLASSEX wndClassEx;</span><br><span class="line">	wndClassEx.cbSize &#x3D; sizeof(WNDCLASSEX);</span><br><span class="line">	wndClassEx.style &#x3D; CS_HREDRAW | CS_VREDRAW;</span><br><span class="line">	wndClassEx.lpfnWndProc &#x3D; WndProc;</span><br><span class="line">	wndClassEx.cbClsExtra &#x3D; 0;</span><br><span class="line">	wndClassEx.cbWndExtra &#x3D; 0;</span><br><span class="line">	wndClassEx.hInstance &#x3D; hInstance;</span><br><span class="line">	wndClassEx.hIcon &#x3D; LoadIcon(NULL, IDI_APPLICATION);</span><br><span class="line">	wndClassEx.hCursor &#x3D; LoadCursor(NULL, IDC_ARROW);</span><br><span class="line">	wndClassEx.hbrBackground &#x3D; (HBRUSH)GetStockObject(WHITE_BRUSH);</span><br><span class="line">	wndClassEx.lpszMenuName &#x3D; NULL;</span><br><span class="line">	wndClassEx.lpszClassName &#x3D; L&quot;SimWinClass&quot;;</span><br><span class="line">	wndClassEx.hIconSm &#x3D; NULL;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;注册窗口类</span><br><span class="line">	if (!RegisterClassEx(&amp;wndClassEx))</span><br><span class="line">	&#123;</span><br><span class="line">		MessageBox(NULL, L&quot;注册窗口类失败!&quot;, L&quot;SimpleWinApp&quot;, 0);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;创建窗口</span><br><span class="line">	HWND hwnd &#x3D; NULL;</span><br><span class="line">	hwnd &#x3D; CreateWindowEx(NULL, &#x2F;&#x2F;窗口扩展风格</span><br><span class="line">		L&quot;SimWinClass&quot;,          &#x2F;&#x2F;窗口类名称</span><br><span class="line">		L&quot;SimpleWinApp&quot;,         &#x2F;&#x2F;窗口标题</span><br><span class="line">		WS_OVERLAPPEDWINDOW,     &#x2F;&#x2F;窗口风格</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始X位置</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始Y位置</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始宽度</span><br><span class="line">		CW_USEDEFAULT,           &#x2F;&#x2F;窗口初始高度</span><br><span class="line">		NULL,                    &#x2F;&#x2F;父窗口句柄</span><br><span class="line">		NULL,                    &#x2F;&#x2F;窗口菜单句柄</span><br><span class="line">		hInstance,               &#x2F;&#x2F;程序实例句柄</span><br><span class="line">		NULL);                  &#x2F;&#x2F; 创建参数</span><br><span class="line"></span><br><span class="line">	if (hwnd &#x3D;&#x3D; NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		MessageBox(NULL, L&quot;创建窗口失败!&quot;, L&quot;SimpleWinApp&quot;, 0);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;显示窗口</span><br><span class="line">	ShowWindow(hwnd, iCmdShow);</span><br><span class="line">	UpdateWindow(hwnd);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;消息循环</span><br><span class="line">	MSG  msg;</span><br><span class="line">	while (GetMessage(&amp;msg, NULL, 0, 0))</span><br><span class="line">	&#123;</span><br><span class="line">		TranslateMessage(&amp;msg);</span><br><span class="line">		DispatchMessage(&amp;msg);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;另外一种消息循环</span><br><span class="line">	&#x2F;**</span><br><span class="line">	MSG  msg;</span><br><span class="line">	while(TRUE)</span><br><span class="line">	&#123;</span><br><span class="line">		if(PeekMessage(&amp;msg, NULL, 0, 0, PM_REMOVE))</span><br><span class="line">		&#123;</span><br><span class="line">			if(msg.message &#x3D;&#x3D; WM_QUIT)</span><br><span class="line">				break;</span><br><span class="line"></span><br><span class="line">			TranslateMessage( &amp;msg );</span><br><span class="line">			DispatchMessage( &amp;msg );</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			&#x2F;&#x2F;进行其它处理</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	**&#x2F;</span><br><span class="line"></span><br><span class="line">	return msg.wParam;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">&#x2F;&#x2F; Desc: 窗口过程</span><br><span class="line">&#x2F;&#x2F;-----------------------------------------------------------------------------</span><br><span class="line">LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)</span><br><span class="line">&#123;</span><br><span class="line">	switch (message)</span><br><span class="line">	&#123;</span><br><span class="line">	case WM_CREATE:</span><br><span class="line">		break;</span><br><span class="line"></span><br><span class="line">	case WM_KEYDOWN:</span><br><span class="line">		if (wParam &#x3D;&#x3D; VK_ESCAPE)</span><br><span class="line">			PostQuitMessage(0);</span><br><span class="line">		break;</span><br><span class="line"></span><br><span class="line">	case WM_DESTROY:</span><br><span class="line">		PostQuitMessage(0);</span><br><span class="line">		break;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	return DefWindowProc(hwnd, message, wParam, lParam);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4 运行结果"></a>4 运行结果</h1><p><img src="/blog/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/3.jpg" alt></p>
+<h1 id="4-运行结果"><a href="#4-运行结果" class="headerlink" title="4 运行结果"></a>4 运行结果</h1><p><img src="/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/3.jpg" alt></p>
 
     </div>
 
@@ -646,9 +585,9 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/DirectX/" rel="tag"># DirectX</a>
-              <a href="/blog/tags/Visual-Studio/" rel="tag"># Visual Studio</a>
-              <a href="/blog/tags/Windows/" rel="tag"># Windows</a>
+              <a href="/tags/DirectX/" rel="tag"># DirectX</a>
+              <a href="/tags/Visual-Studio/" rel="tag"># Visual Studio</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
           </div>
 
         
@@ -657,11 +596,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2020/01/07/new-article/" rel="prev" title="new_article">
+    <a href="/2020/01/07/new-article/" rel="prev" title="new_article">
       <i class="fa fa-chevron-left"></i> new_article
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/" rel="next" title="基于DirectX的茶壶模型绘制">
+    <a href="/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/" rel="next" title="基于DirectX的茶壶模型绘制">
       基于DirectX的茶壶模型绘制 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -759,25 +698,25 @@
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/motion.js"></script>
 
 
-  
-
-
+<script src="/js/next-boot.js"></script>
 
 
   
-<script src="/blog/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -813,5 +752,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

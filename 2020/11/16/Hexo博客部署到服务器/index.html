@@ -5,54 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo博客部署到服务器">
-<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/3.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/2.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/1.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/4.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/5.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/6.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/7.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/14.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/8.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/9.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/10.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/11.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/12.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/13.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/15.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/16.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/17.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/3.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/2.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/1.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/4.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/5.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/6.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/7.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/14.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/8.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/9.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/10.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/11.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/12.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/13.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/15.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/16.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/17.png">
 <meta property="article:published_time" content="2020-11-16T15:34:39.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:58.926Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="CentOS">
 <meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/3.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/3.png">
 
-<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+<link rel="canonical" href="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
 
 
 <script id="page-configurations">
@@ -122,7 +122,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -142,27 +142,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -228,27 +228,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/blog/images/me.jpg">
+      src="/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -288,10 +288,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/me.jpg">
+      <meta itemprop="image" content="/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -326,7 +326,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
+                  <a href="/categories/hexo/" itemprop="url" rel="index"><span itemprop="name">hexo</span></a>
                 </span>
             </span>
 
@@ -353,70 +353,44 @@
 
 </blockquote>
 <a id="more"></a>
-
-<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><p><strong>方法一</strong>：通过宝塔面板安装（安装成功，但却不能访问到nginx的welcome页面，遂卸载）<br><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/3.png" alt="错误1"></p>
-<p><strong>方法二</strong>：yum安装（仍然出现错误）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nginx</span><br></pre></td></tr></table></figure>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/2.png" alt="错误2"></p>
+<h1 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h1><p><strong>方法一</strong>：通过宝塔面板安装（安装成功，但却不能访问到nginx的welcome页面，遂卸载）<br><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/3.png" alt="错误1"></p>
+<p><strong>方法二</strong>：yum安装（仍然出现错误）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nginx</span><br></pre></td></tr></table></figure><br><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/2.png" alt="错误2"></p>
 <p><strong>方法三</strong>： 解压缩安装</p>
 <p><strong>1. 进入官网下载nginx压缩包及相关依赖</strong></p>
 <p>nginx下载页面：<a href="http://nginx.org/en/download.html" target="_blank" rel="noopener">http://nginx.org/en/download.html</a></p>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/1.png" alt="nginx下载页面"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/1.png" alt="nginx下载页面"></p>
 <p><strong>2. 安装nginx依赖pcre</strong></p>
 <p>pcre下载页面：<a href="https://ftp.pcre.org/pub/pcre/" target="_blank" rel="noopener">https://ftp.pcre.org/pub/pcre/</a></p>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/4.png" alt="pcre下载页面"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/4.png" alt="pcre下载页面"></p>
 <p><strong>3. 将nginx和pcre的压缩包均通过XFtp传输到服务器上</strong></p>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/5.png" alt="nginx和pcre"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/5.png" alt="nginx和pcre"></p>
 <p><strong>4. 安装pcre</strong></p>
-<p>（1）解压pcre压缩包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf pcre压缩包名称</span><br></pre></td></tr></table></figure>
-
-<p>（2）进入pcre目录，执行configure文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure</span><br></pre></td></tr></table></figure>
-
-<p>（3）在pcre目录下执行以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<p>（4）检查安装是否成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcre-config --version</span><br></pre></td></tr></table></figure>
-
-<p><strong>5. 通过yum安装openssl和zlib依赖</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel</span><br></pre></td></tr></table></figure>
-
+<p>（1）解压pcre压缩包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf pcre压缩包名称</span><br></pre></td></tr></table></figure></p>
+<p>（2）进入pcre目录，执行configure文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure</span><br></pre></td></tr></table></figure></p>
+<p>（3）在pcre目录下执行以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></p>
+<p>（4）检查安装是否成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcre-config --version</span><br></pre></td></tr></table></figure></p>
+<p><strong>5. 通过yum安装openssl和zlib依赖</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install make zlib zlib-devel gcc-c++ libtool openssl openssl-devel</span><br></pre></td></tr></table></figure></p>
 <p><strong>6. 安装nginx</strong></p>
-<p>（1）解压缩nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx压缩包名称</span><br></pre></td></tr></table></figure>
-
-<p>（2）进入nginx目录执行configure文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/6.png" alt="配置完成页面"></p>
-<p>（3）在nginx目录执行命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
+<p>（1）解压缩nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx压缩包名称</span><br></pre></td></tr></table></figure></p>
+<p>（2）进入nginx目录执行configure文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;configure</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/6.png" alt="配置完成页面"></p>
+<p>（3）在nginx目录执行命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure></p>
 <p><strong>7. nginx安装成功后目录为/usr/local/</strong></p>
 <p>其执行文件路径为/usr/local/sbin</p>
 <p><strong>8. 配置nginx环境变量</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. vim &#x2F;etc&#x2F;profile</span><br><span class="line"></span><br><span class="line">2. 添加NGINX_HOME</span><br><span class="line">NGINX_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;nginx</span><br><span class="line"># PATH中添加 $NGINX_HOME&#x2F;sbin</span><br><span class="line">export $PATH&#x3D;&quot;$PATH:$NGINX_HOME&#x2F;sbin&quot;</span><br><span class="line"></span><br><span class="line">3. 保存文件并退出</span><br><span class="line"></span><br><span class="line">4. source &#x2F;etc&#x2F;profile 使文件生效</span><br><span class="line"></span><br><span class="line">5. 在非&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;sbin目录下执行nginx -v验证是否配置环境成功</span><br></pre></td></tr></table></figure>
-
 <p><strong>9. 启动nginx并访问</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nginx # 启动</span><br><span class="line">ps -ef | grep nginx # 查看nginx进程证明其确实启动</span><br><span class="line">浏览器中访问：http:&#x2F;&#x2F;101.200.3.108:80</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/7.png" alt="成功页面"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/7.png" alt="成功页面"></p>
 <p><strong>10. 修改nginx配置文件</strong></p>
 <blockquote>
 <p>这一步在配置完成git仓库后再进行</p>
 </blockquote>
 <p><em>配置文件地址：/usr/local/nginx/conf/nginx.conf</em></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br><span class="line"></span><br><span class="line">1.将location &#x2F; 下的root值更换为git工作目录 &#x2F;home&#x2F;www&#x2F;website</span><br><span class="line">2.将location &#x2F;50x.html下的root值更换为git工作目录 &#x2F;home&#x2F;www&#x2F;website</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/14.png" alt="nginx配置文件"></p>
-<h2 id="常用nginx命令"><a href="#常用nginx命令" class="headerlink" title="常用nginx命令"></a>常用nginx命令</h2><p>若是宝塔面板安装，则nginx安装目录为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;www&#x2F;server&#x2F;nginx</span><br><span class="line"># 配置文件路径为：&#x2F;www&#x2F;server&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br></pre></td></tr></table></figure>
-
-<p>若是解压缩安装，则nginx安装目录为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;nginx</span><br><span class="line"># 配置文件路径为：&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br></pre></td></tr></table></figure>
-<p>解压缩安装的nginx必须在其安装目录执行nginx命令才有效，若想在任何地方都有效则需要配置环境变量</p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/14.png" alt="nginx配置文件"></p>
+<h2 id="常用nginx命令"><a href="#常用nginx命令" class="headerlink" title="常用nginx命令"></a>常用nginx命令</h2><p>若是宝塔面板安装，则nginx安装目录为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;www&#x2F;server&#x2F;nginx</span><br><span class="line"># 配置文件路径为：&#x2F;www&#x2F;server&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br></pre></td></tr></table></figure></p>
+<p>若是解压缩安装，则nginx安装目录为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;local&#x2F;nginx</span><br><span class="line"># 配置文件路径为：&#x2F;usr&#x2F;local&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br></pre></td></tr></table></figure><br>解压缩安装的nginx必须在其安装目录执行nginx命令才有效，若想在任何地方都有效则需要配置环境变量</p>
 <ol>
 <li><p>启动</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx</span><br></pre></td></tr></table></figure>
@@ -429,57 +403,36 @@
 </li>
 <li><p>查看nginx配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure>
-
 </li>
 </ol>
-<h1 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h1><p><strong>安装命令</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nodejs</span><br></pre></td></tr></table></figure>
-
-<p><strong>检测是否安装成功</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-
-<h1 id="安装Git并配置仓库"><a href="#安装Git并配置仓库" class="headerlink" title="安装Git并配置仓库"></a>安装Git并配置仓库</h1><p><strong>1. 安装git</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git</span><br></pre></td></tr></table></figure>
-
-<p><strong>2. 新建git用户</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br></pre></td></tr></table></figure>
-
-<p><strong>3. 为git用户添加权限</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">chmod 740 &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line">vim &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line">添加 git All&#x3D;(ALL) ALL  # 为git账户添加权限</span><br><span class="line"></span><br><span class="line">chmod 400 &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line">passwd git # 为git用户设置密码</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/8.png" alt="为git用户添加权限语句"></p>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/9.png" alt="为git用户添加权限语句"></p>
+<h1 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h1><p><strong>安装命令</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y nodejs</span><br></pre></td></tr></table></figure></p>
+<p><strong>检测是否安装成功</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure></p>
+<h1 id="安装Git并配置仓库"><a href="#安装Git并配置仓库" class="headerlink" title="安装Git并配置仓库"></a>安装Git并配置仓库</h1><p><strong>1. 安装git</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install git</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 新建git用户</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser git</span><br></pre></td></tr></table></figure></p>
+<p><strong>3. 为git用户添加权限</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">chmod 740 &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line">vim &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line">添加 git All&#x3D;(ALL) ALL  # 为git账户添加权限</span><br><span class="line"></span><br><span class="line">chmod 400 &#x2F;etc&#x2F;sudoers</span><br><span class="line"></span><br><span class="line">passwd git # 为git用户设置密码</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/8.png" alt="为git用户添加权限语句"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/9.png" alt="为git用户添加权限语句"></p>
 <p><strong>4. 以git用户身份登录</strong></p>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/10.png" alt="以git用户身份登录"></p>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/11.png" alt="以git用户身份登录"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/10.png" alt="以git用户身份登录"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/11.png" alt="以git用户身份登录"></p>
 <p><strong>5. 在git用户目录下创建ssh密钥</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">mkdir .ssh</span><br><span class="line"></span><br><span class="line">cd .ssh</span><br><span class="line"></span><br><span class="line">vim authorized_keys</span><br><span class="line"></span><br><span class="line">添加本地Windows下已生成的密钥：位置如下图</span><br><span class="line"></span><br><span class="line">chmod 600 ~&#x2F;.ssh&#x2F;authorized_keys</span><br><span class="line"></span><br><span class="line">chmod 700 ~&#x2F;.ssh</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/12.png" alt="密钥地址"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/12.png" alt="密钥地址"></p>
 <p><strong>6. 创建git仓库</strong></p>
-<p>（1）使用root用户登录，创建git的工作文件夹</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;home</span><br><span class="line">mkdir -p www&#x2F;website</span><br></pre></td></tr></table></figure>
-
-<p>（2）使用git用户登录，初始化仓库设置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">git init --bare blog.git</span><br><span class="line"></span><br><span class="line">vim ~&#x2F;blog.git&#x2F;hooks&#x2F;post-receive</span><br><span class="line"></span><br><span class="line">添加 git --work-tree&#x3D;&#x2F;home&#x2F;www&#x2F;website --git-dir&#x3D;&#x2F;home&#x2F;git&#x2F;blog.git checkout -f</span><br><span class="line"></span><br><span class="line">chmod +x ~&#x2F;blog.git&#x2F;hooks&#x2F;post-receive</span><br></pre></td></tr></table></figure>
-
+<p>（1）使用root用户登录，创建git的工作文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;home</span><br><span class="line">mkdir -p www&#x2F;website</span><br></pre></td></tr></table></figure></p>
+<p>（2）使用git用户登录，初始化仓库设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line"></span><br><span class="line">git init --bare blog.git</span><br><span class="line"></span><br><span class="line">vim ~&#x2F;blog.git&#x2F;hooks&#x2F;post-receive</span><br><span class="line"></span><br><span class="line">添加 git --work-tree&#x3D;&#x2F;home&#x2F;www&#x2F;website --git-dir&#x3D;&#x2F;home&#x2F;git&#x2F;blog.git checkout -f</span><br><span class="line"></span><br><span class="line">chmod +x ~&#x2F;blog.git&#x2F;hooks&#x2F;post-receive</span><br></pre></td></tr></table></figure></p>
 <p><strong>7. Windows主机ssh连接服务器</strong></p>
-<p>（1）打开命令行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -v git@服务器IP地址</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/13.png" alt="连接成功"></p>
+<p>（1）打开命令行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -v git@服务器IP地址</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/13.png" alt="连接成功"></p>
 <p>（2）前往nginx步骤第10步配置一下nginx的配置文件</p>
 <h1 id="将本地hexo博客上传到服务器"><a href="#将本地hexo博客上传到服务器" class="headerlink" title="将本地hexo博客上传到服务器"></a>将本地hexo博客上传到服务器</h1><p><strong>1. 更改本地hexo配置文件</strong></p>
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/15.png" alt="更改本地hexo配置文件"></p>
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/15.png" alt="更改本地hexo配置文件"></p>
 <p><strong>2. 执行命令重新部署hexo</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/16.png" alt="重新部署hexo"></p>
-<p><strong>3. 服务器重启nginx服务</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
-
+<p><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/16.png" alt="重新部署hexo"></p>
+<p><strong>3. 服务器重启nginx服务</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure></p>
 <p><strong>4. 浏览器访问</strong></p>
-<p>输入服务器地址 <a href="http://101.200.3.108" target="_blank" rel="noopener">http://101.200.3.108</a> 即可访问博客<br><img src="/blog/blog/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/17.png" alt="输入服务器地址即可访问博客"></p>
+<p>输入服务器地址 <a href="http://101.200.3.108" target="_blank" rel="noopener">http://101.200.3.108</a> 即可访问博客<br><img src="/2020/11/16/Hexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/17.png" alt="输入服务器地址即可访问博客"></p>
 
     </div>
 
@@ -489,8 +442,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/CentOS/" rel="tag"># CentOS</a>
-              <a href="/blog/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/CentOS/" rel="tag"># CentOS</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
           </div>
 
         
@@ -499,11 +452,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2020/11/16/Git/" rel="prev" title="Git">
+    <a href="/2020/11/16/Git/" rel="prev" title="Git">
       <i class="fa fa-chevron-left"></i> Git
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2020/11/17/Nginx/" rel="next" title="Nginx">
+    <a href="/2020/11/17/Nginx/" rel="next" title="Nginx">
       Nginx <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -601,25 +554,25 @@
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/motion.js"></script>
 
 
-  
-
-
+<script src="/js/next-boot.js"></script>
 
 
   
-<script src="/blog/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -655,5 +608,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

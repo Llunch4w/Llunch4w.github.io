@@ -5,56 +5,56 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务器购买和宝塔部署">
-<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/1.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/2.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/3.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/4.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/5.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/7.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/18.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/19.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/8.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/11.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/12.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/10.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/13.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/14.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/15.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/16.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/17.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/20.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/21.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/22.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/1.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/2.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/3.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/4.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/5.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/7.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/18.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/19.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/8.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/11.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/12.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/10.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/13.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/14.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/15.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/16.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/17.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/20.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/21.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/22.png">
 <meta property="article:published_time" content="2020-11-14T23:14:46.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:59.145Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="云服务器">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/1.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/1.png">
 
-<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/">
+<link rel="canonical" href="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/">
 
 
 <script id="page-configurations">
@@ -124,7 +124,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -144,27 +144,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -230,27 +230,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/blog/images/me.jpg">
+      src="/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -290,10 +290,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/me.jpg">
+      <meta itemprop="image" content="/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -328,7 +328,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
+                  <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
                 </span>
             </span>
 
@@ -355,91 +355,89 @@
 
 </blockquote>
 <a id="more"></a>
-
 <h1 id="阿里云"><a href="#阿里云" class="headerlink" title="阿里云"></a>阿里云</h1><p>阿里云首页链接：<a href="https://www.aliyun.com/?utm_content=se_1007692031" target="_blank" rel="noopener">https://www.aliyun.com/?utm_content=se_1007692031</a></p>
 <h2 id="浏览方式"><a href="#浏览方式" class="headerlink" title="浏览方式"></a>浏览方式</h2><p>浏览首页底端的热门产品</p>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/1.png" alt="阿里云首页底部"></p>
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/1.png" alt="阿里云首页底部"></p>
 <h2 id="学生免费领取一个ECS"><a href="#学生免费领取一个ECS" class="headerlink" title="学生免费领取一个ECS"></a>学生免费领取一个ECS</h2><ol>
 <li>进入学生机模块</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/2.png" alt="学生机"></p>
-<ol start="2">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/2.png" alt="学生机"></p>
+<ol>
 <li>免费领取ECS</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/3.png" alt="免费领取ECS"></p>
-<ol start="3">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/3.png" alt="免费领取ECS"></p>
+<ol>
 <li>完成测试后领取</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/4.png" alt="完成测试后领取"></p>
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/4.png" alt="完成测试后领取"></p>
 <h2 id="优惠活动模块"><a href="#优惠活动模块" class="headerlink" title="优惠活动模块"></a>优惠活动模块</h2><p>优惠活动模块网址：<a href="https://www.aliyun.com/minisite/goods?userCode=0phtycgr" target="_blank" rel="noopener">https://www.aliyun.com/minisite/goods?userCode=0phtycgr</a></p>
 <p>免费服务器使用额度耗尽后可以去优惠模块购买。</p>
 <h1 id="XShell"><a href="#XShell" class="headerlink" title="XShell"></a>XShell</h1><h2 id="下载XShell"><a href="#下载XShell" class="headerlink" title="下载XShell"></a>下载XShell</h2><ol>
 <li>进入XShell下载官网：<a href="https://www.netsarang.com/zh/xshell-download/" target="_blank" rel="noopener"><a href="https://www.netsarang.com/zh/xshell-download/" target="_blank" rel="noopener">XShell官网</a></a></li>
 </ol>
-<ol start="2">
+<ol>
 <li>进入免费授权页面</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/5.png" alt="进入免费授权页面"></p>
-<ol start="3">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/5.png" alt="进入免费授权页面"></p>
+<ol>
 <li>填写个人信息</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/7.png" alt="填写个人信息"></p>
-<ol start="4">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/7.png" alt="填写个人信息"></p>
+<ol>
 <li>点击邮件中的链接即可下载</li>
 </ol>
-<p>注意有两封邮件，一封是安装XShell的，一封是安装XFtp的<br><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/18.png" alt="两封邮件"></p>
-<p>点击邮件中的链接就可以下载相应的程序了<br><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/19.png" alt="邮件链接"></p>
+<p>注意有两封邮件，一封是安装XShell的，一封是安装XFtp的<br><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/18.png" alt="两封邮件"></p>
+<p>点击邮件中的链接就可以下载相应的程序了<br><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/19.png" alt="邮件链接"></p>
 <h2 id="XShell远程连接远程服务器"><a href="#XShell远程连接远程服务器" class="headerlink" title="XShell远程连接远程服务器"></a>XShell远程连接远程服务器</h2><ol>
 <li>打开XShell，新建一个会话</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/8.png" alt="新建会话"></p>
-<ol start="2">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/8.png" alt="新建会话"></p>
+<ol>
 <li>主机号为云服务器的公网IP</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/11.png" alt="主机号配置"></p>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/12.png" alt="主机号配置"></p>
-<ol start="3">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/11.png" alt="主机号配置"></p>
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/12.png" alt="主机号配置"></p>
+<ol>
 <li>接下来会要求输入用户名和密码。用户名为root，密码在服务器管理端设置</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/10.png" alt="用户名和密码"></p>
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/10.png" alt="用户名和密码"></p>
 <h1 id="安装宝塔面板"><a href="#安装宝塔面板" class="headerlink" title="安装宝塔面板"></a>安装宝塔面板</h1><ol>
 <li>宝塔网址：<a href="https://www.bt.cn/" target="_blank" rel="noopener">https://www.bt.cn/</a></li>
 </ol>
-<ol start="2">
+<ol>
 <li><p>宝塔linux面板安装教程：<a href="https://www.bt.cn/bbs/thread-19376-1-1.html" target="_blank" rel="noopener">https://www.bt.cn/bbs/thread-19376-1-1.html</a></p>
 </li>
 <li><p>在按照宝塔前，先将服务器存一份快照</p>
 </li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/13.png" alt="保存快照"></p>
-<ol start="4">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/13.png" alt="保存快照"></p>
+<ol>
 <li>CentOS宝塔安装命令</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http:&#x2F;&#x2F;download.bt.cn&#x2F;install&#x2F;install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/14.png" alt="CentOS安装宝塔"></p>
-<ol start="5">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/14.png" alt="CentOS安装宝塔"></p>
+<ol>
 <li>安装成功后可获得宝塔面板的网址</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/15.png" alt="宝塔面板网址"></p>
-<ol start="6">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/15.png" alt="宝塔面板网址"></p>
+<ol>
 <li>宝塔面板</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/16.png" alt="宝塔面板"></p>
-<ol start="7">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/16.png" alt="宝塔面板"></p>
+<ol>
 <li>（可选）利用宝塔面板的应用商店<strong>傻瓜式</strong>安装环境</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/17.png" alt="傻瓜式环境安装"></p>
-<ol start="8">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/17.png" alt="傻瓜式环境安装"></p>
+<ol>
 <li>（可选）利用宝塔面板的安全配置防火墙过滤端口</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/20.png" alt="安全面板"></p>
-<ol start="9">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/20.png" alt="安全面板"></p>
+<ol>
 <li>（可选）利用Xftp传输文件到远程服务器</li>
 </ol>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/21.png" alt="xftp"></p>
-<p><img src="/blog/blog/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/22.png" alt="xftp"></p>
-<ol start="10">
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/21.png" alt="xftp"></p>
+<p><img src="/2020/11/15/%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0%E5%92%8C%E5%AE%9D%E5%A1%94%E9%83%A8%E7%BD%B2/22.png" alt="xftp"></p>
+<ol>
 <li>（可选）通过面板设置更改宝塔面板的一些设置</li>
 </ol>
 <p>我将用户名和密码更改为自己更容易记的密码了。</p>
@@ -452,7 +450,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 云服务器</a>
+              <a href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag"># 云服务器</a>
           </div>
 
         
@@ -461,11 +459,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2020/11/14/%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E5%8F%82%E8%80%83%E6%8C%87%E5%8D%97/" rel="prev" title="大厂面试参考指南">
+    <a href="/2020/11/14/%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E5%8F%82%E8%80%83%E6%8C%87%E5%8D%97/" rel="prev" title="大厂面试参考指南">
       <i class="fa fa-chevron-left"></i> 大厂面试参考指南
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2020/11/15/Linux%E5%91%BD%E4%BB%A4/" rel="next" title="Linux命令">
+    <a href="/2020/11/15/Linux%E5%91%BD%E4%BB%A4/" rel="next" title="Linux命令">
       Linux命令 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -563,25 +561,25 @@
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/motion.js"></script>
 
 
-  
-
-
+<script src="/js/next-boot.js"></script>
 
 
   
-<script src="/blog/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -617,5 +615,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

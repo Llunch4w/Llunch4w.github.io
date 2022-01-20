@@ -5,42 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="注意力模型">
-<meta property="og:url" content="https://llunch4w.gitee.io/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_seq2seq.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_cal.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/position_encoding.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/transformer_block.png">
-<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq_transformer.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_seq2seq.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_cal.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/position_encoding.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/transformer_block.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq_transformer.png">
 <meta property="article:published_time" content="2022-01-17T07:56:45.000Z">
 <meta property="article:modified_time" content="2022-01-19T09:49:38.984Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="Deep Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq.png">
 
-<link rel="canonical" href="https://llunch4w.gitee.io/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/">
+<link rel="canonical" href="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/">
 
 
 <script id="page-configurations">
@@ -110,7 +110,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -130,27 +130,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -216,27 +216,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/blog/images/me.jpg">
+      src="/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -276,10 +276,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/me.jpg">
+      <meta itemprop="image" content="/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -332,8 +332,7 @@
 
 </blockquote>
 <a id="more"></a>
-
-<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><h2 id="Seq2Seq"><a href="#Seq2Seq" class="headerlink" title="Seq2Seq"></a>Seq2Seq</h2><p><img src="/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq.png" alt></p>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><h2 id="Seq2Seq"><a href="#Seq2Seq" class="headerlink" title="Seq2Seq"></a>Seq2Seq</h2><p><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq.png" alt></p>
 <p>Above figure show an application which uses <strong>Seq2Seq Model</strong> to realize <strong>Machine Translation</strong>. Seq2Seq model is composed of 2 parts, respectivly <strong>Encoder</strong> and <strong>Decoder</strong> : </p>
 <ol>
 <li>origin sequence encodes to one coding.</li>
@@ -347,16 +346,15 @@
 <p>There is a basic hypothesis for Seq2Seq based on RNN: <strong>The last hidden state in the encoder RNN contains all the information of the origin sequence</strong>.<br>Obviously, the hypothesis is unreasonable, especially for long origin sequence.     </p>
 <p>To solve the problem, someone proposed <strong>Attention Model</strong>.</p>
 <h1 id="Attention-Mechanism"><a href="#Attention-Mechanism" class="headerlink" title="Attention Mechanism"></a>Attention Mechanism</h1><p>The core idea of <strong>Attention Machinism</strong>: When generating a new target word, not noly considering previous time state and already generated word, but also considering which words in the origin sequence is more relevant to the current word need to generate. It guides us put more attention to the words in the source sequence which is more relevant to the current word.</p>
-<p><img src="/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_seq2seq.png" alt></p>
-<p>Mathmatically,  </p>
-
+<p><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_seq2seq.png" alt></p>
+<p>Mathmatically,<br>
 $$
 \begin{matrix}
     \hat{\alpha_s} = attn(h_s, h_{t-1}) \\
     \alpha_s = Softmax(\hat{\alpha})_s
 \end{matrix}
 $$
-    
+    </p>
 <ul>
 <li>$h_s$: the state of time $s$ in the source sequence.</li>
 <li>$h_{t-1}$: the state of previous time in the target sequence.</li>
@@ -364,13 +362,13 @@ $$
 <li>$\hat{\alpha} = [\hat{\alpha}_1, \hat{\alpha}_2, \cdots, \hat{\alpha}_L]$, where $L$ is the length of source sequence.</li>
 <li>$Softmax$: Normalize attention score.</li>
 </ul>
-<p><strong>Attention Calculation Formula</strong><br><img src="/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_cal.png" alt></p>
+<p><strong>Attention Calculation Formula</strong><br><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_cal.png" alt></p>
 <h1 id="Self-Attention"><a href="#Self-Attention" class="headerlink" title="Self Attention"></a>Self Attention</h1><p>The core idea of <strong>Self-Attention</strong>: Observe its companion, then know its meaning. In other word, the state of one point in the sequence can be calculated by the correlation(attention) between the state at this time and the state at other times.</p>
 <p>Specifically,   </p>
 <ul>
 <li>inputs can be represented by one combination of n vectors: $x_1, x_2, \cdots, x_n$.</li>
 <li>outputs can be represented by one combination of n new vectors: $y_1, y_2, \cdots, y_n$.</li>
-<li>The calculation formulate of $y_i$: $y_i = \sum_{j=1}^n a_{ij}x_{j}$<ul>
+<li>The calculation formulate of $y<em>i$: $y_i = \sum</em>{j=1}^n a<em>{ij}x</em>{j}$<ul>
 <li>$a_{ij}$ is the attention weight(after softmax normalize) between $x_i$ and $x_j$.</li>
 </ul>
 </li>
@@ -392,7 +390,7 @@ $$
 <h3 id="Importing-Position-Information"><a href="#Importing-Position-Information" class="headerlink" title="Importing Position Information"></a>Importing Position Information</h3><p>We need to import position information for every input vector. There are 2 ways to import position information:</p>
 <ol>
 <li>Position Embeddings(位置嵌入): Like word embedding, use a continues, lower dimension, dense vector to represent position information.</li>
-<li>Position Encodings(位置编码): Use function to map a position index(integer) to a vector.<br><img src="/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/position_encoding.png" alt></li>
+<li>Position Encodings(位置编码): Use function to map a position index(integer) to a vector.<br><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/position_encoding.png" alt></li>
 </ol>
 <ul>
 <li>$p$ indicates the position index.</li>
@@ -407,8 +405,7 @@ $$
 <li>$k_i = W^k x_i$</li>
 <li>$v_i = W^v x_i$</li>
 </ul>
-<p><strong>New Calculation Formulation</strong></p>
-
+<p><strong>New Calculation Formulation</strong><br>
 $$
 \begin{matrix}
 y_i = \sum_{j=1}^n = \alpha_{ij}v_j \\
@@ -416,12 +413,11 @@ y_i = \sum_{j=1}^n = \alpha_{ij}v_j \\
 \hat{\alpha}_{ij} = attn(q_i, k_j)
 \end{matrix}
 $$
-    
-
+    </p>
 <h3 id="Multiple-Layer-Attention"><a href="#Multiple-Layer-Attention" class="headerlink" title="Multiple Layer Attention"></a>Multiple Layer Attention</h3><p>In the original Attention Machenism, it only considers the relationship between 2 input sequence units. But in practical applications, it is often necessary to consider the relationship between many sequence units. If we consturct higher order relationship, it will result higher model complexity. </p>
 <p>To solve this demands, someone proposed <strong>Message Propagation</strong>, which can realized by stacking multiple layer self-attention model. Normally, attention calculation use linear function. So the result of stacking them will also be linear. In order to enhance the presentation ability of model, we can add non-linear MLP behind every attention layer.</p>
 <p>In addition, in order to benefit the process of model learning, we can also use some techniques, such as <strong>Layer Normalization</strong>, <strong>Residual Connections</strong>.</p>
-<p>All the layers stacked to construct a <strong>Transformer Block</strong>.<br><img src="/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/transformer_block.png" alt></p>
+<p>All the layers stacked to construct a <strong>Transformer Block</strong>.<br><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/transformer_block.png" alt></p>
 <h3 id="Multi-Head-Machenism"><a href="#Multi-Head-Machenism" class="headerlink" title="Multi-Head Machenism"></a>Multi-Head Machenism</h3><p>Since the result of self-attention need to be normalized, even if an input is related to multiple other inputs, they can not be given a large attention weight at the same time. In the other word, the results of self-attention is <strong>exclusive</strong>.</p>
 <p>To solve this problem, the core idea is:</p>
 <ul>
@@ -430,7 +426,7 @@ $$
 <li>Through a linear mappping, map the concated output to a vector of dimension d.</li>
 </ul>
 <p>In other view, <strong>Multi-Head Attention Machenism</strong> is equal to <strong>Ensemble of multiple Self-Attention Model</strong>, like different kernels in the CNN. </p>
-<h2 id="Seq2Seq-based-on-Transformer"><a href="#Seq2Seq-based-on-Transformer" class="headerlink" title="Seq2Seq based on Transformer"></a>Seq2Seq based on Transformer</h2><p><img src="/blog/blog/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq_transformer.png" alt></p>
+<h2 id="Seq2Seq-based-on-Transformer"><a href="#Seq2Seq-based-on-Transformer" class="headerlink" title="Seq2Seq based on Transformer"></a>Seq2Seq based on Transformer</h2><p><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq_transformer.png" alt></p>
 <h2 id="Pros-amp-Cons"><a href="#Pros-amp-Cons" class="headerlink" title="Pros &amp; Cons"></a>Pros &amp; Cons</h2><p><strong>Advantages</strong>: </p>
 <ul>
 <li>Good at processing <strong>Long Distant Relationship</strong> between words.</li>
@@ -453,7 +449,7 @@ $$
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
           </div>
 
         
@@ -462,11 +458,11 @@ $$
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="prev" title="循环神经网络">
+    <a href="/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" rel="prev" title="循环神经网络">
       <i class="fa fa-chevron-left"></i> 循环神经网络
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2022/01/18/Python-API/" rel="next" title="Python API">
+    <a href="/2022/01/18/Python-API/" rel="next" title="Python API">
       Python API <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -564,25 +560,25 @@ $$
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/motion.js"></script>
 
 
-  
-
-
+<script src="/js/next-boot.js"></script>
 
 
   
-<script src="/blog/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
@@ -671,5 +667,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
