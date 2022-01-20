@@ -5,45 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/BlogSrc/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/BlogSrc/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/BlogSrc/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/BlogSrc/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/BlogSrc/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
-<link rel="stylesheet" href="/BlogSrc/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.github.io","root":"/BlogSrc/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis">
-<meta property="og:url" content="https://llunch4w.github.io/BlogSrc/2020/11/20/Redis/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/11/20/Redis/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/1.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/2.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/3.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/4.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/5.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/6.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/7.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/8.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/11/20/Redis/9.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/1.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/2.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/3.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/4.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/5.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/6.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/7.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/8.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/9.png">
 <meta property="article:published_time" content="2020-11-20T02:44:46.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:58.973Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.github.io/2020/11/20/Redis/1.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/11/20/Redis/1.png">
 
-<link rel="canonical" href="https://llunch4w.github.io/BlogSrc/2020/11/20/Redis/">
+<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/11/20/Redis/">
 
 
 <script id="page-configurations">
@@ -113,7 +113,7 @@
 
   <div class="site-meta">
 
-    <a href="/BlogSrc/" class="brand" rel="start">
+    <a href="/blog/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -133,27 +133,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/BlogSrc/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/BlogSrc/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/BlogSrc/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/BlogSrc/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/BlogSrc/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -219,27 +219,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/BlogSrc/images/me.jpg">
+      src="/blog/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/BlogSrc/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/BlogSrc/categories/">
+            <a href="/blog/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/BlogSrc/tags/">
+            <a href="/blog/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -279,10 +279,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/BlogSrc/2020/11/20/Redis/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/11/20/Redis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/BlogSrc/images/me.jpg">
+      <meta itemprop="image" content="/blog/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -330,7 +330,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+        <blockquote class="blockquote-center">
 <p>^ _ ^ </p>
 
 </blockquote>
@@ -354,7 +354,7 @@
 <h1 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>1. 下载Redis安装包</strong></p>
 <p>Redis下载地址：<a href="https://redis.io/" target="_blank" rel="noopener">https://redis.io/</a></p>
 <p><strong>2. 将安装包通过Xftp传输到服务器中</strong></p>
-<p><img src="/2020/11/20/Redis/1.png" alt="传输安装包"></p>
+<p><img src="/blog/blog/2020/11/20/Redis/1.png" alt="传输安装包"></p>
 <p><strong>3. 解压缩压缩包</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># tar -zxvf redis压缩包名称</span><br><span class="line">tar -zxvf redis-6.0.9.tar.gz</span><br><span class="line"># 将解压得到的redis文件夹移动到&#x2F;etc&#x2F;opt目录（仅仅因为这个目录通常用来存放用户安装文件）</span><br><span class="line">mv redis-6.0.9 &#x2F;etc&#x2F;opt</span><br></pre></td></tr></table></figure>
 
@@ -368,21 +368,21 @@
 <blockquote>
 <p>make命令执行后发生了错误，发现是因为gcc版本过低，需要升级版本</p>
 </blockquote>
-<p><img src="/2020/11/20/Redis/2.png" alt="make错误"></p>
+<p><img src="/blog/blog/2020/11/20/Redis/2.png" alt="make错误"></p>
 <p>解决方法1：使用redis6以下的版本进行安装</p>
 <p>redis5安装地址：<a href="https://redis.io/download" target="_blank" rel="noopener">https://redis.io/download</a></p>
 <p>解决方案2：放弃解压缩安装方式，直接使用docker一键安装</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis <span class="comment"># 从远程仓库拉取redis镜像</span></span><br><span class="line"></span><br><span class="line">docker run --name redis01 -d -P redis <span class="comment"># 通过镜像创建并启动一个容器命名为redis01</span></span><br><span class="line"></span><br><span class="line">docker <span class="built_in">exec</span> -it redis01 /bin/bash <span class="comment"># 以交互方式进入容器</span></span><br><span class="line"></span><br><span class="line">redis-cli <span class="comment"># redis命令：进入redis客户端</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Redis目录"><a href="#Redis目录" class="headerlink" title="Redis目录"></a>Redis目录</h2><p>/usr/local/bin</p>
-<p><img src="/2020/11/20/Redis/3.png" alt="Redis目录"></p>
+<p><img src="/blog/blog/2020/11/20/Redis/3.png" alt="Redis目录"></p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><em>将/etc/opt/redis-5.0.10/下的配置文件移动到/usr/local/bin/kconfig下，修改kconfig下的配置文件来控制redis的启动</em></p>
 <ol>
 <li>进入/usr/local/bin</li>
 <li>创建配置文件目录kconfig</li>
 <li>将/etc/opt/redis-5.0.10/下的redis.conf文件复制到kconfig文件夹下</li>
 </ol>
-<p><img src="/2020/11/20/Redis/4.png" alt="Redis配置文件"></p>
+<p><img src="/blog/blog/2020/11/20/Redis/4.png" alt="Redis配置文件"></p>
 <ol start="4">
 <li>redis默认不是后台启动的，修改配置文件中<code>daemonsize</code>的值为<code>yes</code></li>
 </ol>
@@ -451,7 +451,7 @@
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 成功的案例</span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> money 100</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> out 0</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; watch money     <span class="comment"># 加锁</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; multi           <span class="comment"># 开启事务</span></span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; INCRBY money 10</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; DECRBY money 20</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; INCRBY out 10</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; mget money out</span><br><span class="line">QUEUED</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">exec</span>            <span class="comment"># 执行事务</span></span><br><span class="line">1) (<span class="built_in">integer</span>) 110</span><br><span class="line">2) (<span class="built_in">integer</span>) 90</span><br><span class="line">3) (<span class="built_in">integer</span>) 10</span><br><span class="line">4) 1) <span class="string">"90"</span></span><br><span class="line">   2) <span class="string">"10"</span></span><br><span class="line">127.0.0.1:6379&gt; unwatch     <span class="comment"># 解锁</span></span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/11/20/Redis/5.png" alt="watch-事务失败"></p>
+<p><img src="/blog/blog/2020/11/20/Redis/5.png" alt="watch-事务失败"></p>
 <blockquote>
 <p>如果发现事务失败，就先解锁，再加锁</p>
 </blockquote>
@@ -460,7 +460,7 @@
 </blockquote>
 <h2 id="连接步骤"><a href="#连接步骤" class="headerlink" title="连接步骤"></a>连接步骤</h2><p><strong>1. 在服务器端配置远程连接</strong></p>
 <p>（1）在阿里云服务器上安全组中开放端口6379</p>
-<p>（2）在服务器端防火墙放行端口6379<br><img src="/2020/11/20/Redis/6.png" alt="防火墙放行端口"></p>
+<p>（2）在服务器端防火墙放行端口6379<br><img src="/blog/blog/2020/11/20/Redis/6.png" alt="防火墙放行端口"></p>
 <p>（3）修改redis.conf文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/bin</span><br><span class="line">vim kconfig/redis.conf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更改两项键值对</span></span><br><span class="line"><span class="built_in">bind</span> 127.0.0.1      <span class="comment"># --&gt; 0.0.0.0</span></span><br><span class="line">protected-mode yes  <span class="comment"># --&gt; no</span></span><br></pre></td></tr></table></figure>
 
@@ -534,7 +534,7 @@
 <h2 id="RDB-Redis-Database"><a href="#RDB-Redis-Database" class="headerlink" title="RDB(Redis Database)"></a>RDB(Redis Database)</h2><blockquote>
 <p>RDB通过写 rdb 文件来备份数据，默认保存在 dump.rdb 中。只需要将rdb文件放在redis的启动目录下，redis启动时会自动检测rdb文件来恢复其中数据</p>
 </blockquote>
-<p><img src="/2020/11/20/Redis/7.png" alt="RDB原理"></p>
+<p><img src="/blog/blog/2020/11/20/Redis/7.png" alt="RDB原理"></p>
 <ul>
 <li>在指定时间间隔内将内存中的数据集快照写入磁盘，它恢复时是将快照文件读入到内存中</li>
 <li>Redis会单独创建一个子进程来进行持久化：先将数据写入一个临时持久化文件，等持久化操作结束后再用临时持久化文件替换上次持久化好的文件</li>
@@ -557,7 +557,7 @@
 <h2 id="AOF-Append-Only-File"><a href="#AOF-Append-Only-File" class="headerlink" title="AOF(Append Only File)"></a>AOF(Append Only File)</h2><blockquote>
 <p>将所有命令记录下来，恢复的时候就把这个文件全部再执行一遍</p>
 </blockquote>
-<p><img src="/2020/11/20/Redis/8.png" alt="AOF原理"></p>
+<p><img src="/blog/blog/2020/11/20/Redis/8.png" alt="AOF原理"></p>
 <ul>
 <li>以日志的形式来记录每个写操作，将Redis执行过的指令记录下来（读操作不记录）</li>
 <li>只许追加文件但不可以改写文件</li>
@@ -579,7 +579,7 @@
 <li>aof文件大小远大于rdb，修复速度也比rdb慢</li>
 <li>aof运行效率也比rdb慢</li>
 </ul>
-<h1 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h1><p><img src="/2020/11/20/Redis/9.png" alt="Redis发布订阅"></p>
+<h1 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h1><p><img src="/blog/blog/2020/11/20/Redis/9.png" alt="Redis发布订阅"></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 消息订阅端</span></span><br><span class="line">127.0.0.1:6379&gt; subscribe channel01</span><br><span class="line">Reading messages... (press Ctrl-C to quit)</span><br><span class="line">1) <span class="string">"subscribe"</span></span><br><span class="line">2) <span class="string">"channel01"</span></span><br><span class="line">3) (<span class="built_in">integer</span>) 1</span><br><span class="line">1) <span class="string">"message"</span></span><br><span class="line">2) <span class="string">"channel01"</span></span><br><span class="line">3) <span class="string">"hello,world"</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 消息发布duan</span></span><br><span class="line">127.0.0.1:6379&gt; publish channel01 <span class="string">"hello,world"</span></span><br><span class="line">(<span class="built_in">integer</span>) 1</span><br></pre></td></tr></table></figure>
@@ -604,7 +604,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/BlogSrc/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/blog/tags/Redis/" rel="tag"># Redis</a>
           </div>
 
         
@@ -613,11 +613,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/11/19/%E7%BD%91%E7%AB%99Guide/" rel="prev" title="网站Guide">
+    <a href="/blog/2020/11/19/%E7%BD%91%E7%AB%99Guide/" rel="prev" title="网站Guide">
       <i class="fa fa-chevron-left"></i> 网站Guide
     </a></div>
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/12/09/%E6%96%87%E4%BB%B6-etc-passwd-%E4%BB%8B%E7%BB%8D/" rel="next" title="文件'/etc/passwd'介绍">
+    <a href="/blog/2020/12/09/%E6%96%87%E4%BB%B6-etc-passwd-%E4%BB%8B%E7%BB%8D/" rel="next" title="文件'/etc/passwd'介绍">
       文件'/etc/passwd'介绍 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -715,25 +715,25 @@
   </div>
 
   
-  <script src="/BlogSrc/lib/anime.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/BlogSrc/js/utils.js"></script>
+<script src="/blog/js/utils.js"></script>
 
-<script src="/BlogSrc/js/motion.js"></script>
-
-
-<script src="/BlogSrc/js/next-boot.js"></script>
+<script src="/blog/js/motion.js"></script>
 
 
-  
-
-
+<script src="/blog/js/next-boot.js"></script>
 
 
   
-<script src="/BlogSrc/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
 
 
 
@@ -769,5 +769,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/BlogSrc/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/BlogSrc/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

@@ -5,42 +5,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/BlogSrc/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/BlogSrc/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/BlogSrc/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/BlogSrc/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/BlogSrc/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
-<link rel="stylesheet" href="/BlogSrc/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.github.io","root":"/BlogSrc/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="从一个绘制茶壶的例子开始入门DirectX编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于DirectX的茶壶模型绘制">
-<meta property="og:url" content="https://llunch4w.github.io/BlogSrc/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="从一个绘制茶壶的例子开始入门DirectX编程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.github.io/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/1.jpg">
-<meta property="og:image" content="https://llunch4w.github.io/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/2.jpg">
-<meta property="og:image" content="https://llunch4w.github.io/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/3.jpg">
-<meta property="og:image" content="https://llunch4w.github.io/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/4.jpg">
-<meta property="og:image" content="https://llunch4w.github.io/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/5.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/1.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/2.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/3.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/4.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/5.jpg">
 <meta property="article:published_time" content="2020-06-29T10:35:53.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:59.130Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="DirectX">
 <meta property="article:tag" content="Visual Studio">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.github.io/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/1.jpg">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/1.jpg">
 
-<link rel="canonical" href="https://llunch4w.github.io/BlogSrc/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/">
+<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/">
 
 
 <script id="page-configurations">
@@ -110,7 +110,7 @@
 
   <div class="site-meta">
 
-    <a href="/BlogSrc/" class="brand" rel="start">
+    <a href="/blog/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -130,27 +130,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/BlogSrc/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/BlogSrc/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/BlogSrc/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/BlogSrc/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/BlogSrc/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -216,27 +216,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/BlogSrc/images/me.jpg">
+      src="/blog/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/BlogSrc/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/BlogSrc/categories/">
+            <a href="/blog/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/BlogSrc/tags/">
+            <a href="/blog/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -276,10 +276,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/BlogSrc/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/BlogSrc/images/me.jpg">
+      <meta itemprop="image" content="/blog/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -314,7 +314,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/BlogSrc/categories/DirectX/" itemprop="url" rel="index"><span itemprop="name">DirectX</span></a>
+                  <a href="/blog/categories/DirectX/" itemprop="url" rel="index"><span itemprop="name">DirectX</span></a>
                 </span>
             </span>
 
@@ -336,7 +336,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+        <blockquote class="blockquote-center">
 <p>从一个绘制茶壶的例子开始入门DirectX编程 </p>
 
 </blockquote>
@@ -349,9 +349,9 @@
 <ol>
 <li><p>解决方案处右键–》添加–》项目，打开新建项目向导</p>
 </li>
-<li><p>选择<code>Visual C++</code>/<code>Windows桌面</code>下的Windows桌面向导<br><img src="/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/1.jpg" alt></p>
+<li><p>选择<code>Visual C++</code>/<code>Windows桌面</code>下的Windows桌面向导<br><img src="/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/1.jpg" alt></p>
 </li>
-<li><p>在弹出窗口中选择<code>桌面应用程序</code>，并勾选<code>空项目</code><br><img src="/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/2.jpg" alt></p>
+<li><p>在弹出窗口中选择<code>桌面应用程序</code>，并勾选<code>空项目</code><br><img src="/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/2.jpg" alt></p>
 </li>
 <li><p>设置项目属性</p>
 </li>
@@ -461,7 +461,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3DXVECTOR3 vEyePt(0.0f, 0.0f, -5.0f);</span><br><span class="line">D3DXVECTOR3 vLookatPt(0.0f, 0.0f, 0.0f);</span><br><span class="line">D3DXVECTOR3 vUpVec(0.0f, 1.0f, 0.0f);</span><br><span class="line">D3DXMATRIXA16 matView;</span><br><span class="line">D3DXMatrixLookAtLH(&amp;matView, &amp;vEyePt, &amp;vLookatPt, &amp;vUpVec);</span><br><span class="line">g_pd3dDevice-&gt;SetTransform(D3DTS_VIEW, &amp;matView);</span><br></pre></td></tr></table></figure>
 
 <p><strong>D3DXMATRIXA16类</strong><br>一个 4x4 , 16位对齐的矩阵。</p>
-<p><strong>DirectX常用坐标系</strong><br><img src="/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/3.jpg" alt></p>
+<p><strong>DirectX常用坐标系</strong><br><img src="/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/3.jpg" alt></p>
 <p><strong>D3DXMatrixLookAtLH函数原型</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">D3DXMATRIX* D3DXMatrixLookAtLH(</span><br><span class="line">  _Inout_       D3DXMATRIX  *pOut,	\\ 观察矩阵（结果）</span><br><span class="line">  _In_    const D3DXVECTOR3 *pEye,	\\ 观察点（摄像机所处位置）</span><br><span class="line">  _In_    const D3DXVECTOR3 *pAt,	\\ 观察目标</span><br><span class="line">  _In_    const D3DXVECTOR3 *pUp	\\ 上方向，通常为[0,1,0]</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p><strong>D3DXMatrixLookAtLH函数原理说明</strong></p>
@@ -485,7 +485,7 @@
 
 <p><strong>D3DXMatrixPerspectiveFovLH函数原型</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">D3DXMATRIX* D3DXMatrixPerspectiveFovLH(</span><br><span class="line">  _Inout_ D3DXMATRIX *pOut,		\\ 指向投影矩阵的指针（结果）</span><br><span class="line">  _In_    FLOAT      fovy,		\\ y方向上的视场，以弧度为单位</span><br><span class="line">  _In_    FLOAT      Aspect,	\\ 长宽比，定义为视图空间的宽度除以高度</span><br><span class="line">  _In_    FLOAT      zn,		\\ 近视平面的Z值</span><br><span class="line">  _In_    FLOAT      zf			\\ 远视平面的Z值</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p><img src="/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/4.jpg" alt></p>
+<p><img src="/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/4.jpg" alt></p>
 <h2 id="创建场景图形"><a href="#创建场景图形" class="headerlink" title="创建场景图形"></a>创建场景图形</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HRESULT InitGeometry()</span><br><span class="line">&#123;</span><br><span class="line">	HRESULT hr;</span><br><span class="line">	V_RETURN(D3DXCreateTeapot(g_pd3dDevice, &amp;g_pTeapotMesh, NULL));</span><br><span class="line">	return S_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>D3DXCreateTeapot函数原型</strong></p>
@@ -522,7 +522,7 @@
 
 <p><strong>结构体D3DLIGHT9原型</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">typedef struct D3DLIGHT9 &#123;</span><br><span class="line">  D3DLIGHTTYPE  Type;			\\ 光源类型</span><br><span class="line">  D3DCOLORVALUE Diffuse;		\\ 光线发出的漫反射色</span><br><span class="line">  D3DCOLORVALUE Specular;		\\ 光发出的镜面颜色</span><br><span class="line">  D3DCOLORVALUE Ambient;		\\ 光线发出的环境颜色</span><br><span class="line">  D3DVECTOR     Position;		\\ 光线在世界空间中的位置(对定向灯没有意义)</span><br><span class="line">  D3DVECTOR     Direction;		\\ 光线在世界空间中指向的方向(仅对定向和聚光灯有意义)</span><br><span class="line">  float         Range;			\\ 光线范围(不影响定向灯)</span><br><span class="line">  float         Falloff;		\\ 衰减(大多数开发人员将此值设置为1.0)</span><br><span class="line">  float         Attenuation0;	\\ 衰减常数</span><br><span class="line">  float         Attenuation1;	\\ 衰减常数</span><br><span class="line">  float         Attenuation2;	\\ 衰减常数</span><br><span class="line">  float         Theta;			\\ 聚光灯内锥（即完全照明的聚光锥）的弧度角（以弧度为单位）</span><br><span class="line">  float         Phi;			\\ 以弧度表示的角度，它定义了聚光灯的外部圆锥的外部边缘</span><br><span class="line">&#125; D3DLIGHT9, *LPD3DLIGHT;</span><br></pre></td></tr></table></figure>
-<p><strong>聚光灯模型</strong><br><img src="/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/5.jpg" alt></p>
+<p><strong>聚光灯模型</strong><br><img src="/blog/blog/2020/06/29/%E5%9F%BA%E4%BA%8EDirectX%E7%9A%84%E8%8C%B6%E5%A3%B6%E6%A8%A1%E5%9E%8B%E7%BB%98%E5%88%B6/5.jpg" alt></p>
 <p><strong>D3DLIGHTTYPE类定义</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef enum D3DLIGHTTYPE &#123; </span><br><span class="line">  D3DLIGHT_POINT        &#x3D; 1,	\\ 点光源，光线在空间中具有一定位置，并向各个方向辐射光</span><br><span class="line">  D3DLIGHT_SPOT         &#x3D; 2,	\\ 聚光灯，该光源类似于点光源，但照明仅限于锥形</span><br><span class="line">  D3DLIGHT_DIRECTIONAL  &#x3D; 3,	\\ 光是定向光源</span><br><span class="line">  D3DLIGHT_FORCE_DWORD  &#x3D; 0x7fffffff	\\ 强制将此枚举编译为32位大小</span><br><span class="line">&#125; D3DLIGHTTYPE, *LPD3DLIGHTTYPE;</span><br></pre></td></tr></table></figure>
 
@@ -603,8 +603,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/BlogSrc/tags/DirectX/" rel="tag"># DirectX</a>
-              <a href="/BlogSrc/tags/Visual-Studio/" rel="tag"># Visual Studio</a>
+              <a href="/blog/tags/DirectX/" rel="tag"># DirectX</a>
+              <a href="/blog/tags/Visual-Studio/" rel="tag"># Visual Studio</a>
           </div>
 
         
@@ -613,11 +613,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/" rel="prev" title="最朴素的Windows窗口程序">
+    <a href="/blog/2020/06/28/%E6%9C%80%E6%9C%B4%E7%B4%A0%E7%9A%84Windows%E7%AA%97%E5%8F%A3%E7%A8%8B%E5%BA%8F/" rel="prev" title="最朴素的Windows窗口程序">
       <i class="fa fa-chevron-left"></i> 最朴素的Windows窗口程序
     </a></div>
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/07/12/%E4%BB%8E3dmax%E4%B8%AD%E5%AF%BC%E5%87%BAx%E6%96%87%E4%BB%B6/" rel="next" title="从3dmax中导出x文件">
+    <a href="/blog/2020/07/12/%E4%BB%8E3dmax%E4%B8%AD%E5%AF%BC%E5%87%BAx%E6%96%87%E4%BB%B6/" rel="next" title="从3dmax中导出x文件">
       从3dmax中导出x文件 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -715,25 +715,25 @@
   </div>
 
   
-  <script src="/BlogSrc/lib/anime.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/BlogSrc/js/utils.js"></script>
+<script src="/blog/js/utils.js"></script>
 
-<script src="/BlogSrc/js/motion.js"></script>
-
-
-<script src="/BlogSrc/js/next-boot.js"></script>
+<script src="/blog/js/motion.js"></script>
 
 
-  
-
-
+<script src="/blog/js/next-boot.js"></script>
 
 
   
-<script src="/BlogSrc/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
 
 
 
@@ -769,5 +769,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/BlogSrc/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/BlogSrc/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

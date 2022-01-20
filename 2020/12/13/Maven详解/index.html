@@ -5,51 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/BlogSrc/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/BlogSrc/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/BlogSrc/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/BlogSrc/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/BlogSrc/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
-<link rel="stylesheet" href="/BlogSrc/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.github.io","root":"/BlogSrc/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Maven详解">
-<meta property="og:url" content="https://llunch4w.github.io/BlogSrc/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/1.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/2.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/3.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/4.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/5.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/6.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/7.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/8.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/9.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/12.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/13.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/10.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/11.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/14.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/15.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/1.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/2.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/3.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/4.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/5.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/6.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/7.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/8.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/9.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/12.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/13.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/10.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/11.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/14.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/15.png">
 <meta property="article:published_time" content="2020-12-13T06:01:24.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:58.941Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="Maven">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.github.io/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/1.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/1.png">
 
-<link rel="canonical" href="https://llunch4w.github.io/BlogSrc/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/">
+<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -119,7 +119,7 @@
 
   <div class="site-meta">
 
-    <a href="/BlogSrc/" class="brand" rel="start">
+    <a href="/blog/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -139,27 +139,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/BlogSrc/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/BlogSrc/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/BlogSrc/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/BlogSrc/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/BlogSrc/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -225,27 +225,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/BlogSrc/images/me.jpg">
+      src="/blog/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/BlogSrc/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/BlogSrc/categories/">
+            <a href="/blog/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/BlogSrc/tags/">
+            <a href="/blog/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -285,10 +285,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/BlogSrc/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/BlogSrc/images/me.jpg">
+      <meta itemprop="image" content="/blog/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -323,7 +323,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/BlogSrc/categories/JavaEE/" itemprop="url" rel="index"><span itemprop="name">JavaEE</span></a>
+                  <a href="/blog/categories/JavaEE/" itemprop="url" rel="index"><span itemprop="name">JavaEE</span></a>
                 </span>
             </span>
 
@@ -345,7 +345,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+        <blockquote class="blockquote-center">
 <p>^ _ ^ </p>
 
 </blockquote>
@@ -356,32 +356,32 @@
 </blockquote>
 <h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p><strong>1. 在Apache官网下下载Maven并解压</strong></p>
 <p>下载地址：<a href="https://maven.apache.org/download.cgi" target="_blank" rel="noopener">https://maven.apache.org/download.cgi</a></p>
-<p><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/1.png" alt></p>
-<p>解压到一个目录下<br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/2.png" alt></p>
+<p><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/1.png" alt></p>
+<p>解压到一个目录下<br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/2.png" alt></p>
 <p><strong>2. 配置环境变量</strong></p>
-<p><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/3.png" alt></p>
-<p><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/4.png" alt></p>
-<p>在控制台验证maven是否安装配置成功<br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/5.png" alt></p>
+<p><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/3.png" alt></p>
+<p><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/4.png" alt></p>
+<p>在控制台验证maven是否安装配置成功<br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/5.png" alt></p>
 <p><strong>3. 配置镜像加速</strong><br>在 <strong>D:\java\apache-maven-3.6.3\conf</strong> 路径下的 <strong>settings.xml</strong> 中添加镜像地址</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>nexus-aliyun<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>Nexus aliyun<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>4. 建立本地仓库</strong><br>(1) 在 <strong>D:\java\apache-maven-3.6.3</strong> 路径下添加本地仓库文件夹 <strong>maven-repo</strong><br>(2) 在 <strong>D:\java\apache-maven-3.6.3\conf</strong> 路径下的 <strong>settings.xml</strong> 中添加本地仓库地址</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">localRepository</span>&gt;</span>D:\java\apache-maven-3.6.3\maven-repo<span class="tag">&lt;/<span class="name">localRepository</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="在IDEA中使用"><a href="#在IDEA中使用" class="headerlink" title="在IDEA中使用"></a>在IDEA中使用</h1><p><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/6.png" alt></p>
-<p><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/7.png" alt></p>
-<p><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/8.png" alt></p>
-<p>然后，IDEA会自动下载依赖包<br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/9.png" alt></p>
+<h1 id="在IDEA中使用"><a href="#在IDEA中使用" class="headerlink" title="在IDEA中使用"></a>在IDEA中使用</h1><p><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/6.png" alt></p>
+<p><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/7.png" alt></p>
+<p><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/8.png" alt></p>
+<p>然后，IDEA会自动下载依赖包<br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/9.png" alt></p>
 <p><strong>为项目添加文件夹</strong></p>
 <blockquote>
 <p>这些文件夹在普通Maven项目中会自动创建</p>
 </blockquote>
-<p>初始文件结构<br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/12.png" alt></p>
-<p>为文件夹添加类型（可以按照下图所示方式，也可以在文件夹处右键，在弹出菜单中’Mark Directory As’中选择该文件夹的类型）<br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/13.png" alt></p>
+<p>初始文件结构<br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/12.png" alt></p>
+<p>为文件夹添加类型（可以按照下图所示方式，也可以在文件夹处右键，在弹出菜单中’Mark Directory As’中选择该文件夹的类型）<br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/13.png" alt></p>
 <h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
-<li><p>在IDEA中，项目创建完成后，MavenHome可能会使用IDEA默认，如果发现了这个问题，建议手动修改<br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/10.png" alt></p>
+<li><p>在IDEA中，项目创建完成后，MavenHome可能会使用IDEA默认，如果发现了这个问题，建议手动修改<br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/10.png" alt></p>
 </li>
-<li><p>勾选<code>Sources</code>，可以在下载jar包时同时下载它的源码，希望学习源码时可以勾选此项。<br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/11.png" alt></p>
+<li><p>勾选<code>Sources</code>，可以在下载jar包时同时下载它的源码，希望学习源码时可以勾选此项。<br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/11.png" alt></p>
 </li>
 <li><p>建议不要使用Maven-Web模板创建Web项目，直接使用普通Maven创建项目更好</p>
 </li>
@@ -646,7 +646,7 @@
 <td>将最终的项目包复制到远程仓库中与其他开发者和项目共享。</td>
 </tr>
 </tbody></table>
-<p><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/14.png" alt></p>
+<p><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/14.png" alt></p>
 <h2 id="site"><a href="#site" class="headerlink" title="site"></a>site</h2><p>Maven Site 插件一般用来创建新的报告文档、部署站点等。</p>
 <ul>
 <li><strong>pre-site</strong>：执行一些需要在生成站点文档之前完成的工作</li>
@@ -685,7 +685,7 @@
 <h1 id="引入外部依赖"><a href="#引入外部依赖" class="headerlink" title="引入外部依赖"></a>引入外部依赖</h1><blockquote>
 <p>如果我们需要引入第三库文件到项目，该怎么操作呢？<br>      – pom.xml 的 dependencies 列表列出了我们的项目需要构建的所有外部依赖项</p>
 </blockquote>
-<p><strong>1. 要添加依赖项，我们一般是先在 src 文件夹下添加 lib 文件夹，然后将你工程需要的 jar 文件复制到 lib 文件夹下</strong><br><img src="/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/15.png" alt></p>
+<p><strong>1. 要添加依赖项，我们一般是先在 src 文件夹下添加 lib 文件夹，然后将你工程需要的 jar 文件复制到 lib 文件夹下</strong><br><img src="/blog/blog/2020/12/13/Maven%E8%AF%A6%E8%A7%A3/15.png" alt></p>
 <p><strong>2. 然后添加以下依赖到 pom.xml 文件中</strong></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 在这里添加你的依赖 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span>  <span class="comment">&lt;!-- 库名称，也可以自定义 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>ldapjdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span>    <span class="comment">&lt;!--库名称，也可以自定义--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!--版本号--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span> <span class="comment">&lt;!--作用域--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;basedir&#125;\src\lib\ldapjdk.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span> <span class="comment">&lt;!--项目根目录下的lib文件夹下--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -703,7 +703,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/BlogSrc/tags/Maven/" rel="tag"># Maven</a>
+              <a href="/blog/tags/Maven/" rel="tag"># Maven</a>
           </div>
 
         
@@ -712,11 +712,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/12/13/MyBatis%E8%AF%A6%E8%A7%A3/" rel="prev" title="MyBatis详解">
+    <a href="/blog/2020/12/13/MyBatis%E8%AF%A6%E8%A7%A3/" rel="prev" title="MyBatis详解">
       <i class="fa fa-chevron-left"></i> MyBatis详解
     </a></div>
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/12/14/MyBatis%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="next" title="MyBatis学习记录">
+    <a href="/blog/2020/12/14/MyBatis%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="next" title="MyBatis学习记录">
       MyBatis学习记录 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -814,25 +814,25 @@
   </div>
 
   
-  <script src="/BlogSrc/lib/anime.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/BlogSrc/js/utils.js"></script>
+<script src="/blog/js/utils.js"></script>
 
-<script src="/BlogSrc/js/motion.js"></script>
-
-
-<script src="/BlogSrc/js/next-boot.js"></script>
+<script src="/blog/js/motion.js"></script>
 
 
-  
-
-
+<script src="/blog/js/next-boot.js"></script>
 
 
   
-<script src="/BlogSrc/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
 
 
 
@@ -868,5 +868,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/BlogSrc/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/BlogSrc/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

@@ -5,38 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/BlogSrc/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/BlogSrc/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/BlogSrc/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/BlogSrc/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/BlogSrc/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
-<link rel="stylesheet" href="/BlogSrc/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.github.io","root":"/BlogSrc/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多线程学习记录">
-<meta property="og:url" content="https://llunch4w.github.io/BlogSrc/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg">
-<meta property="og:image" content="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/2.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/2.jpg">
 <meta property="article:published_time" content="2021-05-23T04:26:53.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:59.132Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="线程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.github.io/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg">
 
-<link rel="canonical" href="https://llunch4w.github.io/BlogSrc/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+<link rel="canonical" href="https://llunch4w.gitee.io/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -106,7 +106,7 @@
 
   <div class="site-meta">
 
-    <a href="/BlogSrc/" class="brand" rel="start">
+    <a href="/blog/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -126,27 +126,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/BlogSrc/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/BlogSrc/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/BlogSrc/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/BlogSrc/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/BlogSrc/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -212,27 +212,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/BlogSrc/images/me.jpg">
+      src="/blog/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/BlogSrc/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/BlogSrc/categories/">
+            <a href="/blog/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/BlogSrc/tags/">
+            <a href="/blog/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -272,10 +272,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/BlogSrc/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/BlogSrc/images/me.jpg">
+      <meta itemprop="image" content="/blog/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -310,7 +310,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/BlogSrc/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+                  <a href="/blog/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
                 </span>
             </span>
 
@@ -332,7 +332,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+        <blockquote class="blockquote-center">
 <p>^ _ ^ </p>
 
 </blockquote>
@@ -434,7 +434,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Data</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">increase</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        num++;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"执行加1操作，num = "</span> + num);</span><br><span class="line">        <span class="keyword">this</span>.notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">decrease</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(num == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.wait();</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        num--;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">"执行减1操作，num = "</span> + num);</span><br><span class="line">        <span class="keyword">this</span>.notifyAll();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>分别设置两个生产者、两个消费者线程来进行实验。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FakeNotifyTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Data data = <span class="keyword">new</span> Data();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= <span class="number">2</span>; k++)&#123;</span><br><span class="line">            <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)&#123;</span><br><span class="line">                    data.increase();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,<span class="string">"IncreaseThread"</span> + k).start();</span><br><span class="line">    </span><br><span class="line">            <span class="keyword">new</span> Thread(()-&gt;&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)&#123;</span><br><span class="line">                    data.decrease();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,<span class="string">"DecreaseThread"</span> + k).start();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后出现了迷惑结果：<br><img src="/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg" alt><br>分析造成这种结果的原因是：<br><img src="/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/2.jpg" alt></p>
+<p>然后出现了迷惑结果：<br><img src="/blog/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/1.jpg" alt><br>分析造成这种结果的原因是：<br><img src="/blog/blog/2021/05/23/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/2.jpg" alt></p>
 <ol>
 <li>DecreaseThread1 执行，此时因为 num=1，因此 DecreaseThread1 不会被阻塞，走到了 num– 这一步，完成后 num=0。</li>
 <li>此时，CPU使用权交给了 DecreaseThread2，因为 num=0，所以经过 if 判断时 DecreaseThread2 调用 <code>wait</code> 进行阻塞。</li>
@@ -684,7 +684,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/BlogSrc/tags/%E7%BA%BF%E7%A8%8B/" rel="tag"># 线程</a>
+              <a href="/blog/tags/%E7%BA%BF%E7%A8%8B/" rel="tag"># 线程</a>
           </div>
 
         
@@ -693,11 +693,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/BlogSrc/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/" rel="prev" title="Adobe下载">
+    <a href="/blog/2021/05/20/Adobe%E4%B8%8B%E8%BD%BD/" rel="prev" title="Adobe下载">
       <i class="fa fa-chevron-left"></i> Adobe下载
     </a></div>
       <div class="post-nav-item">
-    <a href="/BlogSrc/2021/05/26/%E5%88%86%E4%BA%AB%E9%9F%B3%E4%B9%90/" rel="next" title="分享音乐">
+    <a href="/blog/2021/05/26/%E5%88%86%E4%BA%AB%E9%9F%B3%E4%B9%90/" rel="next" title="分享音乐">
       分享音乐 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -795,25 +795,25 @@
   </div>
 
   
-  <script src="/BlogSrc/lib/anime.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/BlogSrc/js/utils.js"></script>
+<script src="/blog/js/utils.js"></script>
 
-<script src="/BlogSrc/js/motion.js"></script>
-
-
-<script src="/BlogSrc/js/next-boot.js"></script>
+<script src="/blog/js/motion.js"></script>
 
 
-  
-
-
+<script src="/blog/js/next-boot.js"></script>
 
 
   
-<script src="/BlogSrc/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
 
 
 
@@ -849,5 +849,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/BlogSrc/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/BlogSrc/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>

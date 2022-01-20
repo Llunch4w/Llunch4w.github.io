@@ -5,43 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/BlogSrc/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/BlogSrc/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/BlogSrc/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/BlogSrc/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/BlogSrc/css/main.css">
+<link rel="stylesheet" href="/blog/css/main.css">
 
 
-<link rel="stylesheet" href="/BlogSrc/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llunch4w.github.io","root":"/BlogSrc/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llunch4w.gitee.io","root":"/blog/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="^ _ ^">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库详解">
-<meta property="og:url" content="https://llunch4w.github.io/BlogSrc/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:url" content="https://llunch4w.gitee.io/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="摸鱼的Llunch">
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/4.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/5.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/2.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/3.png">
-<meta property="og:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/near_key.jpg">
-<meta property="og:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/next_key.jpg">
-<meta property="og:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/record_key.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/4.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/5.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/2.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/3.png">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/near_key.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/next_key.jpg">
+<meta property="og:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/record_key.jpg">
 <meta property="article:published_time" content="2020-09-10T01:13:25.000Z">
 <meta property="article:modified_time" content="2022-01-10T06:24:59.142Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://llunch4w.github.io/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/4.png">
+<meta name="twitter:image" content="https://llunch4w.gitee.io/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/4.png">
 
-<link rel="canonical" href="https://llunch4w.github.io/BlogSrc/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/">
+<link rel="canonical" href="https://llunch4w.gitee.io/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -111,7 +111,7 @@
 
   <div class="site-meta">
 
-    <a href="/BlogSrc/" class="brand" rel="start">
+    <a href="/blog/" class="brand" rel="start">
       <i class="logo-line-before"></i>
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
@@ -131,27 +131,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/BlogSrc/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/BlogSrc/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/BlogSrc/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/BlogSrc/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/BlogSrc/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -217,27 +217,27 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Llunch"
-      src="/BlogSrc/images/me.jpg">
+      src="/blog/images/me.jpg">
   <p class="site-author-name" itemprop="name">Llunch</p>
   <div class="site-description" itemprop="description">没有理想的人不伤心</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/BlogSrc/archives/">
+          <a href="/blog/archives/">
         
           <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/BlogSrc/categories/">
+            <a href="/blog/categories/">
           
         <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/BlogSrc/tags/">
+            <a href="/blog/tags/">
           
         <span class="site-state-item-count">73</span>
         <span class="site-state-item-name">标签</span></a>
@@ -277,10 +277,10 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/BlogSrc/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.gitee.io/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/BlogSrc/images/me.jpg">
+      <meta itemprop="image" content="/blog/images/me.jpg">
       <meta itemprop="name" content="Llunch">
       <meta itemprop="description" content="没有理想的人不伤心">
     </span>
@@ -315,7 +315,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/BlogSrc/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">数据库基础</span></a>
+                  <a href="/blog/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">数据库基础</span></a>
                 </span>
             </span>
 
@@ -337,7 +337,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+        <blockquote class="blockquote-center">
 <p>^ _ ^ </p>
 
 </blockquote>
@@ -638,7 +638,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/4.png" alt></p>
+<p><img src="/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/4.png" alt></p>
 <p><strong>B+树</strong></p>
 <ul>
 <li>键值只存储在叶子结点中</li>
@@ -651,7 +651,7 @@
 </li>
 <li>B+树中有两个头指针，一个指向根结点，另一个指向关键字最小的叶子结点</li>
 </ul>
-<p><img src="/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/5.png" alt></p>
+<p><img src="/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/5.png" alt></p>
 <h2 id="索引分类"><a href="#索引分类" class="headerlink" title="索引分类"></a>索引分类</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 显示所有的索引信息</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">index</span> <span class="keyword">from</span> [<span class="keyword">table</span>];</span><br></pre></td></tr></table></figure>
 
 <h3 id="主键索引"><a href="#主键索引" class="headerlink" title="主键索引"></a>主键索引</h3><blockquote>
@@ -689,11 +689,11 @@
 <p><strong>4. 测试未添加索引时的查询</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">test</span> <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'用户9999'</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/2.png" alt></p>
+<p><img src="/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/2.png" alt></p>
 <p><strong>5. 创建索引后再测试相同的查询</strong></p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 为test的name字段添加索引</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">index</span> id_test_name <span class="keyword">on</span> <span class="keyword">test</span>(<span class="keyword">name</span>);</span><br><span class="line"><span class="comment">-- 搜索</span></span><br><span class="line"><span class="keyword">explain</span> <span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">test</span> <span class="keyword">where</span> <span class="keyword">name</span> = <span class="string">'用户9999'</span>;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/3.png" alt></p>
+<p><img src="/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/3.png" alt></p>
 <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h2 id="事务概述"><a href="#事务概述" class="headerlink" title="事务概述"></a>事务概述</h2><p>如果一个包含多个步骤的事务操作，被事务管理，那么这些操作要么同时成功，要么同时失败。</p>
 <h2 id="事务的自动提交和手动提交"><a href="#事务的自动提交和手动提交" class="headerlink" title="事务的自动提交和手动提交"></a>事务的自动提交和手动提交</h2><ul>
 <li>MySQL默认是自动提交<ul>
@@ -779,7 +779,7 @@
 </li>
 </ol>
 <ol start="6">
-<li>临键锁<br>临键锁，作用于非唯一索引上，是记录锁与间隙锁的组合<br><img src="/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/near_key.jpg" alt></li>
+<li>临键锁<br>临键锁，作用于非唯一索引上，是记录锁与间隙锁的组合<br><img src="/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/near_key.jpg" alt></li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UPDATE table SET name &#x3D; &#39;javaHuang&#39; WHERE age &#x3D; 4;</span><br><span class="line">SELECT * FROM table WHERE age &#x3D; 4 FOR UPDATE;</span><br><span class="line">这两个语句都会锁定（2,4]，(4,7)这两个区间。</span><br><span class="line">即， InnoDB 会获取该记录行的 临键锁 ，并同时获取该记录行下一个区间的间隙锁。</span><br></pre></td></tr></table></figure>
 
@@ -788,12 +788,12 @@
 </ol>
 <ul>
 <li>作用于非唯一索引上，主要目的，就是为了防止其他事务在间隔中插入数据，以导致“不可重复读”；</li>
-<li>如果把事务的隔离级别降级为读提交(Read Committed, RC)，间隙锁则会自动失效<br><img src="/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/next_key.jpg" alt></li>
+<li>如果把事务的隔离级别降级为读提交(Read Committed, RC)，间隙锁则会自动失效<br><img src="/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/next_key.jpg" alt></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM table WHERE id &#x3D; 8 FOR UPDATE;</span><br><span class="line">----此时，（7,11）就会被锁定</span><br><span class="line">SELECT * FROM table WHERE id BETWEN 2 AND 5 FOR UPDATE;</span><br><span class="line">----此时，（1,4）和（4,7）就会被锁定</span><br></pre></td></tr></table></figure>
 
 <ol start="8">
-<li>记录锁<br>记录锁，它封锁索引记录，作用于唯一索引上<br><img src="/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/record_key.jpg" alt></li>
+<li>记录锁<br>记录锁，它封锁索引记录，作用于唯一索引上<br><img src="/blog/blog/2020/09/10/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AF%A6%E8%A7%A3/record_key.jpg" alt></li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select * from t where id&#x3D;4 for update;</span><br><span class="line">它会在id&#x3D;4的索引记录上加锁，以阻止其他事务插入，更新，删除id&#x3D;1的这一行。</span><br><span class="line">需要说明的是：</span><br><span class="line">select * from t where id&#x3D;4;</span><br><span class="line">则是快照读(SnapShot Read)，它并不加锁，不影响其他事务操作该数据。</span><br></pre></td></tr></table></figure>
 
@@ -810,7 +810,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/BlogSrc/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/blog/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
           </div>
 
         
@@ -819,11 +819,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/09/05/IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="prev" title="IDEA常用快捷键">
+    <a href="/blog/2020/09/05/IDEA%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="prev" title="IDEA常用快捷键">
       <i class="fa fa-chevron-left"></i> IDEA常用快捷键
     </a></div>
       <div class="post-nav-item">
-    <a href="/BlogSrc/2020/09/11/BootStrap/" rel="next" title="BootStrap">
+    <a href="/blog/2020/09/11/BootStrap/" rel="next" title="BootStrap">
       BootStrap <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -921,25 +921,25 @@
   </div>
 
   
-  <script src="/BlogSrc/lib/anime.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.min.js"></script>
-  <script src="/BlogSrc/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/BlogSrc/js/utils.js"></script>
+<script src="/blog/js/utils.js"></script>
 
-<script src="/BlogSrc/js/motion.js"></script>
-
-
-<script src="/BlogSrc/js/next-boot.js"></script>
+<script src="/blog/js/motion.js"></script>
 
 
-  
-
-
+<script src="/blog/js/next-boot.js"></script>
 
 
   
-<script src="/BlogSrc/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
 
 
 
@@ -975,5 +975,5 @@ NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
 });
 </script>
 
-<script src="/BlogSrc/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/BlogSrc/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/blog/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
