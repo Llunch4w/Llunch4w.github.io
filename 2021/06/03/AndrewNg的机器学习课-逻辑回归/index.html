@@ -114,6 +114,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -224,7 +225,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -340,10 +341,11 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h1><p>在分类问题中，我们尝试预测的是结果是否属于某一个类（例如正确或错误），即预测值为离散值。如果我们要用线性回归算法来解决一个分类问题，对于分类，$y$取值为 0 或者1，但如果你使用的是线性回归，那么假设函数的输出值可能远大于 1，或者远小于0。尽管我们知道标签应该取值0 或者1，但是如果算法得到的值远大于1或者远小于0的话，就会感觉很奇怪。所以我们在接下来的要研究的算法就叫做逻辑回归算法，这个算法的性质是：它的输出值永远在0到 1 之间。</p>
 <h1 id="逻辑回归模型"><a href="#逻辑回归模型" class="headerlink" title="逻辑回归模型"></a>逻辑回归模型</h1><p>我们引入一个新的模型，逻辑回归，该模型的输出变量范围始终在0和1之间。 逻辑回归模型的假设是：$h_\theta = g(\theta^TX)$。其中，$X$代表特征向量，$g$代表逻辑函数（logistic function)。一个常用的逻辑函数为S形函数（Sigmoid function），公式为：$g(z) = \frac{1}{1+e^{-z}}$</p>
 <p>该函数的图像为：<br><img src="/2021/06/03/AndrewNg%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/1.jpg" alt></p>
-<p>$h<em>\theta(x)$的作用是，对于给定的输入变量，根据选择的参数计算输出变量=1的可能性，即$h</em>\theta(x) = P(y=1|x;\theta)$。</p>
+<p>$h_\theta(x)$的作用是，对于给定的输入变量，根据选择的参数计算输出变量=1的可能性，即$h_\theta(x) = P(y=1|x;\theta)$。</p>
 <h1 id="判定边界"><a href="#判定边界" class="headerlink" title="判定边界"></a>判定边界</h1><p>现在讲<strong>下决策边界(decision boundary)</strong>的概念。这个概念能更好地帮助我们理解逻辑回归的假设函数在计算什么。</p>
 <p><img src="/2021/06/03/AndrewNg%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E8%AF%BE-%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92/1.png" alt></p>
 <p>根据上面绘制出的 S 形函数图像，我们知道当</p>

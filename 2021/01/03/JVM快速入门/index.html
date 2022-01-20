@@ -133,6 +133,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -243,7 +244,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -359,6 +360,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p>B站狂神【JVM快速入门篇】视频 : <a href="https://www.bilibili.com/video/BV1iJ411d7jS" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1iJ411d7jS</a></p>
 <h1 id="JVM体系结构"><a href="#JVM体系结构" class="headerlink" title="JVM体系结构"></a>JVM体系结构</h1><p><img src="/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/1.png" alt></p>
 <p><img src="/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/2.png" alt></p>
@@ -449,7 +451,9 @@
 <li>tomcat部署了太多的应用</li>
 <li>大量动态生成的反射类，不断被加载</li>
 </ul>
-<h2 id="堆内存调优"><a href="#堆内存调优" class="headerlink" title="堆内存调优"></a>堆内存调优</h2><p><strong>查看堆内存</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回虚拟机试图使用的最大内存</span></span><br><span class="line"><span class="keyword">long</span> maxMemory = Runtime.getRuntime().maxMemory();</span><br><span class="line"><span class="comment">// 返回jvm的初始化总内存</span></span><br><span class="line"><span class="keyword">long</span> initMemory = Runtime.getRuntime().totalMemory();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"maxMemory = "</span> + maxMemory/(<span class="keyword">double</span>)(<span class="number">1024</span>*<span class="number">1024</span>) + <span class="string">"(MB);initMemory = "</span> +</span><br><span class="line">        initMemory/(<span class="keyword">double</span>)(<span class="number">1024</span>*<span class="number">1024</span>) + <span class="string">"(MB)"</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="堆内存调优"><a href="#堆内存调优" class="headerlink" title="堆内存调优"></a>堆内存调优</h2><p><strong>查看堆内存</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回虚拟机试图使用的最大内存</span></span><br><span class="line"><span class="keyword">long</span> maxMemory = Runtime.getRuntime().maxMemory();</span><br><span class="line"><span class="comment">// 返回jvm的初始化总内存</span></span><br><span class="line"><span class="keyword">long</span> initMemory = Runtime.getRuntime().totalMemory();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"maxMemory = "</span> + maxMemory/(<span class="keyword">double</span>)(<span class="number">1024</span>*<span class="number">1024</span>) + <span class="string">"(MB);initMemory = "</span> +</span><br><span class="line">        initMemory/(<span class="keyword">double</span>)(<span class="number">1024</span>*<span class="number">1024</span>) + <span class="string">"(MB)"</span>);</span><br></pre></td></tr></table></figure>
+
 <p><strong>调整堆大小</strong></p>
 <ol>
 <li>打开运行时配置窗口<br><img src="/2021/01/03/JVM%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/9.png" alt></li>

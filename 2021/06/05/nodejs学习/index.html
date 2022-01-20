@@ -108,6 +108,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -218,7 +219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -334,22 +335,30 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>简单的说 Node.js 就是运行在服务端的 JavaScript。Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。</p>
-<p>我们可以使用以下命令来查看当前的 Node 版本：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; node -v</span><br><span class="line">v10.<span class="number">15</span>.<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p>我们可以使用以下命令来查看当前的 Node 版本：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; node -v</span><br><span class="line">v10.<span class="number">15</span>.<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h1><p>NPM是随同NodeJS一起安装的包管理工具，能解决NodeJS代码部署上的很多问题，常见的使用场景有以下几种：</p>
 <ul>
 <li>允许用户从NPM服务器下载别人编写的第三方包到本地使用</li>
 <li>允许用户从NPM服务器下载并安装别人编写的命令行程序到本地使用</li>
 <li>允许用户将自己编写的包或命令行程序上传到NPM服务器供别人使用</li>
 </ul>
-<p>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。可以通过输入 “npm -v” 来测试是否成功安装：<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm -v</span><br><span class="line"><span class="number">6</span>.<span class="number">4</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>由于新版的nodejs已经集成了npm，所以之前npm也一并安装好了。可以通过输入 “npm -v” 来测试是否成功安装：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; npm -v</span><br><span class="line"><span class="number">6</span>.<span class="number">4</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install &lt;Module Name&gt;</span><br></pre></td></tr></table></figure>
-<p><strong>全局安装与本地安装</strong><br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install express      # 本地安装</span><br><span class="line">npm install express -g   # 全局安装</span><br></pre></td></tr></table></figure></p>
+
+<p><strong>全局安装与本地安装</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install express      # 本地安装</span><br><span class="line">npm install express -g   # 全局安装</span><br></pre></td></tr></table></figure>
 <ul>
 <li>本地安装：将安装包放在 ./node_modules 下（运行 npm 命令时所在的目录），如果没有 node_modules 目录，会在当前执行 npm 命令的目录下生成 node_modules 目录。可以通过 require() 来引入本地安装的包。</li>
 <li>全局安装：将安装包放在node 的安装目录。可以直接在命令行里使用。</li>
 </ul>
 <h2 id="查看安装信息"><a href="#查看安装信息" class="headerlink" title="查看安装信息"></a>查看安装信息</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm list &lt;Module Name&gt; [-g]</span><br></pre></td></tr></table></figure>
+
 <h2 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h2><p>package.json 位于模块的目录下，用于定义包的属性。</p>
 <ul>
 <li>name - 包名。</li>
@@ -362,7 +371,9 @@
 <li>keywords - 关键字</li>
 </ul>
 <h2 id="卸载模块"><a href="#卸载模块" class="headerlink" title="卸载模块"></a>卸载模块</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall express</span><br></pre></td></tr></table></figure>
+
 <h2 id="更新模块"><a href="#更新模块" class="headerlink" title="更新模块"></a>更新模块</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm update express</span><br></pre></td></tr></table></figure>
+
 <h2 id="搜索模块"><a href="#搜索模块" class="headerlink" title="搜索模块"></a>搜索模块</h2><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm search express</span><br></pre></td></tr></table></figure>
     </div>
 

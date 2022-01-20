@@ -112,6 +112,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -222,7 +223,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -329,19 +330,23 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="The-Composition-of-MLP"><a href="#The-Composition-of-MLP" class="headerlink" title="The Composition of MLP"></a>The Composition of MLP</h1><p>Multi Layer Perceptron, named MLP. It is a solution to the linear indivisible problem. Specifically, it can be prepresented by stacking multiple layer <strong>Linear Regressioner</strong>, and adding <strong>Activation Function</strong> between layers.</p>
 <h1 id="Linear-Regression"><a href="#Linear-Regression" class="headerlink" title="Linear Regression"></a>Linear Regression</h1><p>Standard Linear Regression Model:<br>$y = w_1x_1 + w_2x_2 + \cdots + w_nx_n + b = wx + b$</p>
-<p>Standard Linear Regression Model can solve <strong>regression problems</strong>, which is to predict continues values. We can also solve classification problem by simply adding threshold choose layer behind the output of y.<br>e.g.<br>
+<p>Standard Linear Regression Model can solve <strong>regression problems</strong>, which is to predict continues values. We can also solve classification problem by simply adding threshold choose layer behind the output of y.<br>e.g.</p>
+
 $$y=
 \left\{\begin{matrix}
     1, & w \cdot x + b \geq t \\
     0, & otherwise
 \end{matrix}\right.
 $$
-</p>
+
+
+
 <p>There are two import problem need to be solved when using linear regression:</p>
 <ol>
-<li><strong>Feature Extraction</strong>: Raw Input —&gt; Vector x</li>
+<li><strong>Feature Extraction</strong>: Raw Input –&gt; Vector x</li>
 <li><strong>Parameter Learning</strong>: How to choose the fittest param w, b</li>
 </ol>
 <h1 id="Activation-Function"><a href="#Activation-Function" class="headerlink" title="Activation Function"></a>Activation Function</h1><p>The codomain of the output of linearn function is infinite, sometimes we need to <strong>limit the codomain to a fixed range</strong>. Many functions can satisfy the demands.</p>
@@ -358,12 +363,13 @@ $$
 </ol>
 <h2 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h2><p>Sigmoid Function can only deal with binary classfication, while <strong>Softmax Regression</strong> can solve multiple classfication.</p>
 <p>$y_i = Softmax(z)_i = \frac{e^{z_i}}{e^{z_1} + e^{z_2} + \cdots + e^{z_m}}$</p>
-<p>$z = [z<em>1, z_2, \cdots, z_m]$, where $m$ is the number of categories; $y_i$ is the probability of category i; $z_i = w</em>{i<em>1}x_1 + w</em>{i<em>2}x_2 + \cdots w</em>{i_n}x_n + b_i$</p>
+<p>$z = [z_1, z_2, \cdots, z_m]$, where $m$ is the number of categories; $y_i$ is the probability of category i; $z_i = w_{i_1}x_1 + w_{i_2}x_2 + \cdots w_{i_n}x_n + b_i$</p>
 <p><img src="/2022/01/15/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/softmax.png" alt></p>
 <p>$y = Softmax(Wx + b)$ can matrixly represent as:<br><img src="/2022/01/15/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/softmax_matrix.png" alt></p>
 <h2 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h2><p>$ReLU(z) = max(0, z)$</p>
 <h1 id="Multi-Layer-Perceptron"><a href="#Multi-Layer-Perceptron" class="headerlink" title="Multi-Layer Perceptron"></a>Multi-Layer Perceptron</h1><p>Combine <strong>Linear Regressor</strong> and <strong>Activation Function</strong>, we can design MLP to solve <strong>non-linearity</strong> problem.</p>
-<p>For example, a XOR problem can be solved by MLP with 1 hidden layer.<br>
+<p>For example, a XOR problem can be solved by MLP with 1 hidden layer.</p>
+
 $$
 \begin{matrix}
 z = W^1 x + b^1 \\
@@ -371,8 +377,10 @@ h = ReLU(z) \\
 y = W^2h + b^2
 \end{matrix}
 $$
-</p>
-<p>where<br>
+
+
+<p>where</p>
+
 $$
 W^1 = 
 \begin{bmatrix}
@@ -383,10 +391,15 @@ b^1 = [0, -1]^T,
 W^2 = [1, -2],
 b^2 = [0]
 $$
-</p>
+
+
 <p><img src="/2022/01/15/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/xor_neural.png" alt></p>
 <p>The more hidden layers, the stronger presentation skills and the more difficult to learn. So we need to find the balanced point between <strong>model scale</strong> and <strong>learning difficulty</strong>.</p>
-<h1 id="MLP-Code"><a href="#MLP-Code" class="headerlink" title="MLP Code"></a>MLP Code</h1><h2 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h2><p>Create a Linear Model<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line">linear = nn.Linear(in_features, out_features)</span><br></pre></td></tr></table></figure><br>Generally, we might input multiple examples at once, which called <strong>batch</strong>. So the dimension of <strong>inputs</strong> can be <code>(batch, in_features)</code>. In the same way, the dimention of <strong>outputs</strong> can be <code>(batch, out_features)</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># in_features=32, out_features=</span></span><br><span class="line">linear = nn.Linear(<span class="number">32</span>, <span class="number">2</span>)</span><br><span class="line">inputs = torch.rand(<span class="number">3</span>, <span class="number">32</span>)</span><br><span class="line">outputs = linear(inputs)</span><br></pre></td></tr></table></figure></p>
+<h1 id="MLP-Code"><a href="#MLP-Code" class="headerlink" title="MLP Code"></a>MLP Code</h1><h2 id="Linear-Model"><a href="#Linear-Model" class="headerlink" title="Linear Model"></a>Linear Model</h2><p>Create a Linear Model</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line">linear = nn.Linear(in_features, out_features)</span><br></pre></td></tr></table></figure>
+<p>Generally, we might input multiple examples at once, which called <strong>batch</strong>. So the dimension of <strong>inputs</strong> can be <code>(batch, in_features)</code>. In the same way, the dimention of <strong>outputs</strong> can be <code>(batch, out_features)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># in_features=32, out_features=</span></span><br><span class="line">linear = nn.Linear(<span class="number">32</span>, <span class="number">2</span>)</span><br><span class="line">inputs = torch.rand(<span class="number">3</span>, <span class="number">32</span>)</span><br><span class="line">outputs = linear(inputs)</span><br></pre></td></tr></table></figure>
+
 <h2 id="Activation-Function-1"><a href="#Activation-Function-1" class="headerlink" title="Activation Function"></a>Activation Function</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> functional <span class="keyword">as</span> F</span><br><span class="line">activation = F.sigmoid(outputs)</span><br><span class="line">activation = F.relu(outputs)</span><br><span class="line">activation = F.softmax(outputs, dim=<span class="number">1</span>) <span class="comment"># dim represents the axis </span></span><br><span class="line">activation = F.tanh(outputs)</span><br></pre></td></tr></table></figure>
 <p>There are 3 ways to use activation function:</p>
 <ol>

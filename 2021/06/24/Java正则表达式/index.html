@@ -108,6 +108,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -218,7 +219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -334,6 +335,8 @@
 
 </blockquote>
 <a id="more"></a>
+
+
 <h1 id="什么是正则表达式"><a href="#什么是正则表达式" class="headerlink" title="什么是正则表达式"></a>什么是正则表达式</h1><p>正则表达式定义了一种<strong>字符串模式</strong>，用这个模式对字符串进行搜索，可以找到所有符合该模式的<strong>子字符串</strong>。</p>
 <h1 id="正则表达式的使用"><a href="#正则表达式的使用" class="headerlink" title="正则表达式的使用"></a>正则表达式的使用</h1><p>Java中正则表达式相关类定义在 <code>java.util.regex</code> 包中，主要包括以下三类：</p>
 <ul>
@@ -341,18 +344,18 @@
 <li><code>Matcher</code> : Matcher 对象是对输入字符串进行匹配的引擎。</li>
 <li><code>PatternSyntaxException</code> : PatternSyntaxException 是一个非强制异常类，它表示一个正则表达式模式中的语法错误。</li>
 </ul>
-<p><strong>基本使用</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String regex = <span class="string">""</span>;      <span class="comment">// 正则表达式</span></span><br><span class="line">    String content = <span class="string">""</span>;    <span class="comment">// 输入字符串</span></span><br><span class="line">    Pattern pattern = Pattern.compile(regex);</span><br><span class="line">    Matcher mathcer = pattern.matcher(content);</span><br><span class="line">    <span class="keyword">while</span>(matcher.find())&#123;</span><br><span class="line">        System.out.println(matcher.group(<span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>基本使用</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test01</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String regex = <span class="string">""</span>;      <span class="comment">// 正则表达式</span></span><br><span class="line">    String content = <span class="string">""</span>;    <span class="comment">// 输入字符串</span></span><br><span class="line">    Pattern pattern = Pattern.compile(regex);</span><br><span class="line">    Matcher mathcer = pattern.matcher(content);</span><br><span class="line">    <span class="keyword">while</span>(matcher.find())&#123;</span><br><span class="line">        System.out.println(matcher.group(<span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="反斜杠"><a href="#反斜杠" class="headerlink" title="反斜杠"></a>反斜杠</h2><p>正则表达式中有一些特殊符号，如<code>\d</code>,<code>\w</code>等，在其他语言（如JavaScript）可以直接这样写。但是 Java 有些不一样，因为 Java 的转义符号是 <code>\\</code> 而不是 <code>\</code>。</p>
-<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><div class="table-container">
-<table>
+<h2 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h2><table>
 <thead>
 <tr>
 <th>字符</th>
 <th>说明</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>\</td>
 <td>将下一字符标记为特殊字符、文本、反向引用或八进制转义符。</td>
 </tr>
@@ -407,20 +410,13 @@
 <tr>
 <td>(?=pattern)</td>
 <td>例如，’Windows (?=95</td>
-<td>98</td>
-<td>NT</td>
-<td>2000)’ 匹配”Windows 2000”中的”Windows”，但不匹配”Windows 3.1”中的”Windows”。</td>
 </tr>
 <tr>
 <td>(?!pattern)</td>
 <td>例如，’Windows (?!95</td>
-<td>98</td>
-<td>NT</td>
-<td>2000)’ 匹配”Windows 3.1”中的 “Windows”，但不匹配”Windows 2000”中的”Windows”</td>
 </tr>
 <tr>
-<td>x\</td>
-<td>y</td>
+<td>x|y</td>
 <td>匹配 x 或 y。</td>
 </tr>
 <tr>
@@ -475,9 +471,7 @@
 <td>\W</td>
 <td>与任何非单词字符匹配。</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 
     </div>
 

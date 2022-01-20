@@ -110,6 +110,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -219,7 +220,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -326,9 +327,12 @@
 
 </blockquote>
 <a id="more"></a>
+
 <p><img src="/2022/01/15/%E8%A7%A3%E5%86%B3mac%E4%B8%8Bhexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/1.png" alt></p>
-<p>这个问题出现的原因：nodejs的版本太高了，切换为12版本再部署即可。<br>因此需要做：<br>（1）下载nodejs版本管理工具<code>nvm</code><br><a href="https://www.jianshu.com/p/622ad36ee020" target="_blank" rel="noopener">参考</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</span><br></pre></td></tr></table></figure><br>下载过程中可能出现如下错误，本质是因为网络连接的错误<br><code>curl: (35) OpenSSL SSL_connect: Connection reset by peer in connection to raw.githubusercontent.com:443</code><br><a href="https://blog.csdn.net/jartins/article/details/115407952" target="_blank" rel="noopener">参考</a><br><code>sudo vi /etc/hosts</code> —&gt; 添加“185.199.108.133     raw.githubusercontent.com” -&gt; wq</p>
-<p>(2)<br><code>nvm use 12</code> —&gt; <code>hexo d -g</code></p>
+<p>这个问题出现的原因：nodejs的版本太高了，切换为12版本再部署即可。<br>因此需要做：<br>（1）下载nodejs版本管理工具<code>nvm</code><br><a href="https://www.jianshu.com/p/622ad36ee020" target="_blank" rel="noopener">参考</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>下载过程中可能出现如下错误，本质是因为网络连接的错误<br><code>curl: (35) OpenSSL SSL_connect: Connection reset by peer in connection to raw.githubusercontent.com:443</code><br><a href="https://blog.csdn.net/jartins/article/details/115407952" target="_blank" rel="noopener">参考</a><br><code>sudo vi /etc/hosts</code> –&gt; 添加“185.199.108.133     raw.githubusercontent.com” -&gt; wq</p>
+<p>(2)<br><code>nvm use 12</code> –&gt; <code>hexo d -g</code></p>
 
     </div>
 

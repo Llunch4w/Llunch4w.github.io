@@ -115,6 +115,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -225,7 +226,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -332,6 +333,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><h2 id="Seq2Seq"><a href="#Seq2Seq" class="headerlink" title="Seq2Seq"></a>Seq2Seq</h2><p><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/seq2seq.png" alt></p>
 <p>Above figure show an application which uses <strong>Seq2Seq Model</strong> to realize <strong>Machine Translation</strong>. Seq2Seq model is composed of 2 parts, respectivly <strong>Encoder</strong> and <strong>Decoder</strong> : </p>
 <ol>
@@ -347,14 +349,15 @@
 <p>To solve the problem, someone proposed <strong>Attention Model</strong>.</p>
 <h1 id="Attention-Mechanism"><a href="#Attention-Mechanism" class="headerlink" title="Attention Mechanism"></a>Attention Mechanism</h1><p>The core idea of <strong>Attention Machinism</strong>: When generating a new target word, not noly considering previous time state and already generated word, but also considering which words in the origin sequence is more relevant to the current word need to generate. It guides us put more attention to the words in the source sequence which is more relevant to the current word.</p>
 <p><img src="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/attention_seq2seq.png" alt></p>
-<p>Mathmatically,<br>
+<p>Mathmatically,  </p>
+
 $$
 \begin{matrix}
     \hat{\alpha_s} = attn(h_s, h_{t-1}) \\
     \alpha_s = Softmax(\hat{\alpha})_s
 \end{matrix}
 $$
-    </p>
+    
 <ul>
 <li>$h_s$: the state of time $s$ in the source sequence.</li>
 <li>$h_{t-1}$: the state of previous time in the target sequence.</li>
@@ -368,7 +371,7 @@ $$
 <ul>
 <li>inputs can be represented by one combination of n vectors: $x_1, x_2, \cdots, x_n$.</li>
 <li>outputs can be represented by one combination of n new vectors: $y_1, y_2, \cdots, y_n$.</li>
-<li>The calculation formulate of $y<em>i$: $y_i = \sum</em>{j=1}^n a<em>{ij}x</em>{j}$<ul>
+<li>The calculation formulate of $y_i$: $y_i = \sum_{j=1}^n a_{ij}x_{j}$<ul>
 <li>$a_{ij}$ is the attention weight(after softmax normalize) between $x_i$ and $x_j$.</li>
 </ul>
 </li>
@@ -405,7 +408,8 @@ $$
 <li>$k_i = W^k x_i$</li>
 <li>$v_i = W^v x_i$</li>
 </ul>
-<p><strong>New Calculation Formulation</strong><br>
+<p><strong>New Calculation Formulation</strong></p>
+
 $$
 \begin{matrix}
 y_i = \sum_{j=1}^n = \alpha_{ij}v_j \\
@@ -413,7 +417,8 @@ y_i = \sum_{j=1}^n = \alpha_{ij}v_j \\
 \hat{\alpha}_{ij} = attn(q_i, k_j)
 \end{matrix}
 $$
-    </p>
+    
+
 <h3 id="Multiple-Layer-Attention"><a href="#Multiple-Layer-Attention" class="headerlink" title="Multiple Layer Attention"></a>Multiple Layer Attention</h3><p>In the original Attention Machenism, it only considers the relationship between 2 input sequence units. But in practical applications, it is often necessary to consider the relationship between many sequence units. If we consturct higher order relationship, it will result higher model complexity. </p>
 <p>To solve this demands, someone proposed <strong>Message Propagation</strong>, which can realized by stacking multiple layer self-attention model. Normally, attention calculation use linear function. So the result of stacking them will also be linear. In order to enhance the presentation ability of model, we can add non-linear MLP behind every attention layer.</p>
 <p>In addition, in order to benefit the process of model learning, we can also use some techniques, such as <strong>Layer Normalization</strong>, <strong>Residual Connections</strong>.</p>

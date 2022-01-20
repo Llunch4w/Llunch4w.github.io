@@ -108,6 +108,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -218,7 +219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -319,6 +320,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="Gradient-Clip"><a href="#Gradient-Clip" class="headerlink" title="Gradient Clip"></a>Gradient Clip</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''To avoid graidient exploration</span></span><br><span class="line"><span class="string">    @parameters: parameters needed to clip</span></span><br><span class="line"><span class="string">    @max_norm: the highest boundary of the gradient of params</span></span><br><span class="line"><span class="string">    @norm_type: the type of norm</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># torch.nn.utils.clip_grad_norm_</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">clip_grad_norm_</span><span class="params">(parameters, max_norm, norm_type=<span class="number">2</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(parameters, torch.Tensor):</span><br><span class="line">        parameters = [parameters]</span><br><span class="line">    parameters = list(filter(<span class="keyword">lambda</span> p: p.grad <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>, parameters))</span><br><span class="line">    max_norm = float(max_norm)</span><br><span class="line">    norm_type = float(norm_type)</span><br><span class="line">    <span class="keyword">if</span> norm_type == inf:</span><br><span class="line">        total_norm = max(p.grad.data.abs().max() <span class="keyword">for</span> p <span class="keyword">in</span> parameters)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        total_norm = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> parameters:</span><br><span class="line">            param_norm = p.grad.data.norm(norm_type)</span><br><span class="line">            total_norm += param_norm.item() ** norm_type</span><br><span class="line">        total_norm = total_norm ** (<span class="number">1.</span> / norm_type)</span><br><span class="line">    clip_coef = max_norm / (total_norm + <span class="number">1e-6</span>)</span><br><span class="line">    <span class="keyword">if</span> clip_coef &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> parameters:</span><br><span class="line">            p.grad.data.mul_(clip_coef)</span><br><span class="line">    <span class="keyword">return</span> total_norm</span><br></pre></td></tr></table></figure>
 
     </div>

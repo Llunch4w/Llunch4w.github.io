@@ -129,6 +129,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -239,7 +240,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -354,7 +355,9 @@
 <p>^ _ ^ </p>
 
 </blockquote>
+
 <a id="more"></a>
+
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Netty是JBoss提供的一个Java开源框架，主要针对在TCP协议下，面向Client端的高并发应用，或者点对点场景下的大量数据持续的传输。Netty本质上是一个NIO框架，封装了进行NIO的一系列操作。</p>
 <p><img src="/2020/11/03/Netty/1.png" alt="IO封装层次"></p>
 <p><strong>Netty的实际应用</strong></p>
@@ -390,7 +393,6 @@
 <p>应用场景：连接数目较多且连接比较短的场景，如聊天服务器、弹幕系统、服务器之间的通讯等</p>
 <h3 id="Buffer"><a href="#Buffer" class="headerlink" title="Buffer"></a>Buffer</h3><p>Buffer是缓冲区，正是因为NIO模型具有Buffer，因此它是基于块的读写，相比于BIO基于流的读写更有效率。Buffer类派生了IntBuffer,ByteBuffer等子类，所有Buffer类保存数据的底层结构都是数组。</p>
 <p><strong>Buffer类的核心属性</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -399,8 +401,7 @@
 <th>备注</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>capacity</td>
 <td>容量</td>
 <td>可容纳的最大数据量，在缓冲区创建时设定，设定后不可改变</td>
@@ -420,9 +421,7 @@
 <td>标记</td>
 <td>可以在某些位置设置一些标记以方便用户操作</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h3 id="Channel"><a href="#Channel" class="headerlink" title="Channel"></a>Channel</h3><p>相比于流只能单向操作（读或者写），而通道支持同时读写。在NIO中，Channel从Buffer中读数据（write(ByteBuffer src)），写数据到Buffer中(read(ByteBuffer dst))。<br>Channel是NIO中的一个接口，常用的Channel类如下：</p>
 <ul>
 <li>ServerSocketChannel：对应服务器监听客户请求Socket</li>
@@ -431,7 +430,9 @@
 <li>FileChannel：对应文件读写</li>
 </ul>
 <h3 id="Selector"><a href="#Selector" class="headerlink" title="Selector"></a>Selector</h3><p>在NIO模型中充当一个管理者的角色，将不断轮询所有在它这注册过的channel，当channel处有事件发生时，通知相应程序来处理事件。这种机制使得服务器一个线程可以负责与多个客户端之间的通信，其中每个线程对应一个Selector。</p>
-<p><strong>Selector常见操作</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 创建一个Selector</span><br><span class="line">Selector selector &#x3D; Selector.open();</span><br><span class="line">&#x2F;&#x2F; 将一个channel注册到selector上</span><br><span class="line">channel.register(selector,SelectorKey.OP_XXXX,[Buffer]);</span><br><span class="line">&#x2F;&#x2F; selector进行轮询</span><br><span class="line">selector.select([time(ms)]);</span><br><span class="line">&#x2F;&#x2F; 获取Selector上所有有事件发生的SelectionKey（每个SelectionKey与一个注册事件相关联）</span><br><span class="line">Set&lt;SelectionKey&gt; selectionKeys &#x3D; selector.selectedKeys();</span><br><span class="line">&#x2F;&#x2F; 获取Selector上所有注册的SelectionKey</span><br><span class="line">Set&lt;SelectionKey&gt; selectionKeys &#x3D; selector.keys();</span><br><span class="line">&#x2F;&#x2F; 根据SelectionKey获取关联的Channel</span><br><span class="line">channel &#x3D; key.channel();</span><br><span class="line">&#x2F;&#x2F; 根据key获取关联channel的buffer</span><br><span class="line">buffer &#x3D; key.attachment();</span><br></pre></td></tr></table></figure></p>
+<p><strong>Selector常见操作</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 创建一个Selector</span><br><span class="line">Selector selector &#x3D; Selector.open();</span><br><span class="line">&#x2F;&#x2F; 将一个channel注册到selector上</span><br><span class="line">channel.register(selector,SelectorKey.OP_XXXX,[Buffer]);</span><br><span class="line">&#x2F;&#x2F; selector进行轮询</span><br><span class="line">selector.select([time(ms)]);</span><br><span class="line">&#x2F;&#x2F; 获取Selector上所有有事件发生的SelectionKey（每个SelectionKey与一个注册事件相关联）</span><br><span class="line">Set&lt;SelectionKey&gt; selectionKeys &#x3D; selector.selectedKeys();</span><br><span class="line">&#x2F;&#x2F; 获取Selector上所有注册的SelectionKey</span><br><span class="line">Set&lt;SelectionKey&gt; selectionKeys &#x3D; selector.keys();</span><br><span class="line">&#x2F;&#x2F; 根据SelectionKey获取关联的Channel</span><br><span class="line">channel &#x3D; key.channel();</span><br><span class="line">&#x2F;&#x2F; 根据key获取关联channel的buffer</span><br><span class="line">buffer &#x3D; key.attachment();</span><br></pre></td></tr></table></figure>
+
 <h3 id="NIO与零拷贝"><a href="#NIO与零拷贝" class="headerlink" title="NIO与零拷贝"></a>NIO与零拷贝</h3><blockquote>
 <p>零拷贝并不意味着拷贝数目为0，而意味着CPU拷贝次数为0</p>
 </blockquote>
@@ -453,7 +454,7 @@
 <p>Linux2.1提供了sendFile函数，使得内核缓冲区中的数据可以不经过用户态直接拷贝到socket缓冲区内。<br>sendFile优化后网络通信过程经历了3次复制，2次上下文切换</p>
 <p><strong>零拷贝</strong></p>
 <p><img src="/2020/11/03/Netty/7.png" alt="零拷贝"></p>
-<p>Linux2.4对sendFile函数做了优化，避免了从内核缓冲区将数据拷贝到socket缓冲区的操作，直接将内核缓冲区中的数据拷贝到了协议栈。这里其实有一次cpu拷贝（kernel buffer—&gt;socket buffer），但拷贝的信息很少（如length,offset），消耗低，可以忽略。<br>这种方式可以近似经历了2次复制，2次上下文切换</p>
+<p>Linux2.4对sendFile函数做了优化，避免了从内核缓冲区将数据拷贝到socket缓冲区的操作，直接将内核缓冲区中的数据拷贝到了协议栈。这里其实有一次cpu拷贝（kernel buffer–&gt;socket buffer），但拷贝的信息很少（如length,offset），消耗低，可以忽略。<br>这种方式可以近似经历了2次复制，2次上下文切换</p>
 <h2 id="AIO模型"><a href="#AIO模型" class="headerlink" title="AIO模型"></a>AIO模型</h2><p>AIO引入了异步通道的概念，采用Proactor模式，简化了程序编写：有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端启动线程去处理。</p>
 <p>应用场景：连接数目比较多且连接比较长的场景，如相册服务器</p>
 <h1 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h1><p>Reactor模式是一种设计模式，它是基于事件驱动的，可以并发的处理多个服务请求，当请求抵达后，依据多路复用策略，同步的派发这些请求至相关的请求处理程序。</p>
@@ -545,15 +546,23 @@
 <li>EventLoopGroup具有next方法，返回下一个EventLoop</li>
 </ul>
 <p><img src="/2020/11/03/Netty/15.png" alt="EventLoopGroup"></p>
-<p><strong>创建方法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; nThread默认个数为8</span><br><span class="line">NioEventLoopGroup bossGroup &#x3D; new NioEventLoopGroup(1);</span><br><span class="line">NioEventLoopGroup workerGroup &#x3D; new NioEventLoopGroup();</span><br></pre></td></tr></table></figure></p>
-<p><strong>关闭方法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group.shutdownGracefully();</span><br></pre></td></tr></table></figure></p>
+<p><strong>创建方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; nThread默认个数为8</span><br><span class="line">NioEventLoopGroup bossGroup &#x3D; new NioEventLoopGroup(1);</span><br><span class="line">NioEventLoopGroup workerGroup &#x3D; new NioEventLoopGroup();</span><br></pre></td></tr></table></figure>
+
+<p><strong>关闭方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group.shutdownGracefully();</span><br></pre></td></tr></table></figure>
+
 <h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><p>Bootstrap的意思是引导，Netty程序通常是从一个Bootstrap开始，用作配置整个Netty程序。其中，服务端程序使用的是ServerBootstrap，客户端使用的是Bootstrap。</p>
-<p><strong>常见方法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Server端使用ServerBootstrap配置两个EventLoopGroup</span><br><span class="line">serverBootstrap.group(bossGroup,workerGroup);</span><br><span class="line">&#x2F;&#x2F; 客户端使用Bootstrap配置一个EventLoopGroup</span><br><span class="line">boostrap.group(workerGroup);</span><br><span class="line">&#x2F;&#x2F; 配置一个通道实现</span><br><span class="line">channel(Class channelClass)</span><br><span class="line">&#x2F;&#x2F; 用来给ServerChannel添加配置</span><br><span class="line">option(ChannelOption&lt;T&gt; option,T value)</span><br><span class="line">&#x2F;&#x2F; 用来给接收到的通道添加配置</span><br><span class="line">childOption(ChannelOption&lt;T&gt; option,T value)</span><br><span class="line">&#x2F;&#x2F; 为bossGroup中的事件添加业务处理类</span><br><span class="line">handler(ChannelHandler handler)</span><br><span class="line">&#x2F;&#x2F; 为workerGroup中的事件添加业务处理类</span><br><span class="line">childHandler(ChannelHandler handler)</span><br><span class="line">&#x2F;&#x2F; 用于服务器端，占用端口号</span><br><span class="line">ChannelFuture bind(int inetPort)</span><br><span class="line">&#x2F;&#x2F; 用于客户端，连接服务器</span><br><span class="line">ChannelFuture connect(String inetHost,int inetPort)</span><br></pre></td></tr></table></figure></p>
+<p><strong>常见方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Server端使用ServerBootstrap配置两个EventLoopGroup</span><br><span class="line">serverBootstrap.group(bossGroup,workerGroup);</span><br><span class="line">&#x2F;&#x2F; 客户端使用Bootstrap配置一个EventLoopGroup</span><br><span class="line">boostrap.group(workerGroup);</span><br><span class="line">&#x2F;&#x2F; 配置一个通道实现</span><br><span class="line">channel(Class channelClass)</span><br><span class="line">&#x2F;&#x2F; 用来给ServerChannel添加配置</span><br><span class="line">option(ChannelOption&lt;T&gt; option,T value)</span><br><span class="line">&#x2F;&#x2F; 用来给接收到的通道添加配置</span><br><span class="line">childOption(ChannelOption&lt;T&gt; option,T value)</span><br><span class="line">&#x2F;&#x2F; 为bossGroup中的事件添加业务处理类</span><br><span class="line">handler(ChannelHandler handler)</span><br><span class="line">&#x2F;&#x2F; 为workerGroup中的事件添加业务处理类</span><br><span class="line">childHandler(ChannelHandler handler)</span><br><span class="line">&#x2F;&#x2F; 用于服务器端，占用端口号</span><br><span class="line">ChannelFuture bind(int inetPort)</span><br><span class="line">&#x2F;&#x2F; 用于客户端，连接服务器</span><br><span class="line">ChannelFuture connect(String inetHost,int inetPort)</span><br></pre></td></tr></table></figure>
+
 <h2 id="ChannelOption"><a href="#ChannelOption" class="headerlink" title="ChannelOption"></a>ChannelOption</h2><p><strong>SO_BACKLOG</strong><br>对应TCP/IP协议中的listen函数的backlog参数，用来初始化服务器可连接队列大小。服务端对客户端的请求是顺序处理的，且在同一时间只能处理一个客户端的连接请求。当服务端正在处理连接请求时，有新的连接请求到来则会被放入可连接队列中等待。</p>
 <p><strong>SO_KEEPALIVE</strong><br>设置为true的话则代表一直保持连接状态</p>
 <h2 id="ChannelFuture"><a href="#ChannelFuture" class="headerlink" title="ChannelFuture"></a>ChannelFuture</h2><p>Netty中所有的IO操作的异步的，若想知道消息是否被正确处理，就需要通过ChannelFuture注册一个监听，当操作完成时监听会自动触发注册的监听事件。</p>
 <p><strong>异步机制</strong><br>当异步执行某个操作时，当前线程不需要等待操作完成。当前线程调用此操作会立即得到一个返回的Future接口，然后此操作（任务）会在其他线程中执行。通过调用Future接口中的一系列方法此可以知道任务异步执行的情况，同时也可以通过添加监听器的方式来指示任务异步完成后自动执行的回调函数。</p>
-<p><strong>Future-Listener机制</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 绑定一个端口并且同步</span><br><span class="line">ChannelFuture channelFuture &#x3D; bootstrap.bind(6668).sync();</span><br><span class="line">&#x2F;&#x2F; 注册监听函数执行完成后的操作</span><br><span class="line">channelFuture.addListener(new ChannelFutureListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void operationComplete(ChannelFuture channelFuture) throws Exception &#123;</span><br><span class="line">        if(channelFuture.isSuccess())&#123;</span><br><span class="line">            System.out.println(&quot;服务器绑定端口成功&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            System.out.println(&quot;服务器绑定端口失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>Future-Listener机制</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 绑定一个端口并且同步</span><br><span class="line">ChannelFuture channelFuture &#x3D; bootstrap.bind(6668).sync();</span><br><span class="line">&#x2F;&#x2F; 注册监听函数执行完成后的操作</span><br><span class="line">channelFuture.addListener(new ChannelFutureListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void operationComplete(ChannelFuture channelFuture) throws Exception &#123;</span><br><span class="line">        if(channelFuture.isSuccess())&#123;</span><br><span class="line">            System.out.println(&quot;服务器绑定端口成功&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            System.out.println(&quot;服务器绑定端口失败&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
 <h2 id="ChannelHandler"><a href="#ChannelHandler" class="headerlink" title="ChannelHandler"></a>ChannelHandler</h2><p>ChannelHandler是一个接口，处理或拦截I/O事件，并将其转发到ChannelPipeLine（业务处理链）中的下一个处理程序</p>
 <p><img src="/2020/11/03/Netty/13.png" alt="接口和类一览图"></p>
 <p>以客户端为例：</p>
@@ -567,21 +576,28 @@
 <li>入站事件会从链表head往后传递到最后一个入站的handler；</li>
 <li>出站事件会从链表tail往前传递到最前一个出站的handler。</li>
 <li>两种类型的handler互不影响，因为入站handler和出站handler分别保存在两条不同的双向链表中<ul>
-<li>入站handler实现ChannelInboundHandler\<C\>接口，如解码器</C\></li>
-<li>出站handler实现ChannelOutboundHandler\<C\>接口，如编码器</C\></li>
+<li>入站handler实现ChannelInboundHandler&lt;C&gt;接口，如解码器</li>
+<li>出站handler实现ChannelOutboundHandler&lt;C&gt;接口，如编码器</li>
 <li>C代表通道类型，在网络通信中一般是SocketChannel</li>
 </ul>
 </li>
 </ul>
 <h2 id="TaskQueue"><a href="#TaskQueue" class="headerlink" title="TaskQueue"></a>TaskQueue</h2><p>任务队列保存某些了耗时长的业务操作，TaskQueue中的任务会异步执行。在Netty模型中，TaskQueue有一个线程，它会不断从队头取一个任务进行执行。</p>
 <p><strong>将任务加入TaskQueue的方法</strong></p>
-<p>方案1：用户程序自定义普通任务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctx.channel().eventLoop().excute(new Runnable()&#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void run()&#123;</span><br><span class="line">    &#x2F;&#x2F; 耗时长的业务操作</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>方案2：用户自定义定时任务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 该任务是提交到scheduleTaskQueue</span><br><span class="line">ctx.channel().eventLoop().schedule(new Runnable()&#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void run()&#123;</span><br><span class="line">    &#x2F;&#x2F; 耗时长的业务操作</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,5,TimeUnit,SECONDS);</span><br></pre></td></tr></table></figure></p>
+<p>方案1：用户程序自定义普通任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ctx.channel().eventLoop().excute(new Runnable()&#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void run()&#123;</span><br><span class="line">    &#x2F;&#x2F; 耗时长的业务操作</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>方案2：用户自定义定时任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 该任务是提交到scheduleTaskQueue</span><br><span class="line">ctx.channel().eventLoop().schedule(new Runnable()&#123;</span><br><span class="line">  @Override</span><br><span class="line">  public void run()&#123;</span><br><span class="line">    &#x2F;&#x2F; 耗时长的业务操作</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,5,TimeUnit,SECONDS);</span><br></pre></td></tr></table></figure>
+
 <p>方案3：非当前Reactor线程调用Channel中的各种方法<br>一般是用在推送系统中。做法是用一个集合类保存需要推送消息的Channel，在需要推送时，遍历这个集合，获取每个Channel，然后调用eventLoop()函数获得他们所在的NioEventLoop，在对应的TaskQueue或ScheduleTaskQueue中加入任务。</p>
 <h2 id="Unpooled"><a href="#Unpooled" class="headerlink" title="Unpooled"></a>Unpooled</h2><p>Unpooled类是Netty提供的一个专门用来操纵缓冲区的工具类</p>
-<p>ByteBuf底层是一个数组，因此创建时可以指定其大小<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf buf &#x3D; Unpooled.buffer(10);</span><br></pre></td></tr></table></figure></p>
+<p>ByteBuf底层是一个数组，因此创建时可以指定其大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ByteBuf buf &#x3D; Unpooled.buffer(10);</span><br></pre></td></tr></table></figure>
+
 <p>在Netty中，ByteBuf不需要flip进行反转。Netty底层通过维护readIndex,writeIndex,capacity三个变量来控制读写区域。其中[0,readIndex)表示已读取区域； [readIndex,writeIndex)表示可读区域； [writeIndex,capacity)表示可写区域。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">buf.writeByte(i); &#x2F;&#x2F; 写入数据</span><br><span class="line">buf.readByte();   &#x2F;&#x2F; 读取数据</span><br></pre></td></tr></table></figure>
+
 <h1 id="Netty编码解码"><a href="#Netty编码解码" class="headerlink" title="Netty编码解码"></a>Netty编码解码</h1><p>在编写网络应用程序时，由于数据在网络中都是以二进制形式进行传输，因此在发送数据时就需要将业务数据编码成字节码，在接收数据后就需要将字节码解码成业务数据。<br>codec（编解码器）由两部分组成，分别是：decoder(解码器);encoder(编码器)</p>
 <p><img src="/2020/11/03/Netty/16.png" alt="数据传输过程"></p>
 <p><strong>Netty自身编码解码机制和问题</strong></p>
@@ -625,7 +641,7 @@
 <li>不论解码handler还是编码handler，接收的消息必须与待处理的消息类型一致，否则handler不会被执行</li>
 <li>在解码器进行解码时，需要判断缓存（ByteBuf）的数据是否足够，否则接收到的结果可能会与期望的结果不一致</li>
 </ul>
-<h2 id="Netty其他常用编码、解码器"><a href="#Netty其他常用编码、解码器" class="headerlink" title="Netty其他常用编码、解码器"></a>Netty其他常用编码、解码器</h2><p><strong>ReplayingDecoder</strong><br>ReplayingDecoder\<S\> 扩展了ByteToMessageDecoder类</S\></p>
+<h2 id="Netty其他常用编码、解码器"><a href="#Netty其他常用编码、解码器" class="headerlink" title="Netty其他常用编码、解码器"></a>Netty其他常用编码、解码器</h2><p><strong>ReplayingDecoder</strong><br>ReplayingDecoder&lt;S&gt; 扩展了ByteToMessageDecoder类</p>
 <ul>
 <li>优点<ul>
 <li>不必调用readableBytes方法人工判定缓存中数据量是否足够做转换</li>
@@ -652,7 +668,7 @@
 <li>情况3：服务端分两次读取到了数据包：第一次读取到完整的 D1 包和 D2 包部分内容；第二次读取到 D2 包剩余内容。称之为 TCP拆包</li>
 <li>情况4：服务端分两次读取到了数据包：第一次读取到了 D1 包的部分内容；第二次读取到了 D1 包的剩余内容和 D2 包。</li>
 </ol>
-<h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p><a href="https://www.bilibili.com/video/BV1DJ411m7NR?from=search&amp;seid=2689171580875062493" target="_blank" rel="noopener">尚硅谷韩顺平Netty教学</a></p>
+<h1 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h1><p><a href="https://www.bilibili.com/video/BV1DJ411m7NR?from=search&seid=2689171580875062493" target="_blank" rel="noopener">尚硅谷韩顺平Netty教学</a></p>
 
     </div>
 

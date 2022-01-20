@@ -114,6 +114,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -224,7 +225,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -331,23 +332,26 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="RNN-Structure"><a href="#RNN-Structure" class="headerlink" title="RNN Structure"></a>RNN Structure</h1><p><strong>Recurrent Neural Netword</strong> refers to the hidden layer output of the network as its own input.</p>
 <p><img src="/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/rnn_unit.png" alt></p>
-<p>(1) $W^{xh}, b^{xh}$: input layer —&gt; hidden layer<br>(2) $W^{hh}, b^{hh}$: hidden layer —&gt; hidden layer<br>(3) $W^{hy}, b^{hy}$: hidden layer —&gt; output layer     </p>
+<p>(1) $W^{xh}, b^{xh}$: input layer –&gt; hidden layer<br>(2) $W^{hh}, b^{hh}$: hidden layer –&gt; hidden layer<br>(3) $W^{hy}, b^{hy}$: hidden layer –&gt; output layer     </p>
 <p>When the RNN process a sequence input, it need to expand the network according to input time. Then:</p>
 <ul>
 <li>Every input of sequence will align to the different time unit.</li>
 <li>And every output of the previous time will also be the input of this time unit.</li>
 </ul>
 <p><img src="/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/rnn.png" alt></p>
-<p>Formulaly,<br>
+<p>Formulaly,</p>
+
 $$
 \begin{matrix}
     h_t = tanh(W^{xh}x_t + b^{xh} + W^{hh}h_{t-1} + b^{hh}) \\
     y = Softmax(W^{hy}h_n + b^{hy})
 \end{matrix}
 $$
-</p>
+
+
 <p>where $tanh(z) = \frac{e^z - e^{-z}}{e^{z} + e^{-z}}$ is the activation function. The codomain of <strong>tanh</strong> is <strong>(-1, 1)</strong>.<br>Every time, the hidden layer $h_t$ beared all input information of 1~t. So the hidden layer in the RNN alse be called <strong>Memory Unit</strong>.</p>
 <h1 id="LSTM-Structure"><a href="#LSTM-Structure" class="headerlink" title="LSTM Structure"></a>LSTM Structure</h1><p>The defects of RNN:</p>
 <ul>
@@ -357,14 +361,16 @@ $$
 <p><strong>Long Short Term Memory Network</strong> is a variant Recurrent Neural Network which can keep long-term memory.</p>
 <p><img src="/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/lstm_unit.png" alt></p>
 <h2 id="Motivation-and-Evolution"><a href="#Motivation-and-Evolution" class="headerlink" title="Motivation and Evolution"></a>Motivation and Evolution</h2><p>When we firstly see the structure figure, we might be confused of <strong>Why</strong>. Then we will derive it step by step.</p>
-<p>(1)<br>
+<p>(1)     </p>
+
 $$
 \begin{matrix}
     u_t = tanh(W^{xh}x_t + b^{xh} + W^{hh}h_{t-1} + b^{hh}) \\
     h_t = h_{t-1} + u_t
 \end{matrix}
 $$
-<br>The advantage of this variant is connect $h<em>k$ and $h_t$ directly (k &lt; t), striding over several layers between them. Because $h_t = h</em>{t-1} + u<em>t = h</em>{t-2} + u<em>{t-1} + u</em>{t} = h<em>k + u</em>{k+1} + u<em>{k+2} + \cdots + u</em>{t-1} + u_{t}$.</p>
+    
+<p>The advantage of this variant is connect $h_k$ and $h_t$ directly (k &lt; t), striding over several layers between them. Because $h_t = h_{t-1} + u_t = h_{t-2} + u_{t-1} + u_{t} = h_k + u_{k+1} + u_{k+2} + \cdots + u_{t-1} + u_{t}$.</p>
 <p>(2)<br>Simply Adding old state $h_{t-1}$ and new state $u_t$ is a rough way without considering the contribution of each state. So we add a weight as a coefficient, also called <strong>gate</strong>.     </p>
 
 $$
@@ -375,6 +381,7 @@ $$
 \end{matrix}
 $$
     
+
 <ul>
 <li>$f_t$: Forget Gate. Smaller it is, the more old information lost.</li>
 <li>$i_t$: Input Date. Greater it is, the more important new information is.</li>
@@ -391,6 +398,7 @@ $$
 \end{matrix}
 $$
    
+
 <p>$c_t$ is named <strong>Memory Cell</strong>.</p>
 <h1 id="Bi-RNN"><a href="#Bi-RNN" class="headerlink" title="Bi-RNN"></a>Bi-RNN</h1><p>Bi means <strong>Bidirectional</strong>. </p>
 <p>In the traditional RNN, the flow of information is sole-direciton flow. It is not suitable in some tasks. For example, <strong>Part-Of-Speech Tagging</strong>, a word is not only related to previous world, but also related to next word. But in the sole-direction structure, it can not see the next word. </p>

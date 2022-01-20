@@ -112,6 +112,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -222,7 +223,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -329,6 +330,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><code>/etc/passwd</code>文件存储登录时需要的基本信息。换句话说，它存储用户帐户信息。<br>/etc/passwd是一个纯文本文件。它包含系统帐户的列表，为每个帐户提供一些有用的信息，如用户ID、组ID、主目录、shell等等。<br>/etc/passwd文件应该具有一般读取权限，因为许多命令实用程序使用它来将用户id映射到用户名。但是，对/etc/passwd的写访问必须仅限于超级用户/根帐户。</p>
 <h1 id="显示格式"><a href="#显示格式" class="headerlink" title="显示格式"></a>显示格式</h1><p><img src="/2020/12/09/%E6%96%87%E4%BB%B6-etc-passwd-%E4%BB%8B%E7%BB%8D/1.png" alt></p>
 <ol>
@@ -341,8 +343,10 @@
 <li><strong>Command/Shell</strong>：命令或shell (/bin/bash)的绝对路径。通常，这是一个外壳。请注意，它不必是一个shell。例如，sysadmin可以使用nologin shell，它充当用户帐户的替代shell。如果shell设置为/sbin/nologin，并且用户尝试直接登录到Linux系统，那么/sbin/nologin shell将关闭连接。</li>
 </ol>
 <h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><h2 id="查看-etc-passwd-文件"><a href="#查看-etc-passwd-文件" class="headerlink" title="查看 /etc/passwd 文件"></a>查看 /etc/passwd 文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
 <p><img src="/2020/12/09/%E6%96%87%E4%BB%B6-etc-passwd-%E4%BB%8B%E7%BB%8D/2.png" alt></p>
 <h2 id="查看-etc-passwd-文件权限"><a href="#查看-etc-passwd-文件权限" class="headerlink" title="查看 /etc/passwd 文件权限"></a>查看 /etc/passwd 文件权限</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/passwd</span><br></pre></td></tr></table></figure>
+
 <p><img src="/2020/12/09/%E6%96%87%E4%BB%B6-etc-passwd-%E4%BB%8B%E7%BB%8D/3.png" alt></p>
 <h2 id="利用sh脚本查看-etc-passwd"><a href="#利用sh脚本查看-etc-passwd" class="headerlink" title="利用sh脚本查看 /etc/passwd"></a>利用sh脚本查看 /etc/passwd</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># seven fields from /etc/passwd stored in $f1,f2...,$f7</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="keyword">while</span> IFS=: <span class="built_in">read</span> -r f1 f2 f3 f4 f5 f6 f7</span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line"> <span class="built_in">echo</span> <span class="string">"User <span class="variable">$f1</span> use <span class="variable">$f7</span> shell and stores files in <span class="variable">$f6</span> directory."</span></span><br><span class="line"><span class="keyword">done</span> &lt; /etc/passwd</span><br></pre></td></tr></table></figure>
     </div>

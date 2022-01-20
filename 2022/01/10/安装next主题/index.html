@@ -116,6 +116,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -226,7 +227,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -335,8 +336,12 @@
 
 </blockquote>
 <a id="more"></a>
-<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>每次更改项目_config.yml后，需要重新启动网站才能生效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure><br>而如果更改的是next里的_config.yml的话，只需要在浏览器里刷新页面。</p>
-<h1 id="clone-项目"><a href="#clone-项目" class="headerlink" title="clone 项目"></a>clone 项目</h1><p>在hexo目录下打开Git Bash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;next-theme&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure></p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>每次更改项目_config.yml后，需要重新启动网站才能生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>而如果更改的是next里的_config.yml的话，只需要在浏览器里刷新页面。</p>
+<h1 id="clone-项目"><a href="#clone-项目" class="headerlink" title="clone 项目"></a>clone 项目</h1><p>在hexo目录下打开Git Bash</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;next-theme&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+
 <h1 id="更改项目配置"><a href="#更改项目配置" class="headerlink" title="更改项目配置"></a>更改项目配置</h1><ul>
 <li>打开项目文件夹下的_config.yml</li>
 <li>找到关键字theme，赋值为next</li>
@@ -380,11 +385,11 @@
 <p><img src="/2022/01/10/%E5%AE%89%E8%A3%85next%E4%B8%BB%E9%A2%98/5.jpg" alt="图5"></p>
 <h2 id="设置侧栏显示时机"><a href="#设置侧栏显示时机" class="headerlink" title="设置侧栏显示时机"></a>设置侧栏显示时机</h2><blockquote>
 <p>只在 Muse | Mist下有效</p>
+</blockquote>
 <ul>
 <li>打开themes/next文件夹下的_congif.yml</li>
 <li>找到关键字Sidebar Display</li>
 </ul>
-</blockquote>
 <h1 id="个人信息配置"><a href="#个人信息配置" class="headerlink" title="个人信息配置"></a>个人信息配置</h1><h2 id="网站title-作者姓名"><a href="#网站title-作者姓名" class="headerlink" title="网站title|作者姓名"></a>网站title|作者姓名</h2><ul>
 <li>打开项目文件夹下的_congif.yml</li>
 <li>在Site关键字下配置title和author的值</li>
@@ -401,21 +406,27 @@
 <li>找到关键字social</li>
 <li>将需要添加的社交链接取消注释，并赋值自己的社交账号地址</li>
 </ul>
-<h1 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h1><p>在md文件中加上如下注释，那么此注释下所有内容都会省略，并出现阅读全文按钮<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure></p>
+<h1 id="阅读全文"><a href="#阅读全文" class="headerlink" title="阅读全文"></a>阅读全文</h1><p>在md文件中加上如下注释，那么此注释下所有内容都会省略，并出现阅读全文按钮</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- more --&gt;</span><br></pre></td></tr></table></figure>
+
 <h1 id="搜索功能"><a href="#搜索功能" class="headerlink" title="搜索功能"></a>搜索功能</h1><ol>
 <li>安装hexo-generator-searchdb<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure></li>
 <li>站点配置文件新增<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">search:</span><br><span class="line">    path: search.xml</span><br><span class="line">    field: post</span><br><span class="line">    format: html</span><br><span class="line">    limit: 10000</span><br></pre></td></tr></table></figure></li>
 <li>主题配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Local Search</span><br><span class="line">Local_search:</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <h1 id="显示图片"><a href="#显示图片" class="headerlink" title="显示图片"></a>显示图片</h1><p>直接用相对路径访问图片是不能在网站上显示出来的<br>解决方案：<br><strong>前提</strong>   </p>
 <ol>
 <li>修改站点_config.yml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure></li>
-<li>安装插件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:&#x2F;&#x2F;github.com&#x2F;CodeFalling&#x2F;hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-<strong>方法</strong> </li>
+<li>安装插件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https:&#x2F;&#x2F;github.com&#x2F;CodeFalling&#x2F;hexo-asset-image --save</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>方法</strong> </p>
+<ol>
 <li>在source/_post下新建一个和md文件同名的文件夹</li>
 <li>将要添加的图片放入这个同名文件夹内</li>
 <li>在md文件中按如下方式引用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![示例](.&#x2F;安装next主题&#x2F;1.jpg)</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <h1 id="内置标签使用方法"><a href="#内置标签使用方法" class="headerlink" title="内置标签使用方法"></a>内置标签使用方法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% centerquote %&#125; 可以是一句对文章有概括性的话 &#123;% endcenterquote %&#125;</span><br></pre></td></tr></table></figure>

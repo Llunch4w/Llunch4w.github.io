@@ -108,6 +108,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -218,7 +219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -325,6 +326,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="2022-01-11"><a href="#2022-01-11" class="headerlink" title="2022-01-11"></a>2022-01-11</h1><p>Last day, I asked Professor Chen the question “When could I go home?”. In the moring today, I get the answer “Within five days before Spring Festival”. It is sad. I don’t want to work, but I need to work.</p>
 <p>In addition, I need to change my ticket of bullet train from 19th to 25th. It is also sad, because I only refund successfully, but buying new ticket failed. ZhiXing, the software to buy ticket, should be blamed for the sad thing.</p>
 <p>Rpeatly attempts for ticket wasted lots of time of mine. It was an inefficient morning. The only bussiness thing I did was watching a video explaining the paper in the bilibili.</p>
@@ -335,16 +337,18 @@
 <p>What a decadent day!!!</p>
 <h1 id="2022-01-12"><a href="#2022-01-12" class="headerlink" title="2022-01-12"></a>2022-01-12</h1><p>My Plan:</p>
 <ul>
-<li>[x] Finish the code reading of <strong>seq2seq</strong>, unscramble ipynb tutorial to python script.</li>
+<li><input checked disabled type="checkbox"> Finish the code reading of <strong>seq2seq</strong>, unscramble ipynb tutorial to python script.</li>
 </ul>
 <p>Good news, in the morning, I got my new bullet ticket of 26th in the app 12306. </p>
 <p>Sometimes I think the Win11 is very slow, I want to restore it back to Win10. But I found it is very tedious if the update of Win11 has been updated more than a week. So I gave up. And another question, if I add Ubuntu as the second operating system, what benefit I will get? Should I do this work?</p>
 <p>Today I knew a new python package named <strong>spaCy</strong>, which provides lots of models with <strong>tagging</strong>, <strong>parsing</strong>, <strong>lemmatization</strong> and <strong>named entity recognition</strong>. I can download models whatever I want from this <a href="https://github.com/explosion/spacy-models" target="_blank" rel="noopener">webpage</a>. And the corresponding document is <a href="https://spacy.io/usage/models" target="_blank" rel="noopener">there</a></p>
 <p><strong>Dependency Syntactic Parsing</strong>, one import part in NLP domain. I’d love to figure out what it is to make up my poor undestanding in class. “Dependency” is a realtionship between words which is unequal. In this relationship, one party is the <strong>governor/regent/head</strong>, while another party is <strong>modifier/subordinate/dependent</strong>. So, Dependency Analyze is to analyze the relationship of words in the same sentence.</p>
-<p>Parameter List about some function in <code>torch.nn</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''torch.nn.Embedding</span></span><br><span class="line"><span class="string">    - num_embeddings: normally the input dim</span></span><br><span class="line"><span class="string">    - embedding_dim</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''torch.nn.LSTM</span></span><br><span class="line"><span class="string">    - input_size: the dimension of input. Normally the dimension of embedding dim.</span></span><br><span class="line"><span class="string">    - hidden_size: the dimension of hidden unit.</span></span><br><span class="line"><span class="string">    - num_layers: the number of RNN layers</span></span><br><span class="line"><span class="string">    - bias: default=True</span></span><br><span class="line"><span class="string">    - batch_first: default=False. </span></span><br><span class="line"><span class="string">        Normally the shape of input is (batch_size, seq_length, embedding_dim).</span></span><br><span class="line"><span class="string">        So we would better exchange batch_size and seq_length.</span></span><br><span class="line"><span class="string">    - dropout: default 0</span></span><br><span class="line"><span class="string">    - bidirectional, default=False</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''torch.nn.Linear</span></span><br><span class="line"><span class="string">    - in_features</span></span><br><span class="line"><span class="string">    - out_features</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure></p>
+<p>Parameter List about some function in <code>torch.nn</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''torch.nn.Embedding</span></span><br><span class="line"><span class="string">    - num_embeddings: normally the input dim</span></span><br><span class="line"><span class="string">    - embedding_dim</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''torch.nn.LSTM</span></span><br><span class="line"><span class="string">    - input_size: the dimension of input. Normally the dimension of embedding dim.</span></span><br><span class="line"><span class="string">    - hidden_size: the dimension of hidden unit.</span></span><br><span class="line"><span class="string">    - num_layers: the number of RNN layers</span></span><br><span class="line"><span class="string">    - bias: default=True</span></span><br><span class="line"><span class="string">    - batch_first: default=False. </span></span><br><span class="line"><span class="string">        Normally the shape of input is (batch_size, seq_length, embedding_dim).</span></span><br><span class="line"><span class="string">        So we would better exchange batch_size and seq_length.</span></span><br><span class="line"><span class="string">    - dropout: default 0</span></span><br><span class="line"><span class="string">    - bidirectional, default=False</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''torch.nn.Linear</span></span><br><span class="line"><span class="string">    - in_features</span></span><br><span class="line"><span class="string">    - out_features</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="2022-01-13"><a href="#2022-01-13" class="headerlink" title="2022-01-13"></a>2022-01-13</h1><p>My Plan:</p>
 <ul>
-<li>[x] Finish the code reading of <strong>seq2seq</strong>, unscramble ipynb tutorial to python script.</li>
+<li><input checked disabled type="checkbox"> Finish the code reading of <strong>seq2seq</strong>, unscramble ipynb tutorial to python script.</li>
 </ul>
 <p>In the morning, when I downloaded WhatsAPP again, I found mango is no more there any more. It is sad, so I deleted it again. </p>
 <h1 id="2022-01-14"><a href="#2022-01-14" class="headerlink" title="2022-01-14"></a>2022-01-14</h1><p>Watering…</p>

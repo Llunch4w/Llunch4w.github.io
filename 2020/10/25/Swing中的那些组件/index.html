@@ -116,6 +116,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -226,7 +227,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -341,8 +342,11 @@
 <p>^ _ ^ </p>
 
 </blockquote>
+
 <a id="more"></a>
+
 <h1 id="引入swing包包"><a href="#引入swing包包" class="headerlink" title="引入swing包包"></a>引入swing包包</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import javax.swing.*;</span><br></pre></td></tr></table></figure>
+
 <h1 id="顶层容器"><a href="#顶层容器" class="headerlink" title="顶层容器"></a>顶层容器</h1><p>Swing提供了三种顶层容器，分别是：<code>JFrame</code>,<code>JDialog</code>,<code>JApplet</code></p>
 <ul>
 <li>显示在屏幕上的GUI组件必须处于一个容器层级结构（一棵以顶层容器为根的组件树）中</li>
@@ -364,10 +368,10 @@
 <li>自定义JPanel，然后使用setContentPane设置为Top-Level的Content Pane<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Content Pane强制转换成panel</span><br><span class="line">JPanel panel &#x3D; (JPanel)frame.getContentPane();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 自定义JPanel，设置为JFrame的Content Pane</span><br><span class="line">&#x2F;&#x2F; JPanel默认是FlowLayout布局方式的</span><br><span class="line">JPanel customizePanel &#x3D; new JPanel(new BorderLayout());</span><br><span class="line">frame.setContentPane(customizePanel);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
+<ol start="3">
 <li>frame的add,remove,setLayout方法真正的作用对象是它的Content Pane</li>
 </ol>
-<h2 id="Root-Pane"><a href="#Root-Pane" class="headerlink" title="Root Pane"></a>Root Pane</h2><p>每个Top-Level都依赖于一个隐藏的中间层—RootPane<br><img src="/2020/10/25/Swing%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E7%BB%84%E4%BB%B6/3.png" alt="JFrame中的RootPane"><br><img src="/2020/10/25/Swing%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E7%BB%84%E4%BB%B6/4.png" alt="RootPane中包含的面板"></p>
+<h2 id="Root-Pane"><a href="#Root-Pane" class="headerlink" title="Root Pane"></a>Root Pane</h2><p>每个Top-Level都依赖于一个隐藏的中间层–RootPane<br><img src="/2020/10/25/Swing%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E7%BB%84%E4%BB%B6/3.png" alt="JFrame中的RootPane"><br><img src="/2020/10/25/Swing%E4%B8%AD%E7%9A%84%E9%82%A3%E4%BA%9B%E7%BB%84%E4%BB%B6/4.png" alt="RootPane中包含的面板"></p>
 <ul>
 <li>LayeredPane：包含Menu Bar和Content Pane，用于布置组件</li>
 <li>GlassPane：用于捕获输入事件和组件上的绘图</li>

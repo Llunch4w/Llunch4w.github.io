@@ -111,6 +111,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -221,7 +222,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -336,7 +337,9 @@
 <p>^ _ ^ </p>
 
 </blockquote>
+
 <a id="more"></a>
+
 <h1 id="用户线程和内核线程"><a href="#用户线程和内核线程" class="headerlink" title="用户线程和内核线程"></a>用户线程和内核线程</h1><p><strong>用户线程</strong>：</p>
 <ul>
 <li>用户程序实现，不依赖操作系统核心</li>
@@ -352,12 +355,16 @@
 </ul>
 <p><img src="/2020/09/19/%E8%AF%A6%E8%A7%A3Java%E7%BA%BF%E7%A8%8B/2.jpg" alt></p>
 <h1 id="Java线程的创建方式"><a href="#Java线程的创建方式" class="headerlink" title="Java线程的创建方式"></a>Java线程的创建方式</h1><h2 id="1-继承Thread类"><a href="#1-继承Thread类" class="headerlink" title="1. 继承Thread类"></a>1. 继承Thread类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class Demo1 &#123;</span><br><span class="line">    static int i &#x3D; 0;</span><br><span class="line">    public static class NewThread extends Thread&#123;</span><br><span class="line">        public void run()&#123;</span><br><span class="line">            while(i &lt; 100)&#123;</span><br><span class="line">                System.out.println(&quot;NewThread:&quot; + i++);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Demo1.NewThread().start();</span><br><span class="line">        while(i &lt; 100)&#123;</span><br><span class="line">            System.out.println(&quot;main:&quot; + i++);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-实现Runnable接口"><a href="#2-实现Runnable接口" class="headerlink" title="2. 实现Runnable接口"></a>2. 实现Runnable接口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public class Demo2 &#123;</span><br><span class="line">    static int i;</span><br><span class="line">    class NewThread implements Runnable&#123;</span><br><span class="line">        public void run()&#123;</span><br><span class="line">            while(i &lt; 100)&#123;</span><br><span class="line">                System.out.println(&quot;NewThread：&quot; + i++);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            new Thread(new NewThread()).start();</span><br><span class="line">            while(i &lt; 100)&#123;</span><br><span class="line">                System.out.println(&quot;Main：&quot; + i++);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="3-通过ExecutorService和Callable"><a href="#3-通过ExecutorService和Callable" class="headerlink" title="3. 通过ExecutorService和Callable"></a>3. 通过ExecutorService和Callable<Class></Class></h2><blockquote>
 <p>有时，我们需要在主线程中开启多个线程并发执行一个任务，然后收集各个线程执行返回的结果并将最终结果汇总起来，这时就要用到Callable接口。通过ExecutorService和Callable可以实现有返回值的线程</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class Demo3 &#123;</span><br><span class="line">    class MyCallable implements Callable&lt;String&gt;&#123;</span><br><span class="line">        private String name;</span><br><span class="line">        public MyCallable(String name)&#123;</span><br><span class="line">            this.name &#x3D; name;</span><br><span class="line">        &#125;</span><br><span class="line">        @Override</span><br><span class="line">        public String call() throws Exception &#123; &#x2F;&#x2F; 线程实现逻辑</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 创建一个大小为5的线程池</span><br><span class="line">    ExecutorService pool &#x3D; Executors.newFixedThreadPool(5);</span><br><span class="line">    &#x2F;&#x2F; 创建一个有多个返回值的任务列表</span><br><span class="line">    List&lt;Future&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 5; i++) &#123;</span><br><span class="line">            &#x2F;&#x2F; 创建一个有返回值的线程实例</span><br><span class="line">            Callable&lt;String&gt; thread &#x3D; new MyCallable(i + &quot; &quot;);</span><br><span class="line">            &#x2F;&#x2F; 提交线程，获取Future放入list中</span><br><span class="line">            Future future &#x3D; pool.submit(thread);</span><br><span class="line">            list.add(future);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; 关闭线程池，等待线程执行结束</span><br><span class="line">        pool.shutdown();</span><br><span class="line">        &#x2F;&#x2F; 遍历所有线程执行结果</span><br><span class="line">        for (Future future : list) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                System.out.println(future.get().toString());</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="4-基于线程池"><a href="#4-基于线程池" class="headerlink" title="4. 基于线程池"></a>4. 基于线程池</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public class Demo4 &#123;</span><br><span class="line">    static int index &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void test()&#123;</span><br><span class="line">        ExecutorService threadPool &#x3D; Executors.newFixedThreadPool(5);</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 5; i++) &#123;</span><br><span class="line">            threadPool.execute(new Runnable() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void run() &#123;</span><br><span class="line">                    while(index &lt; 100)&#123;</span><br><span class="line">                        System.out.println(Thread.currentThread().getName() + &quot;:&quot; + index++);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h1 id="线程池的工作原理"><a href="#线程池的工作原理" class="headerlink" title="线程池的工作原理"></a>线程池的工作原理</h1><p><strong>Java线程池的核心组件</strong></p>
 <ul>
 <li>线程池管理器：用于创建并管理线程</li>
@@ -365,7 +372,9 @@
 <li>任务接口：用于定义工作线程的执行和调度策略</li>
 <li>任务队列：存放待处理的任务</li>
 </ul>
-<p><strong>ThreadPoolExecutor</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,  &#x2F;&#x2F; 线程池中核心线程的容量</span><br><span class="line">                        int maximumPoolSize, &#x2F;&#x2F; 线程池容量</span><br><span class="line">                        long keepAliveTime,  &#x2F;&#x2F; 空闲线程的最长存活时间</span><br><span class="line">                        TimeUit unit,        &#x2F;&#x2F; 存活时间单位</span><br><span class="line">                        BlockingQueue&lt;Runnable&gt; workQueue) &#x2F;&#x2F; 任务队列</span><br><span class="line">&#123;</span><br><span class="line">    this(corePoolSize,maxmiumPoolSize,keepAliveTime,unit,workQueue,</span><br><span class="line">        Executors.defaultThreadFactory(),defaultHandler);</span><br><span class="line">    &#x2F;&#x2F; threadFactory:线程工厂</span><br><span class="line">    &#x2F;&#x2F; defaultHandler:线程池无法处理任务时的拒绝策略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>ThreadPoolExecutor</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,  &#x2F;&#x2F; 线程池中核心线程的容量</span><br><span class="line">                        int maximumPoolSize, &#x2F;&#x2F; 线程池容量</span><br><span class="line">                        long keepAliveTime,  &#x2F;&#x2F; 空闲线程的最长存活时间</span><br><span class="line">                        TimeUit unit,        &#x2F;&#x2F; 存活时间单位</span><br><span class="line">                        BlockingQueue&lt;Runnable&gt; workQueue) &#x2F;&#x2F; 任务队列</span><br><span class="line">&#123;</span><br><span class="line">    this(corePoolSize,maxmiumPoolSize,keepAliveTime,unit,workQueue,</span><br><span class="line">        Executors.defaultThreadFactory(),defaultHandler);</span><br><span class="line">    &#x2F;&#x2F; threadFactory:线程工厂</span><br><span class="line">    &#x2F;&#x2F; defaultHandler:线程池无法处理任务时的拒绝策略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p><strong>线程池的工作原理</strong></p>
 <ul>
 <li>线程池刚被创建时，会向系统申请一个管理线程作为线程池管理器</li>
@@ -386,15 +395,15 @@
 <li>AbortPolicy：抛出异常，阻止线程运行</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="2">
 <li>CallerRunsPolicy：如果被丢弃的线程任务未关闭，则执行该线程任务</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="3">
 <li>移除阻塞队列中最早的一个线程任务，并尝试提交当前任务</li>
 </ol>
 </li>
-<li><ol>
+<li><ol start="4">
 <li>丢弃当前线程任务不作任何处理</li>
 </ol>
 </li>
@@ -403,6 +412,7 @@
 <p>可缓存线程池</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService threadPool &#x3D; Executors.newCachedThreadPool();</span><br></pre></td></tr></table></figure>
+
 <p><strong>执行策略</strong></p>
 <ul>
 <li>处理新任务时，如果当前线程中有可重用线程，则重用它们</li>
@@ -413,10 +423,12 @@
 <p>固定大小线程池，用于创建一个固定线程数量的线程池，并将线程资源存放在队列中循环使用</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService threadPool &#x3D; Executors.newFixedThreadPool(5);</span><br></pre></td></tr></table></figure>
+
 <h2 id="3-newScheduledThreadPool"><a href="#3-newScheduledThreadPool" class="headerlink" title="3. newScheduledThreadPool"></a>3. newScheduledThreadPool</h2><blockquote>
 <p>可定时调度线程池，可以在设定延迟时间后或者定期执行某个线程任务</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ScheduledExecutorService threadPool &#x3D; Executors.newScheduledThreadPool();</span><br><span class="line">&#x2F;&#x2F; 1. 创建一个延迟3s执行的线程</span><br><span class="line">threadPool.schedule(new Runnable()&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run()&#123;&#x2F;&#x2F;...&#125;</span><br><span class="line">&#125;,3,TimeUnit.SECONDS);</span><br><span class="line">&#x2F;&#x2F; 2. 创建一个延迟1s且每3s执行一次的线程</span><br><span class="line">threadPool.schedule(new Runnable()&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void run()&#123;&#x2F;&#x2F;...&#125;</span><br><span class="line">&#125;,1,3,TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+
 <h2 id="4-newSingleThreadExecutor"><a href="#4-newSingleThreadExecutor" class="headerlink" title="4. newSingleThreadExecutor"></a>4. newSingleThreadExecutor</h2><blockquote>
 <p>线程池会保证永远有且只有一个可用的线程，在该线程停止或发生异常时，newSingleThreadExecutor线程池会启动一个新的线程来代替该线程继续执行任务</p>
 </blockquote>

@@ -110,6 +110,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -220,7 +221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -336,13 +337,22 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>CSDN 博文 : <a href="https://blog.csdn.net/qq_36239569/article/details/104104894" target="_blank" rel="noopener">https://blog.csdn.net/qq_36239569/article/details/104104894</a></p>
 <h1 id="Live2D"><a href="#Live2D" class="headerlink" title="Live2D"></a>Live2D</h1><p>Live2D是一种应用于电子游戏的绘图渲染技术，由日本Cybernoids公司开发，通过一系列的连续图像和人物建模来生成一种类似二维图像的三维模型，换句话说就是2D的素材实现一定程度的3D效果，但只能是一定程度3D，因为Live 2D人物无法大幅度转身。</p>
 <p>hexo中的看板娘基于 Live2D 技术进行实现。</p>
-<h1 id="添加步骤"><a href="#添加步骤" class="headerlink" title="添加步骤"></a>添加步骤</h1><p><strong>1. 安装依赖</strong><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure><br>添加成功后 <strong>node_modules</strong> 模块下会增加一个 <strong>live2d-widget</strong> 目录。</p>
-<p><strong>2. 下载模型文件</strong><br>模型文件可直接用npm安装：如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-koharu</span><br></pre></td></tr></table></figure><br>model名字可在<a href="https://github.com/xiazeyu/live2d-widget-models" target="_blank" rel="noopener">live2d-widget-models</a>中找到，也可点击<a href="https://blog.csdn.net/wang_123_zy/article/details/87181892" target="_blank" rel="noopener">live2d看板娘模型预览</a>来选择你喜欢的模型进行安装。</p>
-<p><strong>3. 添加live2d看板娘到hexo</strong><br>配置Hexo的主 <code>_config.yml</code> 或者使用的主题的 <code>_config.yml</code><br>添加以下代码到配置文件中：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">## Live2D看板娘</span><br><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  model:</span><br><span class="line">    #模板目录，在node_modules里</span><br><span class="line">    use: live2d-widget-model-koharu </span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 300 </span><br><span class="line">    height: 600</span><br><span class="line">  mobile:</span><br><span class="line">    # 在手机端显示</span><br><span class="line">    show: false   </span><br><span class="line">  rect:</span><br><span class="line">    opacity:0.7</span><br></pre></td></tr></table></figure></p>
-<p><strong>4. 生成文件</strong><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure></p>
+<h1 id="添加步骤"><a href="#添加步骤" class="headerlink" title="添加步骤"></a>添加步骤</h1><p><strong>1. 安装依赖</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+<p>添加成功后 <strong>node_modules</strong> 模块下会增加一个 <strong>live2d-widget</strong> 目录。</p>
+<p><strong>2. 下载模型文件</strong><br>模型文件可直接用npm安装：如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install live2d-widget-model-koharu</span><br></pre></td></tr></table></figure>
+<p>model名字可在<a href="https://github.com/xiazeyu/live2d-widget-models" target="_blank" rel="noopener">live2d-widget-models</a>中找到，也可点击<a href="https://blog.csdn.net/wang_123_zy/article/details/87181892" target="_blank" rel="noopener">live2d看板娘模型预览</a>来选择你喜欢的模型进行安装。</p>
+<p><strong>3. 添加live2d看板娘到hexo</strong><br>配置Hexo的主 <code>_config.yml</code> 或者使用的主题的 <code>_config.yml</code><br>添加以下代码到配置文件中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">## Live2D看板娘</span><br><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  model:</span><br><span class="line">    #模板目录，在node_modules里</span><br><span class="line">    use: live2d-widget-model-koharu </span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 300 </span><br><span class="line">    height: 600</span><br><span class="line">  mobile:</span><br><span class="line">    # 在手机端显示</span><br><span class="line">    show: false   </span><br><span class="line">  rect:</span><br><span class="line">    opacity:0.7</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 生成文件</strong></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
 <h1 id="可爱的koharu"><a href="#可爱的koharu" class="headerlink" title="可爱的koharu"></a>可爱的koharu</h1><p><img src="/2021/06/15/hexo%E6%B7%BB%E5%8A%A0%E7%9C%8B%E6%9D%BF%E5%A8%98/1.jpg" alt></p>
 
     </div>

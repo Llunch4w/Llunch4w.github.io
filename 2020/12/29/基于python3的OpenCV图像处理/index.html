@@ -113,6 +113,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -223,7 +224,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -339,8 +340,9 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><ol>
-<li><p>B站视频【基于python3的Opencv图像处理教程(从零到实践)】：<a href="https://www.bilibili.com/video/BV1CJ411D7Yj?from=search&amp;seid=14244991535486395451" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1CJ411D7Yj?from=search&amp;seid=14244991535486395451</a></p>
+<li><p>B站视频【基于python3的Opencv图像处理教程(从零到实践)】：<a href="https://www.bilibili.com/video/BV1CJ411D7Yj?from=search&seid=14244991535486395451" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1CJ411D7Yj?from=search&amp;seid=14244991535486395451</a></p>
 </li>
 <li><p>opencv3.4文档：<a href="https://docs.opencv.org/master/" target="_blank" rel="noopener">https://docs.opencv.org/master/</a></p>
 </li>
@@ -360,12 +362,18 @@
 </ul>
 <h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p><img src="/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/1.png" alt></p>
 <p>opencv的框架与各模块功能介绍：<a href="https://blog.csdn.net/u012679707/article/details/79505279" target="_blank" rel="noopener">https://blog.csdn.net/u012679707/article/details/79505279</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>目前python版本</strong><br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PS E:\Github\Blog&gt; python --version</span><br><span class="line">Python <span class="number">3</span>.<span class="number">6</span>.<span class="number">6</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>目前python版本</strong></p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PS E:\Github\Blog&gt; python --version</span><br><span class="line">Python <span class="number">3</span>.<span class="number">6</span>.<span class="number">6</span></span><br></pre></td></tr></table></figure>
+
 <p><strong>opencv依赖库</strong></p>
 <blockquote>
-<p>将python需要安装的依赖库写入requirements.txt中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opencv-python</span><br><span class="line">opencv-contrib-python</span><br><span class="line">pytesseract</span><br></pre></td></tr></table></figure></p>
+<p>将python需要安装的依赖库写入requirements.txt中</p>
 </blockquote>
-<p><strong>安装依赖库</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 升级python版本（如果出现pip version版本过低的Warning则执行此步骤）</span></span><br><span class="line">python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip </span><br><span class="line"><span class="comment"># 安装requirements.txt中说明的各依赖库</span></span><br><span class="line">python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ \</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opencv-python</span><br><span class="line">opencv-contrib-python</span><br><span class="line">pytesseract</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装依赖库</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 升级python版本（如果出现pip version版本过低的Warning则执行此步骤）</span></span><br><span class="line">python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ --upgrade pip </span><br><span class="line"><span class="comment"># 安装requirements.txt中说明的各依赖库</span></span><br><span class="line">python -m pip install -i https://mirrors.aliyun.com/pypi/simple/ \</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
 <h1 id="图像的加载和保存"><a href="#图像的加载和保存" class="headerlink" title="图像的加载和保存"></a>图像的加载和保存</h1><h1 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h1><h1 id="色彩空间"><a href="#色彩空间" class="headerlink" title="色彩空间"></a>色彩空间</h1><ul>
 <li>RGB</li>
 <li>HSV<br><img src="/2020/12/29/%E5%9F%BA%E4%BA%8Epython3%E7%9A%84OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/2.png" alt></li>

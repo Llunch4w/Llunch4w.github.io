@@ -110,6 +110,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -220,7 +221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -336,11 +337,13 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h1><blockquote>
 <p><strong>JAVA中的几种基本数据类型是什么，各自占用多少字节？</strong></p>
 </blockquote>
 <p><img src="/2020/08/19/Java%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/1.jpg" alt></p>
 <h1 id="编程获取方式"><a href="#编程获取方式" class="headerlink" title="编程获取方式"></a>编程获取方式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">System.out.printf(&quot;%s\t%s\n&quot;,&quot;类型&quot;,&quot;大小（字节）&quot;);</span><br><span class="line">System.out.printf(&quot;%s\t%d\n&quot;,&quot;byte&quot;,Byte.SIZE&#x2F;8);</span><br><span class="line">System.out.printf(&quot;%s\t%d\n&quot;,&quot;short&quot;,Short.SIZE&#x2F;8);</span><br><span class="line">System.out.printf(&quot;%s\t%d\n&quot;,&quot;int&quot;,Integer.SIZE&#x2F;8);</span><br><span class="line">System.out.printf(&quot;%s\t%d\n&quot;,&quot;long&quot;,Long.SIZE&#x2F;8);</span><br><span class="line">System.out.printf(&quot;%s\t%d\n&quot;,&quot;float&quot;,Float.SIZE&#x2F;8);</span><br><span class="line">System.out.printf(&quot;%s\t%d\n&quot;,&quot;double&quot;,Double.SIZE&#x2F;8);</span><br><span class="line">System.out.printf(&quot;%s\t%d\n&quot;,&quot;char&quot;,Character.SIZE&#x2F;8);</span><br><span class="line">&#x2F;&#x2F; Boolean并没有SIZE属性，Boolean.SIZE会出现编译错误</span><br><span class="line">&#x2F;&#x2F; System.out.printf(&quot;%s\t%d&quot;,&quot;boolean&quot;,Boolean.SIZE&#x2F;8);</span><br></pre></td></tr></table></figure>
+
 <p>值得注意的一点是Boolean没有SIZE属性，其原因在于boolean类型本身就没有给出具体的占用字节数。对虚拟机来说并不存在boolean这个类型，boolean类型的数据存储时实际上是转换成了另一种基础类型储存。但一般是认为Boolean类型占用一个字节。</p>
 <p><strong><a href="https://blog.csdn.net/qq_36763419/article/details/91392297" target="_blank" rel="noopener">关于boolean占用内存大小的更多解释</a></strong></p>
 

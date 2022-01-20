@@ -110,6 +110,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -220,7 +221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -321,6 +322,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>In MLP, if in a layer, every input item needs to multiply a independent weight, the layer will be named <strong>Fully Connected Layer</strong> or <strong>Dense Layer</strong>. However, it is not appropriate for some tasks, such as:</p>
 <ul>
 <li><strong>Image Recognition</strong>: The same picture with different image transformation will have very different results.</li>
@@ -350,11 +352,19 @@
 </ol>
 <p>The CNN which slides in a single direction is called <strong>One-Dimension Convolution</strong>. One Dimension Convolution is suitable for NLP data. When we need to deal with image data, we need <strong>Two-Demension Convolution</strong>, which slides both horizantol and vertical.</p>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> Conv1d</span><br><span class="line"></span><br><span class="line"><span class="comment"># Conv1d(in_channels, out_channels, kernel_size)</span></span><br><span class="line">conv1 = Conv1d(<span class="number">5</span>, <span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line">conv2 = Conv1d(<span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># input size: (batch, in_channels, seq_len)</span></span><br><span class="line"><span class="comment"># in nlp, in_channels represents the dimension of word vector.</span></span><br><span class="line">inputs = torch.rand(<span class="number">2</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># output size: (batch, out_channels, seq_len)</span></span><br><span class="line"><span class="comment"># batch: 2; out_channels: 2</span></span><br><span class="line">outputs1 = conv1(inputs) <span class="comment"># seq_len: 3 = 6 - 4 + 1</span></span><br><span class="line">outputs2 = conv2(inputs) <span class="comment"># seq_len: 4 = 6 - 3 + 1</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> MaxPool1d</span><br><span class="line">pool1 = MaxPool1d(<span class="number">3</span>) <span class="comment"># 3 is the seq_len of outputs1</span></span><br><span class="line">pool2 = MaxPool1d(<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># outputs_pool1 size: [batch, out_channels, 1]</span></span><br><span class="line">outputs_pool1 = pool1(outputs1)</span><br><span class="line">outputs_pool2 = pool2(outputs2)</span><br></pre></td></tr></table></figure>
-<p>Pool can also use as a function. The advantage of this method is we don’t need know the pool size in advance.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">output_pool1 = F.max_pool1d(outputs1, kernel_size=outputs1.shape[<span class="number">2</span>])</span><br><span class="line">output_pool2 = F.max_pool1d(outputs2, kernel_size=outputs2.shape[<span class="number">2</span>])</span><br></pre></td></tr></table></figure></p>
+
+<p>Pool can also use as a function. The advantage of this method is we don’t need know the pool size in advance.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line">output_pool1 = F.max_pool1d(outputs1, kernel_size=outputs1.shape[<span class="number">2</span>])</span><br><span class="line">output_pool2 = F.max_pool1d(outputs2, kernel_size=outputs2.shape[<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
 <h2 id="Squeeze-amp-Concat"><a href="#Squeeze-amp-Concat" class="headerlink" title="Squeeze &amp; Concat"></a>Squeeze &amp; Concat</h2><p>We need to concat <code>outputs_pool1</code> and <code>outputs_pool2</code>. Before that operation, we need to delete dimension which is 1, named <strong>squeeze</strong>.</p>
-<p><strong>Squeeze</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if outputs_pool1[2] == 1, the delete dimension 2</span></span><br><span class="line">outputs_pool_squeeze1 = outputs_pool1.squeeze(dim=<span class="number">2</span>)</span><br><span class="line">outputs_pool_squeeze2 = outputs_pool2.squeeze(dim=<span class="number">2</span>)</span><br></pre></td></tr></table></figure></p>
-<p><strong>Concat</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outputs_pool = torch.cat([outputs_pool_squeeze1, outputs_pool_squeeze2], dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+<p><strong>Squeeze</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if outputs_pool1[2] == 1, the delete dimension 2</span></span><br><span class="line">outputs_pool_squeeze1 = outputs_pool1.squeeze(dim=<span class="number">2</span>)</span><br><span class="line">outputs_pool_squeeze2 = outputs_pool2.squeeze(dim=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Concat</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">outputs_pool = torch.cat([outputs_pool_squeeze1, outputs_pool_squeeze2], dim=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
 <h2 id="Fully-Connected-Layer"><a href="#Fully-Connected-Layer" class="headerlink" title="Fully Connected Layer"></a>Fully Connected Layer</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.nn <span class="keyword">import</span> Linear</span><br><span class="line"></span><br><span class="line">linear = Linear(<span class="number">4</span>, <span class="number">2</span>)</span><br><span class="line">output_linear = liner(output_pool)</span><br><span class="line">print(outputs_linear)</span><br></pre></td></tr></table></figure>
     </div>
 

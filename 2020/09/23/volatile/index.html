@@ -107,6 +107,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -217,7 +218,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -333,6 +334,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h1><blockquote>
 <p>Java Memory Model，Java内存模型，本身是一种抽象概念，描述的是一组规则或规范，通过这组规范定义了程序中各个变量的访问方式</p>
 </blockquote>
@@ -364,8 +366,10 @@
 <li>在volatile读后面插入<code>LoadLoad</code>屏障，禁止下面所有的普通读操作和上面的volatile读重排序；然后插入<code>LoadStore</code>屏障，禁止下面所有的写操作和上面的volatile读重排序</li>
 </ul>
 <h2 id="volatile应用场景"><a href="#volatile应用场景" class="headerlink" title="volatile应用场景"></a>volatile应用场景</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. memory &#x3D; allocate() &#x2F;&#x2F; 分配对象内存空间</span><br><span class="line">2. instance(memory)    &#x2F;&#x2F; 初始化对象</span><br><span class="line">3. instance &#x3D; memory   &#x2F;&#x2F; 设置instance指向刚分配的内存地址，此时instance !&#x3D; null</span><br></pre></td></tr></table></figure>
+
 <p>由于2和3不存在数据依赖关系，而且无论重排前还是重排后程序的执行结果在单线程中没有改变，因此这种重排序优化是允许的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. memory &#x3D; allocate() &#x2F;&#x2F; 分配对象内存空间</span><br><span class="line">3. instance &#x3D; memory   &#x2F;&#x2F; 设置instance指向刚分配的内存地址，此时instance !&#x3D; null，但初始化还没完成</span><br><span class="line">2. instance(memory)    &#x2F;&#x2F; 初始化对象</span><br></pre></td></tr></table></figure>
+
 <p>所以当一条线程访问instance不为null时，由于instance实例未初始化完成，也就造成了线程安全问题。</p>
 
     </div>

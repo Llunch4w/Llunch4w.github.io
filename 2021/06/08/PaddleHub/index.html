@@ -108,6 +108,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -218,7 +219,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -334,15 +335,19 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="PaddleHub简介"><a href="#PaddleHub简介" class="headerlink" title="PaddleHub简介"></a>PaddleHub简介</h1><p>PaddleHub旨在为开发者提供丰富的、高质量的、直接可用的预训练模型。其中涵盖CV、NLP、Audio、Video、工业应用主流五大品类的 300+ 预训练模型，全部开源下载，离线可运行。</p>
 <p>项目地址：<a href="https://github.com/PaddlePaddle/PaddleHub" target="_blank" rel="noopener">https://github.com/PaddlePaddle/PaddleHub</a></p>
 <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="环境依赖"><a href="#环境依赖" class="headerlink" title="环境依赖"></a>环境依赖</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装gpu版本的PaddlePaddle</span></span><br><span class="line">pip install paddlepaddle-gpu -U</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者安装cpu版本的paddlepaddle</span></span><br><span class="line"><span class="comment"># pip install paddlepaddle -U</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="安装命令"><a href="#安装命令" class="headerlink" title="安装命令"></a>安装命令</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install paddlehub==2.1.0</span><br></pre></td></tr></table></figure>
+
 <p>除上述依赖外，PaddleHub的预训练模型和预置数据集需要连接服务端进行下载，请确保机器可以正常访问网络。若本地已存在相关的数据集和预训练模型，则可以离线运行PaddleHub。</p>
 <blockquote>
 <p>使用PaddleHub下载数据集、预训练模型等，要求机器可以访问外网。可以使用<code>server_check()</code>可以检查本地与远端PaddleHub-Server的连接状态，使用方法如下：</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> paddlehub</span><br><span class="line">paddlehub.server_check()</span><br><span class="line"><span class="comment"># 如果可以连接远端PaddleHub-Server，则显示Request Hub-Server successfully。</span></span><br><span class="line"><span class="comment"># 如果无法连接远端PaddleHub-Server，则显示Request Hub-Server unsuccessfully。</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h1><p>在PaddleHub中，Module代表一个可执行模块，一般来讲就是一个可以端到端预测的预训练模型（例如目标检测模型、中文词法分析模型），又或者是一个需要根据下游任务进一步微调（迁移学习）的模型，例如BERT/ERNIE。</p>
 <p>PaddleHub采用模型即软件的设计理念，所有的预训练模型与Python软件包类似，具备版本的概念。</p>
 <h2 id="人像分割"><a href="#人像分割" class="headerlink" title="人像分割"></a>人像分割</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> paddlehub <span class="keyword">as</span> hub</span><br><span class="line"><span class="comment"># module = hub.Module(name="humanseg_lite", version="1.1.1")</span></span><br><span class="line">module = hub.Module(name=<span class="string">"humanseg_lite"</span>)</span><br><span class="line"></span><br><span class="line">res = module.segmentation(</span><br><span class="line">    paths = [<span class="string">"./test_image.jpg"</span>],</span><br><span class="line">    visualization=<span class="literal">True</span>,</span><br><span class="line">    output_dir=<span class="string">'humanseg_output'</span>)</span><br></pre></td></tr></table></figure>

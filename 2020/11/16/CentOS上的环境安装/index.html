@@ -123,6 +123,7 @@
       <h1 class="site-title">摸鱼的Llunch</h1>
       <i class="logo-line-after"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
   </div>
 
   <div class="site-nav-right">
@@ -233,7 +234,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -349,6 +350,7 @@
 
 </blockquote>
 <a id="more"></a>
+
 <h1 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h1><p><strong>CentOS上环境安装的4中方式</strong></p>
 <ol>
 <li>rpm安装</li>
@@ -371,15 +373,27 @@
 <p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/2.png" alt="转移rpm包"></p>
 <p>传输成功后如下图所示：<br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/3.png" alt="转移rpm包成功"></p>
 <p><strong>3. 安装Java环境</strong></p>
-<p>3.1. 查看当前系统是否存在Java环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure></p>
-<p>若已有的话则进行卸载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 检测JDK版本信息</span><br><span class="line">rpm -qa | grep jdk</span><br><span class="line"># -q query</span><br><span class="line"># -a all: query all installed packages</span><br><span class="line">&gt; 得到的结果为一个jdk号</span><br><span class="line"></span><br><span class="line"># 卸载jdk</span><br><span class="line">rpm -e --nodeps 上一步查出的jdk号</span><br><span class="line"># -e</span><br><span class="line"># --nodeps：Dont&#39;t verify dependencies of packages</span><br></pre></td></tr></table></figure></p>
-<p>3.2. 通过rpm命令安装Java环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh rpm文件名</span><br><span class="line"></span><br><span class="line"># -i install</span><br><span class="line"># -v print</span><br><span class="line"># -h hash</span><br></pre></td></tr></table></figure></p>
+<p>3.1. 查看当前系统是否存在Java环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<p>若已有的话则进行卸载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 检测JDK版本信息</span><br><span class="line">rpm -qa | grep jdk</span><br><span class="line"># -q query</span><br><span class="line"># -a all: query all installed packages</span><br><span class="line">&gt; 得到的结果为一个jdk号</span><br><span class="line"></span><br><span class="line"># 卸载jdk</span><br><span class="line">rpm -e --nodeps 上一步查出的jdk号</span><br><span class="line"># -e</span><br><span class="line"># --nodeps：Dont&#39;t verify dependencies of packages</span><br></pre></td></tr></table></figure>
+
+<p>3.2. 通过rpm命令安装Java环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh rpm文件名</span><br><span class="line"></span><br><span class="line"># -i install</span><br><span class="line"># -v print</span><br><span class="line"># -h hash</span><br></pre></td></tr></table></figure>
+
 <p>ps：注意要使用root用户才有安装权限<br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/4.png" alt="安装"></p>
 <p>3.3. 配置环境变量</p>
 <p><strong>安装成功的Java文件保存在\usr目录下</strong><br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/5.png" alt="java安装目录"></p>
-<p><strong>1. 进入 /etc/profile</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure></p>
-<p><strong>2. 在文件末尾添加配置</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_271-amd64</span><br><span class="line">CLASSPATH&#x3D;%JAVA_HOME%&#x2F;lib&#x2F;tools.jar:%JAVA_HOME%&#x2F;jre&#x2F;lib&#x2F;dt.jar:.</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JAVA_HOME&#x2F;jre&#x2F;bin</span><br><span class="line">export PATH CLASSPATH JAVA_HOME</span><br></pre></td></tr></table></figure></p>
-<p><strong>3. 让配置文件生效</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure></p>
+<p><strong>1. 进入 /etc/profile</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 在文件末尾添加配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_271-amd64</span><br><span class="line">CLASSPATH&#x3D;%JAVA_HOME%&#x2F;lib&#x2F;tools.jar:%JAVA_HOME%&#x2F;jre&#x2F;lib&#x2F;dt.jar:.</span><br><span class="line">PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$JAVA_HOME&#x2F;jre&#x2F;bin</span><br><span class="line">export PATH CLASSPATH JAVA_HOME</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 让配置文件生效</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+
 <h1 id="解压缩安装Tomcat"><a href="#解压缩安装Tomcat" class="headerlink" title="解压缩安装Tomcat"></a>解压缩安装Tomcat</h1><p><strong>1. 去官网下载tomcat安装包</strong></p>
 <p>tomcat9.0.39下载页面：<a href="https://tomcat.apache.org/download-90.cgi#9.0.39" target="_blank" rel="noopener">https://tomcat.apache.org/download-90.cgi#9.0.39</a></p>
 <p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/6.png" alt="tomcat9下载"></p>
@@ -387,6 +401,7 @@
 <p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/7.png" alt="tomcat9传输到服务器"></p>
 <p><strong>3. 解压安装包</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf 安装包名称</span><br></pre></td></tr></table></figure>
+
 <p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/8.png" alt="tomcat9解压"></p>
 <blockquote>
 <p>我将解压得到的文件夹移到 /etc/opt目录下了</p>
@@ -396,24 +411,52 @@
 <li>Linux中的可执行文件为.sh文件</li>
 <li>tomcat解压后启动文件存放在bin目录中</li>
 </ul>
-<p><strong>启动和关闭脚本</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;startup.sh # 启动服务器</span><br><span class="line">.&#x2F;shutdown.sh # 关闭服务器</span><br></pre></td></tr></table></figure></p>
-<p><strong>查看启动日志（可选）</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd logs&#x2F;</span><br><span class="line">tail -f catalina.out</span><br></pre></td></tr></table></figure></p>
-<p><strong>访问Tomcat需要通过8080端口</strong><br>服务器端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启8080端口</span><br><span class="line">firewall-cmd --zone&#x3D;public --add-port&#x3D;8080&#x2F;tcp --permanent</span><br><span class="line"></span><br><span class="line"># 重启防火墙</span><br><span class="line">systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line"># 检查是否已开放8080</span><br><span class="line">firewall-cmd --list-ports</span><br></pre></td></tr></table></figure></p>
+<p><strong>启动和关闭脚本</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;startup.sh # 启动服务器</span><br><span class="line">.&#x2F;shutdown.sh # 关闭服务器</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看启动日志（可选）</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd logs&#x2F;</span><br><span class="line">tail -f catalina.out</span><br></pre></td></tr></table></figure>
+
+<p><strong>访问Tomcat需要通过8080端口</strong><br>服务器端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启8080端口</span><br><span class="line">firewall-cmd --zone&#x3D;public --add-port&#x3D;8080&#x2F;tcp --permanent</span><br><span class="line"></span><br><span class="line"># 重启防火墙</span><br><span class="line">systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line"># 检查是否已开放8080</span><br><span class="line">firewall-cmd --list-ports</span><br></pre></td></tr></table></figure>
+
 <p>阿里云端：配置安全组规则，添加8080端口</p>
 <p><strong>5. 成功页面</strong><br><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/9.png" alt="能正确访问tomcat主页"></p>
-<h1 id="yum安装docker"><a href="#yum安装docker" class="headerlink" title="yum安装docker"></a>yum安装docker</h1><p><strong>1. 检测当前CentOS版本信息</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;redhat-release</span><br></pre></td></tr></table></figure></p>
-<p><strong>2. 安装环境</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install 包名</span><br></pre></td></tr></table></figure></p>
-<p>安装gcc相关环境<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure></p>
+<h1 id="yum安装docker"><a href="#yum安装docker" class="headerlink" title="yum安装docker"></a>yum安装docker</h1><p><strong>1. 检测当前CentOS版本信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;etc&#x2F;redhat-release</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 安装环境</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install 包名</span><br></pre></td></tr></table></figure>
+
+<p>安装gcc相关环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum -y install gcc-c++</span><br></pre></td></tr></table></figure>
+
 <p><strong>3. 根据docker官网文档进行操作</strong></p>
 <p>docket官方文档地址：<a href="https://docs.docker.com/engine/install/centos/" target="_blank" rel="noopener">https://docs.docker.com/engine/install/centos/</a></p>
-<p>3.1. 卸载旧版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">    docker-client \</span><br><span class="line">    docker-client-latest \</span><br><span class="line">    docker-common \</span><br><span class="line">    docker-latest \</span><br><span class="line">    docker-latest-logrotate \</span><br><span class="line">    docker-logrotate \</span><br><span class="line">    docker-engine</span><br></pre></td></tr></table></figure></p>
-<p>3.2. 安装需要的软件包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure></p>
-<p>3.3. 设置stable镜像仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br></pre></td></tr></table></figure></p>
-<p>3.4. 更新yum软件包索引<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure></p>
-<p>3.5. 安装docker ce<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure></p>
-<p>3.6. 启动docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure></p>
-<p>3.7. 测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker run hello-word</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure></p>
-<p>关闭docker<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker service docker stop</span><br></pre></td></tr></table></figure></p>
+<p>3.1. 卸载旧版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">    docker-client \</span><br><span class="line">    docker-client-latest \</span><br><span class="line">    docker-common \</span><br><span class="line">    docker-latest \</span><br><span class="line">    docker-latest-logrotate \</span><br><span class="line">    docker-logrotate \</span><br><span class="line">    docker-engine</span><br></pre></td></tr></table></figure>
+
+<p>3.2. 安装需要的软件包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+
+<p>3.3. 设置stable镜像仓库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;docker-ce&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<p>3.4. 更新yum软件包索引</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache fast</span><br></pre></td></tr></table></figure>
+
+<p>3.5. 安装docker ce</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<p>3.6. 启动docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<p>3.7. 测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br><span class="line">docker run hello-word</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
+
+<p>关闭docker</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker service docker stop</span><br></pre></td></tr></table></figure>
+
 <h1 id="宝塔安装mysql"><a href="#宝塔安装mysql" class="headerlink" title="宝塔安装mysql"></a>宝塔安装mysql</h1><p><strong>1. 进入宝塔面板的软件商店安装mysql</strong></p>
 <p><img src="/2020/11/16/CentOS%E4%B8%8A%E7%9A%84%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/10.png" alt="通过宝塔面板安装mysql"></p>
 <p>我选择的是mysql5.6</p>
