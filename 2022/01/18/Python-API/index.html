@@ -28,7 +28,7 @@
 <meta property="og:description" content="^ _ ^">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-18T06:46:29.000Z">
-<meta property="article:modified_time" content="2022-01-18T07:05:50.528Z">
+<meta property="article:modified_time" content="2022-01-21T08:02:10.563Z">
 <meta property="article:author" content="Llunch">
 <meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Clip"><span class="nav-number">1.</span> <span class="nav-text">Gradient Clip</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradient-Clip"><span class="nav-number">1.</span> <span class="nav-text">Gradient Clip</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TransformerEncoderLayer"><span class="nav-number">2.</span> <span class="nav-text">TransformerEncoderLayer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#torch-expand"><span class="nav-number">3.</span> <span class="nav-text">torch.expand</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -292,10 +292,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-01-18 14:46:29 / 修改时间：15:05:50" itemprop="dateCreated datePublished" datetime="2022-01-18T14:46:29+08:00">2022-01-18</time>
+              <time title="创建时间：2022-01-18 14:46:29" itemprop="dateCreated datePublished" datetime="2022-01-18T14:46:29+08:00">2022-01-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-21 16:02:10" itemprop="dateModified" datetime="2022-01-21T16:02:10+08:00">2022-01-21</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -322,6 +328,10 @@
 <a id="more"></a>
 
 <h1 id="Gradient-Clip"><a href="#Gradient-Clip" class="headerlink" title="Gradient Clip"></a>Gradient Clip</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''To avoid graidient exploration</span></span><br><span class="line"><span class="string">    @parameters: parameters needed to clip</span></span><br><span class="line"><span class="string">    @max_norm: the highest boundary of the gradient of params</span></span><br><span class="line"><span class="string">    @norm_type: the type of norm</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="comment"># torch.nn.utils.clip_grad_norm_</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">clip_grad_norm_</span><span class="params">(parameters, max_norm, norm_type=<span class="number">2</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(parameters, torch.Tensor):</span><br><span class="line">        parameters = [parameters]</span><br><span class="line">    parameters = list(filter(<span class="keyword">lambda</span> p: p.grad <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>, parameters))</span><br><span class="line">    max_norm = float(max_norm)</span><br><span class="line">    norm_type = float(norm_type)</span><br><span class="line">    <span class="keyword">if</span> norm_type == inf:</span><br><span class="line">        total_norm = max(p.grad.data.abs().max() <span class="keyword">for</span> p <span class="keyword">in</span> parameters)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        total_norm = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> parameters:</span><br><span class="line">            param_norm = p.grad.data.norm(norm_type)</span><br><span class="line">            total_norm += param_norm.item() ** norm_type</span><br><span class="line">        total_norm = total_norm ** (<span class="number">1.</span> / norm_type)</span><br><span class="line">    clip_coef = max_norm / (total_norm + <span class="number">1e-6</span>)</span><br><span class="line">    <span class="keyword">if</span> clip_coef &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">for</span> p <span class="keyword">in</span> parameters:</span><br><span class="line">            p.grad.data.mul_(clip_coef)</span><br><span class="line">    <span class="keyword">return</span> total_norm</span><br></pre></td></tr></table></figure>
+
+<h1 id="TransformerEncoderLayer"><a href="#TransformerEncoderLayer" class="headerlink" title="TransformerEncoderLayer"></a>TransformerEncoderLayer</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''torch.nn.TransformerEncoderLayer</span></span><br><span class="line"><span class="string">    @param d_model – the number of expected features in the input (required).</span></span><br><span class="line"><span class="string">    @param nhead – the number of heads in the multiheadattention models (required).</span></span><br><span class="line"><span class="string">    @param dim_feedforward – the dimension of the feedforward network model (default=2048).</span></span><br><span class="line"><span class="string">    @param dropout – the dropout value (default=0.1).</span></span><br><span class="line"><span class="string">    @param activation – the activation function of the intermediate layer, can be a string (“relu” or “gelu”) or a unary callable. Default: relu</span></span><br><span class="line"><span class="string">    @param layer_norm_eps – the eps value in layer normalization components (default=1e-5).</span></span><br><span class="line"><span class="string">    @param batch_first – If True, then the input and output tensors are provided as (batch, seq, feature). Default: False.</span></span><br><span class="line"><span class="string">    @param norm_first – if True, layer norm is done prior to attention and feedforward operations, respectivaly. Otherwise it’s done after. Default: False (after). </span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="torch-expand"><a href="#torch-expand" class="headerlink" title="torch.expand"></a>torch.expand</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">torch.arange(<span class="number">5</span>).expand(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">tensor([[0, 1, 2, 3, 4],</span></span><br><span class="line"><span class="string">        [0, 1, 2, 3, 4],</span></span><br><span class="line"><span class="string">        [0, 1, 2, 3, 4]])</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
 
     </div>
 
