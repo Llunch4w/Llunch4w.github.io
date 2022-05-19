@@ -215,20 +215,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">116</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">36</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">73</span>
+        <span class="site-state-item-count">77</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -265,7 +265,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/20/%E4%B8%BAhexo-next%E6%B7%BB%E5%8A%A0%E8%83%8C%E6%99%AF/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/05/14/%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me.jpg">
@@ -279,7 +279,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/20/%E4%B8%BAhexo-next%E6%B7%BB%E5%8A%A0%E8%83%8C%E6%99%AF/" class="post-title-link" itemprop="url">为hexo-next添加背景</a>
+            <a href="/2022/05/14/%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">数据集划分方法总结</a>
         </h2>
 
         <div class="post-meta">
@@ -290,7 +290,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-20 21:22:09 / 修改时间：21:36:40" itemprop="dateCreated datePublished" datetime="2022-01-20T21:22:09+08:00">2022-01-20</time>
+              <time title="创建时间：2022-05-14 11:20:28 / 修改时间：11:57:43" itemprop="dateCreated datePublished" datetime="2022-05-14T11:20:28+08:00">2022-05-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8Btips/" itemprop="url" rel="index"><span itemprop="name">编程tips</span></a>
+                </span>
             </span>
 
           
@@ -304,18 +313,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
+          <h1 id="Condition1"><a href="#Condition1" class="headerlink" title="Condition1"></a>Condition1</h1><p>提前将数据集划分为 train, eval, test 三个数据集保存在不同的文件中, 然后使用时分别读取即可.</p>
+<h1 id="Condition2"><a href="#Condition2" class="headerlink" title="Condition2"></a>Condition2</h1><p>加载全部数据集, 然后将其进行划分.</p>
+<h2 id="Method1"><a href="#Method1" class="headerlink" title="Method1"></a>Method1</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">train_ratio, val_ratio = <span class="number">0.8</span>, <span class="number">0.1</span></span><br><span class="line">train_nums = int(data.shape[<span class="number">0</span>]*train_ratio)</span><br><span class="line">val_nums = int(data.shape[<span class="number">0</span>]*val_ratio)</span><br><span class="line"></span><br><span class="line">train_data = data[:train_nums]</span><br><span class="line">val_data = data[train_nums: train_nums+val_nums]</span><br><span class="line">test_data = data[train_nums+val_nums:]</span><br></pre></td></tr></table></figure>
 
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/20/%E4%B8%BAhexo-next%E6%B7%BB%E5%8A%A0%E8%83%8C%E6%99%AF/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<h2 id="Method2"><a href="#Method2" class="headerlink" title="Method2"></a>Method2</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trian_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, val_size, test_isze])</span><br></pre></td></tr></table></figure>
+
+<h2 id="Method3"><a href="#Method3" class="headerlink" title="Method3"></a>Method3</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader, RandomSampler, SequentialSampler</span><br><span class="line"></span><br><span class="line">indices = list(range(dataset_size))</span><br><span class="line">np.random.shuffle(indices)</span><br><span class="line"></span><br><span class="line">trian_indices, val_indices = indices[:train_num], indices[train_num:]</span><br><span class="line">train_sampler = RandomSampler(trian_indices)</span><br><span class="line">val_sampler = SequentialSampler(val_indices)</span><br><span class="line"></span><br><span class="line">trian_loader = DataLoader(dataset, batch_size=<span class="number">64</span>, sampler=train_sampler)</span><br><span class="line">val_loader = DataLoader(dataset, batch_size=<span class="number">64</span>, sampler=val_sampler)</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -334,7 +339,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/05/09/Text-Classification-Review-2020/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me.jpg">
@@ -348,7 +353,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/" class="post-title-link" itemprop="url">简单情感分类</a>
+            <a href="/2022/05/09/Text-Classification-Review-2020/" class="post-title-link" itemprop="url">Text Classification Review 2020</a>
         </h2>
 
         <div class="post-meta">
@@ -358,90 +363,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-19 16:56:20" itemprop="dateCreated datePublished" datetime="2022-01-19T16:56:20+08:00">2022-01-19</time>
+              <time title="创建时间：2022-05-09 14:42:13" itemprop="dateCreated datePublished" datetime="2022-05-09T14:42:13+08:00">2022-05-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-21 16:48:26" itemprop="dateModified" datetime="2022-01-21T16:48:26+08:00">2022-01-21</time>
+                <time title="修改时间：2022-05-10 14:54:12" itemprop="dateModified" datetime="2022-05-10T14:54:12+08:00">2022-05-10</time>
               </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
-
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/19/%E7%AE%80%E5%8D%95%E6%83%85%E6%84%9F%E5%88%86%E7%B1%BB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/18/Python-API/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me.jpg">
-      <meta itemprop="name" content="Llunch">
-      <meta itemprop="description" content="Laugh through the night">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="摸鱼的Llunch">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/18/Python-API/" class="post-title-link" itemprop="url">Python API</a>
-        </h2>
-
-        <div class="post-meta">
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
+                <i class="far fa-folder"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-18 14:46:29" itemprop="dateCreated datePublished" datetime="2022-01-18T14:46:29+08:00">2022-01-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
                 </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-21 16:02:10" itemprop="dateModified" datetime="2022-01-21T16:02:10+08:00">2022-01-21</time>
-              </span>
+            </span>
 
           
 
@@ -455,12 +394,12 @@
 
       
           <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
+<p>QIAN Li etc. write the review of Text Classifiction in 2020 ^ _ ^ </p>
 
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/18/Python-API/#more" rel="contents">
+              <a class="btn" href="/2022/05/09/Text-Classification-Review-2020/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -484,7 +423,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/05/07/How-to-use-gitlab/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me.jpg">
@@ -498,157 +437,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">注意力模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-17 15:56:45" itemprop="dateCreated datePublished" datetime="2022-01-17T15:56:45+08:00">2022-01-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-20 16:57:33" itemprop="dateModified" datetime="2022-01-20T16:57:33+08:00">2022-01-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
-
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/17/%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A8%A1%E5%9E%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me.jpg">
-      <meta itemprop="name" content="Llunch">
-      <meta itemprop="description" content="Laugh through the night">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="摸鱼的Llunch">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">循环神经网络</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-01-16 20:26:02" itemprop="dateCreated datePublished" datetime="2022-01-16T20:26:02+08:00">2022-01-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-21 13:57:50" itemprop="dateModified" datetime="2022-01-21T13:57:50+08:00">2022-01-21</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
-
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/01/16/%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/16/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me.jpg">
-      <meta itemprop="name" content="Llunch">
-      <meta itemprop="description" content="Laugh through the night">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="摸鱼的Llunch">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/01/16/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">卷积神经网络</a>
+            <a href="/2022/05/07/How-to-use-gitlab/" class="post-title-link" itemprop="url">How to use gitlab</a>
         </h2>
 
         <div class="post-meta">
@@ -659,7 +448,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-16 16:26:35 / 修改时间：20:25:13" itemprop="dateCreated datePublished" datetime="2022-01-16T16:26:35+08:00">2022-01-16</time>
+              <time title="创建时间：2022-05-07 14:19:05 / 修改时间：15:07:58" itemprop="dateCreated datePublished" datetime="2022-05-07T14:19:05+08:00">2022-05-07</time>
             </span>
 
           
@@ -679,7 +468,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/16/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/#more" rel="contents">
+              <a class="btn" href="/2022/05/07/How-to-use-gitlab/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -703,7 +492,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/16/%E5%92%AC%E5%BE%97%E8%8F%9C%E6%A0%B9%EF%BC%8C%E7%99%BE%E4%BA%8B%E5%8F%AF%E5%81%9A/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me.jpg">
@@ -717,7 +506,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/16/%E5%92%AC%E5%BE%97%E8%8F%9C%E6%A0%B9%EF%BC%8C%E7%99%BE%E4%BA%8B%E5%8F%AF%E5%81%9A/" class="post-title-link" itemprop="url">咬得菜根，百事可做</a>
+            <a href="/2022/05/03/Deep-Learning-Review-2015/" class="post-title-link" itemprop="url">Deep Learning Review 2015</a>
         </h2>
 
         <div class="post-meta">
@@ -728,7 +517,16 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-01-16 08:42:03 / 修改时间：09:59:53" itemprop="dateCreated datePublished" datetime="2022-01-16T08:42:03+08:00">2022-01-16</time>
+              <time title="创建时间：2022-05-03 10:51:23 / 修改时间：20:21:11" itemprop="dateCreated datePublished" datetime="2022-05-03T10:51:23+08:00">2022-05-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+                </span>
             </span>
 
           
@@ -743,12 +541,12 @@
 
       
           <blockquote class="blockquote-center">
-<p>^ _ ^ </p>
+<p>Yann LeCun, Yoshua Bengio, Geoffery Hinton write the review of Deep Learning in 2015, published in Natrue^ _ ^ </p>
 
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/16/%E5%92%AC%E5%BE%97%E8%8F%9C%E6%A0%B9%EF%BC%8C%E7%99%BE%E4%BA%8B%E5%8F%AF%E5%81%9A/#more" rel="contents">
+              <a class="btn" href="/2022/05/03/Deep-Learning-Review-2015/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -772,7 +570,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/15/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/04/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E7%BC%96%E5%86%99%E8%8C%83%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me.jpg">
@@ -786,7 +584,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/15/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="post-title-link" itemprop="url">多层感知机</a>
+            <a href="/2022/04/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E7%BC%96%E5%86%99%E8%8C%83%E5%BC%8F/" class="post-title-link" itemprop="url">深度学习模型编写范式</a>
         </h2>
 
         <div class="post-meta">
@@ -796,15 +594,24 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-15 17:07:29" itemprop="dateCreated datePublished" datetime="2022-01-15T17:07:29+08:00">2022-01-15</time>
+              <time title="创建时间：2022-04-25 15:56:32" itemprop="dateCreated datePublished" datetime="2022-04-25T15:56:32+08:00">2022-04-25</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-16 16:13:00" itemprop="dateModified" datetime="2022-01-16T16:13:00+08:00">2022-01-16</time>
+                <time title="修改时间：2022-04-28 20:46:43" itemprop="dateModified" datetime="2022-04-28T20:46:43+08:00">2022-04-28</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a>
+                </span>
+            </span>
 
           
 
@@ -823,7 +630,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/15/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/#more" rel="contents">
+              <a class="btn" href="/2022/04/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E7%BC%96%E5%86%99%E8%8C%83%E5%BC%8F/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -847,7 +654,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/15/%E8%A7%A3%E5%86%B3mac%E4%B8%8Bhexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/03/15/EM%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me.jpg">
@@ -861,7 +668,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/15/%E8%A7%A3%E5%86%B3mac%E4%B8%8Bhexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">解决mac下hexo博客部署失败问题</a>
+            <a href="/2022/03/15/EM%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">EM算法</a>
         </h2>
 
         <div class="post-meta">
@@ -870,16 +677,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-01-15 09:38:58" itemprop="dateCreated datePublished" datetime="2022-01-15T09:38:58+08:00">2022-01-15</time>
+              <time title="创建时间：2022-03-15 09:18:52 / 修改时间：09:19:34" itemprop="dateCreated datePublished" datetime="2022-03-15T09:18:52+08:00">2022-03-15</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-16 09:59:59" itemprop="dateModified" datetime="2022-01-16T09:59:59+08:00">2022-01-16</time>
-              </span>
 
           
 
@@ -898,7 +699,7 @@
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/15/%E8%A7%A3%E5%86%B3mac%E4%B8%8Bhexo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%A4%B1%E8%B4%A5%E9%97%AE%E9%A2%98/#more" rel="contents">
+              <a class="btn" href="/2022/03/15/EM%E7%AE%97%E6%B3%95/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -922,7 +723,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/12/daily-daily-2022-01-11-2022-01-14/">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/03/10/%E5%8E%9F%E7%A5%9E%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me.jpg">
@@ -936,7 +737,154 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/01/12/daily-daily-2022-01-11-2022-01-14/" class="post-title-link" itemprop="url">[daily daily]2022-01-11~2022-01-14</a>
+            <a href="/2022/03/10/%E5%8E%9F%E7%A5%9E%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">原神笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-10 07:10:15 / 修改时间：22:30:37" itemprop="dateCreated datePublished" datetime="2022-03-10T07:10:15+08:00">2022-03-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/10/%E5%8E%9F%E7%A5%9E%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/03/08/Attention-is-all-you-need/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="Laugh through the night">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/08/Attention-is-all-you-need/" class="post-title-link" itemprop="url">Attention is all you need</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-03-08 16:43:30 / 修改时间：17:15:32" itemprop="dateCreated datePublished" datetime="2022-03-08T16:43:30+08:00">2022-03-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/08/Attention-is-all-you-need/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/02/20/spacy%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="Laugh through the night">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/20/spacy%E5%85%A5%E9%97%A8/" class="post-title-link" itemprop="url">spacy入门</a>
         </h2>
 
         <div class="post-meta">
@@ -946,14 +894,98 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-01-12 08:19:16" itemprop="dateCreated datePublished" datetime="2022-01-12T08:19:16+08:00">2022-01-12</time>
+              <time title="创建时间：2022-02-20 10:15:55" itemprop="dateCreated datePublished" datetime="2022-02-20T10:15:55+08:00">2022-02-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-15 09:29:15" itemprop="dateModified" datetime="2022-01-15T09:29:15+08:00">2022-01-15</time>
+                <time title="修改时间：2022-02-21 21:40:09" itemprop="dateModified" datetime="2022-02-21T21:40:09+08:00">2022-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index"><span itemprop="name">deep learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote class="blockquote-center">
+<p>Industrial-Strength Natural Language Processing ^ _ ^ </p>
+
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/20/spacy%E5%85%A5%E9%97%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/02/14/BatchNorm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="Laugh through the night">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/14/BatchNorm/" class="post-title-link" itemprop="url">BatchNorm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-14 14:08:28" itemprop="dateCreated datePublished" datetime="2022-02-14T14:08:28+08:00">2022-02-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-02-16 11:28:09" itemprop="dateModified" datetime="2022-02-16T11:28:09+08:00">2022-02-16</time>
               </span>
 
           
@@ -968,12 +1000,12 @@
 
       
           <blockquote class="blockquote-center">
-<p>My Flow Record during 2022-01-11 to 2022-01-14 ^ _ ^ </p>
+<p>Batch Normalization 解读 ^ _ ^ </p>
 
 </blockquote>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/12/daily-daily-2022-01-11-2022-01-14/#more" rel="contents">
+              <a class="btn" href="/2022/02/14/BatchNorm/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -996,7 +1028,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 

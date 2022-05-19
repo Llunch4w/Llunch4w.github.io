@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="word2vec词向量">
+<meta property="og:url" content="https://llunch4w.github.io/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/cbow_fnn.png">
+<meta property="og:image" content="https://llunch4w.github.io/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/skip_gram.png">
+<meta property="article:published_time" content="2022-01-24T02:09:44.000Z">
+<meta property="article:modified_time" content="2022-01-29T02:09:45.509Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="Deep Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/cbow_fnn.png">
+
+<link rel="canonical" href="https://llunch4w.github.io/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>word2vec词向量 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Motivation"><span class="nav-number">1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CBOW"><span class="nav-number">2.</span> <span class="nav-text">CBOW</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Skip-Gram"><span class="nav-number">3.</span> <span class="nav-text">Skip-Gram</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Parameters-Estimation"><span class="nav-number">4.</span> <span class="nav-text">Parameters Estimation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Negative-Sampling"><span class="nav-number">5.</span> <span class="nav-text">Negative Sampling</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">6.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CBOW-1"><span class="nav-number">6.1.</span> <span class="nav-text">CBOW</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Gram-1"><span class="nav-number">6.2.</span> <span class="nav-text">Skip-Gram</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Skip-Gram-based-on-Negativate-Sampling"><span class="nav-number">6.3.</span> <span class="nav-text">Skip-Gram based on Negativate Sampling</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">Laugh through the night</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="Laugh through the night">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          word2vec词向量
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-24 10:09:44" itemprop="dateCreated datePublished" datetime="2022-01-24T10:09:44+08:00">2022-01-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-29 10:09:45" itemprop="dateModified" datetime="2022-01-29T10:09:45+08:00">2022-01-29</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>For pre-trained based on neural model, it only considered history information and ignored future information. So someone proposed some more efficient pre-trained word vecotr model, including <strong>CBOW(Continuous Bag-Of-Words)</strong> and <strong>Skip-Gram</strong>. They are not language model strictly, only basing <strong>co-occurrence information</strong> realize learning of word vecotr. </p>
+<h1 id="CBOW"><a href="#CBOW" class="headerlink" title="CBOW"></a>CBOW</h1><p>The basic core idea of CBOW: According fixed length of window $|C_t|$(e.g. 5) look up text $w_{t-2}w_{t-1}w_{t}w_{t+1}w_{t+2}$. Based on the context word $C_t = {w_{t-2}, w_{t-1}, w_{t+1}, w_{t+2}}$, predicting $w_t$. The difference between CBOW and neural language model is: <strong>CBOW model dont’t consider the order or position of context words</strong>.</p>
+<p><img src="/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/cbow_fnn.png" alt></p>
+<p>(1) <strong>Input Layer</strong>: Suppose the length of fixed window is n, then the dimension of input is $(n-1) \times |V|$, where $V$ is the vocabluary and every column in the input matrix is a word represented by one-hot encoding.</p>
+<p>(2) <strong>Embedding Layer</strong>: Transfer input space to word vector space through matrix $E \in R^{d \times |V|}$: $v_{w_i} = Ee_{w_i}$. Suppose $C_t = {w_{t-k}, \cdots, w_{t-1}, w_{t+1}, \cdots, w_{t+k}}$. Then we calculate $v_{C_t} = \frac{1}{C_t}\sum_{w \in C_t}v_w$.</p>
+<p>(3) <strong>Output Layer</strong>: $E’ \in R^{|V| \times d}$ is the transport matrix from hidden layer to output layer. Suppose $v’<em>{w_i}$ in $E’$ is the correspoding row vecotr of $w_i$. The probablity of output $w_t$ is $P(w_t|C_t) = \frac{exp(v</em>{C_t} \cdot v’<em>{w_t})}{\sum</em>{w’ \in V}exp(v_{C_t} \cdots v’_{w^’})}$.    </p>
+<p>In the CBOW model, both $E$ and $E’$ can apply as word vecotr matrix. In some task, we also can combine both to get better performance.</p>
+<h1 id="Skip-Gram"><a href="#Skip-Gram" class="headerlink" title="Skip-Gram"></a>Skip-Gram</h1><p>CBOW method using all the words in the context window to predict target word. Skip-Gram model simplified this process: using every word in context window dependently predict the target word. So Skip-Gram model try to establish the co-occurence realtionship between one word to one word, specifically $P(w_t|w_{t+j})$, where $j \in {\pm 1,\cdots,\pm k}$. It also can be described as predict context by current word, as $P(w_{t+j}|w_t)$.   </p>
+<p><img src="/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/skip_gram.png" alt></p>
+<p>In the Input Layer, current time word one-hot encoding $w_t$ as input will map itself from input layer to Embedding Layer through matrix E. Formually, $v_{w_t} = E^T_{w_t}$.<br>Then we use linear transformation matrix $E’$ to predict context word in output layer: $P(c|w_t) = \frac{exp(v_{w_t} \cdot v’<em>c)}{\sum</em>{w’ \in V}exp(v’_{w’})}$.</p>
+<h1 id="Parameters-Estimation"><a href="#Parameters-Estimation" class="headerlink" title="Parameters Estimation"></a>Parameters Estimation</h1><p>Both CBOW model and Skip-Gram model need to estimate paramters $\theta={E, E’}$. But they have different loss function:</p>
+<ul>
+<li>For CBOW, $L(\theta) = -\sum_{t=1}^T logP(w_t|C_t)$   </li>
+<li>For Skip-Gram, $L(\theta) = -\sum_{t=1}^T \sum_{-k \leq j \leq k} logP(w_{t+j}|w_t)$</li>
+</ul>
+<h1 id="Negative-Sampling"><a href="#Negative-Sampling" class="headerlink" title="Negative Sampling"></a>Negative Sampling</h1><p>When the size of vocabulary is too big and the computing resources is limited, both CBOW model and Skip-Gram model will decrease computing efficiency because of the normalization process in the output layer. <strong>Negative Sampling</strong> provide a new task view: Given <strong>current word</strong> and its <strong>context</strong>, maxmize the probablity of co-occurence of them. After that, the problem can be simplified to another problem: <strong>binary classfication task</strong> according to $(w, c)$. The probability of $(w,c)$ has co-occurence relationship: $P(D=1|w,c) = \sigma(v_w \cdot v’_c)$. Otherwise, $P(D=0|w,c) = 1 - P(D=1|w,c) = \sigma(-v_w \cdot v’_c)$</p>
+<p>In Skip-Gram model, $w=w_t, c=w_{t+j}$. If the pair $(w, c)$ satisfies co-occurence condition, then it is a positive sample. At the same time, we can do some negative samples based on this. We sampled some words which is not in the context word, marked as $\widetilde{w_{i}}$. The item $P(w_{t+j}|w_t)$ in loss function will be represented as $P(w_{t+j}|w_t) = log \sigma(v_{w_t} \cdot v’<em>{t+j}) + \sum</em>{i=1}^K log \sigma(- v_{w_t} \cdot v’_{\widetilde{w_i}})$. Usually, the negativate sampling can adapt a sort of distribution.</p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="CBOW-1"><a href="#CBOW-1" class="headerlink" title="CBOW"></a>CBOW</h2><p><strong>create dataset</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CbowDataset</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, corpus, vocab, context_size=<span class="number">2</span>)</span>:</span></span><br><span class="line">        self.data = []</span><br><span class="line">        self.bos = vocab[BOS_TOKEN]</span><br><span class="line">        self.eos = vocab[EOS_TOKEN]</span><br><span class="line">        <span class="keyword">for</span> sentence <span class="keyword">in</span> tqdm(corpus, desc=<span class="string">"Dataset Construction"</span>):</span><br><span class="line">            sentence = [self.bos] + sentence + [self.eos]</span><br><span class="line">            <span class="keyword">if</span> len(sentence) &lt; context_size * <span class="number">2</span> + <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(context_size, len(sentence)-context_size):</span><br><span class="line">                context = sentence[i-context_size:i] + sentence[i+<span class="number">1</span>:i+context_size+<span class="number">1</span>]</span><br><span class="line">                target = sentence[i]</span><br><span class="line">                self.data.append((context, target))</span><br></pre></td></tr></table></figure>
+
+<p><strong>create model</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CbowModel</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, vocab_size, embedding_size)</span>:</span></span><br><span class="line">        super(CbowModel, self).__init__()</span><br><span class="line">        self.embeddings = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        self.output = nn.Linear(embedding_dim, vocab_size, bias=<span class="literal">False</span>)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        embeds = self.embeddings(inputs)</span><br><span class="line">        hidden = embeds.mean(dim=<span class="number">1</span>)</span><br><span class="line">        output = self.output(hidden)</span><br><span class="line">        log_probs = F.log_softmax(output, dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> log_probs</span><br></pre></td></tr></table></figure>
+
+<h2 id="Skip-Gram-1"><a href="#Skip-Gram-1" class="headerlink" title="Skip-Gram"></a>Skip-Gram</h2><p><strong>create database</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SkipGramDataset</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, corpus, vocab, context_size=<span class="number">2</span>)</span>:</span></span><br><span class="line">        self.data = []</span><br><span class="line">        self.bos = vocab[BOS_TOKEN]</span><br><span class="line">        self.eos = vocab[EOS_TOKEN]</span><br><span class="line">        <span class="keyword">for</span> sentence <span class="keyword">in</span> tqdm(corpus, desc=<span class="string">"Dataset Construction"</span>):</span><br><span class="line">            sentence = [self.bos] + sentence + [self.eos]</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(sentence)<span class="number">-1</span>):</span><br><span class="line">                w = sentence[i]</span><br><span class="line">                left_context_index = max(<span class="number">0</span>, i-context_size)</span><br><span class="line">                right_context_index = min(len(sentence), i + context_size)</span><br><span class="line">                context = sentence[left_context_index: i] + sentence[i+<span class="number">1</span>: right_context_index+<span class="number">1</span>]</span><br><span class="line">                self.data.extend([(w, c) <span class="keyword">for</span> c <span class="keyword">in</span> context])</span><br></pre></td></tr></table></figure>
+
+<p><strong>create model</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SkipGramModel</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, vocab_size, embedding_dim)</span>:</span></span><br><span class="line">        super(SkipGramModel, self).__init__()</span><br><span class="line">        self.embeddings = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        self.output = nn.Linear(embbeding_dim, vocab_size)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        embeds = self.embeddings(inputs)</span><br><span class="line">        output = self.output(embeds)</span><br><span class="line">        log_probs = F.log_softmax(output, dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> log_probs</span><br></pre></td></tr></table></figure>
+
+<h2 id="Skip-Gram-based-on-Negativate-Sampling"><a href="#Skip-Gram-based-on-Negativate-Sampling" class="headerlink" title="Skip-Gram based on Negativate Sampling"></a>Skip-Gram based on Negativate Sampling</h2><p><strong>create dataset</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SGNSDataset</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        @param ns_dist: </span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, corpus, vocab, context_size=<span class="number">2</span>, n_negative=<span class="number">5</span>, ns_dist=None)</span>:</span></span><br><span class="line">        self.data = []</span><br><span class="line">        self.bos = vocab[BOS_TOKEN]</span><br><span class="line">        self.eos = vocab[EOS_TOKEN]</span><br><span class="line">        self.pad = vocab[PAD_TOKEN]</span><br><span class="line">        <span class="keyword">for</span> sentence <span class="keyword">in</span> tqdm(corpus, desc=<span class="string">"Dataset Construction"</span>):</span><br><span class="line">            sentence = [self.bos] + sentence + [self.eos]</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(sentence)<span class="number">-1</span>):</span><br><span class="line">                w = sentence[i]</span><br><span class="line">                left_context_index = max(<span class="number">0</span>, i-context_size)</span><br><span class="line">                right_context_index = min(len(sentence), i+context_size)</span><br><span class="line">                context = sentence[left_context_index:i] + sentence[i+<span class="number">1</span>: right_context_index+<span class="number">1</span>]</span><br><span class="line">                context += [self.pad] * (<span class="number">2</span> * context_size - len(context))</span><br><span class="line">                self.data.append((w, context))</span><br><span class="line">        self.n_negativate = n_negativate</span><br><span class="line">        self.ns_dist = ns_dist <span class="keyword">if</span> ns_dist <span class="keyword">else</span> torch.ones(len(vocab))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.data)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, i)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.data[i]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">collate_fn</span><span class="params">(self, examples)</span>:</span></span><br><span class="line">        wordss = torch.tensor([ex[<span class="number">0</span>] <span class="keyword">for</span> ex <span class="keyword">in</span> examples], dtype=torch.long)</span><br><span class="line">        contexts = torch.tensor([ex[<span class="number">1</span>] <span class="keyword">for</span> ex <span class="keyword">in</span> examples], dtype=torch.long)</span><br><span class="line">        batch_size, context_size = contexts.shape</span><br><span class="line">        neg_contexts = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(batch_size):</span><br><span class="line">            ns_dist = self.ns_dist.index_fill(<span class="number">0</span>, contexts[i], <span class="number">.0</span>)</span><br><span class="line">            neg_contexts.append(torch.multinomial(ns_dist, self.n_negativates * context_size, replacement=<span class="literal">True</span>))</span><br><span class="line">        neg_contexts = torch.stack(neg_contexts, dim=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> words, contexts, neg_contexts</span><br></pre></td></tr></table></figure>
+
+<p><strong>create models</strong><br>Maintain 2 embedding layers: <code>w_embeddings</code> for word representation, <code>c_embeddings</code> for context representation.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SGNSModel</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, vocab_size, embedding_dim)</span>:</span></span><br><span class="line">        super(SGNSModel, self).__init__()</span><br><span class="line">        self.w_embeddings = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        self.c_embeddings = nn.Embedding(vocab_soze, embedding_dim)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward_w</span><span class="params">(self, words)</span>:</span></span><br><span class="line">        w_embeds = self.w_embeddings(words)</span><br><span class="line">        <span class="keyword">return</span> w_embeds</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward_c</span><span class="params">(self, contexts)</span>:</span></span><br><span class="line">        c_embeds = self.c_embeddings(contexts)</span><br><span class="line">        <span class="keyword">return</span> c_embeds</span><br></pre></td></tr></table></figure>
+
+<p><strong>counting unigram distribution</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_unigram_distribution</span><span class="params">(corpus, vocab_size)</span>:</span></span><br><span class="line">    token_counts = torch.tensor([<span class="number">0</span>] * vocab_size)</span><br><span class="line">    total_count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> sentence <span class="keyword">in</span> corpus:</span><br><span class="line">        total_count += len(sentence)</span><br><span class="line">        <span class="keyword">for</span> token <span class="keyword">in</span> sentence:</span><br><span class="line">            token_counts[token] += <span class="number">1</span></span><br><span class="line">    unigram_dist = torch.div(token_counts.float(), total_counts)</span><br><span class="line">    <span class="keyword">return</span> unigram_dist</span><br></pre></td></tr></table></figure>
+
+<p><strong>training</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">embedding_dim = <span class="number">128</span></span><br><span class="line">context_size = <span class="number">3</span></span><br><span class="line">batch_size = <span class="number">1024</span></span><br><span class="line">n_negatives = <span class="number">5</span></span><br><span class="line">num_epoch = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">corpus, vocab = load_reuters()</span><br><span class="line">unigram_dist = get_unigram_distribution(corpus, len(vocab))</span><br><span class="line"><span class="comment"># Negative Sampling through probablity distribution: p(w)**0.75</span></span><br><span class="line">negative_sampling_dist = unigram_dist ** <span class="number">0.75</span></span><br><span class="line">negative_sampling_dist /= negative_sampling_dist.sum()</span><br><span class="line"></span><br><span class="line">dataset = SGNSDataset(</span><br><span class="line">    corpus,</span><br><span class="line">    vocab,</span><br><span class="line">    context_size=context_size,</span><br><span class="line">    n_negatives=n_negatives,</span><br><span class="line">    ns_dist=negative_sampling_dist</span><br><span class="line">)</span><br><span class="line">data_loader = get_loader(dataset, batch_size)</span><br><span class="line"></span><br><span class="line">model = SGNSModel(len(vocab), embedding_dim)</span><br><span class="line">model.to(device)</span><br><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line">model.train()</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epochs):</span><br><span class="line">    total_loss = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> tqdm(data_loader, desc=<span class="string">f"Training Epoch <span class="subst">&#123;epoch&#125;</span>"</span>):</span><br><span class="line">        words, contexts, neg_contexts = [x.to(device) <span class="keyword">for</span> x <span class="keyword">in</span> batch]</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        batch_size = words.shape[<span class="number">0</span>]</span><br><span class="line">        word_embeds = model.forward_w(words).unsqueeze(dim=<span class="number">2</span>)</span><br><span class="line">        context_embeds = model.forward_c(words)</span><br><span class="line">        neg_context_embeds = model.forward_c(neg_contexts)</span><br><span class="line">        context_loss = F.logsigmoid(torch.bmm(context_embeds, word_embeds).squeeze(dim=<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" rel="prev" title="静态词向量预训练模型">
+      <i class="fa fa-chevron-left"></i> 静态词向量预训练模型
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/29/GloVe%E8%AF%8D%E5%90%91%E9%87%8F/" rel="next" title="GloVe词向量">
+      GloVe词向量 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

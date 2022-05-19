@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="静态词向量预训练模型">
+<meta property="og:url" content="https://llunch4w.github.io/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/ffn_model.png">
+<meta property="og:image" content="https://llunch4w.github.io/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/rnn_model.png">
+<meta property="article:published_time" content="2022-01-23T05:48:07.000Z">
+<meta property="article:modified_time" content="2022-01-28T02:48:47.860Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="Deep Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/ffn_model.png">
+
+<link rel="canonical" href="https://llunch4w.github.io/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>静态词向量预训练模型 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Pre-trained-Word-Vector-Task"><span class="nav-number">1.</span> <span class="nav-text">Pre-trained Word Vector Task</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Feed-forward-Neural-Netword-Language-Model"><span class="nav-number">2.</span> <span class="nav-text">Feed-forward Neural Netword Language Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Recurrent-Nerual-Network-Language-Model"><span class="nav-number">3.</span> <span class="nav-text">Recurrent Nerual Network Language Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Load-Data"><span class="nav-number">4.1.</span> <span class="nav-text">Load Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FNN"><span class="nav-number">4.2.</span> <span class="nav-text">FNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-number">4.3.</span> <span class="nav-text">RNN</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">Laugh through the night</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="Laugh through the night">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          静态词向量预训练模型
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-23 13:48:07" itemprop="dateCreated datePublished" datetime="2022-01-23T13:48:07+08:00">2022-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-28 10:48:47" itemprop="dateModified" datetime="2022-01-28T10:48:47+08:00">2022-01-28</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Pre-trained-Word-Vector-Task"><a href="#Pre-trained-Word-Vector-Task" class="headerlink" title="Pre-trained Word Vector Task"></a>Pre-trained Word Vector Task</h1><p>Given a text $w_1w_2\cdots w_n$, the basic task of language model is to predict the possibility of one word occures in one position. In other word, calculating conditional probablity $P(w_t|w_1w_2\cdots w_{t-1})$.</p>
+<p>To consturct <strong>Language Model</strong>, we can transfer the problem to a classification problem: the input is history word sequence($w_{1:t-1}$), the output is $w_t$. Then, we can use text which is non-labeled to consturct training dataset and train the model by optimizer loss function in this dataset. Since the supervised signal came from the data itself, this type of learning is also called <strong>Self-supervised Learning</strong>.</p>
+<h1 id="Feed-forward-Neural-Netword-Language-Model"><a href="#Feed-forward-Neural-Netword-Language-Model" class="headerlink" title="Feed-forward Neural Netword Language Model"></a>Feed-forward Neural Netword Language Model</h1><p>Bias Hypothesis: <strong>Markov Assumption</strong><br>The prediction of the next word is only associated with the most recent n-1 word in history.<br>Formually: $P(w_t|w_{1:t-1}) = P(w_t|w_{t-n+1:t-1})$</p>
+<p><img src="/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/ffn_model.png" alt></p>
+<p>(1) <strong>Input Layer</strong>: In the current time $t$, every input is composed of history word sequence $w_{t-n+1:t-1}$. Specifically, we can use <strong>One-Hot Encoding</strong> or <strong>Vocabulary Index</strong> to present a word.    </p>
+<p>(2) <strong>Embedding Layer</strong>: Embedding Layer maps every word in input layer to a dense vector which called <strong>feature vector</strong>. In other view, Embedding Layer can be viewed as a <strong>Look-up Table</strong>. The process of get word vector can be viewed as a process of search the vector in Look-up Table according to the index of the word.<br>Formually, $x = [v_{w_{t-n+1}}; \cdot; v_{w_{t-2}};v_{w_{t-1}}]$, where</p>
+<ul>
+<li>$v_w \in R^d$: shows the word vecotr of d dimenion </li>
+<li>$x \in R^{(n-1)d}$: shows the result of concating all the word vector in history sequence.    </li>
+</ul>
+<p>We can define word vector matrix $E \in R^{d \times |V|}$, where $V$ is the vocabulary.</p>
+<p>(3) <strong>Hidden Layer</strong>: <strong>Linear Transform</strong> and <strong>Activation</strong> to $x$ in Embedding Layer. $h=f(W^{hid}x + b^{hid})$.     </p>
+<ul>
+<li>For Linear transform, $W^{hid} \in R^{m \times (n-1)d}$ is the linear transformation matrix from embedding layer to hidden layer. </li>
+<li>For Activation, normally activation function contains Sigmoid, tanh, ReLU.</li>
+</ul>
+<p>(4) <strong>Output Layer</strong>: <strong>Linear Transform</strong> and <strong>Softmax</strong> to get probability distribution of Vocabulary. $y = Softmax(W^{out}h + b^{out}$, where $W^{out} \in R^{|V| \times m}$ is the linear transforamtion matrix from hidden layer to output layer.     </p>
+<p>From what has been discussed above, the parameters of FNN can be represented as $\theta = {E, W^{hid}, b^{hid}, W^{out}, b^{out}}$. The number of parameters is $|V| \times d + m \times (n-1)d + m + |V| \times m + |V|$. And in case of $m$ and $d$ are constant, so the number of parameter will increase linearly according to the size of vocabulary.  </p>
+<p>Besides, the optimization of hyperparameter such as <strong>dimension of word vector d</strong>, <strong>hidden units dimension m</strong>, <strong>input sequence length n-1</strong>, should be modified by the development dataset.     </p>
+<p>After the training, matrix $E$ will be the <strong>Static Word Vecotr</strong> which is pre-trained.</p>
+<h1 id="Recurrent-Nerual-Network-Language-Model"><a href="#Recurrent-Nerual-Network-Language-Model" class="headerlink" title="Recurrent Nerual Network Language Model"></a>Recurrent Nerual Network Language Model</h1><p>In the FNN LM, the prediction of next word is depended by the length of history be looked back(parameter n). But in the reality situation, the expectation of n is different because of the different length of sequences. For example, “我吃_<em>“, the word in “_</em>“ should be food can be infered by “吃”, only considering short history. But “他感冒了，于是下班之后去了_<em>“, the word in “_</em>“ should be hospital can be infered by “感冒”, that needs to consider long history.</p>
+<p>RNN LM has a good nature to deal with the dependency relationship which has unfixed length. RNN maintains a hidden state, which is called <strong>Memory</strong>, contains all the history information of current word in every moment. <strong>Memory</strong> and <strong>current word</strong> will joint together as the input of the next time.</p>
+<p><img src="/2022/01/23/%E9%9D%99%E6%80%81%E8%AF%8D%E5%90%91%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/rnn_model.png" alt></p>
+<p>(1) <strong>Input Layer</strong>: the input in RNN LM is not limited by the window length n any more. It can be represented by the whole history sequence, $w_{1:t-1}$.  </p>
+<p>(2) <strong>Embedding Layer</strong>: Like FNN LM, in the Embedding Layer, the input sequence should map to word vector. In RNN, every input of time t should be composed of 2 part: Memory, hidden state $h_{t-1}$; the previous word $w_{t-1}$. Specifically, we add start tag <code>&lt;bos&gt;</code> as $w_0$; zero vector as init hidden state $h_0$. The input of t can be represented as $x_t= [v_{w_{t-1}}; h_{t-1}]$.</p>
+<p>(3) <strong>Hidden Layer</strong>: Like FNN LM, the calculation of Hidden Layer is composed of <strong>Linear Transform</strong> and <strong>Activation Function</strong>. $h_t = tanh(W^{hid}x_t + b^{bid})$, where $W_{hid} \in R^{m \times (d+m)}, b^{hid} \in R^m$. For detailed, $W^{hid}=[U; V]$, where $U \in R^{m \times d}, V \in R^{m \times m}$. So another formula has the same meaning, $h_t = tanh(Uv_{w_{t-1}} + Vh_{t-1} + b^{hid})$.  </p>
+<p>(4) <strong>Output Layer</strong>: $y_t = Softmax(W^{out}h_t + b^{out})$, where $W^{out} \in R^{|V| \times m}$.</p>
+<p>When the input sequence is too long, <strong>Vanishing Gradient</strong> and <strong>Exploding Gradient</strong> might occurred. To deal with this problem: </p>
+<ul>
+<li>Before 2015, <strong>Truncated Back-propagation Through Time</strong> is the mainstream method.</li>
+<li>After 2015, <strong>Gating Mechanism</strong> is the mainstream method.(e.g. LSTM)</li>
+</ul>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="Load-Data"><a href="#Load-Data" class="headerlink" title="Load Data"></a>Load Data</h2><p><strong>load corpus and create vocab</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">BOS_TOKEN = <span class="string">"&lt;bos&gt;"</span> <span class="comment"># sentence head tag</span></span><br><span class="line">EOS_TOKEN = <span class="string">"&lt;eos&gt;"</span> <span class="comment"># sentence tail tag</span></span><br><span class="line">PAD_TOKEN = <span class="string">"&lt;pad&gt;"</span> <span class="comment"># space padding</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_reuters</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">        reuters is a corpus database which applies to text classification</span></span><br><span class="line"><span class="string">        including 10788 newspaper documents, which have 1 or more classify label.</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">from</span> nltk.corpus <span class="keyword">import</span> reuters</span><br><span class="line">    text = reuters.sents()</span><br><span class="line">    text = [[word.lower() <span class="keyword">for</span> word <span class="keyword">in</span> sentence] <span class="keyword">for</span> sentence <span class="keyword">in</span> text]</span><br><span class="line">    vocab = Vocab.build(text, reserved_tokens=[PAD_TOKEN, BOS_TOKEN, EOS_TOKEN])</span><br><span class="line">    corpus = [vocab.convert_tokens_to_ids(sentece) <span class="keyword">for</span> sentence <span class="keyword">in</span> text]</span><br><span class="line">    <span class="keyword">return</span> corpus, vocab</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_loader</span><span class="params">(dataset, batch_size)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> DataLoader(dataset, batch_size, collate_fn=dataset.collate_fn, shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="FNN"><a href="#FNN" class="headerlink" title="FNN"></a>FNN</h2><p><strong>create dataset for FNN</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NGramDataset</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, corpus, vocab, context_size=<span class="number">2</span>)</span>:</span></span><br><span class="line">        self.data = []</span><br><span class="line">        self.bos = vocab[BOS_TOKEN]</span><br><span class="line">        self.eos = vocab[EOS_TOKEN]</span><br><span class="line">        <span class="keyword">for</span> sentence <span class="keyword">in</span> tqdm(corpus, desc=<span class="string">"Dataset Construction"</span>):</span><br><span class="line">            sentence = [self.bos] + sentence + [self.eos]</span><br><span class="line">            <span class="keyword">if</span> len(sentence) &lt; context_size:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(context_size, len(sentence)):</span><br><span class="line">                context = sentence[i-context_size:i]</span><br><span class="line">                target = sentence[i]</span><br><span class="line">                self.data.append((context, target))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.data)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, i)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.data[i]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">collate_fn</span><span class="params">(self, examples)</span>:</span></span><br><span class="line">        inputs = torch.tensor([ex[<span class="number">0</span>] <span class="keyword">for</span> ex <span class="keyword">in</span> examples], dtype=torch.long)</span><br><span class="line">        targets = torch.tensor([ex[<span class="number">1</span>] <span class="keyword">for</span> ex <span class="keyword">in</span> examples], dtype=torch.long)</span><br><span class="line">        <span class="keyword">return</span> (inputs, targets)</span><br></pre></td></tr></table></figure>
+
+<p><strong>FNN LM</strong>  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FeedForwardNNLM</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, vocab_size, embedding_dim, context_size, hidden_dim)</span>:</span></span><br><span class="line">        super(FeedForwardNNLM, self).__init__()</span><br><span class="line">        self.embeddings = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        self.linear1 = nn.Linear(context_size * embedding_dim, hidden_dim)</span><br><span class="line">        self.linear2 = nn.Linear(hidden_dim, vocab_size)</span><br><span class="line">        self.activate  = F.relu</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        embeds = self.embeddings(inputs).view((inputs.shape[<span class="number">0</span>], <span class="number">-1</span>))</span><br><span class="line">        hidden = self.activate(self.linear1(embeds))</span><br><span class="line">        output = self.linear2(hidden)</span><br><span class="line">        log_probs = F.log_softmax(output, dim=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> log_probs</span><br></pre></td></tr></table></figure>
+
+<p><strong>Training</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">embedding_dim = <span class="number">128</span></span><br><span class="line">hidden_dim = <span class="number">256</span></span><br><span class="line">batch_size = <span class="number">1024</span></span><br><span class="line">context_size = <span class="number">3</span></span><br><span class="line">num_epoch = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">corpus, vocab = load_reuters()</span><br><span class="line">dataset = NGramDataset(corpus, vocab, context_size)</span><br><span class="line">data_loader = get_loader(dataset, batch_size)</span><br><span class="line"></span><br><span class="line">nll_loss = nn.NLLLoss()</span><br><span class="line">model = FeedForwardNNLM(len(vocab), embedding_dim, context_size, hidden_dim)</span><br><span class="line">model.to(device)</span><br><span class="line"></span><br><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line">model.train()</span><br><span class="line">total_losses = []</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epoch):</span><br><span class="line">    total_loss = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> tqdm(data_loader, desc=<span class="string">f"Training Epoch <span class="subst">&#123;epoch&#125;</span>"</span>):</span><br><span class="line">        inputs, targets = [x.to(device) <span class="keyword">for</span> x <span class="keyword">in</span> batch]</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        log_probs = model(inputs)</span><br><span class="line">        loss = nll_loss(log_probs, targets)</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line">        total_loss += loss.item()</span><br><span class="line">    print(<span class="string">f"Loss: <span class="subst">&#123;total_loss:<span class="number">.2</span>f&#125;</span>"</span>)</span><br><span class="line">    total_losses.append(total_loss)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Save model</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">save_pretrained</span><span class="params">(vocab, embeds, save_path)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(save_path, <span class="string">"w"</span>) <span class="keyword">as</span> writer:</span><br><span class="line">        writer.write(<span class="string">f"<span class="subst">&#123;embeds.shape[<span class="number">0</span>]&#125;</span> <span class="subst">&#123;embeds.shape[<span class="number">1</span>]&#125;</span>\n"</span>)</span><br><span class="line">        <span class="keyword">for</span> idx, token <span class="keyword">in</span> enumerate(vocab.idx_to_token):</span><br><span class="line">            vec = <span class="string">" "</span>.join([<span class="string">f"<span class="subst">&#123;x&#125;</span>"</span> <span class="keyword">for</span> x <span class="keyword">in</span> embeds[idx]])</span><br><span class="line">            writer.write(<span class="string">f"<span class="subst">&#123;token&#125;</span> <span class="subst">&#123;vec&#125;</span>\n"</span>)</span><br><span class="line"></span><br><span class="line">save_pretrained(vocab, model.embeddings.weight.data, <span class="string">"ffnnlm.vec"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><p><strong>create dataset for RNN</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RnnlmDataset</span><span class="params">(Dataset)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, corpus, vocab)</span>:</span></span><br><span class="line">        self.data = []</span><br><span class="line">        self.bos = vocab[BOS_TOKEN]</span><br><span class="line">        self.eos = vocab[EOS_TOKEN]</span><br><span class="line">        self.pad = vocab[PAD_TOKEN]</span><br><span class="line">        <span class="keyword">for</span> sentence <span class="keyword">in</span> tqdm(corpus, desc=<span class="string">"Dataset Construction"</span>)</span><br><span class="line">            input = [self.bos] + sentence</span><br><span class="line">            target = sentence  + [self.eos]</span><br><span class="line">            self.data.append((input, target))</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__len__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> len(self.data)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getitem__</span><span class="params">(self, i)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.data[i]</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">collate_fn</span><span class="params">(self, examples)</span>:</span></span><br><span class="line">        inputs = [torch.tensor(ex[<span class="number">0</span>]) <span class="keyword">for</span> ex <span class="keyword">in</span> examples]</span><br><span class="line">        targets = [torch.tensor(ex[<span class="number">1</span>]) <span class="keyword">for</span> ex <span class="keyword">in</span> examples]</span><br><span class="line">        <span class="comment"># padding for different length sequence</span></span><br><span class="line">        inputs = pad_sequence(inputs, batch_first=<span class="literal">True</span>, padding_value=self.pad)</span><br><span class="line">        targets = pad_Sequence(targets, batch_first=<span class="literal">True</span>, padding_Value=self.pad)</span><br><span class="line">        <span class="keyword">return</span> (inputs, targets)</span><br></pre></td></tr></table></figure>
+
+<p><strong>create RNN model</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RNNLM</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, vocab_size, embedding_dim, hidden_dim)</span>:</span></span><br><span class="line">        super(RNNLM, self).__init__()</span><br><span class="line">        self.embeddings = nn.Embedding(vocab_size, embedding_dim)</span><br><span class="line">        self.rnn = nn.LSTM(embedding_dim, hidden_dim, batch_first=<span class="literal">True</span>)</span><br><span class="line">        self.output = nn.Linear(hidden_dim, vocab_size)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">        embeds = self.embeddings(inputs)</span><br><span class="line">        hidden, _ = self.rnn(embeds)</span><br><span class="line">        output = self.output(hidden)</span><br><span class="line">        log_probs = F.log_softmax(output, dim=<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> log_probs</span><br></pre></td></tr></table></figure>
+
+<p><strong>Training</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">embedding_dim = <span class="number">128</span></span><br><span class="line">hidden_dim = <span class="number">256</span></span><br><span class="line">batch_size = <span class="number">1024</span></span><br><span class="line">num_epoch = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">corpus, vocab = load_reuters()</span><br><span class="line">dataset = RnnlmDataset(corpus, vocab, context_size)</span><br><span class="line">data_loader = get_loader(dataset, batch_size)</span><br><span class="line"></span><br><span class="line">nll_loss = nn.NLLLoss(ignore_index=dataset.pad)</span><br><span class="line">model = FeedForwardNNLM(len(vocab), embedding_dim, hidden_dim)</span><br><span class="line">model.to(device)</span><br><span class="line"></span><br><span class="line">optimizer = optim.Adam(model.parameters(), lr=<span class="number">0.001</span>)</span><br><span class="line"></span><br><span class="line">model.train()</span><br><span class="line">total_losses = []</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> range(num_epoch):</span><br><span class="line">    total_loss = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> batch <span class="keyword">in</span> tqdm(data_loader, desc=<span class="string">f"Training Epoch <span class="subst">&#123;epoch&#125;</span>"</span>):</span><br><span class="line">        inputs, targets = [x.to(device) <span class="keyword">for</span> x <span class="keyword">in</span> batch]</span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        log_probs = model(inputs)</span><br><span class="line">        loss = nll_loss(log_probs.view(<span class="number">-1</span>, log_probs.shape[<span class="number">-1</span>]), targets.view(<span class="number">-1</span>))</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line">        total_loss += loss.item()</span><br><span class="line">    print(<span class="string">f"Loss: <span class="subst">&#123;total_loss:<span class="number">.2</span>f&#125;</span>"</span>)</span><br><span class="line">    total_losses.append(total_loss)</span><br></pre></td></tr></table></figure>
+
+
+<p>Since the goal of training is to acquire the word vector rather than language model itself. In the training process, it is not necessary to take the convergency state of the model as the termination condition of training. </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/01/23/%E7%AE%80%E5%8D%95%E8%AF%8D%E6%80%A7%E6%A0%87%E6%B3%A8/" rel="prev" title="简单词性标注">
+      <i class="fa fa-chevron-left"></i> 简单词性标注
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/24/word2vec%E8%AF%8D%E5%90%91%E9%87%8F/" rel="next" title="word2vec词向量">
+      word2vec词向量 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"llunch4w.github.io","root":"/","scheme":"Pisces","version":"8.0.0-rc.3","exturl":false,"sidebar":{"position":"right","display":"always","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Yann LeCun, Yoshua Bengio, Geoffery Hinton write the review of Deep Learning in 2015, published in Natrue^ _ ^">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep Learning Review 2015">
+<meta property="og:url" content="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/index.html">
+<meta property="og:site_name" content="摸鱼的Llunch">
+<meta property="og:description" content="Yann LeCun, Yoshua Bengio, Geoffery Hinton write the review of Deep Learning in 2015, published in Natrue^ _ ^">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/backpropagation.png">
+<meta property="og:image" content="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/image2text.png">
+<meta property="og:image" content="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/distributed_representaion.png">
+<meta property="og:image" content="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/rnn.png">
+<meta property="article:published_time" content="2022-05-03T02:51:23.000Z">
+<meta property="article:modified_time" content="2022-05-03T12:21:11.249Z">
+<meta property="article:author" content="Llunch">
+<meta property="article:tag" content="论文阅读">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/backpropagation.png">
+
+<link rel="canonical" href="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Deep Learning Review 2015 | 摸鱼的Llunch</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before, .use-motion .logo-line-after {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line-before"></i>
+      <h1 class="site-title">摸鱼的Llunch</h1>
+      <i class="logo-line-after"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">但行好事，莫问前程</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Abstrat"><span class="nav-number">1.</span> <span class="nav-text">Abstrat</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Motivation"><span class="nav-number">2.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Supervised-Learning"><span class="nav-number">3.</span> <span class="nav-text">Supervised Learning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Backpropagation-to-train-multilayer-architectures"><span class="nav-number">4.</span> <span class="nav-text">Backpropagation to train multilayer architectures</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Convoluational-neural-networks"><span class="nav-number">5.</span> <span class="nav-text">Convoluational neural networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Image-understanding-with-deep-convolutional-networks"><span class="nav-number">6.</span> <span class="nav-text">Image understanding with deep convolutional networks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Distributed-representations-and-language-processing"><span class="nav-number">7.</span> <span class="nav-text">Distributed representations and language processing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Recurrent-neural-networks"><span class="nav-number">8.</span> <span class="nav-text">Recurrent neural networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Problem"><span class="nav-number">8.1.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">8.2.</span> <span class="nav-text">Application</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#The-future-of-deep-learning"><span class="nav-number">9.</span> <span class="nav-text">The future of deep learning</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Llunch"
+      src="/images/me.jpg">
+  <p class="site-author-name" itemprop="name">Llunch</p>
+  <div class="site-description" itemprop="description">Laugh through the night</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">116</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">77</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Llunch4w" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Llunch4w" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://llunch4w.github.io/2022/05/03/Deep-Learning-Review-2015/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me.jpg">
+      <meta itemprop="name" content="Llunch">
+      <meta itemprop="description" content="Laugh through the night">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="摸鱼的Llunch">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Deep Learning Review 2015
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-05-03 10:51:23 / 修改时间：20:21:11" itemprop="dateCreated datePublished" datetime="2022-05-03T10:51:23+08:00">2022-05-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">论文阅读</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote class="blockquote-center">
+<p>Yann LeCun, Yoshua Bengio, Geoffery Hinton write the review of Deep Learning in 2015, published in Natrue^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Abstrat"><a href="#Abstrat" class="headerlink" title="Abstrat"></a>Abstrat</h1><blockquote>
+<p>Deep learning allows computational models that are composed of multiple processing layers to learn representations of data with multiple levels of abstraction. These methods have dramatically improved the state-of-the-art in speech recognition, visual object recognition, object detection and many other domains such as drug discovery and genomics. Deep learning discovers intricate structure in large data sets by using the backpropagation algorithm to indicate how a machine should change its internal parameters that are used to compute the representation in each layer from the representation in the previous layer. Deep convolutional nets have brought about breakthroughs in processing images, video, speech and audio, whereas recurrent nets have shone light on sequential data such as text and speech. </p>
+</blockquote>
+<p>Features Of Deep Learning Model:</p>
+<ul>
+<li>Composed of multiple processing Layers.</li>
+<li>The target of Deep Learning is to learn representations of data with multiple levels of abstraction.</li>
+<li>The core method of Deep Learning is <strong>backpropagation</strong>: Machine should change its internal parameters that are used to compute the representation in each layer from the representation in the previous layer.</li>
+</ul>
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>The drawback of conventional Machine-Learning: <strong>e limited in their ability to process natural data in their raw form</strong>. Required careful engineering and considerable domain expertise to design a feture extractor that transformed the raw data.(e.g image pixel –&gt; feature vector).</p>
+<p><strong>Representation Learning</strong> is a set of method that allows machine to be fed with raw data and automatically discover the presentations needed.     </p>
+<p>Deep Learning methods is one of Representation Learning method with mulyiple levels of representation, obtained by composing <strong>no-linear module</strong> that each transform the representation at one low level(starting with the raw input) into a representation at a higher, abstract level.(e.g image detection: input raw pixel data(1 layer) –&gt; detect edege at particular orientations and locations(2 layer) –&gt; detect motifys by arrange edges(3 layer) –&gt; assember motifys to parts of object(4 layer) –&gt; detect object by combining parts of objects(5 layer)).</p>
+<blockquote>
+<p>The key aspect of deep learning is that these layers of features are learned from data suing a general-purpose learning procedure.</p>
+</blockquote>
+<h1 id="Supervised-Learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h1><ol>
+<li>Collated a large data set and labelled them.</li>
+<li>During training, machine is shown an input and produces an output in the form of vector of scores.</li>
+<li>Compute an objective function that measures the errors between the output scores and the desired pattern of scores. The machine than modify its internal adjustable parameters(<strong>weight</strong>) to reduce the error. In practive, <strong>stochastic gradient descent(SGD)</strong> is used for weight modifying.</li>
+</ol>
+<h1 id="Backpropagation-to-train-multilayer-architectures"><a href="#Backpropagation-to-train-multilayer-architectures" class="headerlink" title="Backpropagation to train multilayer architectures"></a>Backpropagation to train multilayer architectures</h1><p><img src="/2022/05/03/Deep-Learning-Review-2015/backpropagation.png" alt></p>
+<h1 id="Convoluational-neural-networks"><a href="#Convoluational-neural-networks" class="headerlink" title="Convoluational neural networks"></a>Convoluational neural networks</h1><p>The reason of <strong>Convolution Layer</strong> architecture is twofold:</p>
+<ol>
+<li>In array data such as images, local groups of values are often highly correlated, forming distinctive local motifs that are easily detected.</li>
+<li>The local statics of images and other signals are invariant to location. In other ward, if a motif can appear in one part of image, it could appear anywhere. Hence, the diea of units at different locations sharing the same weights and detect the same pattern in different parts of array.<blockquote>
+<p>The rold of the convolutional layer is to detect local conjunctions of features from the previous layer.</p>
+</blockquote>
+</li>
+</ol>
+<p>The reason of <strong>Pooling Layer</strong> architecture:</p>
+<ol>
+<li>Reducing the dimension of the representation.</li>
+<li>The relative positions of the features forming a motif can vary somewhat, so Pooling Layer create an invariance to small shifts and distortions.</li>
+</ol>
+<h1 id="Image-understanding-with-deep-convolutional-networks"><a href="#Image-understanding-with-deep-convolutional-networks" class="headerlink" title="Image understanding with deep convolutional networks"></a>Image understanding with deep convolutional networks</h1><p>The reason of the success of ConvNet:</p>
+<ul>
+<li>ImageNet 2012(a million images that contained 1000 different classes)</li>
+<li>efficient use of GPU</li>
+<li>ReLU and dropuout</li>
+<li>Techniques to generate more trainging examples by deforming the existing ones.</li>
+</ul>
+<p><img src="/2022/05/03/Deep-Learning-Review-2015/image2text.png" alt></p>
+<h1 id="Distributed-representations-and-language-processing"><a href="#Distributed-representations-and-language-processing" class="headerlink" title="Distributed representations and language processing"></a>Distributed representations and language processing</h1><p>Method: Using context around a word.<br>Target: Learning word vector.<br><img src="/2022/05/03/Deep-Learning-Review-2015/distributed_representaion.png" alt></p>
+<h1 id="Recurrent-neural-networks"><a href="#Recurrent-neural-networks" class="headerlink" title="Recurrent neural networks"></a>Recurrent neural networks</h1><p>For task that involve sequential inputs(e.g. speech, text), RNN works better. Because when RNN maintain <strong>state vector(implicitly contains information about history)</strong> in a hidden unit. Unfold RNN in time can be seen as very deep neural network in which all the layers share the same weights.</p>
+<p><img src="/2022/05/03/Deep-Learning-Review-2015/rnn.png" alt></p>
+<h2 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h2><ul>
+<li><strong>Gradient explode or vanish</strong>: In practice, trainging RNN can be problematic because the backpropagated gradients either grow or shrink at each time step.</li>
+<li><strong>Hard to store information for very long</strong>: To correct for that, one idea is <strong>Long Short-Term Memory(LSTM)</strong>. Many proposals about Augment RNNs with a <strong>memory module</strong> have published over past years.</li>
+</ul>
+<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><p>RNN + encoder-decoder structure can perform well in machine translation task. For example, after reading a English sentence one word at time, an English encoder can ve trained so that the final state is a good representation of the thought expressed by the sentence. This thouthg vector can be used as the initial hidden state(or as extra input) of a jointly trained French decoder, which outputs a probablity distribution for the first word of French translation.<br>Instead of translating one language to another language, one can learn to translate the meaning of an image into a text. The encode here is a deep ConvNet that converts the pixels into an activity vector in its last hidden layer. The decoder is an RNN similar to one used for natural language modelling.</p>
+<h1 id="The-future-of-deep-learning"><a href="#The-future-of-deep-learning" class="headerlink" title="The future of deep learning"></a>The future of deep learning</h1><ul>
+<li>Human and animal learning is largely unsupervised, we expect unsupervised learning to become far more important in the longer term.</li>
+<li>We exepct mush of the future progress in vision to come from systems that are trained end=to-end and combine ConvNet with RNNs that use reinforcement learning to decide where to look.</li>
+<li>We expect systems that use RNNs to understand sentences or whole documents will become much better when they learn stratefies for selectively attending to one part at a time.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/" rel="tag"># 论文阅读</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/04/25/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B%E7%BC%96%E5%86%99%E8%8C%83%E5%BC%8F/" rel="prev" title="深度学习模型编写范式">
+      <i class="fa fa-chevron-left"></i> 深度学习模型编写范式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/05/07/How-to-use-gitlab/" rel="next" title="How to use gitlab">
+      How to use gitlab <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81MDY4OC8yNzE3MQ"></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Llunch</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":false},"rect":"opacity:0.7","log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
