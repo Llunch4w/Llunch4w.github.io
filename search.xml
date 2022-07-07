@@ -13113,4 +13113,18 @@ $$
         <tag>Deep Learning</tag>
       </tags>
   </entry>
+  <entry>
+    <title>FewShot Tutorial</title>
+    <url>/2022/05/23/FewShot-Tutorial/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Methods-for-Learning-with-Limited-Data"><a href="#Methods-for-Learning-with-Limited-Data" class="headerlink" title="Methods for Learning with Limited Data"></a>Methods for Learning with Limited Data</h1><h2 id="Active-Learning-Human-in-the-Loop-ML"><a href="#Active-Learning-Human-in-the-Loop-ML" class="headerlink" title="Active Learning, Human-in-the Loop ML"></a>Active Learning, Human-in-the Loop ML</h2>]]></content>
+      <tags>
+        <tag>Deep Learning</tag>
+      </tags>
+  </entry>
 </search>
