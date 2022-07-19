@@ -13127,4 +13127,69 @@ $$
         <tag>Deep Learning</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Word Embedding</title>
+    <url>/2022/07/17/Word-Embedding/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.guru99.com/word-embedding-word2vec.html" target="_blank" rel="noopener">Word Embedding Tutorial | Word2vec Model Gensim Example</a></p>
+<h1 id="What-is-Word-Embedding"><a href="#What-is-Word-Embedding" class="headerlink" title="What is Word Embedding?"></a>What is Word Embedding?</h1><ul>
+<li>Word Embedding是一种将自然语言词映射成为向量表示的技术.</li>
+<li>Word Embedding又被称为分布式表示, 因为它本质上是根据词的上下文来表示一个词的.</li>
+<li>Word Embedding的目的一个是让词的向量表示可以控制在一个指定维度下; 一个是让相似的词向量之间的距离更相近, 不相似的词向量之间的距离更相远.</li>
+</ul>
+<h1 id="Word-Embedding-Techonology"><a href="#Word-Embedding-Techonology" class="headerlink" title="Word Embedding Techonology"></a>Word Embedding Techonology</h1><ol>
+<li>Word2Vec(Google)</li>
+<li>Glove(Stanford)</li>
+<li>Fastest(Facebook)</li>
+</ol>
+<h2 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h2><h3 id="CBOW-Continuous-Bag-of-words"><a href="#CBOW-Continuous-Bag-of-words" class="headerlink" title="CBOW(Continuous Bag of words)"></a>CBOW(Continuous Bag of words)</h3><p>基于一个词的上下文窗口内的词来预测当前词.</p>
+<h3 id="Skip-Gram"><a href="#Skip-Gram" class="headerlink" title="Skip Gram"></a>Skip Gram</h3><p>基于一个词去预测它的上下文窗口中出现的词.</p>
+]]></content>
+      <tags>
+        <tag>Blog</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How Fine-tune Changes BERT</title>
+    <url>/2022/07/16/How-Fine-tune-Changes-BERT/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://arxiv.org/pdf/2106.14282" target="_blank" rel="noopener">A Closer Look at How Fine-tuning Changes BERT</a><br><a href="https://github.com/utahnlp/BERT-fine-tuning-analysis" target="_blank" rel="noopener">BERT-fine-tuning-analysis</a></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>The architecture that <code>Pretrained Language Model + Fine-Tuning Layer</code> has been universally successful. Yet, how fine-tuning changes the embedding space is less studied.</p>
+<p>The article proposed a hypothesis: Fine-tune affects classification performance by increasing the distance between examples associated with diffrent labels.</p>
+<p>Conlusion:  Fine-tuning does not introduce arbitrary changes to representations; instead, it adjusts the representations to downstream tasks while largely preserving the original spatial structure of the data points.</p>
+<p><strong>Question</strong>    </p>
+<ol>
+<li>Does fine-tuning always improve performance?</li>
+<li>How does fine-tuning alter the representation to adjust for downstream tasks?</li>
+<li>How does fine-tuning changes the geometric structure of different layers?</li>
+</ol>
+<p><strong>Contribution</strong>    </p>
+<ol>
+<li>Fine-tuning introduces a divergence between training and test sets, which is not severe enough to hurt generalization in most cases. However, we do find one exception where fine-tuning hurts the performance; this setting also has the largest divergence between training and test set after fine-tuning.</li>
+<li>For a representation where task labels are not linearly separable, we find that fine-tuning adjusts it by grouping points with the same label into a small number of clusters (ideally one), thus simplifying the underlying representation.</li>
+<li>Fine-tuning does not change the higher layers arbitrarily. This confirms previous findings. Additionally, we find that fine-tuning largely preserves the relative positions of the label clusters, while reconfiguring the space to adjust for downstream tasks.</li>
+</ol>
+<p><strong>Probing Methods</strong></p>
+<ol>
+<li>Classifiers as Probes: To understand how well a representation encodes the labels, for a task, a probing classifier is trained over it, with the embeddings themselves kept frozen when the classifier is trained. Classifier probes aim to measure how well a<br>contextualized representation captures a linguistic property.</li>
+<li>DirectProbe: Probing the geometric structure. <ul>
+<li>Number of clusters: The number of clusters indicates the linearity of the representation for a task.</li>
+<li>Distance between clusters:  Distances3 between clusters can reveal the internal structure of a representation.</li>
+<li>Spatial Similarity:  Intuitively, if two representations have similar relative distances between clusters, the representations themselves are similar to each other for the task at hand. Distance vector is used for representation.</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Paper</tag>
+      </tags>
+  </entry>
 </search>
