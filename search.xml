@@ -11354,7 +11354,13 @@ $$
   <entry>
     <title>数据集划分方法总结</title>
     <url>/2022/05/14/%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%92%E5%88%86%E6%96%B9%E6%B3%95%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="Condition1"><a href="#Condition1" class="headerlink" title="Condition1"></a>Condition1</h1><p>提前将数据集划分为 train, eval, test 三个数据集保存在不同的文件中, 然后使用时分别读取即可.</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Condition1"><a href="#Condition1" class="headerlink" title="Condition1"></a>Condition1</h1><p>提前将数据集划分为 train, eval, test 三个数据集保存在不同的文件中, 然后使用时分别读取即可.</p>
 <h1 id="Condition2"><a href="#Condition2" class="headerlink" title="Condition2"></a>Condition2</h1><p>加载全部数据集, 然后将其进行划分.</p>
 <h2 id="Method1"><a href="#Method1" class="headerlink" title="Method1"></a>Method1</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">train_ratio, val_ratio = <span class="number">0.8</span>, <span class="number">0.1</span></span><br><span class="line">train_nums = int(data.shape[<span class="number">0</span>]*train_ratio)</span><br><span class="line">val_nums = int(data.shape[<span class="number">0</span>]*val_ratio)</span><br><span class="line"></span><br><span class="line">train_data = data[:train_nums]</span><br><span class="line">val_data = data[train_nums: train_nums+val_nums]</span><br><span class="line">test_data = data[train_nums+val_nums:]</span><br></pre></td></tr></table></figure>
 
@@ -13187,6 +13193,214 @@ $$
 </ul>
 </li>
 </ol>
+]]></content>
+      <tags>
+        <tag>Paper</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Machine Reaeding Comprehension Survey</title>
+    <url>/2022/07/19/Machine-Reaeding-Comprehension-Survey/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote class="blockquote-center">
+<p>^ _ ^ </p>
+
+</blockquote>
+<a id="more"></a>
+
+<h1 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h1><p><strong>Difinition of machine reading compreahension</strong> </p>
+<blockquote>
+<p>Given the context $C$ and question $Q$, machine reading comprehension tasks ask the model to give the correct answer $A$ to the question $Q$ by learning the function $F$ such that $A = F(C, Q)$</p>
+</blockquote>
+<h2 id="Cloze-Tests"><a href="#Cloze-Tests" class="headerlink" title="Cloze Tests"></a>Cloze Tests</h2><blockquote>
+<p>Given the context $C$, from which a word or an entity $A(A \in C)$ is removed, the cloze test ask the model to fill in the blank woth the right word or entity A by learning the function $F$ such that $A=F(C-{A})$</p>
+</blockquote>
+<h2 id="Multiple-Choice"><a href="#Multiple-Choice" class="headerlink" title="Multiple Choice"></a>Multiple Choice</h2><blockquote>
+<p>Given the context $C$, the question $Q$ and a list of candidate answers $A={A_1, A_2, \cdots, A_n}$, the multiple-choice task is to select the correct answer $A_i$ from $A(A_i \in A)$ by learning function F such that $A_i=F(C, Q, A)$</p>
+</blockquote>
+<h2 id="Span-Extraction"><a href="#Span-Extraction" class="headerlink" title="Span Extraction"></a>Span Extraction</h2><blockquote>
+<p>Given the context $C$, which consists of $n$ tokens, that is $C={ t_1, t_2, \cdots, t_n }$, and the question $Q$, the span extraction task requires extracting the continuous subsequence  $A$ = { $t_i, t_{i+1}, \cdots, t_{i+k}$ } from context $C$ as the correct answer to question $Q$ by learning function $F$ such that $A=F(C, Q)$</p>
+</blockquote>
+<h2 id="Free-Answering"><a href="#Free-Answering" class="headerlink" title="Free Answering"></a>Free Answering</h2><blockquote>
+<p>Given the context $C$ and the question $Q$, the correct answer $A$ in free answering task may not be subsequence in the original context $C$, namely either $A \in C$ or $A \notin C$. The task requires predicting the correct answer $A$ by learning the function $F$ such that $A = F(C, Q)$.</p>
+</blockquote>
+<h1 id="Deep-learning-based-Method"><a href="#Deep-learning-based-Method" class="headerlink" title="Deep-learning based Method"></a>Deep-learning based Method</h1><h2 id="General-Architecture"><a href="#General-Architecture" class="headerlink" title="General Architecture"></a>General Architecture</h2><p><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/general_architecture.png" alt></p>
+<ol>
+<li>Embeddings: change input words into fixed-length vectors.<ul>
+<li>Classical word representation method include One-hot; Word2vec; Glove; Fastext.</li>
+<li>Sometimes combined with other linguistic features, i.e., part-of-speech, name entity, and question category.</li>
+</ul>
+</li>
+<li>Feature Extraction: Mine contextual features from context and question embeddings<ul>
+<li>This module is aimed at extracting more contextual information.</li>
+<li>Some typical deep neural networks such as CNN, RNN are used.</li>
+</ul>
+</li>
+<li>Context-Question Interation: find out which parts in the context are more important to answering the question.<ul>
+<li>The attention mechanism, unidirectional or bidirectional, is widely used in this module to emphasize parts of the context relevant to the query.</li>
+<li>Sometimes involves multiple hops, which simulates the rereading process of human comprehension.</li>
+</ul>
+</li>
+<li>Answer Prediction: this module is highly related to different tasks<ul>
+<li>Generation techniques are used in this module for the free answering task</li>
+</ul>
+</li>
+</ol>
+<h2 id="Typical-Deep-learning-Methods"><a href="#Typical-Deep-learning-Methods" class="headerlink" title="Typical Deep-learning Methods"></a>Typical Deep-learning Methods</h2><p><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/typical_method.png" alt></p>
+<h3 id="Embeddings"><a href="#Embeddings" class="headerlink" title="Embeddings"></a>Embeddings</h3><h4 id="Conventional-Word-Representation"><a href="#Conventional-Word-Representation" class="headerlink" title="Conventional Word Representation"></a>Conventional Word Representation</h4><h5 id="One-Hot"><a href="#One-Hot" class="headerlink" title="One-Hot"></a>One-Hot</h5><ul>
+<li>Using binary vector to represent word, and the size of vector is equal to the size of vocabulary.</li>
+<li>Drawbacks:<ul>
+<li>Sparse and may cause curse of dimensionality with increased vocabulary.</li>
+<li>Cannot represent relationships among words.</li>
+</ul>
+</li>
+</ul>
+<h5 id="Distributed-Word-Representation"><a href="#Distributed-Word-Representation" class="headerlink" title="Distributed Word Representation"></a>Distributed Word Representation</h5><ul>
+<li>Encodes words into continuous low-dimensional vectors, which reveals the correlation of words.</li>
+<li>Popular techniques to generate distrubuted word representation: Word2Vec、GloVe.</li>
+<li>Drawback: Cannot efficiently mine contextual information.</li>
+</ul>
+<h4 id="Pre-trained-Contextualized-Word-Representation"><a href="#Pre-trained-Contextualized-Word-Representation" class="headerlink" title="Pre-trained Contextualized Word Representation"></a>Pre-trained Contextualized Word Representation</h4><ul>
+<li>A vector produced by the distributed word representation of one word is constant regardless of different contexts.</li>
+<li>Contextualized word representations, which are pre-trained with large corpora in advance and then directly used as conventional word representations or fine-tuned according to the specific tasks.</li>
+</ul>
+<h5 id="CoVE"><a href="#CoVE" class="headerlink" title="CoVE"></a>CoVE</h5><ul>
+<li>The output of the encoder can be regarded as context vectors (CoVE).    </li>
+<li>Concatenate CoVE of another task and embeddings of this task and feed them through the decoder.</li>
+<li>Drawbacks: Another task(e.g. Machine Translation) needs a large parallel corpus. Its performance will degrade if the training corpus is not adequate.</li>
+</ul>
+<h5 id="ELMo"><a href="#ELMo" class="headerlink" title="ELMo"></a>ELMo</h5><ul>
+<li>Embeddings from language models (ELMo)</li>
+<li>First pre-train a bidirectional language model (biLM) with a large text corpus, then collapsing outputs of all biLM<br>layers into a single vector with a task-specific weighting.</li>
+</ul>
+<h5 id="GPT"><a href="#GPT" class="headerlink" title="GPT"></a>GPT</h5><ul>
+<li>Generative pre-training (GPT)</li>
+<li>A semi-supervised approach combining unsupervised pre-training and supervised fine-tuning. </li>
+<li>The basic component of GPT is a multi-layer transformer decoder that mainly uses multi-head self-attention to train the language model.</li>
+</ul>
+<h5 id="BERT"><a href="#BERT" class="headerlink" title="BERT"></a>BERT</h5><ul>
+<li>Bidirectional encoder representation from transformers (BERT).</li>
+<li>With the masked language model (MLM) and next-sentence prediction task, BERT can pre-train deep contextualized representations with a bidirectional transformer.</li>
+</ul>
+<h4 id="Multiple-Granularity"><a href="#Multiple-Granularity" class="headerlink" title="Multiple Granularity"></a>Multiple Granularity</h4><ul>
+<li>Word-level embeddings pre-trained by Word2Vec or GloVe cannot encode rich syntactic and linguistic information, such as part-of-speech, affixes, and grammar.</li>
+</ul>
+<h5 id="Character-Embeddings"><a href="#Character-Embeddings" class="headerlink" title="Character Embeddings"></a>Character Embeddings</h5><ul>
+<li>Character embeddings represent words at the character level.</li>
+<li>Character embeddings can be encoded with bidirectional LSTMs. For each word, the outputs of the last hidden state are considered to be its character-level representation.</li>
+<li>Moreover, word-level and character-level embeddings can be combined dynamically with a fine-grained gating mechanism.</li>
+</ul>
+<h5 id="Part-of-Speech-Tags"><a href="#Part-of-Speech-Tags" class="headerlink" title="Part-of-Speech Tags"></a>Part-of-Speech Tags</h5><ul>
+<li>A part-of-speech (POS) is a particular grammatical class of words, such as nouns, adjectives, or verb.</li>
+<li>Labeling POS tags in NLP tasks can illustrate complex characteristics of word use and in turn contribute to disambiguation.</li>
+</ul>
+<h5 id="Name-Entity-Tags"><a href="#Name-Entity-Tags" class="headerlink" title="Name-Entity Tags"></a>Name-Entity Tags</h5><ul>
+<li>Name entity, a concept in information retrieval, refers to a real-world object, such as a person, location, or organizations, with a proper name.</li>
+<li>When asking about such objects, name entities are probable answer candidates.</li>
+<li>The method of encoding name-entity tags is similar to that of POS tags.</li>
+</ul>
+<h5 id="Binary-Feature-of-Exact-Match-EM"><a href="#Binary-Feature-of-Exact-Match-EM" class="headerlink" title="Binary Feature of Exact Match (EM)"></a>Binary Feature of Exact Match (EM)</h5><ul>
+<li>This feature measures whether a context word is in the question.</li>
+<li>More loosely, partial matching to measure the correlation between context words and question words. For instance, “teacher” can be partially matched with “teach”.</li>
+</ul>
+<h5 id="Query-Category"><a href="#Query-Category" class="headerlink" title="Query-Category"></a>Query-Category</h5><ul>
+<li>The types of questions (what, where, who, when, why, how) can usually provide clues to search for the answer.</li>
+<li>First obtain query types by counting the key word frequency. Then the question type information is encoded to one-hot vectors and stored in a table. For each query, they look up the table and use a feed-forward neural network for projection.</li>
+</ul>
+<h3 id="Feature-Extraction"><a href="#Feature-Extraction" class="headerlink" title="Feature Extraction"></a>Feature Extraction</h3><ul>
+<li>The feature extraction module is often placed after the embedding layer to extract features of the context and question separately.</li>
+<li>It further pays attention to mining contextual information at the sentence level based on various types of syntactic and linguistic information encoded by the embedding module.</li>
+</ul>
+<h4 id="Recurrent-Neural-Networks"><a href="#Recurrent-Neural-Networks" class="headerlink" title="Recurrent Neural Networks"></a>Recurrent Neural Networks</h4><ul>
+<li>RNNs are called recurrent as outputs in each time step depending on the previous computations.</li>
+<li>Applied to deal with sequential information.</li>
+<li>In particular, long short-term memory (LSTM), gated recurrent units (GRUs), variants of RNNs, are much better at capturing long-term dependencies than plain ones are and can alleviate gradient explosion and vanishing problems.</li>
+<li>The preceding and following words have the same importance in understanding the given word, bidirectional RNNs have been widly used. </li>
+</ul>
+<p>The feature extraction process with bidirectional RNNs can be sorted into two types:<br><strong>word-level</strong><br>Feature extraction outputs for each embedding $x$ at time step $j$.<br><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/word-level-encoding.png" alt></p>
+<p><strong>sentence-level</strong><br>Sentence-level encoding regards the question sentence as a whole.<br><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/sentence-level-encoding.png" alt></p>
+<h4 id="Convolution-Neural-Networks"><a href="#Convolution-Neural-Networks" class="headerlink" title="Convolution Neural Networks"></a>Convolution Neural Networks</h4><p><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/cnn-encoding.png" alt></p>
+<ul>
+<li>The convolution layer has two filter sizes $f_t \times d$ with $k$ output channels, where $d$ is the dimension of word embedding.</li>
+<li>Each filter produces a feature map of shape $(|l| − t + 1) \times k$, where $l$ is the length of sentence.</li>
+<li>One major shortcoming of CNNs is that they can extract only local information but are not capable of dealing with long sequence.</li>
+</ul>
+<h4 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h4><p><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/transformer-encoding.png" alt></p>
+<ul>
+<li>Mainly based on the attention mechanism and multi-head self-attention.</li>
+<li>Add position encoding to make use of the order information.</li>
+<li>In practice, models usually stack several blocks with multi-head self-attention and feed-forward network.</li>
+</ul>
+<p><strong>QANet</strong> is a representative MRC model that uses the transformer. The basic encoder block of QANet is a novel architecture, which combines the multi-head self-attention defined in the transformer with convolutions. </p>
+<h3 id="Context-Question-Interaction"><a href="#Context-Question-Interaction" class="headerlink" title="Context-Question Interaction"></a>Context-Question Interaction</h3><blockquote>
+<p>Extracting the correlation between the context and the question</p>
+</blockquote>
+<h4 id="Unidirectional-Attention"><a href="#Unidirectional-Attention" class="headerlink" title="Unidirectional Attention"></a>Unidirectional Attention</h4><p>Unidirectional attention flow is usually from query to context, highlighting the most relevant parts of the context according to the question.<br>The similarity of each context semantic embedding $P_i$ and the whole question sentence representations Q is calculated by $S_i = f(P_i, Q)$, where $f(\cdot)$ represents the function that can measure the similarity.<br>After being normalized by Softmax, the attention weight for each context word is obtained.  </p>
+<p><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/unidirectional_attention.png" alt></p>
+<p>However, this method fails to pay attention to question words that are also pivotal for answer prediction. Hence, unidirectional attention flow is insufficient for extracting mutual information between the context and the query.</p>
+<h4 id="Bidirectional-Attention"><a href="#Bidirectional-Attention" class="headerlink" title="Bidirectional Attention"></a>Bidirectional Attention</h4><p>Bidirectional attention flows, not only computes query-to-context attention but also the reverse, context-to-query attention.</p>
+<p>The process of computing bidirectional attention:</p>
+<ol>
+<li>the pair-wise matching matrix $M(i, j)$ is obtained by computing the matching scores between each context semantic embedding $P_i$ and question semantic embedding $Q_j$ (word-level).   </li>
+<li>Then the outputs of the column-wise SoftMax function can be regarded as query-to-context attention weight $\alpha$ while context-to-query attention $\beta$ is calculated by the row-wise SoftMax function</li>
+</ol>
+<p><img src="/2022/07/19/Machine-Reaeding-Comprehension-Survey/bidirectional_attention.png" alt></p>
+<p>Bidirectional Attention based methods:  </p>
+<ul>
+<li>AoA Reader(Attention over Attention): compute the dot product between each context embedding and query embedding to obtain a similarity matching matrix $M$. And introducing attended attention, computed by the dot product of $\alpha$ and the average result of $\bata$, which is later used to predict the answer.</li>
+<li>DCN(Dynamic Coattention Network)</li>
+<li>Bi-DAF(Bidirectional Attention Flow)</li>
+<li>DCN+: Using residual connections to merge coattention outputs to encode richer information for the input sequences.</li>
+</ul>
+<h4 id="One-Hop-Interaction"><a href="#One-Hop-Interaction" class="headerlink" title="One-Hop Interaction"></a>One-Hop Interaction</h4><blockquote>
+<p>The interaction between the context and the question is computed only once.</p>
+</blockquote>
+<p>Although this method can do well in tackling simple cloze tests, when the question requires reasoning over multiple sentences in the context, it is hard for this one-hop interaction approach to predict the correct answer.       </p>
+<h4 id="Multi-Hop-Interaction"><a href="#Multi-Hop-Interaction" class="headerlink" title="Multi-Hop Interaction"></a>Multi-Hop Interaction</h4><blockquote>
+<p>It tries to mimic the rereading phenomenon of humans by computing the interaction between the context and the question more than once.        </p>
+</blockquote>
+<p>Mainly methods to perform multi-hop interaction:    </p>
+<ol>
+<li>Calculating the similarity between the context and the question based on previous attentive representations of context.      <ul>
+<li>e.g.  Impatient Reader model: query-aware context representations are dynamically updated by this method as each query token is<br>read.</li>
+</ul>
+</li>
+<li>Using external memory slots to store previous memories. <ul>
+<li>After being given the context as input, the memory mechanism stores information of the context in memory slots and then updates them dynamically.  </li>
+<li>End-to-end version of memory networks: memory storage is embedded with continuous representations and the process of reading and updating memories is modeled by neural networks.</li>
+<li>MEMEN model: Stores question-aware context representations, context-aware question representations, and candidate answer representations in memory slots and updates them dynamically.</li>
+</ul>
+</li>
+<li>Using hidden states to store previous interaction information.<ul>
+<li>R-NET and iterative alternating reader (IA Reader) [14] also use RNNs to update query-aware context representations to perform<br>multi-hop interaction.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Gate Machanism</strong>  </p>
+<blockquote>
+<p>Which can control the amount of mutual information between the context and the question, is a key component in multi-hop interaction.</p>
+</blockquote>
+<p>The gate mechanism, which is performed by a feed-forward network, is applied to determine the degree of matching between the context and the query. Or to filter out insignificant parts in the context and emphasize the ones most relevant to the question.   </p>
+<h3 id="Answer-Prediction"><a href="#Answer-Prediction" class="headerlink" title="Answer Prediction"></a>Answer Prediction</h3><p>The implementation of answer prediction is highly task-specific.</p>
+<h4 id="Word-Predictor"><a href="#Word-Predictor" class="headerlink" title="Word Predictor"></a>Word Predictor</h4><p>Cloze tests require filling in blanks with missing words or entities. </p>
+<ul>
+<li>Attentive Reader: The combination of the query-aware context and the question is reflected in the vocabulary space to<br>search for the correct answer word. But it cannot handle situation that answer is not in the context.</li>
+</ul>
+<h4 id="Option-Selector"><a href="#Option-Selector" class="headerlink" title="Option Selector"></a>Option Selector</h4><p>To tackle the multiple-choice task, the model should select the correct answer from candidate options. The common way is to measure the similarity between attentive context representations and candidate answer representations.</p>
+<h4 id="Span-Extractor"><a href="#Span-Extractor" class="headerlink" title="Span Extractor"></a>Span Extractor</h4><p>The span extraction task can be regarded as an extension of cloze tests, which requires extracting a subsequence from the context rather than a single word.</p>
+<h4 id="Answer-Generator"><a href="#Answer-Generator" class="headerlink" title="Answer Generator"></a>Answer Generator</h4><p>With the appearance of free answering tasks, answers are no longer limited to a subsequence of the original context; instead, they need to be synthesized from the context and the question.</p>
+<h2 id="Additional-Tricks"><a href="#Additional-Tricks" class="headerlink" title="Additional Tricks"></a>Additional Tricks</h2><h3 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h3><p>In a word, reinforcement learning can be regarded as an improved approach in MRC systems that is capable of not only reducing the gap between optimization objectives and evaluation metrics but also determining whether to stop reasoning dynamically. With reinforcement learning, the model can be trained and refine better answers even if some states are discrete.</p>
+<h3 id="Answer-Ranker"><a href="#Answer-Ranker" class="headerlink" title="Answer Ranker"></a>Answer Ranker</h3><p>The common process of ranker is that it extracts some candidate answers, and the one with the highest score is the correct answer.</p>
+<h3 id="Sentence-Selector"><a href="#Sentence-Selector" class="headerlink" title="Sentence Selector"></a>Sentence Selector</h3><p>In practice, if the MRC model is given a long document, it takes a lot of times to understand the full context to answer questions. However, finding the sentences that are most relevant to the questions in advance is a possible way to accelerate the training process.</p>
+<h1 id="Dataset-and-Evaluation-Metrics"><a href="#Dataset-and-Evaluation-Metrics" class="headerlink" title="Dataset and Evaluation Metrics"></a>Dataset and Evaluation Metrics</h1><h2 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h2><p>Highlighting:       </p>
+<ol>
+<li>How to construct large-scale datasets according to task requirements.</li>
+<li>How to reduce lexical overlap between questions and context.</li>
+</ol>
+<h3 id="Cloze-Tests-Datasets"><a href="#Cloze-Tests-Datasets" class="headerlink" title="Cloze Tests Datasets"></a>Cloze Tests Datasets</h3><ul>
+<li>CNN &amp; Daily Mail</li>
+<li>The Children’s Book Test (CBT)</li>
+<li>LAMBADA</li>
+</ul>
 ]]></content>
       <tags>
         <tag>Paper</tag>
